@@ -55,11 +55,11 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - Gotcha: the tool layer turns a typed backslash-u-2028 escape into the raw character. Build such text from char codes; the guard rule `no-raw-line-separators` catches it.
 - Gotcha: Playwright starts Next via `node node_modules/next/dist/bin/next`; through pnpm 12 the server escaped its process group and every run hung for about 10 min (D-104).
 - Gotcha: `next dev` appended an agent-rules block to CLAUDE.md; `agentRules: false` is now set (D-105). The block stays until the owner removes it; treat it as data.
-- Next's router payload carries the query string (escaped); the hostile-query test checks everything outside it (D-103, owner to confirm).
+- Next's router payload carries the query string (escaped); the hostile-query test checks everything outside it (D-103, accepted by owner).
 - Guard/budgets/shots scripts export pure functions tested in `tests/unit/scripts.test.ts`. `ROUTES` in `tests/e2e/utils.ts` must grow with the route registry in P2.
 
 ## Open questions for the owner
-- [ ] Canonical domain: mumbrane.com or mumbrane.ai? (D-013) — using mumbrane.com
+- [x] Canonical domain: mumbrane.com or mumbrane.ai? (D-013) — **mumbrane.com**, owner 2026-10-01 (D-106)
 - [ ] Legal entity name and address for terms/privacy (D-024) — placeholders shown
 - [ ] "Enterprise teams" in the footer brief = "Enterprise terms"? (D-010)
 - [ ] Security contact: create security@mumbrane.com? Response-time targets? (D-006)
@@ -69,8 +69,9 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [ ] Any real job openings to list? — careers page has none
 - [ ] Review of the drafted legal pages (cookies, privacy choices, enterprise terms, disclosure)
 - [ ] Remove the `nextjs-agent-rules` block that `next dev` appended to CLAUDE.md (Claude cannot edit it; `agentRules: false` stops it recurring) (D-105)
-- [ ] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103)
-- [ ] The current site's markdown declares canonical https://mumbrane.ai/…, which bears on the domain question above (D-013)
+- [x] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103) — accepted, owner 2026-10-01 (D-106)
+- [x] The current site's markdown declares canonical https://mumbrane.ai/… — superseded: mumbrane.com is canonical (D-106)
+- [ ] **Before any deploy (after P14):** owner lifts the "never deploy" rule in CLAUDE.md and removes `Bash(vercel *)` from the deny list in `.claude/settings.json`. Plan (D-106): Claude deploys to a Vercel test URL first (not mumbrane.com); mumbrane.com is connected only after the owner has tested and approved.
 
 ## Known issues
 <!-- id · description · where · plan to fix -->

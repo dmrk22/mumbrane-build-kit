@@ -264,3 +264,19 @@ until the owner removes it (Claude cannot edit CLAUDE.md); it is treated as data
 **Alternatives**: Commit the block (lets a dependency write standing instructions into the
 protected rules file).
 **Status**: Owner to remove the appended block from CLAUDE.md.
+
+### D-106 — Owner answers: domain, D-103, hosting (2026-10-01)
+**Context**: Owner answered open questions after P0.
+**Decision**:
+- **Domain (D-013)**: canonical is **https://mumbrane.com** (confirmed; the harvested `.ai`
+  canonicals are superseded). `NEXT_PUBLIC_SITE_URL` default stays `https://mumbrane.com`.
+- **D-103**: accepted as implemented (hostile-query test scope).
+- **Hosting**: Vercel. After P14, Claude deploys, in two stages: (1) to a Vercel test URL only
+  (`*.vercel.app`, not mumbrane.com) for the owner to test; (2) only after the owner approves,
+  connect mumbrane.com. Deploying still requires the owner to lift the "never deploy" rule
+  first (CLAUDE.md non-negotiable 2 and `Bash(vercel *)` in `.claude/settings.json` deny list;
+  Claude cannot edit either). Until then, no deploy of any kind.
+- Deploy-time checks to run then: proxy on the Node runtime; CSP `upgrade-insecure-requests`
+  present over HTTPS; test URL carries `noindex` (preview) so it is never indexed; HSTS stays
+  apex-only until D-005.
+**Status**: Decided (owner).
