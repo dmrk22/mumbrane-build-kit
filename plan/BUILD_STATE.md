@@ -16,7 +16,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P6 | Home | done | 2026-10-01 | 2026-10-01 | `p06-home` |
 | P7 | Moth and Models | done | 2026-10-01 | 2026-10-01 | `p07-moth` |
 | P8 | Research and News | done | 2026-10-01 | 2026-10-01 | `p08-research` |
-| P9 | Company, Careers, Contact | not started | | | |
+| P9 | Company, Careers, Contact | done | 2026-10-01 | 2026-10-01 | `p09-company` |
 | P10 | Solutions | not started | | | |
 | P11 | Developers, Pricing, Changelog, Status | not started | | | |
 | P12 | Console preview | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P9 (not started)
-- Next task: P9 Company, Careers, Contact
+- Phase: P10 (not started)
+- Next task: P10 Solutions (overview, four solution pages, use cases)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,6 +99,15 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P9 — Company, Careers, Contact
+- [x] Content: `src/content/company.ts` (COMPANY blocks with unlock `step` + honest permanent locks, CAREERS), `src/content/contact.ts` (field specs, error copy, preview state)
+- [x] `/company` — `BlocksMosaic` (pinned 180 vh ≥ 1024 with motion, viewport unlock below, focus unlocks linked blocks, CSS pre-lock + 4 s failsafe, D-114), why closed worlds + plate, FIG. 02 `MuonTrack`, CTA ledger on ink
+- [x] `/careers` — hero, 2 × 2 "How we work", areas (not openings) as chips + glosses, cadmium CTA; no job listing component
+- [x] `/contact`, `/contact/sales` — `PreviewForm` (server actions via `useActionState`, same zod schema client + server, inline errors, counted `role=status` summary, focus first invalid, honeypot, preview state with capped mailto, `?interest` preselect)
+- [x] Tests: `forms.test.ts` (schemas, error codes, mailto cap); `forms.spec.ts` (JS + no-JS + honeypot + interest); blocks (no-JS, reduced, focus unlock, pin to 12/12, mobile reveal, failsafe, ≥ 55 fps)
+- [x] Screens reviewed 375/768/1440 + reduced + pin states at 1440 × 900
+- Measured (prod): first-load JS /company 165.3 KB, /careers 161.6 KB, /contact 182.8 KB, /contact/sales 180.8 KB (budget 190); blocks pin ≥ 55 fps
+
 ### P8 — Research and News
 - [x] Content: `scripts/articles.ts` converts `src/content/source/*.md` → typed blocks (`src/content/articleBodies.ts`, generated; Zod schemas in `schemas.ts`); authors' wording kept (articles.test diffs against the source)
 - [x] `/research` — painted hero + glass caption, two-column abstract, three lines of inquiry (Plates I–III), FIG. 01 light cone, hypothesis → experiment, perspectives on ink, CTA
@@ -110,6 +119,14 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P9 — 2026-10-01
+- Browser-side validation uses `zod/mini` + `z.config({ jitless: true })` (D-116). Never import classic `zod` into anything a client component reaches: it breaks the JS budget and trips the CSP (eval probe).
+- `/contact` sits at 182.8 KB of 190: little headroom for new client code there.
+- `PreviewForm` is generic (field specs in `src/content/contact.ts`); the server actions in `src/app/(site)/contact/actions.ts` are the seam for the backend (comment marks it).
+- Blocks: CSS pre-lock under `@media (scripting: enabled)` + a 4 s failsafe (D-114). Anything else that must start hidden with JS should follow the same pattern, not lock at hydration.
+- The write hook flags `bg-violet-fg` as the default palette; use `bg-(--color-violet-fg)` (D-115).
+- `/legal/privacy` (linked from the forms) arrives in P13.
 
 ### P8 — 2026-10-01
 - New article = add the source `.md` + metadata in `articles.ts`, then `node scripts/articles.ts` (regenerates `articleBodies.ts`; excluded from Biome and from the budgets file count).
@@ -192,6 +209,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [ ] Website launch date for the changelog (D-012)
 - [ ] Keep "Try for free" (→ console preview) or say "Try the preview"? (D-015)
 - [ ] Any real job openings to list? — careers page has none
+- [ ] Confirm the six one-line glosses under "Areas we care about" on /careers (authored, D-115)
 - [ ] Review of the drafted legal pages (cookies, privacy choices, enterprise terms, disclosure)
 - [ ] Remove the `nextjs-agent-rules` block that `next dev` appended to CLAUDE.md (Claude cannot edit it; `agentRules: false` stops it recurring) (D-105)
 - [x] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103) — accepted, owner 2026-10-01 (D-106)

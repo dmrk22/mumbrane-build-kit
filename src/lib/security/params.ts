@@ -1,4 +1,5 @@
-import { z } from 'zod'
+// `zod/mini` (tree-shakable): INTERESTS reaches the browser through the contact form's schema.
+import * as z from 'zod/mini'
 
 const first = (value: unknown): unknown => (Array.isArray(value) ? value[0] : value)
 

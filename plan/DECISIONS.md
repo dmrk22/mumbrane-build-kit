@@ -365,3 +365,41 @@ after the functional e2e. Budgets and assertions are unchanged.
 **Alternatives**: One worker for the whole suite (triples verify time as routes grow);
 loosening the thresholds (not allowed).
 **Status**: Decided.
+
+### D-114 — Company blocks: locked from the first paint by CSS, with a failsafe (2026-10-01)
+**Context**: DESIGN §7.6 wants the mosaic locked while you scroll into it, but fully open without
+JS and under reduced motion. Rendering "open" on the server and locking at hydration would re-hide
+text the visitor has already seen (the H1 and the mosaic share the first screen, board 05).
+**Decision**: Open is the default state. `@media (scripting: enabled) and (prefers-reduced-motion:
+no-preference)` draws blocks without `data-unlocked` as locked from the first paint; `BlocksMosaic`
+then sets `data-unlocked` per block (pin steps ≥ 1024 px, viewport entry below, focus on linked
+blocks). If the section is never armed (`data-live` missing — scripts blocked or failed), a CSS
+failsafe opens every block after 4 s; the component checks for the finished failsafe and then never
+re-locks. The heading row moved the lede beside the H1, and rows are `clamp(140px, (100dvh − 300px)
+/ 3, 200px)`, so the pinned section fits a 900 px viewport (200 px rows there).
+**Alternatives**: Server-rendered locked state (unreadable without JS); lock at hydration (a visible
+re-hide); an inline pre-paint script (CSP allows none).
+**Status**: Decided.
+
+### D-115 — P9 copy and a hook false positive (2026-10-01)
+**Context**: PAGES §6 asks for one-line glosses on the careers areas; CONTENT §3.6 lists the areas
+only. The write hook reads the brand utility `bg-violet-fg` as Tailwind's default violet palette.
+**Decision**: Six neutral one-line glosses authored (descriptions of the field, no claims), flagged
+for the owner in BUILD_STATE. The violet block uses the same token as `bg-(--color-violet-fg)`.
+Form error copy for fields CONTENT does not cover follows its pattern ("Enter your company.",
+"Choose a company size.", "Keep it under 160 characters.").
+**Alternatives**: Areas without glosses (thinner than the layout spec); editing the protected hook.
+**Status**: Decided; glosses await owner confirmation.
+
+### D-116 — Browser-side Zod: `zod/mini`, jitless (2026-10-01)
+**Context**: SECURITY §6 runs the form schema in the browser as well as in the server action. The
+classic `zod` build put /contact at 256 KB first-load JS (budget 190), and Zod's JIT probes
+`new Function` once, which the strict CSP reports as an enforced `script-src` violation even though
+Zod catches the throw (security.spec failed on /contact and /contact/sales in production).
+**Decision**: `src/lib/forms.ts` and `src/lib/security/params.ts` use `zod/mini` (same pinned
+package, same rules, tree-shakable) and `z.config({ jitless: true })`, which skips the probe.
+Server-only modules (`env`, content schemas) keep the classic API. Measured (prod): /contact
+182.8 KB, /contact/sales 180.8 KB; security.spec clean.
+**Alternatives**: A hand-written client validator (two sources of truth); raising the budget (not
+allowed); dropping client validation (loses inline, announced errors without a round trip).
+**Status**: Decided.

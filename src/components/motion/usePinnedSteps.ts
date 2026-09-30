@@ -4,7 +4,7 @@ import { type RefObject, useCallback, useEffect, useRef } from 'react'
 import { loadMotion } from './load'
 
 // DESIGN §7.0 pins: desktop ≥ 1024 only, motion allowed, scrub 0.6, snapped to steps, ≤ 200 vh.
-const PIN_OK = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)'
+export const PIN_OK = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)'
 
 type Range = { start: number; end: number }
 

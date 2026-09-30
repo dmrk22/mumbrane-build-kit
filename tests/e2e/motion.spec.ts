@@ -157,3 +157,105 @@ test.describe('@perf motion lab', () => {
     test.skip(result === 'unavailable', 'EXT_disjoint_timer_query_webgl2 not exposed in headless Chromium')
   })
 })
+
+test.describe('@motion company blocks (DESIGN §7.6)', () => {
+  const counter = (page: Page) => page.locator('[data-blocks] p.tabular-nums')
+  const opacityOfCopy = (page: Page) =>
+    page.$$eval('[data-step] .block-copy > *', (els) => els.map((e) => getComputedStyle(e).opacity))
+
+  test.describe('without JavaScript', () => {
+    test.use({ javaScriptEnabled: false })
+    test('every block is open and the counter reads 12 / 12', async ({ page }) => {
+      await page.goto('/company')
+      await expect(counter(page)).toHaveText(/^12 \/ 12/)
+      expect(new Set(await opacityOfCopy(page))).toEqual(new Set(['1']))
+    })
+  })
+
+  test('reduced motion: every block is open from the start', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/company')
+    await expect(page.locator('[data-blocks]')).toHaveAttribute('data-live', '')
+    await expect(counter(page)).toHaveText(/^12 \/ 12/)
+    expect(new Set(await opacityOfCopy(page))).toEqual(new Set(['1']))
+  })
+
+  test('desktop: starts locked, text stays accessible, focus unlocks a linked block', async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, 'desktop pin')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/company')
+    await expect(counter(page)).toHaveText(/^00 \/ 12/)
+    // Locked, yet named for assistive tech.
+    const moth = page.getByRole('link', { name: /Preview 004 · local CLI/ })
+    await expect(moth).not.toHaveAttribute('data-unlocked', '')
+    await moth.focus()
+    await expect(moth).toHaveAttribute('data-unlocked', '')
+    await expect(counter(page)).toHaveText(/^01 \/ 12/)
+  })
+
+  test('desktop: scrolling through the pin unlocks all twelve', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop pin')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/company')
+    await page.waitForFunction(() => document.querySelector('.pin-spacer'))
+    await scrollThrough(page)
+    await expect(counter(page)).toHaveText(/^12 \/ 12/)
+    // The three future-work blocks stay locked in every state.
+    await expect(page.locator('[data-blocks] li:not(:has([data-step]))')).toHaveCount(3)
+  })
+
+  test('mobile: blocks unlock as they enter the viewport', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto('/company')
+    await expect(page.locator('[data-blocks]')).toHaveAttribute('data-live', '')
+    const before = Number((await counter(page).textContent())?.slice(0, 2))
+    expect(before).toBeLessThan(12)
+    await scrollThrough(page)
+    await expect(counter(page)).toHaveText(/^12 \/ 12/)
+  })
+})
+
+test.describe('@perf company blocks', () => {
+  test('the pinned unlock sequence holds ≥ 55 fps while scrolling', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop probe')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/company')
+    await page.waitForFunction(() => document.querySelector('.pin-spacer'))
+    await page.mouse.move(700, 450)
+    const counting = page.evaluate(
+      () =>
+        new Promise<number>((resolve) => {
+          let frames = 0
+          const start = performance.now()
+          const tick = (now: number) => {
+            frames++
+            if (now - start < 2000) requestAnimationFrame(tick)
+            else resolve((frames * 1000) / (now - start))
+          }
+          requestAnimationFrame(tick)
+        }),
+    )
+    for (let i = 0; i < 30; i++) await page.mouse.wheel(0, 60)
+    const fps = await counting
+    test.info().annotations.push({ type: 'fps', description: fps.toFixed(1) })
+    expect(fps).toBeGreaterThanOrEqual(55)
+    expect(
+      Number((await page.locator('[data-blocks] p.tabular-nums').textContent())?.slice(0, 2)),
+    ).toBeGreaterThan(0)
+  })
+})
+
+test.describe('@motion company blocks failsafe', () => {
+  // Scripting is on but no JavaScript arrives (blocked, failed, very slow): the CSS draws the
+  // blocks locked, so a failsafe must open them — the text may never stay hidden.
+  test('blocks open after 4 s when the scripts never load', async ({ page }) => {
+    await page.route(/\/_next\/static\/chunks\/.*\.js(\?.*)?$/, (route) => route.abort())
+    await page.goto('/company')
+    const copy = page.locator('[data-step] .block-copy > *').first()
+    expect(await copy.evaluate((e) => getComputedStyle(e).opacity)).toBe('0')
+    await expect.poll(() => copy.evaluate((e) => getComputedStyle(e).opacity), { timeout: 6000 }).toBe('1')
+  })
+})

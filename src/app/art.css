@@ -188,3 +188,67 @@
     border-color: color-mix(in oklab, var(--color-on-dark) 30%, transparent);
   }
 }
+
+/* Company blocks unlock (DESIGN §7.6). Open is the default, so no-JS and reduced motion show every
+   block. With scripting and motion, blocks without data-unlocked draw locked from the first paint;
+   opening is an iris wipe from the top-left corner (600 ms mb.inOut), then label and text rise
+   12 px and fade in (60 ms stagger). If JS never arms the section (no data-live), a failsafe opens
+   everything after 4 s; BlocksMosaic sees the finished failsafe and never re-locks. */
+@layer components {
+  [data-step] .block-fill {
+    clip-path: circle(150% at 0 0);
+    transition: clip-path 600ms var(--ease-in-out);
+  }
+  [data-step] .block-copy > * {
+    transition:
+      opacity 360ms var(--ease-out) 380ms,
+      transform 360ms var(--ease-out) 380ms;
+  }
+  [data-step] .block-copy > * + * {
+    transition-delay: 440ms;
+  }
+  [data-step] .block-lock {
+    opacity: 0;
+    transition: opacity 240ms linear;
+  }
+
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    [data-step]:not([data-unlocked]) .block-fill {
+      clip-path: circle(0% at 0 0);
+    }
+    [data-step]:not([data-unlocked]) .block-copy > * {
+      opacity: 0;
+      transform: translateY(12px);
+      transition-delay: 0ms;
+    }
+    [data-step]:not([data-unlocked]) .block-lock {
+      opacity: 1;
+    }
+    [data-blocks]:not([data-live]) .block-fill {
+      animation: blocks-failsafe-fill 1ms 4s forwards;
+    }
+    [data-blocks]:not([data-live]) .block-copy > * {
+      animation: blocks-failsafe-copy 1ms 4s forwards;
+    }
+    [data-blocks]:not([data-live]) .block-lock {
+      animation: blocks-failsafe-lock 1ms 4s forwards;
+    }
+  }
+}
+
+@keyframes blocks-failsafe-fill {
+  to {
+    clip-path: circle(150% at 0 0);
+  }
+}
+@keyframes blocks-failsafe-copy {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blocks-failsafe-lock {
+  to {
+    opacity: 0;
+  }
+}
