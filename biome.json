@@ -15,7 +15,10 @@
       "!.next",
       "!.cache",
       "!.shots",
-      "!src/content/source"
+      "!src/content/source",
+      "!src/app/lqip.css",
+      "!src/content/paintings.manifest.json",
+      "!src/shaders"
     ]
   },
   "formatter": {
@@ -67,7 +70,9 @@
   "overrides": [
     {
       "includes": ["src/app/globals.css"],
-      "formatter": { "enabled": false }
+      "formatter": {
+        "enabled": false
+      }
     },
     {
       "includes": ["src/lib/security/json-ld.tsx"],

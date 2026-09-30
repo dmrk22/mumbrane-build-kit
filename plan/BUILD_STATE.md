@@ -12,7 +12,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P2 | Platform: security, metadata, errors | done | 2026-10-01 | 2026-10-01 | `p02-platform` |
 | P3 | Brand and chrome | done | 2026-10-01 | 2026-10-01 | `p03-chrome` |
 | P4 | Motion system and art engine | done | 2026-10-01 | 2026-10-01 | `p04-motion` |
-| P5 | Painting pipeline | not started | | | |
+| P5 | Painting pipeline | done | 2026-10-01 | 2026-10-01 | `p05-paintings` |
 | P6 | Home | not started | | | |
 | P7 | Moth and Models | not started | | | |
 | P8 | Research and News | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P5 (not started)
-- Next task: P5 task 1 (paintings registry + scene/paint shaders; scripts/paint.ts)
+- Phase: P6 (not started)
+- Next task: P6 Home (PAGES §1, CONTENT §3.1, DESIGN §7.2–§7.5)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -76,8 +76,24 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] 6 `/lab/motion` (3 seeds, every primitive, CSP counter; D-111)
 - Measurements (2026-10-01, dev server, headless Chromium 1440×900): scroll FPS below canvases ≥ 55 (asserted); with 3 software-GL canvases ≈ 48 (recorded, SwiftShader); CLS from motion 0; GPU timer not exposed headless → not measurable. Prod first-load JS on `/` 161.3 KB (budget 220), CSS 13.3 KB; GSAP/Lenis never before `load` (asserted).
 
+### P5 — Painting pipeline
+- [x] 1 Shaders byte-exact via `scripts/shaders.ts`; registry `src/content/paintings.ts` (integer seeds, alt text, optional scene `palette`)
+- [x] 2 `scripts/paint.ts`: reference harness + SwiftShader flags + width/1440 scaling; hash-skip (2nd run no-op); ~68 s for all ten
+- [x] 3 `scripts/images.ts`: AVIF (q stepped from 62 to fit budget) + WebP q78 at 640/1024/1600/2400, median-cut palette, 24 px LQIP → `paintings.manifest.json` + `src/app/lqip.css` (byte-identical re-runs)
+- [x] 4 `Painting` (`<picture>`, explicit size, LQIP class, `fit` width|cover); poster fallback in `MembraneCanvas` via a server-rendered prop
+- [x] 5 `Plate` (Roman number, mono date, crop marks, real seed, spectral strip; reveal + hover in CSS; stretched title link)
+- [x] 6 Ten images: 4 research/news plates, 3 inquiry (4:5), research hero (21:9), company plate, membrane poster. Reviewed full size + in plates at 1440/375. Re-seeded: inquiry-causality 37 → 44; company-plate given an evening palette (every meadow seed shares one composition, so a re-seed could not separate it from plate-wording).
+- 1600 w AVIF sizes (budget 180 KB / poster 120 KB): research-hero 68 · plate-field 96 · plate-wording 111 · plate-evidence 79 · plate-preview 73 · inquiry-representation 176 · inquiry-dynamics 146 · inquiry-causality 143 · company-plate 100 · poster 25 (KB, all q62)
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P5 — 2026-10-01
+- `pnpm art` = `node scripts/paint.ts && node scripts/images.ts`; `--only <id>` / `--force` on paint. Stamps live in `.cache/paintings/*.hash|*.enc.json` (not committed): a fresh clone re-renders everything (~3.5 min) but produces the same files.
+- Generated files are excluded from Biome (`lqip.css`, manifest, `src/shaders`) — a formatter pass would make them drift from their generators (a test compares `lqip.css` with its generator).
+- `painting(id)` (`src/content/paintingsData.ts`) joins registry + manifest; never import it into a client component (ships every LQIP) — pass rendered `<Painting>` as a prop instead.
+- The sky scene's warm horizon lights at the right edge are intended (board `plate-1.png` has them).
+- Plate titles keep hyphenated compounds together (`TitleText`).
 
 ### P4 — 2026-10-01
 - Every motion component awaits `loadMotion()`; never import `./gsap` statically from a component (it would enter first-load JS — `perf.spec` catches it via the `._gsap` marker).

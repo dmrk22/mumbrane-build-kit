@@ -1,0 +1,482 @@
+[
+  {
+    "id": "research-hero",
+    "width": 2400,
+    "height": 1029,
+    "palette": [
+      {
+        "hex": "#d5c670",
+        "weight": 0.5
+      },
+      {
+        "hex": "#2e53b5",
+        "weight": 0.125
+      },
+      {
+        "hex": "#7490c9",
+        "weight": 0.125
+      },
+      {
+        "hex": "#1d3c2a",
+        "weight": 0.063
+      },
+      {
+        "hex": "#254950",
+        "weight": 0.063
+      },
+      {
+        "hex": "#2e534c",
+        "weight": 0.031
+      },
+      {
+        "hex": "#354c27",
+        "weight": 0.031
+      },
+      {
+        "hex": "#c4ba85",
+        "weight": 0.031
+      },
+      {
+        "hex": "#405225",
+        "weight": 0.016
+      },
+      {
+        "hex": "#4b5d36",
+        "weight": 0.016
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwAwCdASoYAAoAPtFWo0uoJKMhsAgBABoJbACdACHetJZratrC7PkgAP7TSVYVL9xOnXeP9AuWaUl+CJBrHfMq6P/hfzITXPqQia4IcSN++qYYzeR9l063wbmkSTbjvRUQasziUfSy7RV8FHsEJXmlgwAAAA=="
+  },
+  {
+    "id": "plate-field",
+    "width": 2400,
+    "height": 1500,
+    "palette": [
+      {
+        "hex": "#d5c670",
+        "weight": 0.5
+      },
+      {
+        "hex": "#2c52b7",
+        "weight": 0.125
+      },
+      {
+        "hex": "#718dc9",
+        "weight": 0.125
+      },
+      {
+        "hex": "#143221",
+        "weight": 0.063
+      },
+      {
+        "hex": "#173c5f",
+        "weight": 0.063
+      },
+      {
+        "hex": "#214561",
+        "weight": 0.031
+      },
+      {
+        "hex": "#314926",
+        "weight": 0.031
+      },
+      {
+        "hex": "#c1b683",
+        "weight": 0.031
+      },
+      {
+        "hex": "#405225",
+        "weight": 0.016
+      },
+      {
+        "hex": "#40542a",
+        "weight": 0.016
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAACQBACdASoYAA8APtFUpEuoJKOhsAgBABoJbACdMoGv/gPJCZg8ARywpZ5AydIA/tMZ3ZCj0yZOOuuc/KAxJj+WptgQTc/4iGafFb9fCvmOPspc0xcJRrndFfw5woHyJq4frLN/VuBWx/c0AzrkZAQmr09cfjdFrUQFzG6f0NuJuf/dJQ6vKbH/Xf9pCd3ytuXstAW7k91h7nsAAAA="
+  },
+  {
+    "id": "plate-wording",
+    "width": 2400,
+    "height": 1500,
+    "palette": [
+      {
+        "hex": "#adc7d3",
+        "weight": 0.25
+      },
+      {
+        "hex": "#195229",
+        "weight": 0.125
+      },
+      {
+        "hex": "#3f8237",
+        "weight": 0.125
+      },
+      {
+        "hex": "#509438",
+        "weight": 0.125
+      },
+      {
+        "hex": "#7fa6b4",
+        "weight": 0.125
+      },
+      {
+        "hex": "#95b7cc",
+        "weight": 0.125
+      },
+      {
+        "hex": "#56983d",
+        "weight": 0.063
+      },
+      {
+        "hex": "#5d9355",
+        "weight": 0.031
+      },
+      {
+        "hex": "#67926c",
+        "weight": 0.016
+      },
+      {
+        "hex": "#759867",
+        "weight": 0.016
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAwCdASoYAA8APtFWpUwoJKOiMAgBABoJZACw7CPv2I+n/aUi5sAA/rFL34EM2CSAHNbD6BtmBgzmLPPeDtghqQaSxFfVm3IDbzPDvgD0b9jCQ7kO8IURAAA="
+  },
+  {
+    "id": "plate-evidence",
+    "width": 2400,
+    "height": 1500,
+    "palette": [
+      {
+        "hex": "#1a2372",
+        "weight": 0.25
+      },
+      {
+        "hex": "#d48655",
+        "weight": 0.25
+      },
+      {
+        "hex": "#d9b767",
+        "weight": 0.25
+      },
+      {
+        "hex": "#384598",
+        "weight": 0.063
+      },
+      {
+        "hex": "#4254b0",
+        "weight": 0.063
+      },
+      {
+        "hex": "#cc6f4e",
+        "weight": 0.063
+      },
+      {
+        "hex": "#4c5aab",
+        "weight": 0.016
+      },
+      {
+        "hex": "#4c5fbe",
+        "weight": 0.016
+      },
+      {
+        "hex": "#6e74a4",
+        "weight": 0.016
+      },
+      {
+        "hex": "#c88569",
+        "weight": 0.016
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAwCdASoYAA8APtFWpkuoJKOhsAgBABoJbACdMoADTcQTyw8kWgAA95kv9x8gyj92/PHvm9Magf4uyxYf9ijk/k30BUcT3WWdmmghjz5eEBiIUiQs18AA"
+  },
+  {
+    "id": "plate-preview",
+    "width": 2400,
+    "height": 1500,
+    "palette": [
+      {
+        "hex": "#142768",
+        "weight": 0.25
+      },
+      {
+        "hex": "#3056a1",
+        "weight": 0.25
+      },
+      {
+        "hex": "#4666a4",
+        "weight": 0.125
+      },
+      {
+        "hex": "#717e9d",
+        "weight": 0.125
+      },
+      {
+        "hex": "#1c1813",
+        "weight": 0.063
+      },
+      {
+        "hex": "#1d306a",
+        "weight": 0.063
+      },
+      {
+        "hex": "#292520",
+        "weight": 0.031
+      },
+      {
+        "hex": "#2a3964",
+        "weight": 0.031
+      },
+      {
+        "hex": "#343e58",
+        "weight": 0.031
+      },
+      {
+        "hex": "#505c84",
+        "weight": 0.031
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAwBACdASoYAA8APtFUo0uoJKMhsAgBABoJagCw/f/gPHh5wMkRtXr4yrIA/s3+O8tnY21XB/Qc0px+GQbrHvCdcey8xeBszoTFiExVKJBEx3gGY2YNglgYpxDr6v8ZD6lftEmSv12QGBPHBbAAAA=="
+  },
+  {
+    "id": "inquiry-representation",
+    "width": 2400,
+    "height": 3000,
+    "palette": [
+      {
+        "hex": "#d5c76b",
+        "weight": 0.5
+      },
+      {
+        "hex": "#2b50b2",
+        "weight": 0.125
+      },
+      {
+        "hex": "#748ec8",
+        "weight": 0.125
+      },
+      {
+        "hex": "#163524",
+        "weight": 0.063
+      },
+      {
+        "hex": "#183f37",
+        "weight": 0.063
+      },
+      {
+        "hex": "#224839",
+        "weight": 0.031
+      },
+      {
+        "hex": "#324b27",
+        "weight": 0.031
+      },
+      {
+        "hex": "#c9be7d",
+        "weight": 0.031
+      },
+      {
+        "hex": "#3e5228",
+        "weight": 0.016
+      },
+      {
+        "hex": "#556437",
+        "weight": 0.016
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRr4AAABXRUJQVlA4ILIAAADwBQCdASoYAB4APslSoUunpKMht/VYAPAZCWwAnTLjgqsYAJHzJHyUdDiAyy3qjrjRwHOBjNBbUAD+5yW5QiHkZ4ma082/XbCq4rF4N/pr8BzC9v+/jcqcnmmdNF03ACp98zcp46VWpSYLZKqPPz3rxu7zWBGXPBoUDx0vSW+r+lXb1ZxfhZ4WooN4S/cnurrgcO9f2yF+6yvpWZ7y+ewLYwt35PxbR+RMlQCgkJ2NAAAA"
+  },
+  {
+    "id": "inquiry-dynamics",
+    "width": 2400,
+    "height": 3000,
+    "palette": [
+      {
+        "hex": "#d79e5e",
+        "weight": 0.5
+      },
+      {
+        "hex": "#202976",
+        "weight": 0.25
+      },
+      {
+        "hex": "#3e4ea4",
+        "weight": 0.125
+      },
+      {
+        "hex": "#cc704b",
+        "weight": 0.063
+      },
+      {
+        "hex": "#4b5cb4",
+        "weight": 0.031
+      },
+      {
+        "hex": "#5964ac",
+        "weight": 0.008
+      },
+      {
+        "hex": "#888693",
+        "weight": 0.008
+      },
+      {
+        "hex": "#cf7d58",
+        "weight": 0.008
+      },
+      {
+        "hex": "#c6755e",
+        "weight": 0.004
+      },
+      {
+        "hex": "#cd7a57",
+        "weight": 0.004
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABQBQCdASoYAB4APslSoUunpKMht/VYAPAZCWgArDLje1+gAKUvCNSSyaY6sMbGaQPbd1gA1oXg9I8xIUX4lH04e/1pKXt/BLOpR9YQPN9tuICvvT7zYiqtLAd6gFSZHo0iExmiOYCtqx/AU2xniw6kXqya8YFu+JgAAA=="
+  },
+  {
+    "id": "inquiry-causality",
+    "width": 2400,
+    "height": 3000,
+    "palette": [
+      {
+        "hex": "#191c2d",
+        "weight": 0.25
+      },
+      {
+        "hex": "#1f3985",
+        "weight": 0.25
+      },
+      {
+        "hex": "#5473ab",
+        "weight": 0.25
+      },
+      {
+        "hex": "#3f5b9a",
+        "weight": 0.063
+      },
+      {
+        "hex": "#5b6d97",
+        "weight": 0.063
+      },
+      {
+        "hex": "#3b4c82",
+        "weight": 0.031
+      },
+      {
+        "hex": "#3e548e",
+        "weight": 0.031
+      },
+      {
+        "hex": "#6e7a99",
+        "weight": 0.031
+      },
+      {
+        "hex": "#79829a",
+        "weight": 0.016
+      },
+      {
+        "hex": "#9c9286",
+        "weight": 0.016
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACQBQCdASoYAB4APtFepE8oJSMiKAqpABoJZgCdL46A6NfFCZZcwx2LV7Z8Apvzpfo3sNv6iAD+7oCv1YasUB3Gb9FGOoohs7jh+bWTqC1/Fz8bG16QzpH7nLYDhck2CfkzihOP2Wx1S5DqU7MQWTulTqs1aIkqrBhad/1MYPJmZzm8nGWYTP6bjmORPuK9TW41zxZKrqyMZBhyToAAAA=="
+  },
+  {
+    "id": "company-plate",
+    "width": 2400,
+    "height": 1500,
+    "palette": [
+      {
+        "hex": "#407a64",
+        "weight": 0.25
+      },
+      {
+        "hex": "#104b3d",
+        "weight": 0.125
+      },
+      {
+        "hex": "#277359",
+        "weight": 0.125
+      },
+      {
+        "hex": "#d4bc85",
+        "weight": 0.125
+      },
+      {
+        "hex": "#d8c397",
+        "weight": 0.125
+      },
+      {
+        "hex": "#c5b494",
+        "weight": 0.063
+      },
+      {
+        "hex": "#d1c196",
+        "weight": 0.063
+      },
+      {
+        "hex": "#d7ad81",
+        "weight": 0.063
+      },
+      {
+        "hex": "#80777f",
+        "weight": 0.031
+      },
+      {
+        "hex": "#b89b81",
+        "weight": 0.031
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAACQAwCdASoYAA8APtFYpEwoJSOiMAgBABoJaACdIExDAoc46X5sAP7S48Ms8gIGjPpWdiVzJy2xtQYULsi0qU18g7pGGJYxH/XRHeuIcj2Dl/ByHcgoA+AA"
+  },
+  {
+    "id": "membrane-poster",
+    "width": 2560,
+    "height": 1440,
+    "palette": [
+      {
+        "hex": "#171a89",
+        "weight": 0.5
+      },
+      {
+        "hex": "#1c28a1",
+        "weight": 0.25
+      },
+      {
+        "hex": "#1c2ead",
+        "weight": 0.125
+      },
+      {
+        "hex": "#2032af",
+        "weight": 0.063
+      },
+      {
+        "hex": "#2a3db9",
+        "weight": 0.016
+      },
+      {
+        "hex": "#3741b2",
+        "weight": 0.016
+      },
+      {
+        "hex": "#334cc8",
+        "weight": 0.008
+      },
+      {
+        "hex": "#3c51c5",
+        "weight": 0.008
+      },
+      {
+        "hex": "#4360d7",
+        "weight": 0.008
+      },
+      {
+        "hex": "#5983f0",
+        "weight": 0.008
+      }
+    ],
+    "lqip": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABQAwCdASoYAA4APtFUo0uoJKMhsAgBABoJYgCdADBhjCCUgAD+78m1wwboTNIpmdH5JfiD7FPq7I2Thittn2499OHMx9Nma6ZRzKmsf62dX9ggAAA="
+  }
+]

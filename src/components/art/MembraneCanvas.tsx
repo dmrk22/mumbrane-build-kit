@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { cx } from '@/lib/cx'
 import { MEMBRANE_COLORS } from '@/lib/gl/colors'
 import { createGL, drawFullscreen, program, setUniforms } from '@/lib/gl/context'
@@ -12,25 +12,38 @@ const POINTER_LERP = 0.08
 
 /**
  * The hero's WebGL membrane (DESIGN §7.2) over its CSS field. The field shows until the first
- * frame is ready, then the canvas fades in; with no WebGL2, Save-Data or a lost context the CSS
- * field simply stays (the poster image joins in P5). Paused off-screen and in hidden tabs; one
- * static frame under reduced motion. Decorative.
+ * frame is ready, then the canvas fades in. With no WebGL2, Save-Data, a shader failure or a lost
+ * context, `poster` (a server-rendered <Painting>, so the manifest never ships to the client) is
+ * shown instead. Paused off-screen and in hidden tabs; one static frame under reduced motion.
+ * Decorative.
  */
-export function MembraneCanvas({ seed = 1.37, className }: { seed?: number; className?: string }) {
+export function MembraneCanvas({
+  seed = 1.37,
+  poster,
+  className,
+}: {
+  seed?: number
+  poster?: ReactNode
+  className?: string
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [fallback, setFallback] = useState(false)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
     const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number }
-    if (nav.connection?.saveData) return
-    const gl = createGL(canvas)
-    if (!gl) return
+    const gl = nav.connection?.saveData ? null : createGL(canvas)
+    if (!gl) {
+      setFallback(true)
+      return
+    }
     let prog: WebGLProgram
     try {
       prog = program(gl, MEMBRANE_FRAG)
     } catch (err) {
       console.error('MembraneCanvas: shader failed', err)
+      setFallback(true)
       return
     }
 
@@ -100,7 +113,8 @@ export function MembraneCanvas({ seed = 1.37, className }: { seed?: number; clas
     const onLost = (e: Event) => {
       e.preventDefault()
       loop.stop()
-      delete canvas.dataset.ready // back to the CSS field
+      delete canvas.dataset.ready
+      setFallback(true)
     }
     canvas.addEventListener('webglcontextlost', onLost)
     cleanups.push(() => canvas.removeEventListener('webglcontextlost', onLost))
@@ -111,7 +125,7 @@ export function MembraneCanvas({ seed = 1.37, className }: { seed?: number; clas
 
   return (
     <div aria-hidden="true" className={cx('membrane-field absolute inset-0 overflow-hidden', className)}>
-      <canvas ref={canvasRef} className="membrane-canvas absolute inset-0 size-full" />
+      {fallback ? poster : <canvas ref={canvasRef} className="membrane-canvas absolute inset-0 size-full" />}
     </div>
   )
 }

@@ -75,11 +75,24 @@ test.describe('@security', () => {
     const css = assets.find((u) => u.endsWith('.css'))
     expect(js, 'a _next/static JS file').toBeTruthy()
     expect(css, 'a _next/static CSS file').toBeTruthy()
-    // /paintings arrives in P5; the icon and security.txt stand in for public images and files.
-    for (const url of [js, css, '/icons/icon-192.png', '/.well-known/security.txt', '/robots.txt', MISSING]) {
+    const painting = '/paintings/plate-field-640.avif'
+    for (const url of [
+      js,
+      css,
+      painting,
+      '/icons/icon-192.png',
+      '/.well-known/security.txt',
+      '/robots.txt',
+      MISSING,
+    ]) {
       const res = await request.get(url ?? '')
       expectStaticHeaders(res.headers(), url ?? '')
     }
+    // Paintings are cached for a day and revalidated in the background (SECURITY §3.4).
+    const res = await request.get(painting)
+    expect(res.status()).toBe(200)
+    expect(res.headers()['content-type']).toBe('image/avif')
+    expect(res.headers()['cache-control']).toBe('public, max-age=86400, stale-while-revalidate=604800')
   })
 
   for (const route of ROUTES) {

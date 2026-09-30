@@ -5,6 +5,8 @@ import { site } from '@/content/site'
 import { publicEnv } from '@/lib/env'
 import { fontVars } from './fonts'
 import './globals.css'
+// Generated painting placeholders (scripts/images.ts): one class per painting, no inline styles.
+import './lqip.css'
 
 export const metadata: Metadata = {
   metadataBase: publicEnv.siteUrl,

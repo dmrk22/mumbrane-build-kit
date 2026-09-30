@@ -80,3 +80,60 @@
     color: var(--color-on-dark);
   }
 }
+
+/* Plates (DESIGN §7.5): on reveal the crop marks scale in, the painting unveils top-down, the
+   strip grows; on hover (fine pointers) the painting eases to 1.02 and a varnish sheen crosses. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] .plate .crop-mark {
+    transform: scale(0);
+  }
+  [data-reveal="pending"] .plate .plate-frame {
+    clip-path: inset(0 0 100% 0);
+  }
+  [data-reveal="pending"] .plate .plate-strip {
+    transform: scaleX(0);
+  }
+  [data-reveal="done"] .plate .crop-mark {
+    transition: transform var(--duration-ui) var(--ease-out);
+  }
+  [data-reveal="done"] .plate .plate-frame {
+    transition: clip-path var(--duration-hero) var(--ease-in-out) 200ms;
+  }
+  [data-reveal="done"] .plate .plate-strip {
+    transform-origin: left;
+    transition: transform var(--duration-reveal) var(--ease-out) 900ms;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .plate .plate-painting {
+      transition: transform 600ms var(--ease-out);
+    }
+    .plate:hover .plate-painting {
+      transform: scale(1.02);
+    }
+    .plate .plate-frame {
+      position: relative;
+    }
+    .plate .plate-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        115deg,
+        transparent 35%,
+        color-mix(in oklab, var(--color-paper) 22%, transparent) 50%,
+        transparent 65%
+      );
+      transform: translateX(-120%);
+    }
+    .plate:hover .plate-frame::after {
+      transform: translateX(120%);
+      transition: transform 900ms var(--ease-out);
+    }
+  }
+}
+@media (forced-colors: active) {
+  .plate .plate-frame {
+    border: 1px solid CanvasText;
+  }
+}

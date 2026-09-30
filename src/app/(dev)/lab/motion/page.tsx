@@ -4,6 +4,8 @@ import { CropMarks } from '@/components/art/CropMarks'
 import { EvidenceSeal } from '@/components/art/EvidenceSeal'
 import { Guilloche } from '@/components/art/Guilloche'
 import { MembraneCanvas } from '@/components/art/MembraneCanvas'
+import { Painting } from '@/components/art/Painting'
+import { Plate } from '@/components/art/Plate'
 import { RegistrationMark } from '@/components/art/RegistrationMark'
 import { SpectralStrip } from '@/components/art/SpectralStrip'
 import { InstrumentStack, InstrumentWindow } from '@/components/instrument/InstrumentWindow'
@@ -21,6 +23,47 @@ import { PinDemo } from './PinDemo'
 export const metadata: Metadata = { title: 'Motion lab', robots: { index: false, follow: false } }
 
 const SEEDS = [1.37, 4.2, 9.1] as const
+const PLATES = [
+  {
+    paintingId: 'plate-field',
+    date: '2026-09-16',
+    title: 'Towards field-based intelligence',
+    meta: 'Research perspective',
+  },
+  {
+    paintingId: 'plate-wording',
+    date: '2026-09-22',
+    title: 'Different wording. Different meaning.',
+    meta: 'Engineering notes',
+  },
+  {
+    paintingId: 'plate-evidence',
+    date: '2026-09-22',
+    title: 'When the field cannot establish an answer',
+    meta: 'Research practice',
+  },
+] as const
+const INQUIRY = [
+  {
+    paintingId: 'inquiry-representation',
+    date: '2026-09-16',
+    title: 'Can knowledge become a field?',
+    meta: 'Representation',
+  },
+  {
+    paintingId: 'inquiry-dynamics',
+    date: '2026-09-16',
+    title: 'What makes a field reason?',
+    meta: 'Dynamics',
+  },
+  {
+    paintingId: 'inquiry-causality',
+    date: '2026-09-16',
+    title: 'What can a system know, and when?',
+    meta: 'Causality',
+  },
+] as const
+
 // Real strips come from the paintings manifest (P5); this sample reuses the brand hexes.
 const SAMPLE_PALETTE = [
   { hex: HEX.cadmium, weight: 0.3 },
@@ -98,6 +141,40 @@ export default function MotionLab() {
         </Section>
 
         <PinDemo />
+
+        <Section surface="paper-2" labelledBy="lab-plates">
+          <Heading level={2} size="display-s" id="lab-plates">
+            Plates
+          </Heading>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {PLATES.map((p, i) => (
+              <Plate
+                key={p.paintingId}
+                {...p}
+                number={i + 1}
+                href="/lab/motion"
+                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+              />
+            ))}
+          </div>
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+            {INQUIRY.map((p, i) => (
+              <Plate key={p.paintingId} {...p} number={i + 4} sizes="(min-width: 640px) 30vw, 100vw" />
+            ))}
+          </div>
+          <figure className="mt-10">
+            <Painting id="research-hero" sizes="100vw" />
+            <figcaption className="mt-2 font-mono text-label uppercase">research-hero · 21:9</figcaption>
+          </figure>
+          <figure className="mt-10">
+            <div className="relative aspect-video">
+              <Painting id="membrane-poster" decorative fit="cover" sizes="100vw" />
+            </div>
+            <figcaption className="mt-2 font-mono text-label uppercase">
+              membrane-poster · fallback
+            </figcaption>
+          </figure>
+        </Section>
 
         <Section surface="paper-2" labelledBy="lab-art">
           <Heading level={2} size="display-s" id="lab-art">
