@@ -403,3 +403,19 @@ Server-only modules (`env`, content schemas) keep the classic API. Measured (pro
 **Alternatives**: A hand-written client validator (two sources of truth); raising the budget (not
 allowed); dropping client validation (loses inline, announced errors without a round trip).
 **Status**: Decided.
+
+### D-117 — Solutions copy: authored, illustrative, and nothing invented for the delivered worlds (2026-10-01)
+**Context**: CONTENT §3.8 fixes the headings, the four illustrative worlds' subjects and the Fit
+lists, but not the rulebook bullets, the "why evidence matters" points, the domain "next step"
+wording, or the sketch definitions. The sources name the libraries, trails and venues worlds
+without any detail.
+**Decision**: Authored copy stays descriptive (what gets defined, what the evidence lets a reader
+do); every world is tagged Illustrative / Illustrative sketch / Synthetic example world, with a
+caption that it is not a customer deployment or a live console. The limits box reuses sourced
+sentences from releases.md/moth.md. Libraries, Trails and Venues show no question or outcome —
+only "Its questions and definitions ship with the local delivery." The Security page's "Our own
+security" panel states only what this build does (strict CSP, no third parties, no tracking).
+The Solutions menu is marked current on its overview page (`Menu.index`).
+**Alternatives**: Inventing example questions for the three undetailed worlds (would read as
+real results); leaving the template sections empty.
+**Status**: Decided; authored solution copy listed for owner review.

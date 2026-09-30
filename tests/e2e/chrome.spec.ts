@@ -239,3 +239,23 @@ test.describe('@smoke print', () => {
     expect(printed.after).toContain(printed.href)
   })
 })
+
+test.describe('@smoke current section', () => {
+  // Regression: /solutions is the Solutions menu's feature card, not one of its links, so the
+  // trigger showed no current mark on the section's own overview page.
+  for (const [route, current] of [
+    ['/solutions', 'true'],
+    ['/solutions/legal', 'true'],
+    ['/company', 'false'],
+  ] as const) {
+    test(`Solutions trigger current=${current} on ${route}`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'desktop menus')
+      await page.setViewportSize({ width: 1440, height: 900 })
+      await page.goto(route)
+      await expect(page.locator('header button[data-current]', { hasText: 'Solutions' })).toHaveAttribute(
+        'data-current',
+        current,
+      )
+    })
+  }
+})

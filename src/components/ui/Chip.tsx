@@ -1,3 +1,5 @@
+import type { Route } from 'next'
+import Link from 'next/link'
 import type { ComponentProps, ReactNode } from 'react'
 import { OUTCOMES, type Outcome } from '@/content/outcomes'
 import { cx } from '@/lib/cx'
@@ -36,6 +38,37 @@ export function Chip({
     >
       {children}
     </button>
+  )
+}
+
+/**
+ * A filter as a link (URL state, works without JS): replaces the history entry and keeps the scroll
+ * position, so filtering feels like a toggle. Current = the pressed look + `aria-current`.
+ */
+export function FilterChip({
+  href,
+  current,
+  children,
+}: {
+  href: Route
+  current: boolean
+  children: ReactNode
+}) {
+  return (
+    <Link
+      href={href}
+      replace
+      scroll={false}
+      aria-current={current ? 'true' : undefined}
+      className={cx(
+        CHIP,
+        current
+          ? 'border-surface-invert bg-surface-invert text-surface-on-invert'
+          : 'border-surface-fg/25 text-surface-fg hover:bg-surface-raise',
+      )}
+    >
+      {children}
+    </Link>
   )
 }
 

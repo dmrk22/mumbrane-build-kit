@@ -13,7 +13,14 @@ export type FeatureCard = {
   secondary?: NavLink
   meta?: string
 }
-export type Menu = { id: string; label: string; links: NavLink[]; feature: FeatureCard }
+export type Menu = {
+  id: string
+  label: string
+  links: NavLink[]
+  feature: FeatureCard
+  /** The section's own overview page, reached through the feature card: current there too. */
+  index?: string
+}
 
 function link(path: RoutePath, description?: string): NavLink {
   const r = routeFor(path)
@@ -30,6 +37,7 @@ export const HEADER = {
     {
       id: 'solutions',
       label: 'Solutions',
+      index: '/solutions',
       links: [
         link('/solutions/business', 'Decisions that follow your policies'),
         link('/solutions/customer-support', 'Answers grounded in your rules'),

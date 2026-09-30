@@ -17,7 +17,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P7 | Moth and Models | done | 2026-10-01 | 2026-10-01 | `p07-moth` |
 | P8 | Research and News | done | 2026-10-01 | 2026-10-01 | `p08-research` |
 | P9 | Company, Careers, Contact | done | 2026-10-01 | 2026-10-01 | `p09-company` |
-| P10 | Solutions | not started | | | |
+| P10 | Solutions | done | 2026-10-01 | 2026-10-01 | `p10-solutions` |
 | P11 | Developers, Pricing, Changelog, Status | not started | | | |
 | P12 | Console preview | not started | | | |
 | P13 | Legal, llms.txt, OG images, completeness | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P10 (not started)
-- Next task: P10 Solutions (overview, four solution pages, use cases)
+- Phase: P11 (not started)
+- Next task: P11 Developers, Pricing, Changelog, Status
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,6 +99,14 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P10 — Solutions
+- [x] `src/content/solutions.ts` — overview, four solutions (rulebook, illustrative field, domain next steps, evidence points, legal note), shared limits box (sourced), use cases (4 delivered + 6 sketches)
+- [x] `/solutions` — hero, 2 × 2 cards + wide use-cases card, Fit checklists, ink CTA; Solutions trigger current on the overview (`Menu.index`)
+- [x] `/solutions/[slug]` — the template (generateStaticParams, unknown → 404): hero, ink rulebook + `FieldWindow` (tag Illustrative), outcome ledger with domain wording, evidence + limits, Security "Our own security" panel, cadmium CTA → `/contact?interest=<slug>`
+- [x] `/solutions/use-cases` — `?domain=` parsed by Zod (`parseUseCaseFilter`), `FilterChip` links (replace, keep scroll; plain links without JS), `role=status` count, groups hidden when empty
+- [x] Tests: `pages.spec.ts` (filter URL state, fallback, no-JS, labels, interest links, 404); chrome.spec current section
+- [x] Screens reviewed 375/768/1440 + reduced; claims audit logged
+
 ### P9 — Company, Careers, Contact
 - [x] Content: `src/content/company.ts` (COMPANY blocks with unlock `step` + honest permanent locks, CAREERS), `src/content/contact.ts` (field specs, error copy, preview state)
 - [x] `/company` — `BlocksMosaic` (pinned 180 vh ≥ 1024 with motion, viewport unlock below, focus unlocks linked blocks, CSS pre-lock + 4 s failsafe, D-114), why closed worlds + plate, FIG. 02 `MuonTrack`, CTA ledger on ink
@@ -119,6 +127,13 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P10 — 2026-10-01
+- `FieldWindow` (instrument/) renders any `FieldExample` (define, facts, questions → outcome + reason); reuse it for /developers examples.
+- Inline markup inside a flex column must sit in one text box (`<p>`), or each node becomes its own flex item.
+- Filters are links (`FilterChip` in Chip.tsx: replace + keep scroll) over Zod-parsed search params — works without JS; reuse for any future list filter.
+- Header menus take an optional `index` path (the section overview reached via the feature card).
+- `/legal/responsible-disclosure` (Security page) and `/legal/privacy` (forms) arrive in P13.
 
 ### P9 — 2026-10-01
 - Browser-side validation uses `zod/mini` + `z.config({ jitless: true })` (D-116). Never import classic `zod` into anything a client component reaches: it breaks the JS budget and trips the CSP (eval probe).
@@ -210,6 +225,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [ ] Keep "Try for free" (→ console preview) or say "Try the preview"? (D-015)
 - [ ] Any real job openings to list? — careers page has none
 - [ ] Confirm the six one-line glosses under "Areas we care about" on /careers (authored, D-115)
+- [ ] Review the authored solution copy: rulebook bullets, evidence points, domain next steps, four illustrative worlds, six sketches (`src/content/solutions.ts`, D-117)
 - [ ] Review of the drafted legal pages (cookies, privacy choices, enterprise terms, disclosure)
 - [ ] Remove the `nextjs-agent-rules` block that `next dev` appended to CLAUDE.md (Claude cannot edit it; `agentRules: false` stops it recurring) (D-105)
 - [x] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103) — accepted, owner 2026-10-01 (D-106)
@@ -221,6 +237,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Logs
 - Claims audits: 2026-10-01 (P7) — claims.test green; every figure on / , /moth, /developers/models traced to releases.md; labels present (Explanatory example, Proposed, Illustrative); no forbidden words
+- Claims audits: 2026-10-01 (P10) — claims.test green; /solutions, the four solution pages and /solutions/use-cases carry no numbers, customers, results or ROI; every world labelled (Illustrative / Illustrative sketch / Synthetic example world); avoid-list and forbidden-list grep over company, contact, solutions content: only the verbatim Company-block "Unlocked" and the source contact lede ("unlock") — both allowed by CONTENT §1
 - Trusted Types trial: —
 - Dependency changes / advisories: —
 

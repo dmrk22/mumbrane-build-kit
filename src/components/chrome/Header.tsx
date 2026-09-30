@@ -176,7 +176,7 @@ export function Header({
             <ul className="flex items-center gap-6 xl:gap-8">
               {nav.menus.map((menu) => {
                 const expanded = open === menu.id
-                const current = menu.links.some((l) => isCurrent(pathname, l.href))
+                const current = menu.links.some((l) => isCurrent(pathname, l.href)) || pathname === menu.index
                 return (
                   <li key={menu.id}>
                     <button
