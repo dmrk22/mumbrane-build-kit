@@ -18,7 +18,8 @@
       "!src/content/source",
       "!src/app/lqip.css",
       "!src/content/paintings.manifest.json",
-      "!src/shaders"
+      "!src/shaders",
+      "!src/content/articleBodies.ts"
     ]
   },
   "formatter": {

@@ -85,3 +85,47 @@ export function homeJsonLd() {
     ],
   }
 }
+
+type ArticleLike = {
+  slug: string
+  section: 'research' | 'news'
+  title: string
+  description: string
+  published: string
+  updated?: string
+  plate: string
+}
+
+/** Metadata for an article page: OG type article, dates, and its markdown alternate (PAGES §0.5). */
+export function articleMetadata(a: ArticleLike): Metadata {
+  const path = `/${a.section}/${a.slug}` as const
+  const base = pageMetadata({ title: a.title, description: a.description, path })
+  const md = new URL(`/md${path}`, publicEnv.siteUrl).href
+  return {
+    ...base,
+    alternates: { ...base.alternates, types: { 'text/markdown': md } },
+    openGraph: {
+      ...base.openGraph,
+      type: 'article',
+      publishedTime: a.published,
+      ...(a.updated ? { modifiedTime: a.updated } : {}),
+    },
+  }
+}
+
+/** Article structured data (CONTENT §6): the plate's 1600 w WebP as the image. */
+export function articleJsonLd(a: ArticleLike) {
+  const url = new URL(`/${a.section}/${a.slug}`, publicEnv.siteUrl).href
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: a.title,
+    description: a.description,
+    datePublished: a.published,
+    dateModified: a.updated ?? a.published,
+    author: { '@type': 'Organization', name: 'Mumbrane Labs' },
+    publisher: { '@type': 'Organization', name: site.name, url: publicEnv.siteUrl.href },
+    image: new URL(`/paintings/${a.plate}-1600.webp`, publicEnv.siteUrl).href,
+    mainEntityOfPage: url,
+  }
+}

@@ -30,6 +30,9 @@ const FORBIDDEN = [
 const VERBATIM_NEGATIONS = [
   'These safeguards are not measured capacity guarantees.',
   'they are not pure reasoning-kernel measurements, controlled cold-cache results, or guarantees.',
+  // A section heading of the research perspective (and its anchor id), verbatim.
+  'Equilibrium is a candidate, not a guarantee',
+  'equilibrium-is-a-candidate-not-a-guarantee',
 ]
 
 function contentFiles(dir = 'src/content'): string[] {

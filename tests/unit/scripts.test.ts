@@ -104,6 +104,8 @@ test('budgets: depth, barrels, file length and generated exclusions', () => {
   assert.equal(checkShape(['src/lib/big.ts'], () => 401).length, 1)
   assert.equal(isCounted('src/components/brand/mark-geometry.ts'), false)
   assert.equal(isCounted('src/content/source/index.md'), false)
+  // Regression: the generated article bodies passed 400 lines and failed `pnpm verify`.
+  assert.equal(isCounted('src/content/articleBodies.ts'), false)
   assert.equal(isCounted('src/lib/cx.ts'), true)
 })
 
@@ -155,4 +157,12 @@ test('guard: brand `violet` tokens pass, default-palette violet shades do not', 
   assert.deepEqual(rules('src/components/ui/A.tsx', '<p className="text-blue-600" />'), [
     'no-default-palette',
   ])
+})
+
+test('guard: vendor names in prose pass, their domains and scripts do not', () => {
+  assert.deepEqual(rules('src/content/a.ts', "text: 'others become more plausible'"), [])
+  assert.deepEqual(rules('src/content/a.ts', "text: 'an intercom on the wall'"), [])
+  assert.deepEqual(rules('src/app/a.tsx', "<script src='/plausible.js' />"), ['no-third-party-services'])
+  assert.deepEqual(rules('src/lib/a.ts', "const u = 'https://plausible.io/api'"), ['no-third-party-services'])
+  assert.deepEqual(rules('src/lib/a.ts', "load('static.hotjar.com')"), ['no-third-party-services'])
 })

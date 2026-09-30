@@ -184,3 +184,58 @@ test.describe('@motion brand reveals', () => {
     expect(animated).toBe(false)
   })
 })
+
+test.describe('@smoke figures', () => {
+  // Regression: the light-cone labels were SVG text, so they scaled with the drawing to ~7 px at
+  // 375, and "can reach it" sat across the dashed time axis.
+  for (const width of [320, 375, 1440]) {
+    test(`light-cone labels stay legible and clear of the time axis at ${width} px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 900 })
+      await page.goto('/research')
+      const figure = page.locator('[data-figure="light-cone"]')
+      await figure.scrollIntoViewIfNeeded()
+      const labels = await figure.evaluate((el) => {
+        const box = el.getBoundingClientRect()
+        const axis = box.left + box.width / 2
+        return [...el.querySelectorAll('span')].map((s) => {
+          const r = s.getBoundingClientRect()
+          return {
+            text: s.textContent,
+            px: Number.parseFloat(getComputedStyle(s).fontSize),
+            crossesAxis: r.left < axis && r.right > axis,
+          }
+        })
+      })
+      expect(labels).toHaveLength(4)
+      for (const l of labels) {
+        expect(l.px, l.text ?? '').toBeGreaterThanOrEqual(11)
+        expect(l.crossesAxis, l.text ?? '').toBe(false)
+      }
+    })
+  }
+})
+
+test.describe('@smoke print', () => {
+  // Regression: there was no print stylesheet, so an article printed with the sticky header, the
+  // ink footer and tinted surfaces, and its links printed without their targets (DESIGN §10).
+  test('an article prints black on white without chrome and shows link targets', async ({ page }) => {
+    await page.goto('/news/introducing-moth-preview-004')
+    await page.emulateMedia({ media: 'print' })
+    await expect(page.locator('header[data-collapsed]')).toBeHidden()
+    await expect(page.locator('footer')).toBeHidden()
+    const printed = await page.evaluate(() => {
+      const section = document.querySelector('article [data-surface]')
+      const link = document.querySelector('.prose-article a[href]:not([href^="#"])')
+      return {
+        bg: section ? getComputedStyle(section).backgroundColor : '',
+        fg: section ? getComputedStyle(section).color : '',
+        href: link?.getAttribute('href') ?? '',
+        after: link ? getComputedStyle(link, '::after').content : '',
+      }
+    })
+    expect(printed.bg).toBe('rgb(255, 255, 255)')
+    expect(printed.fg).toBe('rgb(0, 0, 0)')
+    expect(printed.href).not.toBe('')
+    expect(printed.after).toContain(printed.href)
+  })
+})

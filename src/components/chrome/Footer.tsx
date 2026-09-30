@@ -8,7 +8,7 @@ import { HEADER, FOOTER as NAV } from '@/content/nav'
 // DESIGN §9.3 + CONTENT §2.2: ink footer, six link columns, legal row, giant wordmark (§7.8).
 export function Footer() {
   return (
-    <footer data-surface="ink" className="overflow-hidden pt-16 md:pt-20 lg:pt-24">
+    <footer data-surface="ink" className="overflow-hidden pt-16 md:pt-20 lg:pt-24 print:hidden">
       <Container>
         <div className="grid grid-cols-12 gap-x-4 gap-y-14 lg:gap-x-6">
           <InView className="col-span-12 lg:col-span-4">

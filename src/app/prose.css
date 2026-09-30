@@ -43,7 +43,8 @@
     & a {
       @apply link-prose;
     }
-    & code {
+    /* Inline code only: code blocks (<pre>) style themselves. */
+    & :not(pre) > code {
       font-family: var(--font-mono);
       font-size: 0.85em;
       font-variant-numeric: normal;
@@ -89,5 +90,23 @@
         text-indent: -0.4em;
       }
     }
+  }
+}
+
+/* Print (DESIGN §10): articles and legal pages print black on white, with chrome hidden
+   (print:hidden on the header, footer, contents and copy buttons) and link targets shown.
+   System colours rather than raw values: Canvas/CanvasText are the printer's paper and ink. */
+@media print {
+  :root,
+  [data-surface] {
+    --surface-bg: Canvas;
+    --surface-fg: CanvasText;
+    --surface-muted: CanvasText;
+    --surface-subtle: CanvasText;
+  }
+  .prose-article a[href]:not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    overflow-wrap: anywhere;
   }
 }

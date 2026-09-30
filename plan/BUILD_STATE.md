@@ -15,7 +15,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P5 | Painting pipeline | done | 2026-10-01 | 2026-10-01 | `p05-paintings` |
 | P6 | Home | done | 2026-10-01 | 2026-10-01 | `p06-home` |
 | P7 | Moth and Models | done | 2026-10-01 | 2026-10-01 | `p07-moth` |
-| P8 | Research and News | not started | | | |
+| P8 | Research and News | done | 2026-10-01 | 2026-10-01 | `p08-research` |
 | P9 | Company, Careers, Contact | not started | | | |
 | P10 | Solutions | not started | | | |
 | P11 | Developers, Pricing, Changelog, Status | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P8 (not started)
-- Next task: P8 Research and News (articles, /md alternates)
+- Phase: P9 (not started)
+- Next task: P9 Company, Careers, Contact
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,8 +99,23 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P8 — Research and News
+- [x] Content: `scripts/articles.ts` converts `src/content/source/*.md` → typed blocks (`src/content/articleBodies.ts`, generated; Zod schemas in `schemas.ts`); authors' wording kept (articles.test diffs against the source)
+- [x] `/research` — painted hero + glass caption, two-column abstract, three lines of inquiry (Plates I–III), FIG. 01 light cone, hypothesis → experiment, perspectives on ink, CTA
+- [x] `/research/[slug]`, `/news/[slug]` — shared `Article` template (meta, framed plate, prose from blocks, sticky contents ≥ 1280 px, cite + copy, markdown link, related); `generateStaticParams`; unknown slug → 404
+- [x] `/news` — featured latest + all posts (`NewsList`)
+- [x] `/md/[...path]` — `text/markdown` from the same blocks for every article; `alternates.types`; sitemap `lastModified`
+- [x] Prose checklist (QUALITY §5.4) — wording, headings, labelled code blocks, links, captions, dates/reading time, cite, markdown parity, print (print stylesheet added: chrome hidden, Canvas/CanvasText, link targets shown)
+- [x] Screens reviewed 375/768/1440 + reduced; fixed: light-cone labels (SVG text fell to ~7 px at 375 and one crossed the time axis → HTML labels on the type scale)
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P8 — 2026-10-01
+- New article = add the source `.md` + metadata in `articles.ts`, then `node scripts/articles.ts` (regenerates `articleBodies.ts`; excluded from Biome and from the budgets file count).
+- Print: chrome carries `print:hidden`; `prose.css` ends with the print block. Legal pages (P13) should use `<Prose>` to inherit it.
+- Figure labels over SVG art are HTML placed in % of the viewBox (see `LightCone`), never SVG `<text>` — SVG text scales below legibility on phones.
+- `/md` serves articles only; P13 adds key pages and links them from `/llms.txt`.
 
 ### P7 — 2026-10-01
 - Evidence tables and code blocks never scroll horizontally (two-column tables wrap; code wraps with `pre-wrap`): a scroller would need a focusable region (axe `scrollable-region-focusable`) and a suppression. Keep new tables ≤ 2–3 columns or revisit.

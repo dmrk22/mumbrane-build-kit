@@ -109,7 +109,9 @@ export const RULES: readonly Rule[] = [
   },
   {
     id: 'no-third-party-services',
-    re: /fonts\.(googleapis|gstatic)\.com|cdn\.jsdelivr|unpkg\.com|cdnjs\.|esm\.sh|skypack|googletagmanager|google-analytics|segment\.(io|com)|mixpanel|hotjar|posthog|sentry\.io|plausible|intercom|hubspot/,
+    // Vendor names that are also English words ("more plausible") only count as their domains or
+    // script names; imports of such packages are already blocked by the dependency allowlist.
+    re: /fonts\.(googleapis|gstatic)\.com|cdn\.jsdelivr|unpkg\.com|cdnjs\.|esm\.sh|skypack|googletagmanager|google-analytics|segment\.(io|com)|sentry\.io|\b(mixpanel|hotjar|posthog|plausible|intercom|hubspot)\.(com|io|net|js)\b/,
     hint: 'No CDNs, remote fonts, analytics or trackers.',
     applies: strict,
   },

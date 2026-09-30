@@ -65,3 +65,23 @@ test('article routes join the registry within the same limits, once each', async
     assert.ok(r.description.length <= 160, r.path)
   }
 })
+
+test('article metadata: OG article with dates, markdown alternate, JSON-LD', async () => {
+  const { articleJsonLd, articleMetadata } = await import('../../src/lib/seo.ts')
+  const { ARTICLES } = await import('../../src/content/articles.ts')
+  const a = ARTICLES[0]
+  const m = articleMetadata(a)
+  assert.deepEqual(m.alternates, {
+    canonical: 'https://mumbrane.com/research/toward-field-based-intelligence',
+    types: { 'text/markdown': 'https://mumbrane.com/md/research/toward-field-based-intelligence' },
+  })
+  const og = m.openGraph as { type: string; publishedTime: string; modifiedTime: string }
+  assert.equal(og.type, 'article')
+  assert.equal(og.publishedTime, '2026-09-16')
+  assert.equal(og.modifiedTime, '2026-09-22')
+  const ld = articleJsonLd(a)
+  assert.equal(ld.headline, a.title)
+  assert.equal(ld.dateModified, '2026-09-22')
+  assert.equal(ld.image, 'https://mumbrane.com/paintings/plate-field-1600.webp')
+  assert.deepEqual(ld.author, { '@type': 'Organization', name: 'Mumbrane Labs' })
+})

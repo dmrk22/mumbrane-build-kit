@@ -15,6 +15,8 @@ const GENERATED = new Set([
   'src/components/brand/mark-geometry.ts',
   'src/content/paintings.manifest.json',
   'src/app/lqip.css',
+  // Built from src/content/source/*.md (itself uncounted); grows with every article.
+  'src/content/articleBodies.ts',
 ])
 const EXACT = /^\d+\.\d+\.\d+$/
 

@@ -162,7 +162,7 @@ export function Header({
         data-scrolled={scrolled || open !== null}
         data-collapsed={collapsed}
         className={cx(
-          'sticky top-0 z-40 border-b border-transparent bg-transparent text-surface-fg',
+          'sticky top-0 z-40 border-b border-transparent bg-transparent text-surface-fg print:hidden',
           'transition-[background-color,border-color,color] duration-[240ms] ease-out',
           'data-[scrolled=true]:border-surface-rule data-[scrolled=true]:bg-surface/86 data-[scrolled=true]:backdrop-blur-[14px] data-[scrolled=true]:backdrop-saturate-140',
         )}

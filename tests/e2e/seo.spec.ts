@@ -83,3 +83,48 @@ test.describe('@seo', () => {
     })
   }
 })
+
+test.describe('@seo articles and markdown alternates', () => {
+  for (const [path, title] of [
+    ['/research/toward-field-based-intelligence', 'Towards field-based intelligence'],
+    ['/news/introducing-moth-preview-004', 'Introducing Moth Preview 004'],
+  ] as const) {
+    test(`${path}: markdown alternate linked, served as text/markdown, noindex`, async ({
+      page,
+      request,
+    }) => {
+      await page.goto(path)
+      const alt = await page.locator('link[rel="alternate"][type="text/markdown"]').getAttribute('href')
+      expect(alt).toBe(`${SITE}/md${path}`)
+      const res = await request.get(`/md${path}`)
+      expect(res.status()).toBe(200)
+      expect(res.headers()['content-type']).toBe('text/markdown; charset=utf-8')
+      expect(res.headers()['x-robots-tag']).toBe('noindex')
+      const md = await res.text()
+      expect(md.startsWith('---\ntitle: ')).toBe(true)
+      expect(md).toContain(`# ${title}`)
+      expect(md).not.toMatch(/<(?!\/)[a-z]/i)
+      const jsonLd = JSON.parse(
+        (await page.locator('script[type="application/ld+json"]').textContent()) ?? '{}',
+      )
+      expect(jsonLd['@type']).toBe('Article')
+    })
+  }
+
+  test('unknown slugs and markdown paths are 404; a slug under the wrong section is 404', async ({
+    request,
+  }) => {
+    expect((await request.get('/research/not-a-real-article')).status()).toBe(404)
+    expect((await request.get('/news/toward-field-based-intelligence')).status()).toBe(404)
+    const md = await request.get('/md/research/not-a-real-article')
+    expect(md.status()).toBe(404)
+    expect(md.headers()['content-type']).toContain('text/plain')
+  })
+
+  test('sitemap gives articles their last change', async ({ request }) => {
+    const xml = await (await request.get('/sitemap.xml')).text()
+    expect(xml).toMatch(
+      /<loc>https:\/\/mumbrane\.com\/research\/toward-field-based-intelligence<\/loc>\s*<lastmod>2026-09-22/,
+    )
+  })
+})
