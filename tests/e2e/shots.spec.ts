@@ -10,9 +10,17 @@ const FULL = { fullPage: true, style: 'html { scrollbar-gutter: auto; }' }
 async function settle(page: Page) {
   await page.waitForLoadState('networkidle')
   await page.evaluate(() => document.fonts.ready)
-  // Scroll through once so scroll-triggered reveals reach their final state.
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-  await page.evaluate(() => window.scrollTo(0, 0))
+  // Scroll through a viewport at a time, as a reader would, so every scroll-triggered reveal sees
+  // its box on screen (a jump to the bottom skips the ones in between).
+  await page.evaluate(async () => {
+    const frames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+    for (let y = 0; y < document.documentElement.scrollHeight; y += window.innerHeight * 0.7) {
+      window.scrollTo(0, y)
+      await frames()
+    }
+    window.scrollTo(0, 0)
+    await frames()
+  })
   // Documented exception (QUALITY §2): let motion settle before capturing.
   await page.waitForTimeout(1000)
 }

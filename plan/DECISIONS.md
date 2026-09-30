@@ -314,3 +314,27 @@ lives in `@layer components` so the unlayered reduced-motion rule (durations and
 always wins. Zero JS weight; GSAP stays for scrubs and pins (P4).
 **Alternatives**: GSAP timelines (adds GSAP to every route's first load for three sequences).
 **Status**: Decided.
+
+### D-110 — Suppression 1 of ≤ 3: `gl.useProgram` is not a React hook (2026-10-01)
+**Context**: Biome's `useHookAtTopLevel` treats any call named `use*` as a React hook, including
+the WebGL2 method `WebGLRenderingContext.useProgram` in `src/lib/gl/context.ts` (a plain library
+function, no React).
+**Decision**: One line-level `biome-ignore lint/correctness/useHookAtTopLevel` with a reason, on that
+call only. QUALITY §2 budget: 1 of ≤ 3 suppressions used.
+**Alternatives**: Calling it through `.call`/bracket access to dodge the matcher (obscures the code);
+a folder-wide rule override (broader than the one line).
+**Status**: Decided.
+
+### D-111 — Motion lab: live reduced-motion state instead of a toggle; probes (2026-10-01)
+**Context**: BUILD_PLAN P4 task 6 asks for a reduced-motion toggle on the lab page. A page cannot
+change `prefers-reduced-motion`, and the motion code rightly reads only that media query.
+**Decision**: `/lab/motion` shows the live state, a CSP-violation counter and a Replay button;
+reduced motion is exercised through Playwright emulation (`1440-reduced` shots, `motion.spec`)
+and DevTools → Rendering. Probes: the FPS probe measures scrolling below the membranes, because
+headless Chromium rasterises WebGL in software (SwiftShader) — the with-canvases figure is
+recorded, not asserted; the GPU timer (`EXT_disjoint_timer_query_webgl2`) is not exposed headless
+and is reported as not measurable rather than estimated. CLS from motion is measured after fonts
+load; font-swap CLS is a font-loading matter held to the 0.02 budget by `perf.spec` (P14).
+**Alternatives**: A global motion flag read by every component (a second source of truth that
+could disagree with the OS setting).
+**Status**: Decided.

@@ -2,6 +2,7 @@
 /* Our component layers, split out to keep files small (the tokens below stay verbatim). */
 @import "./prose.css";
 @import "./motion.css";
+@import "./art.css";
 
 /* ==========================================================================
    Mumbrane design tokens — Tailwind CSS v4 (CSS-first). Paste into src/app/globals.css

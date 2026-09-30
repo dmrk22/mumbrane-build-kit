@@ -1,0 +1,82 @@
+/* Art primitives (DESIGN §7.2, §7.5, §8.4–§8.5). Gradients here are the sanctioned ones: the hero
+   field fallback and the DotScreen texture (§2.5). */
+
+/* DotScreen: 1 px dots on a 6 px pitch, in the surface's subtle ink at 25 % by default. */
+@utility dot-screen {
+  background-image: radial-gradient(
+    circle,
+    var(--dot-color, color-mix(in oklab, var(--surface-subtle) 25%, transparent)) 0.55px,
+    transparent 0.75px
+  );
+  background-size: 6px 6px;
+}
+
+@layer components {
+  /* The hero's field before (and instead of) the first WebGL frame: the shader's own background
+     (ultramarine at 80 % / 26 % into ultramarine-deep), so the H1 stays the LCP element. */
+  .membrane-field {
+    background: radial-gradient(
+      circle farthest-corner at 80% 26%,
+      var(--color-ultramarine),
+      var(--color-ultramarine-deep)
+    );
+  }
+  .membrane-canvas {
+    opacity: 0;
+    transition: opacity var(--duration-hero) var(--ease-out);
+  }
+  .membrane-canvas[data-ready="true"] {
+    opacity: 1;
+  }
+}
+
+/* EvidenceSeal (DESIGN §7.5): rings draw on in sequence while the legend turns 12° → 0°. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] .seal-ring {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  [data-reveal="done"] .seal-ring {
+    stroke-dasharray: 1;
+    animation: mark-draw var(--duration-signature) var(--ease-in-out) both;
+    animation-delay: calc(var(--ring-i, 0) * 120ms);
+  }
+  .seal-legend {
+    transform-box: view-box;
+    transform-origin: center;
+  }
+  [data-reveal="pending"] .seal-legend {
+    transform: rotate(12deg);
+  }
+  [data-reveal="done"] .seal-legend {
+    transition: transform var(--duration-signature) var(--ease-out);
+  }
+}
+.seal-rings .seal-ring:nth-child(2) {
+  --ring-i: 1;
+}
+.seal-rings .seal-ring:nth-child(3) {
+  --ring-i: 2;
+}
+.seal-rings .seal-ring:nth-child(4) {
+  --ring-i: 3;
+}
+.seal-rings .seal-ring:nth-child(5) {
+  --ring-i: 4;
+}
+.seal-rings .seal-ring:nth-child(6) {
+  --ring-i: 5;
+}
+
+/* Instrument window body: paper on light grounds, ink-2 on dark ones (DESIGN §9.6). */
+@layer components {
+  .instrument-body {
+    background-color: var(--color-paper);
+    color: var(--color-text);
+  }
+  [data-surface="ink"] .instrument-body,
+  [data-surface="ultramarine"] .instrument-body {
+    background-color: var(--color-ink-2);
+    color: var(--color-on-dark);
+  }
+}

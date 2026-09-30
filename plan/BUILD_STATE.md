@@ -11,7 +11,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P1 | Foundations | done | 2026-10-01 | 2026-10-01 | `p01-foundations` |
 | P2 | Platform: security, metadata, errors | done | 2026-10-01 | 2026-10-01 | `p02-platform` |
 | P3 | Brand and chrome | done | 2026-10-01 | 2026-10-01 | `p03-chrome` |
-| P4 | Motion system and art engine | not started | | | |
+| P4 | Motion system and art engine | done | 2026-10-01 | 2026-10-01 | `p04-motion` |
 | P5 | Painting pipeline | not started | | | |
 | P6 | Home | not started | | | |
 | P7 | Moth and Models | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P4 (not started)
-- Next task: P4 task 1 (motion core: SmoothScroll, gsap.ts, Reveal, SplitReveal, ScrubText, Pin)
+- Phase: P5 (not started)
+- Next task: P5 task 1 (paintings registry + scene/paint shaders; scripts/paint.ts)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -67,8 +67,26 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] 4 `Footer`: six columns (CONTENT §2.2), legal row, giant wordmark rise + lockup draw-on via `InView` (D-109)
 - [x] 5 `(site)/layout.tsx`: skip link, header, `main#main`, footer (SmoothScroll slot in P4); 404 renders its own chrome
 
+### P4 — Motion system and art engine
+- [x] 1 Motion core (`src/components/motion/`): `load.ts` (GSAP after load+idle), `gsap.ts` (ScrollTrigger, CustomEase, mb.* eases), `SmoothScroll` (Lenis on gsap.ticker; route change → top + focus H1), `Reveal` (+stagger), `SplitReveal`, `ScrubText`, `usePinnedSteps`, `useReducedMotion`, `InView`
+- [x] 2 WebGL engine (`src/lib/gl/`): `createGL`/`program`/`setUniforms`/`drawFullscreen`, `createLoop` (fps cap, 50 ms clamp, pause w/o time jump — unit-tested), tier + DPR cap, `colors.ts` (= palette)
+- [x] 3 `MembraneCanvas`: shader via `scripts/shaders.ts` (byte-exact copy, tested), CSS field until first frame, IO/visibility pause, pointer lerp, reduced motion = one frame at t 2.0, context-loss fallback (poster image joins in P5)
+- [x] 4 Art (`src/components/art/`): Guilloche (band/rosette/border, `src/lib/art/guilloche.ts`, tested), CropMarks, RegistrationMark, SpectralStrip, EvidenceSeal (draw-on via InView), `dot-screen` utility
+- [x] 5 `InstrumentWindow` + `InstrumentStack`
+- [x] 6 `/lab/motion` (3 seeds, every primitive, CSP counter; D-111)
+- Measurements (2026-10-01, dev server, headless Chromium 1440×900): scroll FPS below canvases ≥ 55 (asserted); with 3 software-GL canvases ≈ 48 (recorded, SwiftShader); CLS from motion 0; GPU timer not exposed headless → not measurable. Prod first-load JS on `/` 161.3 KB (budget 220), CSS 13.3 KB; GSAP/Lenis never before `load` (asserted).
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P4 — 2026-10-01
+- Every motion component awaits `loadMotion()`; never import `./gsap` statically from a component (it would enter first-load JS — `perf.spec` catches it via the `._gsap` marker).
+- Reveals skip boxes already on screen (`alreadySeen`) so nothing seen is re-hidden; start states only under `MOTION_OK`.
+- Pins: `usePinnedSteps` gives the GSAP pin-spacer the section's background (else paper shows through).
+- Shots now scroll a viewport at a time (so InView/ScrollTrigger reveals fire); tests use `settled()` / `network().quiet()`.
+- Biome suppression budget: 1 of ≤ 3 used (D-110, `gl.useProgram`).
+- Follow-up P14: font-swap CLS ≈ 0.0016 from JetBrains Mono (not preloaded) — consider `display: 'optional'` for the mono face if route CLS approaches 0.02.
+- New CSS file `src/app/art.css` (field, dot-screen, seal, instrument body).
 
 ### P3 — 2026-10-01
 - Nav copy: `src/content/nav.ts` (typed against the registry); article metadata `src/content/articles.ts` (bodies in P8) feeds `REGISTRY` (= `ROUTES` + article routes). Header seeds its surface from `SURFACE_TOP` (registry `surfaceTop`) so the first paint is themed.

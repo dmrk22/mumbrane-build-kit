@@ -201,3 +201,26 @@
     block-size: auto;
   }
 }
+
+/* Lenis (lenis/dist/lenis.css, the rules this site needs) and the route-change focus target. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+main h1[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* ScrubText (DESIGN §7.3): words light as the block scrolls; unlit only once JS arms them. */
+.scrub-text [data-word] {
+  transition: color var(--duration-micro) linear;
+}
+.scrub-text [data-word][data-lit="false"] {
+  color: var(--color-text-3);
+}

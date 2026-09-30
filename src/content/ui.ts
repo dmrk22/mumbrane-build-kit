@@ -4,4 +4,6 @@ export const ui = {
   errorPrefix: 'Error:',
   copied: 'Copied',
   loading: 'Loading',
+  // The EvidenceSeal legend (DESIGN §8.5); decorative, repeated around the ring.
+  sealLegend: 'CHECKED · RETAINED · REPLAYABLE · ',
 } as const
