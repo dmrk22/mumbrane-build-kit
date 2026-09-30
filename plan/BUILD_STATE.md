@@ -14,7 +14,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P4 | Motion system and art engine | done | 2026-10-01 | 2026-10-01 | `p04-motion` |
 | P5 | Painting pipeline | done | 2026-10-01 | 2026-10-01 | `p05-paintings` |
 | P6 | Home | done | 2026-10-01 | 2026-10-01 | `p06-home` |
-| P7 | Moth and Models | not started | | | |
+| P7 | Moth and Models | done | 2026-10-01 | 2026-10-01 | `p07-moth` |
 | P8 | Research and News | not started | | | |
 | P9 | Company, Careers, Contact | not started | | | |
 | P10 | Solutions | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P7 (not started)
-- Next task: P7 Moth and Models (PAGES §2, §11.3; CONTENT §3.2, §4)
+- Phase: P8 (not started)
+- Next task: P8 Research and News (articles, /md alternates)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -92,8 +92,21 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Rhythm pass: surface sequence ultramarine · paper · ink · paper · paper-2 · paper · ink · paper · cadmium; header themes over each; reveal timings checked in step captures
 - Measured (prod, `pnpm test:perf`): first-load JS on `/` 170.9 KB (budget 220), CSS 17.4 KB; mobile (4× CPU, Fast 4G) LCP 930–953 ms, CLS 0, no long task > 200 ms; desktop LCP = H1 (D-112); axe clean; overflow 0 at 320 and 1440 (with motion)
 
+### P7 — Moth and Models
+- [x] `/moth` — 11 sections per PAGES §2 (hero window, pipeline FIG. 01, purchasing explainer, 7-outcome ledger + boundaries, `#evidence`, `#language-contract`, `#qualification`, measured, inspect (retained failure as caveat note), `#prepared-base` (Proposed), get the preview); copy verbatim from moth.md/releases.md in `src/content/moth.ts`
+- [x] `/developers/models` — model card + shared modules (`LanguageContract`, `OutcomeLedger`, `Qualification`) + "Moth Base — Proposed"
+- [x] New shared UI: `CodeBlock` (+`CopyButton`), `DataTable`, `Note`, `Tag`, `Pipeline`, `PurchasingExplainer`; `keepNumberUnits`
+- [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
+- Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P7 — 2026-10-01
+- Evidence tables and code blocks never scroll horizontally (two-column tables wrap; code wraps with `pre-wrap`): a scroller would need a focusable region (axe `scrollable-region-focusable`) and a suppression. Keep new tables ≤ 2–3 columns or revisit.
+- `scripts/guard.ts` no longer flags brand `violet`/`violet-*` tokens (only numeric default shades like `violet-500`).
+- Outcomes `incomplete`/`incompatible` have minimal wording: the source only names them (owner may refine).
+- `MOTH.purchasing` audit-mode reasons are authored for the explanatory example (labelled "Explanatory example").
 
 ### P6 — 2026-10-01
 - Reusable section components in `src/components/sections/`: `OutcomeLedger`, `SpecTable`, `NewsList`, `MothDemo`, `HomeHero` — reuse on /moth, /news, /developers.
@@ -174,7 +187,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 <!-- id · description · where · plan to fix -->
 
 ## Logs
-- Claims audits: —
+- Claims audits: 2026-10-01 (P7) — claims.test green; every figure on / , /moth, /developers/models traced to releases.md; labels present (Explanatory example, Proposed, Illustrative); no forbidden words
 - Trusted Types trial: —
 - Dependency changes / advisories: —
 

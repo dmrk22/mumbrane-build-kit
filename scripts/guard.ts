@@ -145,7 +145,9 @@ export const RULES: readonly Rule[] = [
   },
   {
     id: 'no-default-palette',
-    re: /\b(text|bg|border|fill|stroke|from|to|via|ring|outline|decoration|shadow)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|white|black)(-\d{2,3})?\b/,
+    // `violet` is also a brand token (violet, violet-fg, violet-soft…), so only its numeric
+    // default-palette shades (violet-500) are flagged.
+    re: /\b(text|bg|border|fill|stroke|from|to|via|ring|outline|decoration|shadow)-(?:(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|purple|fuchsia|pink|rose|white|black)(-\d{2,3})?|violet-\d{2,3})\b/,
     hint: 'Tailwind default palette classes do not exist here; use brand tokens.',
     applies: (f) => strict(f) && inComponents(f),
   },

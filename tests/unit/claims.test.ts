@@ -27,7 +27,10 @@ const FORBIDDEN = [
   /\bcustomers\b|\bour customer\b/i,
   /trusted by/i,
 ]
-const VERBATIM_NEGATIONS = ['These safeguards are not measured capacity guarantees.']
+const VERBATIM_NEGATIONS = [
+  'These safeguards are not measured capacity guarantees.',
+  'they are not pure reasoning-kernel measurements, controlled cold-cache results, or guarantees.',
+]
 
 function contentFiles(dir = 'src/content'): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
@@ -47,4 +50,15 @@ test('content modules carry none of the forbidden claim patterns', () => {
     for (const re of FORBIDDEN) if (re.test(text)) hits.push(`${file}: ${re}`)
   }
   assert.deepEqual(hits, [])
+})
+
+test('the limits grid shows only what its claims say', async () => {
+  const { MOTH } = await import('../../src/content/moth.ts')
+  for (const cell of MOTH.contract.limits) {
+    const c = CLAIMS.find((x) => x.id === cell.claim)
+    assert.ok(c, cell.claim)
+    for (const part of cell.value.split(' / ')) assert.ok(c.value.includes(part), `${cell.claim}: ${part}`)
+    for (const word of cell.label.split(/[\s/]+/).filter((w) => w.length > 3))
+      assert.ok(c.line.toLowerCase().includes(word.replace(/s$/, '')), `${cell.claim}: “${word}”`)
+  }
 })

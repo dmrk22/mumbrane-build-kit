@@ -70,3 +70,11 @@ export function roman(n: number): string {
   }
   return out
 }
+
+/**
+ * Non-breaking space between a number and the word or unit after it ("0.781 seconds",
+ * "2,115 tests"), so the pair never splits across lines (DESIGN §3.4).
+ */
+export function keepNumberUnits(text: string): string {
+  return text.replace(/(\d) (?=[A-Za-z])/g, '$1 ')
+}

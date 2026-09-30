@@ -339,3 +339,15 @@ main h1[tabindex="-1"]:focus {
     transform: translateY(250%);
   }
 }
+
+/* Purchasing explainer: the rebuilt results cross-fade in (320 ms). */
+@layer components {
+  .explainer-swap {
+    animation: fade-in var(--duration-ui) var(--ease-out);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}

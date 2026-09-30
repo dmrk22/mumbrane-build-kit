@@ -109,3 +109,15 @@ test('formats: mono, prose and short dates; Roman numerals', () => {
   assert.deepEqual([1, 2, 3, 4, 9, 14, 40].map(roman), ['I', 'II', 'III', 'IV', 'IX', 'XIV', 'XL'])
   assert.throws(() => roman(0))
 })
+
+test('keepNumberUnits joins numbers to their units with a no-break space', async () => {
+  const { keepNumberUnits } = await import('../../src/lib/format.ts')
+  assert.equal(keepNumberUnits('0.781 seconds'), '0.781 seconds')
+  assert.equal(
+    keepNumberUnits('Median 0.559 seconds across seven observations'),
+    'Median 0.559 seconds across seven observations',
+  )
+  assert.equal(keepNumberUnits('2,115 tests passed'), '2,115 tests passed')
+  assert.equal(keepNumberUnits('Preview 004 is local'), 'Preview 004 is local')
+  assert.equal(keepNumberUnits('no numbers here'), 'no numbers here')
+})

@@ -1,0 +1,220 @@
+import { Mark } from '@/components/brand/Mark'
+import { InstrumentWindow } from '@/components/instrument/InstrumentWindow'
+import { Grid } from '@/components/layout/Grid'
+import { Section } from '@/components/layout/Section'
+import { SplitReveal } from '@/components/motion/SplitReveal'
+import { LanguageContract } from '@/components/sections/LanguageContract'
+import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
+import { Pipeline } from '@/components/sections/Pipeline'
+import { PurchasingExplainer } from '@/components/sections/PurchasingExplainer'
+import { Qualification } from '@/components/sections/Qualification'
+import { Button } from '@/components/ui/Button'
+import { Tag } from '@/components/ui/Chip'
+import { DataTable } from '@/components/ui/DataTable'
+import { Eyebrow, Heading } from '@/components/ui/Heading'
+import { Icon } from '@/components/ui/Icon'
+import { Inline } from '@/components/ui/Inline'
+import { Note } from '@/components/ui/Note'
+import { MOTH } from '@/content/moth'
+import { routeMetadata } from '@/lib/seo'
+
+export const metadata = routeMetadata('/moth')
+
+/** Eyebrow + H2 for a content section: offset editorial on desktop (DESIGN §4.3). */
+function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; id: string }) {
+  return (
+    <div className="flex flex-col gap-4">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <SplitReveal>
+        <Heading level={2} size="display-m" id={id}>
+          <Inline text={title} />
+        </Heading>
+      </SplitReveal>
+    </div>
+  )
+}
+
+// PAGES §2 — surfaces: paper · ink · paper · paper-2 · paper · paper-2 · paper · paper · ink · paper-2 · cadmium.
+export default function MothPage() {
+  const { hero, how, purchasing, outcomes, preview, contract, qualification, measured, inspect, direction } =
+    MOTH
+  return (
+    <>
+      <Section surface="paper" labelledBy="moth-title" className="pt-10 lg:pt-16">
+        <Grid className="items-center gap-y-14">
+          <div className="col-span-12 lg:col-span-6">
+            <Eyebrow>{hero.eyebrow}</Eyebrow>
+            <h1 id="moth-title" className="mt-4 font-serif text-display-xl">
+              {hero.title}
+            </h1>
+            <p className="mt-4 max-w-[18ch] font-serif text-display-m text-balance">
+              <Inline text={hero.subhead} />
+            </p>
+            <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href={hero.primary.href} arrow>
+                {hero.primary.label}
+              </Button>
+              <Button href={hero.secondary.href} variant="secondary">
+                {hero.secondary.label}
+              </Button>
+            </div>
+          </div>
+          <div className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <InstrumentWindow title={hero.window.title} footer>
+              <div className="flex items-center gap-4 border-b border-surface-rule pb-4">
+                <Mark width={56} className="text-surface-fg" />
+                <span className="text-label uppercase">{MOTH.preview.eyebrow}</span>
+              </div>
+              <ol className="mt-2 divide-y divide-surface-rule">
+                {how.steps.map((s, i) => (
+                  <li key={s.name} className="flex items-center gap-4 py-3">
+                    <span className="text-surface-subtle tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                    <span>{s.name}</span>
+                    <span className="ml-auto flex items-center gap-2 text-label text-viridian-fg uppercase">
+                      <span aria-hidden="true" className="size-1.5 bg-viridian" />
+                      {hero.window.status}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </InstrumentWindow>
+          </div>
+        </Grid>
+      </Section>
+
+      <Section surface="ink" id="how-it-works" labelledBy="how-title">
+        <SectionHead eyebrow={how.eyebrow} title={how.title} id="how-title" />
+        <Pipeline steps={how.steps} figure={how.figure} caption={how.caption} className="mt-14" />
+      </Section>
+
+      <Section surface="paper" id="purchase-readiness" labelledBy="purchasing-title">
+        <SectionHead eyebrow={purchasing.eyebrow} title={purchasing.title} id="purchasing-title" />
+        <div className="mt-12">
+          <PurchasingExplainer p={purchasing} />
+        </div>
+        <p className="mt-10 max-w-[64ch] text-caption text-surface-muted">{purchasing.disclaimer}</p>
+      </Section>
+
+      <Section surface="paper-2" id="outcomes" labelledBy="outcomes-title">
+        <SectionHead eyebrow={outcomes.eyebrow} title={outcomes.title} id="outcomes-title" />
+        <OutcomeLedger outcomes={outcomes.ledger} heads={outcomes.heads} className="mt-12" />
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          {outcomes.boundaries.map((b) => (
+            <p key={b} className="text-small text-surface-muted">
+              <Inline text={b} />
+            </p>
+          ))}
+        </div>
+      </Section>
+
+      <Section surface="paper" id="evidence" labelledBy="preview-title">
+        <SectionHead eyebrow={preview.eyebrow} title={preview.title} id="preview-title" />
+        <Grid className="mt-12 gap-y-10">
+          <div className="col-span-12 flex flex-col gap-6 lg:col-span-6">
+            <p className="text-body">{preview.scope}</p>
+            <p className="text-body text-surface-muted">{preview.platform}</p>
+          </div>
+          <div className="col-span-12 lg:col-span-5 lg:col-start-8">
+            <h3 className="font-mono text-label text-surface-subtle uppercase">{preview.supportsTitle}</h3>
+            <ul className="mt-4 flex flex-col gap-3">
+              {preview.supports.map((s) => (
+                <li key={s} className="flex gap-3 text-small">
+                  <Icon name="check" className="mt-0.5 size-4 text-viridian-fg" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+            <Note tone="info" className="mt-8">
+              <p>{preview.note}</p>
+            </Note>
+          </div>
+        </Grid>
+      </Section>
+
+      <Section surface="paper-2" id="language-contract" labelledBy="contract-title">
+        <SectionHead eyebrow={contract.eyebrow} title={contract.title} id="contract-title" />
+        <div className="mt-12">
+          <LanguageContract />
+        </div>
+      </Section>
+
+      <Section surface="paper" id="qualification" labelledBy="qualification-title">
+        <SectionHead eyebrow={qualification.eyebrow} title={qualification.title} id="qualification-title" />
+        <div className="mt-12">
+          <Qualification />
+        </div>
+      </Section>
+
+      <Section surface="paper" id="measured" labelledBy="measured-title" className="pt-0 md:pt-0 lg:pt-0">
+        <SectionHead eyebrow={measured.eyebrow} title={measured.title} id="measured-title" />
+        <p className="mt-8 max-w-[64ch] text-body text-surface-muted">{measured.environment}</p>
+        <DataTable
+          caption={measured.eyebrow}
+          source={measured.source}
+          columns={measured.columns}
+          rows={measured.rows}
+          className="mt-8 max-w-3xl"
+        />
+        <p className="mt-6 max-w-[64ch] text-small text-surface-muted">{measured.caveat}</p>
+      </Section>
+
+      <Section surface="ink" id="inspect" labelledBy="inspect-title">
+        <SectionHead eyebrow={inspect.eyebrow} title={inspect.title} id="inspect-title" />
+        <Grid className="mt-12 gap-y-10">
+          <div className="col-span-12 flex flex-col gap-6 lg:col-span-6">
+            <p className="text-body">
+              <Inline text={inspect.text} />
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {inspect.files.map((f) => (
+                <li key={f}>
+                  <code className="border border-surface-rule bg-surface-raise px-2 py-1 font-mono text-code">
+                    {f}
+                  </code>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="col-span-12 flex flex-col gap-6 lg:col-span-5 lg:col-start-8">
+            <Note tone="caveat" title={inspect.harnessTitle}>
+              <p>{inspect.harness}</p>
+            </Note>
+            <p className="text-small text-surface-muted">{inspect.closing}</p>
+          </div>
+        </Grid>
+      </Section>
+
+      <Section surface="paper-2" id="prepared-base" labelledBy="direction-title">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <Eyebrow>{direction.eyebrow}</Eyebrow>
+            <Tag>{direction.tag}</Tag>
+          </div>
+          <Heading level={2} size="display-m" id="direction-title">
+            {direction.title}
+          </Heading>
+        </div>
+        <p className="mt-8 max-w-[60ch] font-serif text-lede">{direction.text}</p>
+        <Button href={direction.link.href} variant="text" arrow className="mt-8">
+          {direction.link.label}
+        </Button>
+      </Section>
+
+      <Section surface="cadmium" id="get-the-preview" labelledBy="get-title">
+        <Heading level={2} size="display-m" id="get-title">
+          {MOTH.getPreview.title}
+        </Heading>
+        <p className="mt-6 max-w-[56ch] text-lede">{MOTH.getPreview.text}</p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Button href={MOTH.getPreview.primary.href} arrow>
+            {MOTH.getPreview.primary.label}
+          </Button>
+          <Button href={MOTH.getPreview.secondary.href} variant="secondary">
+            {MOTH.getPreview.secondary.label}
+          </Button>
+        </div>
+      </Section>
+    </>
+  )
+}

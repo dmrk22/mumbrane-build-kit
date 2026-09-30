@@ -65,3 +65,20 @@ export function StatusChip({ outcome, className }: { outcome: Outcome; className
     </span>
   )
 }
+
+/**
+ * A content label (CONTENT §4): Preview, Illustrative, Simulation, Proposed, Draft, Synthetic
+ * example world, Conceptual illustration, Explanatory example. Mono, 2 px radius, bordered.
+ */
+export function Tag({ className, children }: { className?: string; children: ReactNode }) {
+  return (
+    <span
+      className={cx(
+        'inline-flex h-6 items-center rounded-xs border border-surface-fg/30 px-2 font-mono text-label whitespace-nowrap text-surface-muted uppercase',
+        className,
+      )}
+    >
+      {children}
+    </span>
+  )
+}

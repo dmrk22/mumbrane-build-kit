@@ -145,3 +145,14 @@ test('e2e tolerance for prefetches of unbuilt routes is exact and self-expiring'
     'unknown paths are never tolerated',
   )
 })
+
+test('guard: brand `violet` tokens pass, default-palette violet shades do not', () => {
+  assert.deepEqual(rules('src/components/ui/A.tsx', '<p className="bg-violet-soft text-violet-ink" />'), [])
+  assert.deepEqual(rules('src/components/ui/A.tsx', '<p className="text-violet-fg bg-violet" />'), [])
+  assert.deepEqual(rules('src/components/ui/A.tsx', '<p className="bg-violet-500" />'), [
+    'no-default-palette',
+  ])
+  assert.deepEqual(rules('src/components/ui/A.tsx', '<p className="text-blue-600" />'), [
+    'no-default-palette',
+  ])
+})
