@@ -23,7 +23,8 @@
     "og": "playwright test --project=og",
     "shots": "node scripts/shots.ts",
     "verify:fast": "pnpm typecheck && pnpm lint && pnpm guard && pnpm test:unit",
-    "verify": "pnpm verify:fast && pnpm budgets && pnpm build && E2E_PROD=1 pnpm test:e2e"
+    "verify": "pnpm verify:fast && pnpm budgets && pnpm build && E2E_PROD=1 pnpm test:e2e && E2E_PROD=1 pnpm test:perf",
+    "test:perf": "playwright test --project=perf --workers=1"
   },
   "dependencies": {
     "@gsap/react": "2.1.2",

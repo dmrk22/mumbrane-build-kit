@@ -137,3 +137,45 @@
     border: 1px solid CanvasText;
   }
 }
+
+/* Moth demo (DESIGN §7.4) and instrument content (§9.6): section tags, entity chips, step reveals. */
+@layer components {
+  .demo-tag {
+    display: inline-block;
+    background-color: var(--color-paper-3);
+    color: var(--color-ink);
+    padding: 0.1em 0.45em;
+    font-size: var(--text-label);
+    letter-spacing: var(--text-label--letter-spacing);
+    text-transform: uppercase;
+  }
+  .instrument-body code {
+    background-color: var(--color-paper-3);
+    padding: 0.05em 0.35em;
+  }
+  [data-surface="ink"] .instrument-body code,
+  [data-surface="ultramarine"] .instrument-body code {
+    background-color: var(--color-ink-3);
+  }
+  .demo-part,
+  .demo-trace,
+  .demo-fill {
+    transition:
+      opacity var(--duration-ui) var(--ease-out),
+      transform var(--duration-ui) var(--ease-out);
+  }
+  .demo-part[data-shown="false"] {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .demo-trace[data-shown="false"] {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  .demo-fill {
+    transform-origin: left;
+  }
+  .demo-fill[data-shown="false"] {
+    transform: scaleX(0);
+  }
+}

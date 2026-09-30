@@ -88,3 +88,24 @@ test('scripts/shaders refuses GLSL that a template literal would change', async 
   assert.throws(() => toModule('x', 'a ` b'))
   assert.throws(() => toModule('x', `a $${'{b}'}`)) // the two characters "${", built without a template hole
 })
+
+test('uniform locations are looked up once per program and name', async () => {
+  const { setUniforms } = await import('../../src/lib/gl/context.ts')
+  let lookups = 0
+  const set: string[] = []
+  const gl = {
+    getUniformLocation: (_p: unknown, name: string) => {
+      lookups++
+      return name === 'uMissing' ? null : { name }
+    },
+    uniform1f: (loc: { name: string }) => set.push(loc.name),
+    uniform2f: (loc: { name: string }) => set.push(loc.name),
+    uniform3f: (loc: { name: string }) => set.push(loc.name),
+    uniform4f: (loc: { name: string }) => set.push(loc.name),
+  } as unknown as WebGL2RenderingContext
+  const program = {} as WebGLProgram
+  for (let frame = 0; frame < 60; frame++)
+    setUniforms(gl, program, { uTime: frame, uRes: [1, 2], uMissing: 1, uLine: [0, 0, 0] })
+  assert.equal(lookups, 4, 'four names, one lookup each, across 60 frames (misses cached too)')
+  assert.equal(set.length, 60 * 3)
+})

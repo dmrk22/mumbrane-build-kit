@@ -49,6 +49,20 @@ export function program(gl: WebGL2RenderingContext, frag: string, vert = FULLSCR
 
 type UniformValue = number | readonly number[]
 
+// getUniformLocation is a synchronous round trip to the GPU process: calling it every frame
+// stalls the main thread while the GPU is busy. Look each name up once per program.
+const locations = new WeakMap<WebGLProgram, Map<string, WebGLUniformLocation | null>>()
+
+export function uniformLocation(gl: WebGL2RenderingContext, p: WebGLProgram, name: string) {
+  let cache = locations.get(p)
+  if (!cache) {
+    cache = new Map()
+    locations.set(p, cache)
+  }
+  if (!cache.has(name)) cache.set(name, gl.getUniformLocation(p, name))
+  return cache.get(name) ?? null
+}
+
 /** Sets float uniforms by name (1–4 components). Unknown names are ignored, as GL does. */
 export function setUniforms(
   gl: WebGL2RenderingContext,
@@ -56,7 +70,7 @@ export function setUniforms(
   values: Readonly<Record<string, UniformValue>>,
 ) {
   for (const [name, v] of Object.entries(values)) {
-    const loc = gl.getUniformLocation(p, name)
+    const loc = uniformLocation(gl, p, name)
     if (!loc) continue
     const a = typeof v === 'number' ? [v] : v
     const [x = 0, y = 0, z = 0, w = 0] = a

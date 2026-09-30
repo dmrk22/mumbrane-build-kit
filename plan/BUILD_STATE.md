@@ -13,7 +13,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P3 | Brand and chrome | done | 2026-10-01 | 2026-10-01 | `p03-chrome` |
 | P4 | Motion system and art engine | done | 2026-10-01 | 2026-10-01 | `p04-motion` |
 | P5 | Painting pipeline | done | 2026-10-01 | 2026-10-01 | `p05-paintings` |
-| P6 | Home | not started | | | |
+| P6 | Home | done | 2026-10-01 | 2026-10-01 | `p06-home` |
 | P7 | Moth and Models | not started | | | |
 | P8 | Research and News | not started | | | |
 | P9 | Company, Careers, Contact | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P6 (not started)
-- Next task: P6 Home (PAGES §1, CONTENT §3.1, DESIGN §7.2–§7.5)
+- Phase: P7 (not started)
+- Next task: P7 Moth and Models (PAGES §2, §11.3; CONTENT §3.2, §4)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -85,8 +85,23 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] 6 Ten images: 4 research/news plates, 3 inquiry (4:5), research hero (21:9), company plate, membrane poster. Reviewed full size + in plates at 1440/375. Re-seeded: inquiry-causality 37 → 44; company-plate given an evening palette (every meadow seed shares one composition, so a re-seed could not separate it from plate-wording).
 - 1600 w AVIF sizes (budget 180 KB / poster 120 KB): research-hero 68 · plate-field 96 · plate-wording 111 · plate-evidence 79 · plate-preview 73 · inquiry-representation 176 · inquiry-dynamics 146 · inquiry-causality 143 · company-plate 100 · poster 25 (KB, all q62)
 
+### P6 — Home
+- [x] Sections 1–9 (PAGES §1) in `src/app/(site)/page.tsx`; copy in `src/content/home.ts`; figures via `src/content/claims.ts` (claims.test.ts: verbatim in releases.md + forbidden patterns)
+- [x] Hero (`HomeHero`): membrane + CSS field + poster fallback, scrim, CSS entrance, SCROLL hint; slides under the header
+- [x] Principle ScrubText + outcome chips; `MothDemo` pinned 120 vh (5 steps, final state everywhere else); Evidence (`OutcomeLedger` + EvidenceSeal); Compounding (guilloche band); Research plates; Current release (`SpecTable`); News (`NewsList`); Get started (cadmium)
+- [x] Rhythm pass: surface sequence ultramarine · paper · ink · paper · paper-2 · paper · ink · paper · cadmium; header themes over each; reveal timings checked in step captures
+- Measured (prod, `pnpm test:perf`): first-load JS on `/` 170.9 KB (budget 220), CSS 17.4 KB; mobile (4× CPU, Fast 4G) LCP 930–953 ms, CLS 0, no long task > 200 ms; desktop LCP = H1 (D-112); axe clean; overflow 0 at 320 and 1440 (with motion)
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P6 — 2026-10-01
+- Reusable section components in `src/components/sections/`: `OutcomeLedger`, `SpecTable`, `NewsList`, `MothDemo`, `HomeHero` — reuse on /moth, /news, /developers.
+- Articles now carry `plate` + `plateNumber` (I–III on home per CONTENT; Introducing = IV). Outcomes carry `meaning`/`next` (`CORE_OUTCOMES` = the five).
+- Pinned sections always render their *final* state server-side; the pin (desktop + motion) steps them back. Full-page shots show step 1 + the spacer — review pins with viewport step captures.
+- Anything hidden-until-a-step must not translate outside its container (8 px overflow regression; `overflow-x-clip` on the section; chrome.spec checks 1440 with motion).
+- Hero LCP rules (D-112): below 1024 px hero text lifts without fading; H1 lines are block masks only from 1024 px.
+- `pnpm verify` now ends with `pnpm test:perf` (serial, D-113).
 
 ### P5 — 2026-10-01
 - `pnpm art` = `node scripts/paint.ts && node scripts/images.ts`; `--only <id>` / `--force` on paint. Stamps live in `.cache/paintings/*.hash|*.enc.json` (not committed): a fresh clone re-renders everything (~3.5 min) but produces the same files.

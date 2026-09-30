@@ -224,3 +224,118 @@ main h1[tabindex="-1"]:focus {
 .scrub-text [data-word][data-lit="false"] {
   color: var(--color-text-3);
 }
+
+/* Home hero entrance (DESIGN §7.2): CSS keyframes, so nothing waits for JS. Final states are the
+   CSS defaults; the reduced-motion rule makes every animation finish instantly. */
+@layer components {
+  /* Keeps the lede legible over the field lines: the left third on desktop, where the text sits;
+     below 1024 px the text spans the width, so the scrim does too (strongest on the text side). */
+  .hero-scrim {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-ultramarine-deep) 55%, transparent) 0%,
+      color-mix(in oklab, var(--color-ultramarine-deep) 30%, transparent) 100%
+    );
+  }
+  @media (min-width: 1024px) {
+    .hero-scrim {
+      background: linear-gradient(
+        90deg,
+        color-mix(in oklab, var(--color-ultramarine-deep) 45%, transparent) 0%,
+        transparent 38%
+      );
+    }
+  }
+  /* Below 1024 px the H1 is a single text box that lifts into place (transform only, so it is
+     painted — and counted as the LCP — from its first frame). */
+  .hero-title {
+    animation: hero-lift var(--duration-hero) var(--ease-out) 200ms both;
+  }
+  @media (min-width: 1024px) {
+    .hero-title {
+      animation: none;
+    }
+    /* Line masks keep room for descenders and the italic's overhang. */
+    .hero-line {
+      display: block;
+      overflow: clip;
+      overflow-clip-margin: 0.25em;
+      padding-bottom: 0.06em;
+      margin-bottom: -0.06em;
+    }
+    .hero-line-inner {
+      display: block;
+    }
+    .hero-d-line-0,
+    .hero-d-line-1 {
+      animation: hero-line var(--duration-hero) var(--ease-out) both;
+    }
+  }
+  /* Below 1024 px hero text lifts without fading, so it is painted in the first frame: a phone's
+     main thread is busy with JS for seconds, and a fade-in would push the LCP to its end. */
+  .hero-rise {
+    animation: hero-lift var(--duration-reveal) var(--ease-out) both;
+  }
+  @media (min-width: 1024px) {
+    .hero-rise {
+      animation-name: hero-rise;
+    }
+  }
+  .hero-d1 {
+    animation-delay: 120ms;
+  }
+  .hero-d-line-0 {
+    animation-delay: 200ms;
+  }
+  .hero-d-line-1 {
+    animation-delay: 280ms;
+  }
+  .hero-d3 {
+    animation-delay: 520ms;
+  }
+  .hero-d4 {
+    animation-delay: 640ms;
+  }
+  .hero-d5 {
+    animation-delay: 800ms;
+  }
+  .hero-scroll-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-scroll-line::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 40%;
+    background: var(--surface-fg);
+    animation: scroll-hint 2.4s var(--ease-in-out) infinite;
+  }
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+/* The H1 rises from 40 %, not from fully masked: mostly painted in its first frame, it stays the
+   LCP element (a line fully hidden by its mask is not counted until it is revealed). */
+@keyframes hero-line {
+  from {
+    transform: translateY(40%);
+  }
+}
+@keyframes hero-lift {
+  from {
+    transform: translateY(12px);
+  }
+}
+@keyframes scroll-hint {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(250%);
+  }
+}

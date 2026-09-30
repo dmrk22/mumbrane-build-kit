@@ -16,6 +16,28 @@ test.describe('@smoke layout', () => {
   }
 })
 
+test.describe('@smoke layout with motion', () => {
+  // Regression: a hidden-until-its-step window, translated 24 px further right, pushed the pinned
+  // Moth demo 8 px past the 1440 px viewport. Checked with motion on, after scrolling through.
+  for (const route of ROUTES) {
+    test(`no horizontal overflow at 1440 px with motion on ${route}`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'desktop layout')
+      await page.setViewportSize({ width: 1440, height: 900 })
+      await page.goto(route)
+      await page.waitForLoadState('load')
+      await page.evaluate(async () => {
+        const frames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+        for (let y = 0; y < document.documentElement.scrollHeight; y += 400) {
+          window.scrollTo(0, y)
+          await frames()
+        }
+      })
+      const width = await page.evaluate(() => document.documentElement.scrollWidth)
+      expect(width).toBeLessThanOrEqual(1440)
+    })
+  }
+})
+
 test.describe('@motion header collapse', () => {
   test('collapses after 80 px, stays collapsed until back above 24 px', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 400 })

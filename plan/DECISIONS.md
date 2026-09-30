@@ -338,3 +338,30 @@ load; font-swap CLS is a font-loading matter held to the 0.02 budget by `perf.sp
 **Alternatives**: A global motion flag read by every component (a second source of truth that
 could disagree with the OS setting).
 **Status**: Decided.
+
+### D-112 — Home LCP: hero text painted in the first frame (2026-10-01)
+**Context**: Under the QUALITY §4 mobile profile (390 px, CPU 4×, Fast 4G) the main thread is busy
+with JS until ≈ 2.6 s. Hero text that faded in from opacity 0, or H1 lines starting fully inside
+their masks, was only counted as painted then (LCP ≈ 2.5 s). At 390 px the H1 and the lede are
+near-equal text boxes (≈ 32.8k vs 33.3k px²), so which one Chrome names is incidental.
+**Decision**: Below 1024 px hero text lifts with transform only (no fade) and the H1 is a single
+text box; from 1024 px the H1 keeps its per-line mask reveal (lines start at 40 %, not fully
+masked) and the fades. perf.spec asserts mobile LCP ≤ 2.0 s with a hero text element (H1 or
+lede) and, on desktop, that the H1 is the LCP. Measured: mobile LCP 930–953 ms, CLS 0.
+Also: long tasks during the membrane loop in headless runs are SwiftShader (software GL, present
+without throttling, absent under reduced motion) — all under the 200 ms limit; real devices
+render the shader on the GPU.
+**Alternatives**: Dropping the hero entrance (loses the designed moment); a font-display change
+(the late paint was the animation, not the fonts).
+**Status**: Decided.
+
+### D-113 — Timing probes run alone: `pnpm test:perf` (2026-10-01)
+**Context**: Web-vitals and long-task probes measured inside the parallel e2e run saw other
+workers' browsers competing for the same CPU (one run: an 880 ms long task that is ≈ 120 ms when
+the probe runs alone). A timing budget only means something on a quiet machine.
+**Decision**: `perf.spec.ts` is its own Playwright project (`perf`), excluded from
+chromium/mobile/webkit and run by `pnpm test:perf` (`--workers=1`), which `pnpm verify` now runs
+after the functional e2e. Budgets and assertions are unchanged.
+**Alternatives**: One worker for the whole suite (triples verify time as routes grow);
+loosening the thresholds (not allowed).
+**Status**: Decided.
