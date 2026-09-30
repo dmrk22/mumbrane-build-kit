@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { Header } from '@/components/chrome/Header'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
 import { Button } from '@/components/ui/Button'
@@ -12,6 +13,8 @@ import { Kbd } from '@/components/ui/Kbd'
 import { Numeral } from '@/components/ui/Numeral'
 import { Prose } from '@/components/ui/Prose'
 import { SmartLink } from '@/components/ui/SmartLink'
+import { SURFACE_TOP } from '@/content/chrome'
+import { HEADER } from '@/content/nav'
 import { OUTCOMES, type Outcome } from '@/content/outcomes'
 import { SURFACES, type Surface } from '@/lib/surface'
 
@@ -115,96 +118,100 @@ function Kit({ surface }: { surface: Surface }) {
 export default function LabPage() {
   if (process.env.NODE_ENV === 'production') notFound()
   return (
-    <main id="main" tabIndex={-1}>
-      <Section surface="paper" rhythm="compact">
-        <Eyebrow>Lab · development only</Eyebrow>
-        <Heading level={1} size="display-l" className="mt-4">
-          Component lab
-        </Heading>
-        <div className="mt-10 flex flex-col gap-3">
-          <Heading level={2} size="display-xl">
-            Display XL
+    <>
+      {/* The real header, so its theming can be checked over every surface below. */}
+      <Header nav={HEADER} surfaceTop={SURFACE_TOP} />
+      <main id="main" tabIndex={-1}>
+        <Section surface="paper" rhythm="compact">
+          <Eyebrow>Lab · development only</Eyebrow>
+          <Heading level={1} size="display-l" className="mt-4">
+            Component lab
           </Heading>
-          <Heading level={2} size="display-l">
-            Display L
-          </Heading>
-          <Heading level={2} size="display-m">
-            Display M
-          </Heading>
-          <Heading level={2} size="display-s">
-            Display S — plate titles
-          </Heading>
-          <Heading level={2} size="title">
-            Title — card titles
-          </Heading>
-          <p className="text-lede">Lede — intro paragraphs, 18 → 21 px.</p>
-          <p className="text-body">Body — default text, 17 px, line height 1.6.</p>
-          <p className="text-small">Small — secondary text, footer links.</p>
-          <p className="text-caption text-surface-muted">Caption — figure captions and form hints.</p>
-          <p className="font-mono text-code">code — instrument content 13.5 px</p>
-        </div>
-      </Section>
-
-      {SURFACES.map((s) => (
-        <Kit key={s} surface={s} />
-      ))}
-
-      <Section surface="paper" labelledBy="lab-forms" rhythm="compact">
-        <Heading level={2} size="display-s" id="lab-forms">
-          Forms
-        </Heading>
-        <form className="mt-8 grid max-w-180 gap-6 md:grid-cols-2">
-          <Field id="lab-name" label="Name" autoComplete="name" />
-          <Field id="lab-email" label="Work email" type="email" hint="We reply from @mumbrane.com." />
-          <Field id="lab-org" label="Organization" defaultValue="x" error="Enter at least 2 characters." />
-          <Field id="lab-disabled" label="Disabled" disabled defaultValue="Not editable" />
-          <Select id="lab-interest" label="Interest" defaultValue="evaluation">
-            <option value="evaluation">An evaluation</option>
-            <option value="research">A research collaboration</option>
-          </Select>
-          <Select id="lab-interest-bad" label="Interest (invalid)" error="Choose an option.">
-            <option value="">Choose…</option>
-          </Select>
-          <div className="md:col-span-2">
-            <TextArea id="lab-message" label="Message" hint="Up to 2,000 characters." />
+          <div className="mt-10 flex flex-col gap-3">
+            <Heading level={2} size="display-xl">
+              Display XL
+            </Heading>
+            <Heading level={2} size="display-l">
+              Display L
+            </Heading>
+            <Heading level={2} size="display-m">
+              Display M
+            </Heading>
+            <Heading level={2} size="display-s">
+              Display S — plate titles
+            </Heading>
+            <Heading level={2} size="title">
+              Title — card titles
+            </Heading>
+            <p className="text-lede">Lede — intro paragraphs, 18 → 21 px.</p>
+            <p className="text-body">Body — default text, 17 px, line height 1.6.</p>
+            <p className="text-small">Small — secondary text, footer links.</p>
+            <p className="text-caption text-surface-muted">Caption — figure captions and form hints.</p>
+            <p className="font-mono text-code">code — instrument content 13.5 px</p>
           </div>
-          <div className="flex flex-col gap-4 md:col-span-2">
-            <Checkbox id="lab-consent" label="I have read the privacy notice." />
-            <Checkbox id="lab-checked" label="Checked" defaultChecked />
-            <Checkbox id="lab-invalid" label="Invalid" error="This box is required." />
-          </div>
-          <div className="md:col-span-2">
-            <Button type="submit" arrow>
-              Send message
-            </Button>
-          </div>
-        </form>
-      </Section>
+        </Section>
 
-      <Section surface="paper-2" labelledBy="lab-prose" rhythm="compact">
-        <Heading level={2} size="display-s" id="lab-prose">
-          Prose
-        </Heading>
-        <Prose className="mt-8">
-          <p>
-            A definition can build on another definition. An interpretation skill can make a new sentence form
-            usable — see <SmartLink href="#lab-prose">the section anchor</SmartLink>. In 2026 we ran 2,115
-            tests; the <code>orderone</code> case is <em>supported</em>.
-          </p>
-          <h2>When the field cannot establish an answer</h2>
-          <p>Missing support, conflicting information, and incomplete execution mean different things.</p>
-          <ul>
-            <li>Missing support is not the same as a no.</li>
-            <li>Conflicts point to facts that need resolving.</li>
-          </ul>
-          <blockquote>“Evidence, retained.”</blockquote>
-          <h3>Replay</h3>
-          <ol>
-            <li>Retain the evidence.</li>
-            <li>Replay an earlier episode against its original build.</li>
-          </ol>
-        </Prose>
-      </Section>
-    </main>
+        {SURFACES.map((s) => (
+          <Kit key={s} surface={s} />
+        ))}
+
+        <Section surface="paper" labelledBy="lab-forms" rhythm="compact">
+          <Heading level={2} size="display-s" id="lab-forms">
+            Forms
+          </Heading>
+          <form className="mt-8 grid max-w-180 gap-6 md:grid-cols-2">
+            <Field id="lab-name" label="Name" autoComplete="name" />
+            <Field id="lab-email" label="Work email" type="email" hint="We reply from @mumbrane.com." />
+            <Field id="lab-org" label="Organization" defaultValue="x" error="Enter at least 2 characters." />
+            <Field id="lab-disabled" label="Disabled" disabled defaultValue="Not editable" />
+            <Select id="lab-interest" label="Interest" defaultValue="evaluation">
+              <option value="evaluation">An evaluation</option>
+              <option value="research">A research collaboration</option>
+            </Select>
+            <Select id="lab-interest-bad" label="Interest (invalid)" error="Choose an option.">
+              <option value="">Choose…</option>
+            </Select>
+            <div className="md:col-span-2">
+              <TextArea id="lab-message" label="Message" hint="Up to 2,000 characters." />
+            </div>
+            <div className="flex flex-col gap-4 md:col-span-2">
+              <Checkbox id="lab-consent" label="I have read the privacy notice." />
+              <Checkbox id="lab-checked" label="Checked" defaultChecked />
+              <Checkbox id="lab-invalid" label="Invalid" error="This box is required." />
+            </div>
+            <div className="md:col-span-2">
+              <Button type="submit" arrow>
+                Send message
+              </Button>
+            </div>
+          </form>
+        </Section>
+
+        <Section surface="paper-2" labelledBy="lab-prose" rhythm="compact">
+          <Heading level={2} size="display-s" id="lab-prose">
+            Prose
+          </Heading>
+          <Prose className="mt-8">
+            <p>
+              A definition can build on another definition. An interpretation skill can make a new sentence
+              form usable — see <SmartLink href="#lab-prose">the section anchor</SmartLink>. In 2026 we ran
+              2,115 tests; the <code>orderone</code> case is <em>supported</em>.
+            </p>
+            <h2>When the field cannot establish an answer</h2>
+            <p>Missing support, conflicting information, and incomplete execution mean different things.</p>
+            <ul>
+              <li>Missing support is not the same as a no.</li>
+              <li>Conflicts point to facts that need resolving.</li>
+            </ul>
+            <blockquote>“Evidence, retained.”</blockquote>
+            <h3>Replay</h3>
+            <ol>
+              <li>Retain the evidence.</li>
+              <li>Replay an earlier episode against its original build.</li>
+            </ol>
+          </Prose>
+        </Section>
+      </main>
+    </>
   )
 }

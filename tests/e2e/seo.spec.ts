@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { ROUTES as REGISTRY } from '../../src/content/routes.ts'
+import { REGISTRY } from '../../src/content/routes.ts'
 import { ROUTES } from './utils.ts'
 
 const SITE = 'https://mumbrane.com'

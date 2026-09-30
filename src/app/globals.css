@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Our component layers, split out to keep files small (the tokens below stay verbatim). */
+@import "./prose.css";
+@import "./motion.css";
 
 /* ==========================================================================
    Mumbrane design tokens — Tailwind CSS v4 (CSS-first). Paste into src/app/globals.css
@@ -283,8 +286,10 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms;
+    animation-delay: 0s;
     animation-iteration-count: 1;
     transition-duration: 0.01ms;
+    transition-delay: 0s;
     scroll-behavior: auto;
   }
 }
@@ -324,66 +329,5 @@
   [data-surface="ink"], [data-surface="ultramarine"] {
     --surface-invert: var(--color-paper);
     --surface-on-invert: var(--color-ink);
-  }
-}
-
-/* Article prose (DESIGN §9.11): serif body with oldstyle figures, 64–70 ch measure. */
-@layer components {
-  .prose-article {
-    font-family: var(--font-serif);
-    font-size: var(--text-article);
-    line-height: var(--text-article--line-height);
-    letter-spacing: var(--text-article--letter-spacing);
-    font-variant-numeric: oldstyle-nums proportional-nums;
-    max-width: 68ch;
-    color: var(--surface-fg);
-
-    & > * + * { margin-top: 1.1em; }
-    & h2 {
-      margin-top: 64px;
-      font-size: var(--text-display-s);
-      line-height: var(--text-display-s--line-height);
-      letter-spacing: var(--text-display-s--letter-spacing);
-      font-weight: var(--text-display-s--font-weight);
-    }
-    & h3 {
-      margin-top: 40px;
-      font-family: var(--font-sans);
-      font-size: var(--text-title);
-      line-height: var(--text-title--line-height);
-      letter-spacing: var(--text-title--letter-spacing);
-      font-weight: var(--text-title--font-weight);
-    }
-    & h2 + *, & h3 + * { margin-top: 16px; }
-    & em, & i { font-family: var(--font-serif-italic); font-style: italic; }
-    & strong, & b { font-weight: 600; }
-    & a { @apply link-prose; }
-    & code {
-      font-family: var(--font-mono);
-      font-size: 0.85em;
-      font-variant-numeric: normal;
-      background-color: var(--surface-raise);
-      padding: 0.1em 0.3em;
-    }
-    & ul, & ol { padding-left: 1.5em; }
-    & ul > li { position: relative; }
-    & ul > li::before { content: "–"; position: absolute; left: -1.1em; color: var(--surface-subtle); }
-    & ol { list-style: decimal; }
-    & ol > li::marker { color: var(--surface-subtle); font-variant-numeric: lining-nums tabular-nums; }
-    & li + li { margin-top: 0.4em; }
-    & blockquote {
-      margin-block: 40px;
-      border-left: 2px solid var(--color-ultramarine);
-      padding-left: 24px;
-      font-family: var(--font-serif-italic);
-      font-style: italic;
-      font-size: var(--text-display-s);
-      line-height: var(--text-display-s--line-height);
-      hanging-punctuation: first;
-    }
-    /* Chromium has no hanging-punctuation: hang the opening quote by hand (DESIGN §3.4). */
-    @supports not (hanging-punctuation: first) {
-      & blockquote { text-indent: -0.4em; }
-    }
   }
 }

@@ -1,6 +1,7 @@
 // The route registry (PAGES §0.1). Header, footer, sitemap, robots, e2e route lists and shots all
 // read from here. Data only: imported by node tests with a relative path.
 import type { Surface } from '../lib/surface.ts'
+import { ARTICLES, articlePath } from './articles.ts'
 
 export type RouteGroup = 'solutions' | 'developer' | 'company' | 'legal' | 'console'
 
@@ -314,3 +315,16 @@ export function routeFor(path: RoutePath): RouteEntry {
   if (!entry) throw new Error(`Unknown route: ${path}`)
   return entry
 }
+
+/** Article pages, contributed by the article index (PAGES §0.1 dynamic routes). */
+export const ARTICLE_ROUTES: readonly RouteEntry[] = ARTICLES.map((a) => ({
+  path: articlePath(a),
+  title: a.title,
+  description: a.description,
+  group: 'company',
+  sitemap: true,
+  surfaceTop: 'paper',
+}))
+
+/** Every route of the site: the static registry plus article pages. */
+export const REGISTRY: readonly RouteEntry[] = [...ROUTES, ...ARTICLE_ROUTES]

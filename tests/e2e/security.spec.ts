@@ -1,6 +1,14 @@
 import { expect, test } from '@playwright/test'
 import { SECURITY_HEADERS } from '../../src/lib/security/headers.ts'
-import { collectConsole, collectViolations, externalRequests, MISSING, prod, ROUTES } from './utils.ts'
+import {
+  collectConsole,
+  collectViolations,
+  externalRequests,
+  MISSING,
+  network,
+  prod,
+  ROUTES,
+} from './utils.ts'
 
 const NONCE = /'nonce-([A-Za-z0-9+/]{22}==)'/
 
@@ -79,10 +87,11 @@ test.describe('@security', () => {
       const violations = await collectViolations(page)
       const consoleMessages = collectConsole(page)
       const external = externalRequests(page, new URL(baseURL ?? '').origin)
+      const net = network(page)
       await page.goto(route)
-      await page.waitForLoadState('networkidle')
+      await net.quiet()
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-      await page.waitForLoadState('networkidle')
+      await net.quiet()
       expect((await violations()).filter((v) => v.disposition === 'enforce')).toEqual([])
       expect(consoleMessages.filter((m) => m.startsWith('error') || m.startsWith('pageerror'))).toEqual([])
       expect(consoleMessages.filter((m) => m.includes('Permissions-Policy'))).toEqual([])

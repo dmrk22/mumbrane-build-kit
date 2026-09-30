@@ -12,21 +12,14 @@ export const metadata: Metadata = {
   description: site.description,
 }
 
+// No providers and no chrome here (PAGES §0.2): the (site) and console layouts bring their own.
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // Reading the request headers opts every page into dynamic rendering, which per-request CSP
   // nonces require (SECURITY §3.3). The nonce is handed only to scripts that need it (none yet).
   await headers()
   return (
     <html lang="en" data-surface="paper" className={fontVars}>
-      <body>
-        <a
-          href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2"
-        >
-          {site.skipLink}
-        </a>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

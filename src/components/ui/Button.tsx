@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps, MouseEventHandler, ReactNode } from 'react'
 import { ui } from '@/content/ui'
 import { cx } from '@/lib/cx'
 import { Icon } from './Icon'
@@ -27,7 +27,7 @@ type Common = {
   children: ReactNode
 }
 
-type AsLink = Common & { href: string }
+type AsLink = Common & { href: string; onClick?: MouseEventHandler<HTMLAnchorElement> }
 type AsButton = Common & { href?: undefined; loading?: boolean } & Omit<
     ComponentProps<'button'>,
     'className' | 'children'
@@ -67,7 +67,7 @@ export function Button(props: AsLink | AsButton) {
 
   if (props.href !== undefined) {
     return (
-      <SmartLink href={props.href} className={classes}>
+      <SmartLink href={props.href} className={classes} {...(props.onClick ? { onClick: props.onClick } : {})}>
         {inner}
       </SmartLink>
     )

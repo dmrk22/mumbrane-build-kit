@@ -1,4 +1,5 @@
 import { LOCKUP, MARK, WORDMARK } from '@/components/brand/mark-geometry'
+import { Section } from '@/components/layout/Section'
 import { site } from '@/content/site'
 import { JsonLd } from '@/lib/security/json-ld'
 import { homeJsonLd, routeMetadata } from '@/lib/seo'
@@ -9,9 +10,9 @@ export const metadata = routeMetadata('/')
 export default function Home() {
   const { compact } = MARK.weights
   return (
-    <main id="main" className="grid min-h-dvh place-items-center bg-paper px-6 text-ink">
+    <Section surface="paper" className="grid min-h-dvh place-items-center">
       <JsonLd data={homeJsonLd()} />
-      <h1 className="w-full max-w-160">
+      <h1 className="mx-auto w-full max-w-160">
         <svg viewBox={LOCKUP.viewBox} role="img" aria-label={site.name} className="block h-auto w-full">
           <g
             transform={LOCKUP.markTransform}
@@ -37,6 +38,6 @@ export default function Home() {
           </g>
         </svg>
       </h1>
-    </main>
+    </Section>
   )
 }

@@ -130,3 +130,18 @@ test('e2e route discovery: page files map to registry paths (groups dropped, [sl
   assert.ok(patterns.includes('/'), 'the (site) group home page is found')
   assert.ok(patterns.includes('/lab'), 'the (dev) group lab page is found')
 })
+
+test('e2e tolerance for prefetches of unbuilt routes is exact and self-expiring', async () => {
+  const { isUnbuiltPrefetch, UNBUILT, ROUTES } = await import('../e2e/utils.ts')
+  for (const built of ROUTES) assert.ok(!UNBUILT.has(built), `${built} is built`)
+  const [someUnbuilt] = [...UNBUILT]
+  if (someUnbuilt) {
+    assert.ok(isUnbuiltPrefetch(`http://localhost:3100${someUnbuilt}?_rsc=abc`))
+    assert.ok(!isUnbuiltPrefetch(`http://localhost:3100${someUnbuilt}`), 'a document load is never tolerated')
+  }
+  assert.ok(!isUnbuiltPrefetch('http://localhost:3100/?_rsc=abc'), 'built routes are never tolerated')
+  assert.ok(
+    !isUnbuiltPrefetch('http://localhost:3100/not-in-registry?_rsc=abc'),
+    'unknown paths are never tolerated',
+  )
+})

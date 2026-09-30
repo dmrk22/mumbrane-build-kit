@@ -54,3 +54,14 @@ test('console routes are noindex and out of the sitemap; everything else is inde
     assert.equal('noindex' in r && r.noindex === true, isConsole, r.path)
   }
 })
+
+test('article routes join the registry within the same limits, once each', async () => {
+  const { ARTICLE_ROUTES, REGISTRY } = await import('../../src/content/routes.ts')
+  assert.equal(ARTICLE_ROUTES.length, 4)
+  assert.equal(new Set(REGISTRY.map((r) => r.path)).size, REGISTRY.length)
+  for (const r of ARTICLE_ROUTES) {
+    assert.match(r.path, /^\/(research|news)\/[a-z0-9-]+$/)
+    assert.ok(fullTitle(r.title, r.path).length <= 60, r.path)
+    assert.ok(r.description.length <= 160, r.path)
+  }
+})

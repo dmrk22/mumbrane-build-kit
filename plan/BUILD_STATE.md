@@ -10,7 +10,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P0 | Setup (`/setup`) | done | 2026-09-30 | 2026-09-30 | `p00-setup` |
 | P1 | Foundations | done | 2026-10-01 | 2026-10-01 | `p01-foundations` |
 | P2 | Platform: security, metadata, errors | done | 2026-10-01 | 2026-10-01 | `p02-platform` |
-| P3 | Brand and chrome | not started | | | |
+| P3 | Brand and chrome | done | 2026-10-01 | 2026-10-01 | `p03-chrome` |
 | P4 | Motion system and art engine | not started | | | |
 | P5 | Painting pipeline | not started | | | |
 | P6 | Home | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P3 (not started)
-- Next task: P3 task 1 (Mark, Lockup, Wordmark components)
+- Phase: P4 (not started)
+- Next task: P4 task 1 (motion core: SmoothScroll, gsap.ts, Reveal, SplitReveal, ScrubText, Pin)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -60,8 +60,24 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] 7 `src/content/routes.ts` registry (all routes incl. solution/legal slugs; article slugs join in P8)
 - [x] 8 Legacy redirects incl. `/:path*.md` (Next accepts the pattern; e2e-checked, 308)
 
+### P3 — Brand and chrome
+- [x] 1 `Mark`/`Lockup`/`Wordmark` (`src/components/brand/`): weight auto, non-scaling hairline floor ≤ 48 px (D-108), CSS draw-on (`draw` / `.draw-on-reveal`), always `aria-hidden` (named by context)
+- [x] 2 `Header` (client): surface sampling (1 px IO line + MutationObserver on main), backdrop after 8 px, collapse with 80/24 px hysteresis via sentinels (no scroll listener), disclosure mega menus (click, 120 ms hover intent, Esc → trigger, outside click, focus-out)
+- [x] 3 `MobileNav`: native modal `<dialog>` (trap, Esc, inert, focus return), `html:has()` scroll lock, `<details name>` accordions, CTAs pinned
+- [x] 4 `Footer`: six columns (CONTENT §2.2), legal row, giant wordmark rise + lockup draw-on via `InView` (D-109)
+- [x] 5 `(site)/layout.tsx`: skip link, header, `main#main`, footer (SmoothScroll slot in P4); 404 renders its own chrome
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P3 — 2026-10-01
+- Nav copy: `src/content/nav.ts` (typed against the registry); article metadata `src/content/articles.ts` (bodies in P8) feeds `REGISTRY` (= `ROUTES` + article routes). Header seeds its surface from `SURFACE_TOP` (registry `surfaceTop`) so the first paint is themed.
+- Chrome motion is CSS in `src/app/motion.css` (`@layer components`); prose in `src/app/prose.css`. `globals.css` must stay < 400 lines (budget) — new component CSS goes in those files.
+- Gotchas: a class like `hidden` passed to `Button` loses to its own `inline-flex` — wrap instead. `animation` shorthand on `… path` out-ranks later delay rules of lower specificity. `InView` uses threshold 0.25 (no bottom margin) so page-end boxes can reveal.
+- Links in hidden panels use `SmartLink prefetch={false}` (all pages are dynamic: each prefetch is a server render).
+- e2e: `settled(page)` (no running animations) before axe/screens; `network(page).quiet()` instead of `networkidle`; console tolerance for RSC prefetches of *unbuilt* registry routes (`UNBUILT`, self-expiring; unit-tested). `/lab` now mounts the real header over all five surfaces.
+- Known until P6: `/` placeholder is paper while its registry surfaceTop is ultramarine → header SSR-paints ultramarine, corrects on hydration.
+- Follow-up: total built JS 193.8 KB gzip (all chunks) — per-route first-load measured in `perf.spec` (P4/P14); watch the 190 KB marketing budget.
 
 ### P2 — 2026-10-01
 - Registry `src/content/routes.ts` lists the whole site now; e2e `ROUTES` = registry ∩ existing `page.tsx` (fs walk in `tests/e2e/utils.ts`), so suites grow as pages land. `routeMetadata(path)` gives any page its title/description/canonical/OG.

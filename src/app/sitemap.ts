@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next'
-import { ROUTES } from '@/content/routes'
+import { REGISTRY } from '@/content/routes'
 import { publicEnv } from '@/lib/env'
 
-// Every indexable route in the registry; article slugs join in P8 with their lastModified dates.
+// Every indexable route in the registry, articles included (they gain lastModified in P8).
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ROUTES.filter((r) => r.sitemap).map((r) => ({ url: new URL(r.path, publicEnv.siteUrl).href }))
+  return REGISTRY.filter((r) => r.sitemap).map((r) => ({ url: new URL(r.path, publicEnv.siteUrl).href }))
 }

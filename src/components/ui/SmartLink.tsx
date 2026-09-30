@@ -13,14 +13,16 @@ type AnchorRest = Omit<
 /**
  * Every link goes through the link policy (SECURITY §2.5, §4.4): internal and fragment links use
  * next/link; external links are allowlisted, `noopener noreferrer` and marked ↗; anything the
- * policy rejects renders as plain text.
+ * policy rejects renders as plain text. `prefetch={false}` is for links that sit in hidden panels
+ * (menus, the mobile sheet): every page here is dynamic, so a prefetch is a server render.
  */
 export function SmartLink({
   href,
   className,
   children,
+  prefetch,
   ...rest
-}: { href: string; className?: string; children: ReactNode } & AnchorRest) {
+}: { href: string; className?: string; children: ReactNode; prefetch?: false } & AnchorRest) {
   const safe = toSafeHref(href)
   if (!safe) {
     if (process.env.NODE_ENV !== 'production') console.error(`SmartLink rejected href: ${href}`)
@@ -31,7 +33,12 @@ export function SmartLink({
     case 'fragment':
       return (
         // Internal paths are checked against the route registry by links.test.ts, not by the type.
-        <Link href={safe.href as Route} className={className} {...rest}>
+        <Link
+          href={safe.href as Route}
+          className={className}
+          {...(prefetch === false ? { prefetch } : {})}
+          {...rest}
+        >
           {children}
         </Link>
       )

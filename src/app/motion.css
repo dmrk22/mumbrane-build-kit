@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Chrome motion (DESIGN §6, §7.1, §7.7). CSS only. Layered on purpose: the unlayered
+   reduced-motion rule must beat these however specific they are, so states swap instantly.
+   ========================================================================== */
+
+@layer components {
+  /* Header lockup collapse: letters fold E → M (30 ms stagger, 310 ms each, mb.twist), each sliding
+   toward the mark ≈ 4 px per index (312 wordmark units at the 20 px lockup) and fading over the
+   last 40 %. Expansion runs M → E in 480 ms with mb.out. The mark itself only gets the uniform
+   1 → 1.04 → 1 bump. */
+  .lockup-collapsible .mb-letter {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition:
+      transform 270ms var(--ease-out) var(--in),
+      opacity 108ms linear var(--in);
+  }
+  [data-collapsed="true"] .lockup-collapsible .mb-letter {
+    transform: translateX(var(--shift)) scaleY(0);
+    opacity: 0;
+    transition:
+      transform 310ms var(--ease-twist) var(--out),
+      opacity 124ms linear calc(var(--out) + 186ms);
+  }
+  .lockup-collapsible [data-letter="0"] {
+    --shift: 0px;
+    --in: 0ms;
+    --out: 210ms;
+  }
+  .lockup-collapsible [data-letter="1"] {
+    --shift: -312px;
+    --in: 30ms;
+    --out: 180ms;
+  }
+  .lockup-collapsible [data-letter="2"] {
+    --shift: -624px;
+    --in: 60ms;
+    --out: 150ms;
+  }
+  .lockup-collapsible [data-letter="3"] {
+    --shift: -936px;
+    --in: 90ms;
+    --out: 120ms;
+  }
+  .lockup-collapsible [data-letter="4"] {
+    --shift: -1248px;
+    --in: 120ms;
+    --out: 90ms;
+  }
+  .lockup-collapsible [data-letter="5"] {
+    --shift: -1560px;
+    --in: 150ms;
+    --out: 60ms;
+  }
+  .lockup-collapsible [data-letter="6"] {
+    --shift: -1872px;
+    --in: 180ms;
+    --out: 30ms;
+  }
+  .lockup-collapsible [data-letter="7"] {
+    --shift: -2184px;
+    --in: 210ms;
+    --out: 0ms;
+  }
+  .lockup-collapsible .mb-mark-bump {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  [data-collapsed="true"] .lockup-collapsible .mb-mark-bump {
+    animation: mark-bump 240ms var(--ease-out) 240ms;
+  }
+  @keyframes mark-bump {
+    50% {
+      transform: scale(1.04);
+    }
+  }
+
+  /* Mark draw-on (404 and footer): struts → band → rim over 1.4 s. Paths carry pathLength="1". */
+  @media (prefers-reduced-motion: no-preference) {
+    .mark-draw .mb-mark path {
+      stroke-dasharray: 1;
+      animation: mark-draw 700ms var(--ease-in-out) both;
+    }
+    [data-reveal="pending"] .draw-on-reveal .mb-mark path {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+    [data-reveal="done"] .draw-on-reveal .mb-mark path {
+      stroke-dasharray: 1;
+      animation: mark-draw 700ms var(--ease-in-out) both;
+    }
+    /* Must out-rank the `… .mb-mark path` shorthand above, or every stroke starts at once. */
+    .mark-draw .mb-mark .mb-band,
+    [data-reveal="done"] .draw-on-reveal .mb-mark .mb-band {
+      animation-delay: 450ms;
+    }
+    .mark-draw .mb-mark .mb-rim,
+    [data-reveal="done"] .draw-on-reveal .mb-mark .mb-rim {
+      animation-duration: 450ms;
+      animation-delay: 950ms;
+    }
+
+    /* Footer giant wordmark (DESIGN §7.8): letters rise 40 % → 0, 40 ms stagger, 900 ms mb.out. */
+    .wordmark-rise .mb-letter {
+      transform-box: fill-box;
+    }
+    [data-reveal="pending"] .wordmark-rise .mb-letter {
+      transform: translateY(40%);
+    }
+    [data-reveal="done"] .wordmark-rise .mb-letter {
+      transition: transform 900ms var(--ease-out) calc(var(--rise-i, 0) * 40ms);
+    }
+    .wordmark-rise [data-letter="1"] {
+      --rise-i: 1;
+    }
+    .wordmark-rise [data-letter="2"] {
+      --rise-i: 2;
+    }
+    .wordmark-rise [data-letter="3"] {
+      --rise-i: 3;
+    }
+    .wordmark-rise [data-letter="4"] {
+      --rise-i: 4;
+    }
+    .wordmark-rise [data-letter="5"] {
+      --rise-i: 5;
+    }
+    .wordmark-rise [data-letter="6"] {
+      --rise-i: 6;
+    }
+    .wordmark-rise [data-letter="7"] {
+      --rise-i: 7;
+    }
+  }
+  @keyframes mark-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Mega menu items rise in with a 20 ms stagger. */
+  [data-open="true"] .menu-item {
+    transition-delay: calc(var(--menu-i, 0) * 20ms);
+  }
+  .menu-item:nth-child(2) {
+    --menu-i: 1;
+  }
+  .menu-item:nth-child(3) {
+    --menu-i: 2;
+  }
+  .menu-item:nth-child(4) {
+    --menu-i: 3;
+  }
+  .menu-item:nth-child(5) {
+    --menu-i: 4;
+  }
+  .menu-item:nth-child(6) {
+    --menu-i: 5;
+  }
+  .menu-item:nth-child(7) {
+    --menu-i: 6;
+  }
+  .menu-item:nth-child(8) {
+    --menu-i: 7;
+  }
+
+  /* Mobile sheet: a native modal <dialog>; opens as a circle growing from the menu button. */
+  .mobile-sheet[open] {
+    animation: sheet-open 420ms var(--ease-in-out);
+  }
+  .mobile-sheet::backdrop {
+    background: transparent;
+  }
+  html:has(.mobile-sheet[open]) {
+    overflow: hidden;
+  }
+  @keyframes sheet-open {
+    from {
+      clip-path: circle(0% at calc(100% - 42px) 30px);
+    }
+    to {
+      clip-path: circle(150% at calc(100% - 42px) 30px);
+    }
+  }
+
+  /* Accordion groups animate their height where the browser supports ::details-content. */
+  .nav-accordion {
+    interpolate-size: allow-keywords;
+  }
+  .nav-accordion::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--duration-ui) var(--ease-in-out),
+      content-visibility var(--duration-ui) allow-discrete;
+  }
+  .nav-accordion[open]::details-content {
+    block-size: auto;
+  }
+}

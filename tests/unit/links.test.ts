@@ -3,7 +3,7 @@ import { readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { test } from 'node:test'
 import { pathToFileURL } from 'node:url'
-import { ROUTES } from '../../src/content/routes.ts'
+import { REGISTRY } from '../../src/content/routes.ts'
 import { toSafeHref } from '../../src/lib/security/links.ts'
 
 test('toSafeHref accept/reject table', () => {
@@ -45,7 +45,7 @@ test('toSafeHref accept/reject table', () => {
 
 // Every href in every content module: accepted by the policy, and internal ones exist.
 const CONTENT = 'src/content'
-const known = new Set<string>(ROUTES.map((r) => r.path))
+const known = new Set<string>(REGISTRY.map((r) => r.path))
 
 function contentModules(dir: string): string[] {
   return readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
