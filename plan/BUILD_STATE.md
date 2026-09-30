@@ -9,7 +9,7 @@ Update after every task: tick the box, add a one-line note, commit.
 |---|---|---|---|---|---|
 | P0 | Setup (`/setup`) | done | 2026-09-30 | 2026-09-30 | `p00-setup` |
 | P1 | Foundations | done | 2026-10-01 | 2026-10-01 | `p01-foundations` |
-| P2 | Platform: security, metadata, errors | not started | | | |
+| P2 | Platform: security, metadata, errors | done | 2026-10-01 | 2026-10-01 | `p02-platform` |
 | P3 | Brand and chrome | not started | | | |
 | P4 | Motion system and art engine | not started | | | |
 | P5 | Painting pipeline | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P2 (not started)
-- Next task: P2 task 1 (finalise proxy + CSP + headers; security.spec on every route)
+- Phase: P3 (not started)
+- Next task: P3 task 1 (Mark, Lockup, Wordmark components)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -50,8 +50,25 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] 5 /lab page (dev only; notFound in production) — reviewed at 375/768/1440 + reduced; focus rings checked on all 5 surfaces
 - [x] 6 Unit tests: cx, contrast (+ inline parser in P2 task 3)
 
+### P2 — Platform: security, metadata, errors
+- [x] 1 proxy + CSP + headers (P0, SECURITY §4 verbatim) — security.spec now runs over every built registry route; robots.txt added to static-header checks (/paintings image in P5)
+- [x] 2 json-ld.tsx + Organization/WebSite on `/` (`homeJsonLd()` in seo.ts)
+- [x] 3 `src/lib/inline.ts` + `<Inline>` — linear-time (precomputed next-marker tables), 20k adversarial inputs < 50 ms
+- [x] 4 params.ts (P0) + params.test.ts (hostile values, arrays, objects, 10 kB)
+- [x] 5 `src/lib/seo.ts` pageMetadata/routeMetadata + seo.test.ts (titles ≤ 60, descriptions ≤ 160)
+- [x] 6 robots, sitemap, manifest, security.txt (Expires 2027-09-30, valid), not-found, error, global-error
+- [x] 7 `src/content/routes.ts` registry (all routes incl. solution/legal slugs; article slugs join in P8)
+- [x] 8 Legacy redirects incl. `/:path*.md` (Next accepts the pattern; e2e-checked, 308)
+
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P2 — 2026-10-01
+- Registry `src/content/routes.ts` lists the whole site now; e2e `ROUTES` = registry ∩ existing `page.tsx` (fs walk in `tests/e2e/utils.ts`), so suites grow as pages land. `routeMetadata(path)` gives any page its title/description/canonical/OG.
+- Error boundaries use Next 16.3's stable `retry` prop (not `reset`). They render no error details.
+- Next writes the root canonical as `https://mumbrane.com` (no slash); tests compare parsed URLs.
+- Follow-ups: 404 gets the 320 px mark + draw-on in P3 (needs `<Mark>`); manifest colours move to `src/lib/gl/colors.ts` in P4; article slugs + `lastModified` join the sitemap in P8; `links.test.ts` already walks every content module.
+- The `(site)` layout (header/footer) arrives in P3; the 404 renders without chrome until then.
 
 ### P1 — 2026-10-01
 - Primitives: `src/components/layout/{Container,Section,Grid}`, `src/components/ui/{Heading(+Eyebrow),Prose,Numeral,Button,SmartLink,Chip(+StatusChip),Field(+TextArea,Select,Checkbox),Divider,Kbd,Icon}`. All server components.
