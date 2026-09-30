@@ -1,0 +1,28 @@
+# Supply-chain hardening — plan/SECURITY.md §5.2. Single-package repo (no `packages:` list).
+# Several of these are pnpm 11 defaults; they are stated explicitly so a downgrade cannot
+# silently weaken them.
+
+# Never resolve a version published less than 24 hours ago…
+minimumReleaseAge: 1440
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
+# …except Next.js, whose security releases must land immediately (§5.3).
+minimumReleaseAgeExclude:
+  - next
+  - '@next/*'
+
+# Fail if a package's publishing trust level drops (e.g. provenance disappears) — the classic
+# signature of a hijacked maintainer account.
+trustPolicy: no-downgrade
+
+# Transitive dependencies must come from the registry (no git repos or tarball URLs).
+blockExoticSubdeps: true
+
+# Install scripts are denied unless reviewed and listed here.
+strictDepBuilds: true
+allowBuilds:
+  sharp: true
+
+# Exact versions and a matching engine, always.
+savePrefix: ''
+engineStrict: true

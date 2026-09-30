@@ -1,0 +1,446 @@
+{
+  "$comment": "Tested render presets (planning phase: headless Chromium, SwiftShader). Colours are sRGB channel values in 0..1 (hex / 255) written straight to the framebuffer (no linear conversion). fsFile is relative to reference/shaders/. A scene pass renders into a half-resolution target named by `target`; the paint pass samples it through `uSrc`.",
+  "scaling": {
+    "baseWidth": 1440,
+    "rule": "When rendering at another width W, multiply uStroke and the pixel components of uSliceBand (z = line spacing px, w = displacement px) by W / 1440. Everything else is resolution-independent.",
+    "outputs": "Paintings: 2400 px wide (aspect per DESIGN §8.2). Membrane poster: 2560 x 1440 at uTime 2.0."
+  },
+  "presets": {
+    "membrane-hero": {
+      "width": 1440,
+      "height": 900,
+      "passes": [
+        {
+          "fsFile": "membrane.frag",
+          "uniforms": {
+            "uTime": 2.0,
+            "uSeed": 1.37,
+            "uPointer": [
+              -1,
+              -1
+            ],
+            "uDpr": 1,
+            "uBgA": [
+              0.102,
+              0.188,
+              0.702
+            ],
+            "uBgB": [
+              0.082,
+              0.082,
+              0.502
+            ],
+            "uLine": [
+              0.498,
+              0.78,
+              0.976
+            ],
+            "uSpark": [
+              0.945,
+              0.365,
+              0.208
+            ],
+            "uWarm": [
+              0.98,
+              0.804,
+              0.337
+            ]
+          }
+        }
+      ],
+      "notes": "Hero field. uTime 2.0 is the frozen still used for reduced motion and the poster (brand/board/hero-still.png). Live: uTime = seconds, uPointer smoothed 0..1 (y up) or (-1,-1)."
+    },
+    "range": {
+      "width": 1440,
+      "height": 900,
+      "passes": [
+        {
+          "fsFile": "scene.frag",
+          "target": "scene",
+          "scale": 0.5,
+          "uniforms": {
+            "uSeed": 3.7,
+            "uScene": 0.0,
+            "uTime": 0.0,
+            "uSkyTop": [
+              0.97,
+              0.87,
+              0.55
+            ],
+            "uSkyLow": [
+              0.98,
+              0.78,
+              0.3
+            ],
+            "uCloud": [
+              0.99,
+              0.95,
+              0.82
+            ],
+            "uFar": [
+              0.34,
+              0.52,
+              0.96
+            ],
+            "uMid": [
+              0.08,
+              0.27,
+              0.84
+            ],
+            "uNear": [
+              0.09,
+              0.24,
+              0.15
+            ],
+            "uGround": [
+              0.18,
+              0.3,
+              0.16
+            ],
+            "uAccent": [
+              0.98,
+              0.8,
+              0.3
+            ],
+            "uAccent2": [
+              0.55,
+              0.4,
+              0.85
+            ]
+          }
+        },
+        {
+          "fsFile": "paint.frag",
+          "uniforms": {
+            "uSrc": "scene",
+            "uSeed": 3.7,
+            "uStroke": 30.0,
+            "uSlices": 1.0,
+            "uSliceBand": [
+              0.1,
+              0.22,
+              7.0,
+              10.0
+            ],
+            "uBlocks": 1.0,
+            "uBlockA": [
+              0.49,
+              0.8,
+              0.96
+            ],
+            "uBlockB": [
+              0.95,
+              0.56,
+              0.25
+            ],
+            "uBlockC": [
+              0.98,
+              0.8,
+              0.3
+            ],
+            "uPaper": [
+              0.976,
+              0.969,
+              0.941
+            ]
+          }
+        }
+      ],
+      "notes": "Cobalt range under a cadmium sky, with Replay-style interventions (scan slices across the tree line, three pixel-sorted blocks). Reference: brand/board/plate-0.png"
+    },
+    "sky": {
+      "width": 1440,
+      "height": 900,
+      "passes": [
+        {
+          "fsFile": "scene.frag",
+          "target": "scene",
+          "scale": 0.5,
+          "uniforms": {
+            "uSeed": 4.7,
+            "uScene": 1.0,
+            "uTime": 0.0,
+            "uSkyTop": [
+              0.07,
+              0.16,
+              0.5
+            ],
+            "uSkyLow": [
+              0.24,
+              0.44,
+              0.78
+            ],
+            "uCloud": [
+              0.95,
+              0.92,
+              0.84
+            ],
+            "uFar": [
+              0.3,
+              0.4,
+              0.6
+            ],
+            "uMid": [
+              0.2,
+              0.3,
+              0.5
+            ],
+            "uNear": [
+              0.16,
+              0.14,
+              0.12
+            ],
+            "uGround": [
+              0.1,
+              0.09,
+              0.08
+            ],
+            "uAccent": [
+              0.98,
+              0.78,
+              0.36
+            ],
+            "uAccent2": [
+              0.9,
+              0.4,
+              0.3
+            ]
+          }
+        },
+        {
+          "fsFile": "paint.frag",
+          "uniforms": {
+            "uSrc": "scene",
+            "uSeed": 4.7,
+            "uStroke": 30.0,
+            "uSlices": 0.0,
+            "uSliceBand": [
+              0.1,
+              0.22,
+              7.0,
+              10.0
+            ],
+            "uBlocks": 0.0,
+            "uBlockA": [
+              0.49,
+              0.8,
+              0.96
+            ],
+            "uBlockB": [
+              0.95,
+              0.56,
+              0.25
+            ],
+            "uBlockC": [
+              0.98,
+              0.8,
+              0.3
+            ],
+            "uPaper": [
+              0.976,
+              0.969,
+              0.941
+            ]
+          }
+        }
+      ],
+      "notes": "Cumulus sky over a dark horizon. Reference: brand/board/plate-1.png"
+    },
+    "meadow": {
+      "width": 1440,
+      "height": 900,
+      "passes": [
+        {
+          "fsFile": "scene.frag",
+          "target": "scene",
+          "scale": 0.5,
+          "uniforms": {
+            "uSeed": 5.7,
+            "uScene": 2.0,
+            "uTime": 0.0,
+            "uSkyTop": [
+              0.5,
+              0.72,
+              0.95
+            ],
+            "uSkyLow": [
+              0.86,
+              0.91,
+              0.93
+            ],
+            "uCloud": [
+              0.99,
+              0.98,
+              0.95
+            ],
+            "uFar": [
+              0.5,
+              0.65,
+              0.8
+            ],
+            "uMid": [
+              0.34,
+              0.54,
+              0.46
+            ],
+            "uNear": [
+              0.1,
+              0.33,
+              0.17
+            ],
+            "uGround": [
+              0.33,
+              0.62,
+              0.24
+            ],
+            "uAccent": [
+              0.98,
+              0.8,
+              0.28
+            ],
+            "uAccent2": [
+              0.56,
+              0.4,
+              0.86
+            ]
+          }
+        },
+        {
+          "fsFile": "paint.frag",
+          "uniforms": {
+            "uSrc": "scene",
+            "uSeed": 5.7,
+            "uStroke": 30.0,
+            "uSlices": 0.0,
+            "uSliceBand": [
+              0.1,
+              0.22,
+              7.0,
+              10.0
+            ],
+            "uBlocks": 0.0,
+            "uBlockA": [
+              0.49,
+              0.8,
+              0.96
+            ],
+            "uBlockB": [
+              0.95,
+              0.56,
+              0.25
+            ],
+            "uBlockC": [
+              0.98,
+              0.8,
+              0.3
+            ],
+            "uPaper": [
+              0.976,
+              0.969,
+              0.941
+            ]
+          }
+        }
+      ],
+      "notes": "Meadow, tree line and pale sky. Reference: brand/board/plate-2.png"
+    },
+    "sea": {
+      "width": 1440,
+      "height": 900,
+      "passes": [
+        {
+          "fsFile": "scene.frag",
+          "target": "scene",
+          "scale": 0.5,
+          "uniforms": {
+            "uSeed": 6.7,
+            "uScene": 3.0,
+            "uTime": 0.0,
+            "uSkyTop": [
+              0.93,
+              0.47,
+              0.33
+            ],
+            "uSkyLow": [
+              0.99,
+              0.8,
+              0.45
+            ],
+            "uCloud": [
+              0.86,
+              0.42,
+              0.47
+            ],
+            "uFar": [
+              0.3,
+              0.38,
+              0.78
+            ],
+            "uMid": [
+              0.07,
+              0.1,
+              0.44
+            ],
+            "uNear": [
+              0.1,
+              0.1,
+              0.2
+            ],
+            "uGround": [
+              0.1,
+              0.1,
+              0.2
+            ],
+            "uAccent": [
+              1.0,
+              0.9,
+              0.62
+            ],
+            "uAccent2": [
+              0.9,
+              0.5,
+              0.3
+            ]
+          }
+        },
+        {
+          "fsFile": "paint.frag",
+          "uniforms": {
+            "uSrc": "scene",
+            "uSeed": 6.7,
+            "uStroke": 30.0,
+            "uSlices": 0.0,
+            "uSliceBand": [
+              0.1,
+              0.22,
+              7.0,
+              10.0
+            ],
+            "uBlocks": 0.0,
+            "uBlockA": [
+              0.49,
+              0.8,
+              0.96
+            ],
+            "uBlockB": [
+              0.95,
+              0.56,
+              0.25
+            ],
+            "uBlockC": [
+              0.98,
+              0.8,
+              0.3
+            ],
+            "uPaper": [
+              0.976,
+              0.969,
+              0.941
+            ]
+          }
+        }
+      ],
+      "notes": "Sea at dusk with glints. Reference: brand/board/plate-3.png"
+    }
+  }
+}

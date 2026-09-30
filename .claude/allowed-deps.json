@@ -1,0 +1,30 @@
+{
+  "$comment": "Direct dependencies Claude may install. Anything else is blocked by .claude/hooks/guard-bash.mjs. To propose a new one: log a DECISIONS.md entry with justification (size, maintenance, security record, why the platform can't do it) and ask the owner to add it here.",
+  "runtime": [
+    "next",
+    "react",
+    "react-dom",
+    "gsap",
+    "@gsap/react",
+    "lenis",
+    "zod",
+    "server-only"
+  ],
+  "dev": [
+    "typescript",
+    "@types/node",
+    "@types/react",
+    "@types/react-dom",
+    "tailwindcss",
+    "@tailwindcss/postcss",
+    "postcss",
+    "@biomejs/biome",
+    "@playwright/test",
+    "@axe-core/playwright",
+    "sharp"
+  ],
+  "budgets": {
+    "maxRuntime": 8,
+    "maxDev": 11
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "note": "Logo files are locked. Tests fail if any byte changes. Only the owner may replace them (see LOGO.md).",
+  "files": {
+    "mumbrane-lockup.svg": "80634101b9691974683a9babc2421152452a3293116c92b6112b39e5e1192582",
+    "mumbrane-mark-compact.svg": "93c36f5c6949e1716aa6fba83244b23bff3e7b845098fd59183ae73f9fc91418",
+    "mumbrane-mark.svg": "c4773488b59300112d0958136669a72edd6f7533846ab922cc8087b75eec3817",
+    "mumbrane-wordmark.svg": "735bac8d2454625bf50cf0ab7186e72194c0e699fca3cf60390f96924fa5d513",
+    "reference.png": "3fab60aab9a185aa261926f7a6dc03868790f504e3dca76e99f13d1075510c09"
+  },
+  "geometry": {
+    "mumbrane-mark.svg": {
+      "paths": 27,
+      "sha256_of_d": "153a18e34ddbb9c1e0bf903b7531f30e0dfe4a4f0f448310e2f48196e6fdf6e4"
+    },
+    "mumbrane-mark-compact.svg": {
+      "paths": 27,
+      "sha256_of_d": "153a18e34ddbb9c1e0bf903b7531f30e0dfe4a4f0f448310e2f48196e6fdf6e4"
+    },
+    "mumbrane-wordmark.svg": {
+      "paths": 8,
+      "sha256_of_d": "3106ff60b64fe4296998f3b75972bed2ece4bae1cda198bf31c17091db1c4b6f"
+    },
+    "mumbrane-lockup.svg": {
+      "paths": 35,
+      "sha256_of_d": "cd10e695ac7168b0a6e3690a827a247a83520f1f5102f8625ef0eed36aa4d45d"
+    }
+  }
+}

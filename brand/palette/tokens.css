@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Mumbrane design tokens — Tailwind CSS v4 (CSS-first). Paste into src/app/globals.css
+   directly after `@import "tailwindcss";`. Generated from brand/palette/palette.json.
+   All colours are sRGB-safe OKLCH (hex in comments). Do not add ad-hoc colours:
+   extend this file and DECISIONS.md instead.
+   ========================================================================== */
+
+@theme {
+  /* Remove Tailwind's default palette so only brand colours exist. */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Neutrals — archival paper and blue-black ink */
+  --color-paper: oklch(0.975 0.009 88.0); /* #f9f7f0 */
+  --color-paper-2: oklch(0.948 0.013 86.0); /* #f2ede4 */
+  --color-paper-3: oklch(0.905 0.016 84.0); /* #e5dfd4 */
+  --color-rule: oklch(0.855 0.014 84.0); /* #d4cfc5 */
+  --color-ink: oklch(0.165 0.022 268.0); /* #0a0e18 */
+  --color-ink-2: oklch(0.215 0.026 268.0); /* #141926 */
+  --color-ink-3: oklch(0.265 0.028 268.0); /* #1f2533 */
+  --color-rule-dark: oklch(0.340 0.026 268.0); /* #323846 */
+  --color-text: oklch(0.190 0.020 268.0); /* #10141d */
+  --color-text-2: oklch(0.400 0.022 268.0); /* #424754 */
+  --color-text-3: oklch(0.500 0.018 268.0); /* #5f636e */
+  --color-on-dark: oklch(0.965 0.010 88.0); /* #f6f3ec */
+  --color-on-dark-2: oklch(0.820 0.016 268.0); /* #bfc4cf */
+  --color-on-dark-3: oklch(0.700 0.020 268.0); /* #999eab */
+
+  /* Pigments — base, soft tint, accessible text on paper (fg), on ink (glow), text on soft (ink) */
+  --color-ultramarine: oklch(0.400 0.205 267.0); /* #1a30b3 */
+  --color-ultramarine-soft: oklch(0.955 0.019 267.0); /* #eaf0fe */
+  --color-ultramarine-fg: oklch(0.400 0.205 267.0); /* #1a30b3 — 9.25:1 on paper */
+  --color-ultramarine-glow: oklch(0.614 0.191 267.0); /* #517af5 — 5.01:1 on ink */
+  --color-ultramarine-ink: oklch(0.412 0.164 267.0); /* #233ea2 — 8.06:1 on ultramarine-soft */
+  --color-cobalt: oklch(0.520 0.190 262.0); /* #245fd4 */
+  --color-cobalt-soft: oklch(0.955 0.020 262.0); /* #e9f1fe */
+  --color-cobalt-fg: oklch(0.520 0.190 262.0); /* #245fd4 — 5.35:1 on paper */
+  --color-cobalt-glow: oklch(0.612 0.190 262.0); /* #3f7df4 — 5.01:1 on ink */
+  --color-cobalt-ink: oklch(0.409 0.152 262.0); /* #16439a — 8.02:1 on cobalt-soft */
+  --color-cherenkov: oklch(0.800 0.101 240.0); /* #7fc7f9 */
+  --color-cherenkov-soft: oklch(0.955 0.022 240.0); /* #e4f3fe */
+  --color-cherenkov-fg: oklch(0.522 0.110 240.0); /* #1970a2 — 5.05:1 on paper */
+  --color-cherenkov-glow: oklch(0.800 0.101 240.0); /* #7fc7f9 — 10.51:1 on ink */
+  --color-cherenkov-ink: oklch(0.403 0.085 240.0); /* #0e4d71 — 8.00:1 on cherenkov-soft */
+  --color-vermilion: oklch(0.665 0.190 36.0); /* #f15d35 */
+  --color-vermilion-soft: oklch(0.955 0.021 36.0); /* #feece7 */
+  --color-vermilion-fg: oklch(0.546 0.172 36.0); /* #bf3e18 — 5.00:1 on paper */
+  --color-vermilion-glow: oklch(0.665 0.190 36.0); /* #f15d35 — 5.84:1 on ink */
+  --color-vermilion-ink: oklch(0.417 0.131 36.0); /* #84280d — 8.02:1 on vermilion-soft */
+  --color-cadmium: oklch(0.865 0.143 88.0); /* #facd56 */
+  --color-cadmium-soft: oklch(0.955 0.045 88.0); /* #fdefcf */
+  --color-cadmium-fg: oklch(0.529 0.100 88.0); /* #836717 — 5.00:1 on paper */
+  --color-cadmium-glow: oklch(0.865 0.143 88.0); /* #facd56 — 12.79:1 on ink */
+  --color-cadmium-ink: oklch(0.403 0.076 88.0); /* #59450c — 8.08:1 on cadmium-soft */
+  --color-viridian: oklch(0.620 0.113 168.0); /* #2a9c79 */
+  --color-viridian-soft: oklch(0.955 0.042 168.0); /* #d6faeb */
+  --color-viridian-fg: oklch(0.514 0.096 168.0); /* #1a785d — 5.04:1 on paper */
+  --color-viridian-glow: oklch(0.620 0.113 168.0); /* #2a9c79 — 5.63:1 on ink */
+  --color-viridian-ink: oklch(0.397 0.074 168.0); /* #0f533f — 8.04:1 on viridian-soft */
+  --color-madder: oklch(0.660 0.150 6.0); /* #dc6684 */
+  --color-madder-soft: oklch(0.955 0.021 6.0); /* #feebee */
+  --color-madder-fg: oklch(0.546 0.150 6.0); /* #b44263 — 5.02:1 on paper */
+  --color-madder-glow: oklch(0.660 0.150 6.0); /* #dc6684 — 5.76:1 on ink */
+  --color-madder-ink: oklch(0.416 0.120 6.0); /* #7e2942 — 8.03:1 on madder-soft */
+  --color-violet: oklch(0.560 0.155 294.0); /* #7b5ec5 */
+  --color-violet-soft: oklch(0.955 0.022 294.0); /* #f0eefe */
+  --color-violet-fg: oklch(0.540 0.155 294.0); /* #7658be — 5.01:1 on paper */
+  --color-violet-glow: oklch(0.619 0.155 294.0); /* #8d70d9 — 5.01:1 on ink */
+  --color-violet-ink: oklch(0.413 0.124 294.0); /* #503987 — 8.07:1 on violet-soft */
+  --color-ultramarine-deep: oklch(0.300 0.169 270.0); /* #151580 — hero field shadow */
+
+  /* Semantic outcome colours (Moth answers). Fill with ink text (≥ 5.6:1), except refused:
+     violet base fails AA with both ink (3.9) and on-dark (4.46), so refused uses violet-fg with
+     on-dark text (4.85:1). Never put small text on the violet base. */
+  --color-supported: var(--color-viridian);
+  --color-unproven: var(--color-cadmium);   /* NO_SUPPORTED_PROOF */
+  --color-conflict: var(--color-vermilion);
+  --color-refused: var(--color-violet-fg);  /* language refusal */
+  --color-limit: var(--color-paper-3);      /* resource stop / incomplete / incompatible */
+
+  /* Type families — variables are provided by next/font in src/app/fonts.ts */
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
+  /* Italic lives in its own next/font instance (no opsz axis, to stay inside the font budget).
+     Use it for every serif italic; `font-synthesis: none` in the base layer exposes mistakes. */
+  --font-serif-italic: var(--font-newsreader-italic), var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-sans: var(--font-host-grotesk), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale — fluid between 375px and 1440px viewports */
+  --text-display-xl: clamp(3.25rem, 1.52rem + 7.38vw, 8.25rem);
+  --text-display-xl--line-height: 0.93;
+  --text-display-xl--letter-spacing: -0.028em;
+  --text-display-xl--font-weight: 330;
+  --text-display-l: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
+  --text-display-l--line-height: 1.02;
+  --text-display-l--letter-spacing: -0.022em;
+  --text-display-l--font-weight: 340;
+  --text-display-m: clamp(1.875rem, 1.2rem + 2.87vw, 3.625rem);
+  --text-display-m--line-height: 1.1;
+  --text-display-m--letter-spacing: -0.018em;
+  --text-display-m--font-weight: 360;
+  --text-display-s: clamp(1.5rem, 1.24rem + 1.1vw, 2.25rem);
+  --text-display-s--line-height: 1.12;
+  --text-display-s--letter-spacing: -0.014em;
+  --text-display-s--font-weight: 370;
+  --text-title: clamp(1.25rem, 1.16rem + 0.38vw, 1.5rem);
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.01em;
+  --text-title--font-weight: 600;
+  --text-lede: clamp(1.125rem, 1.06rem + 0.28vw, 1.3125rem);
+  --text-lede--line-height: 1.5;
+  --text-lede--letter-spacing: -0.003em;
+  --text-lede--font-weight: 400;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-body--letter-spacing: 0em;
+  --text-body--font-weight: 400;
+  --text-article: clamp(1.1875rem, 1.13rem + 0.24vw, 1.3125rem);
+  --text-article--line-height: 1.6;
+  --text-article--letter-spacing: -0.003em;
+  --text-article--font-weight: 400;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.5;
+  --text-small--letter-spacing: 0em;
+  --text-small--font-weight: 400;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.45;
+  --text-caption--letter-spacing: 0.005em;
+  --text-caption--font-weight: 400;
+  --text-label: 0.71875rem;
+  --text-label--line-height: 1.3;
+  --text-label--letter-spacing: 0.08em;
+  --text-label--font-weight: 500;
+  --text-code: 0.84375rem;
+  --text-code--line-height: 1.7;
+  --text-code--letter-spacing: 0em;
+  --text-code--font-weight: 400;
+
+  /* Spacing base (Tailwind multiplies this): 4px grid */
+  --spacing: 0.25rem;
+
+  /* Radii — mostly square; pills only for primary buttons and chips */
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* Motion. Eases generate `ease-*` utilities. Tailwind has no duration namespace, so the
+     durations are plain variables: use `duration-(--duration-ui)` or `var(--duration-ui)`. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);       /* expo-out: reveals, UI */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);   /* quint in-out: state changes */
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);        /* exits */
+  --ease-twist: cubic-bezier(0.83, 0, 0.17, 1);    /* the wordmark half-twist */
+  --duration-micro: 120ms;
+  --duration-hover: 200ms;
+  --duration-ui: 320ms;
+  --duration-reveal: 560ms;
+  --duration-hero: 900ms;
+  --duration-signature: 1400ms;
+
+  /* Elevation — used sparingly (instrument windows, menus) */
+  --shadow-window: 0 30px 80px -30px oklch(0.1 0.02 268 / 0.55), 0 1px 0 0 oklch(1 0 0 / 0.04) inset;
+  --shadow-menu: 0 24px 60px -24px oklch(0.1 0.02 268 / 0.35);
+
+  /* Breakpoints */
+  --breakpoint-sm: 40rem;   /* 640 */
+  --breakpoint-md: 48rem;   /* 768 */
+  --breakpoint-lg: 64rem;   /* 1024 */
+  --breakpoint-xl: 80rem;   /* 1280 */
+  --breakpoint-2xl: 90rem;  /* 1440 */
+}
+
+/* Surface themes: every <Section> sets data-surface; components use surface-* utilities
+   so they adapt automatically (and the header can read the surface under it). */
+@theme inline {
+  --color-surface: var(--surface-bg);
+  --color-surface-fg: var(--surface-fg);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-rule: var(--surface-rule);
+  --color-surface-raise: var(--surface-raise);
+  --color-surface-accent: var(--surface-accent);
+}
+
+@layer base {
+  :root, [data-surface="paper"] {
+    --surface-bg: var(--color-paper); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
+    --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper-2);
+    --surface-accent: var(--color-cobalt);
+    color-scheme: light;
+  }
+  [data-surface="paper-2"] {
+    --surface-bg: var(--color-paper-2); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
+    --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper);
+    --surface-accent: var(--color-cobalt);
+    color-scheme: light;
+  }
+  [data-surface="ink"] {
+    --surface-bg: var(--color-ink); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
+    --surface-subtle: var(--color-on-dark-3); --surface-rule: var(--color-rule-dark); --surface-raise: var(--color-ink-2);
+    --surface-accent: var(--color-cherenkov);
+    color-scheme: dark;
+  }
+  [data-surface="ultramarine"] {
+    --surface-bg: var(--color-ultramarine); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
+    --surface-subtle: var(--color-on-dark-2); --surface-rule: oklch(0.97 0.01 88 / 0.22); --surface-raise: var(--color-ultramarine-deep); /* on-dark-3 fails AA on ultramarine (3.7:1) */
+    --surface-accent: var(--color-cadmium);
+    color-scheme: dark;
+  }
+  [data-surface="cadmium"] {
+    --surface-bg: var(--color-cadmium); --surface-fg: var(--color-ink); --surface-muted: var(--color-cadmium-ink);
+    --surface-subtle: var(--color-cadmium-ink); --surface-rule: oklch(0.2 0.02 268 / 0.25); --surface-raise: var(--color-cadmium-soft);
+    --surface-accent: var(--color-ink);
+    color-scheme: light;
+  }
+  @media (prefers-contrast: more) {
+    :root, [data-surface="paper"], [data-surface="paper-2"] { --surface-muted: var(--color-text); --surface-subtle: var(--color-text-2); }
+    [data-surface="ink"], [data-surface="ultramarine"] { --surface-muted: var(--color-on-dark); --surface-subtle: var(--color-on-dark-2); }
+  }
+}

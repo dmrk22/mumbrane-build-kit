@@ -1,0 +1,26 @@
+# Mumbrane Labs
+
+> Mumbrane is an independent research lab investigating field-based intelligence and building Moth, an experimental local reasoning runtime.
+
+Use the Markdown documents below for clean agent context. Canonical HTML URLs are included in each document's frontmatter.
+
+## Core pages
+
+- [Mumbrane Labs](https://mumbrane.ai/index.md): An independent research lab investigating field-based intelligence.
+- [Moth](https://mumbrane.ai/moth.md): Configurable classification over a compiled field of facts, definitions, and supported English interpretation skills.
+- [Release & evidence](https://mumbrane.ai/releases.md): The supported capabilities, language boundaries, and qualification evidence for Moth Inference Preview 004.
+- [Console — Coming soon](https://mumbrane.ai/console.md): The Mumbrane console is coming soon. Explore the ideas behind our work in News.
+- [News](https://mumbrane.ai/news.md): Product developments, engineering decisions, and practical examples from Mumbrane Labs.
+- [Research](https://mumbrane.ai/research.md): Mumbrane's research into field-based intelligence, energy-guided reasoning, and the causal limits of inference.
+- [Talk to Mumbrane](https://mumbrane.ai/contact.md): Contact Mumbrane Labs about research, collaboration, careers, or general questions.
+- [Changelog](https://mumbrane.ai/changelog.md): Updates to Mumbrane models, research, and products.
+- [Login](https://mumbrane.ai/login.md): Access to Mumbrane systems.
+- [Terms of use](https://mumbrane.ai/terms.md): The basic conditions for using Mumbrane's public website and research materials.
+- [Privacy notice](https://mumbrane.ai/privacy.md): A plain-language summary of how information submitted through this site is handled.
+
+## Publications
+
+- [Introducing Moth Preview 004](https://mumbrane.ai/news/introducing-moth-preview-004.md): A local preview for defining a world, compiling its meaning, and asking classification questions with inspectable evidence.
+- [Different wording. Different meaning.](https://mumbrane.ai/news/different-wording-different-meaning.md): How Moth preserves subjects, relationships and requirements when supported English is rephrased—and when a change should alter the answer.
+- [When the field cannot establish an answer](https://mumbrane.ai/news/when-the-field-cannot-establish-an-answer.md): Missing support, conflicting information and incomplete execution mean different things. A useful answer keeps those distinctions visible.
+- [Towards Field based Intelligence](https://mumbrane.ai/research/toward-field-based-intelligence.md): Our research hypothesis: persistent knowledge, interacting fields, and energy-guided inference could offer a path toward more general reasoning.
