@@ -8,7 +8,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | Phase | Name | Status | Started | Done | Commit / tag |
 |---|---|---|---|---|---|
 | P0 | Setup (`/setup`) | done | 2026-09-30 | 2026-09-30 | `p00-setup` |
-| P1 | Foundations | in progress | 2026-10-01 | | |
+| P1 | Foundations | done | 2026-10-01 | 2026-10-01 | `p01-foundations` |
 | P2 | Platform: security, metadata, errors | not started | | | |
 | P3 | Brand and chrome | not started | | | |
 | P4 | Motion system and art engine | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P1 (in progress)
-- Next task: P1 task 1 (globals.css base layer)
+- Phase: P2 (not started)
+- Next task: P2 task 1 (finalise proxy + CSP + headers; security.spec on every route)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -52,6 +52,16 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P1 — 2026-10-01
+- Primitives: `src/components/layout/{Container,Section,Grid}`, `src/components/ui/{Heading(+Eyebrow),Prose,Numeral,Button,SmartLink,Chip(+StatusChip),Field(+TextArea,Select,Checkbox),Divider,Kbd,Icon}`. All server components.
+- `globals.css` = tokens verbatim + our layers: `[data-surface]` paints bg/fg; `surface-invert`/`surface-on-invert` colours (primary buttons, selected chips); `animate-progress`; `link-prose` utility; `.prose-article`.
+- `Button` renders `SmartLink` when given `href`. `variant="ink"` is for light grounds only (invisible on ink by design).
+- Gotcha: the guard's embed rule is case-insensitive, so a component named `Frame` trips it (`<Frame` ≈ `<frame`). Name wrappers otherwise.
+- Gotcha: `transition-colors` also animates `outline-color` → focus ring fades in from currentColor. Use `transition-[color,background-color,border-color]`.
+- Gotcha: guard-bash rejects `python3 -`, `sed` on plan files, recursive grep, dotfile globs, and commit messages carrying the session URL inline — use Edit/Read and `git commit -F <file>`.
+- A stale `pnpm start` from an earlier session held :3000 and served the P0 build to the shots (all 404). Check `lsof -iTCP:3000` if shots look wrong.
+- `/lab` verified 404 on a production build (curl on `next start`); `next-env.d.ts` untracked (D-107).
 
 ### P0 — 2026-09-30
 - Versions (D-100): next 16.3.8 (security release of 2026-09-30), react 19.3.0, TS 7.0.2, Tailwind 4.3.3, Biome 2.5.14 (2.5.15 was < 24 h old), Playwright 1.63.0, pnpm 12.6.0, Node 24.18.1. Audit clean.
