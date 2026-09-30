@@ -43,12 +43,12 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 <!-- When a phase starts, copy its tasks from BUILD_PLAN as checkboxes here. -->
 
 ### P1 — Foundations
-- [ ] 1 globals.css: tokens verbatim + base layer + typographic defaults
-- [ ] 2 Layout primitives: Container, Section, Grid
-- [ ] 3 Type components: Eyebrow, Heading, Prose, Numeral
-- [ ] 4 UI primitives: Button, SmartLink, Chip/StatusChip, Field/TextArea/Select/Checkbox, Divider, Kbd, Icon
-- [ ] 5 /lab page (dev only; notFound in production)
-- [ ] 6 Unit tests: cx, contrast (+ inline parser in P2 task 3)
+- [x] 1 globals.css: tokens verbatim + base layer + typographic defaults — surfaces paint themselves; reduced-motion rule unlayered (no !important); `link-prose` utility; `.prose-article`
+- [x] 2 Layout primitives: Container, Section, Grid — `src/components/layout/`; `Surface` type in `src/lib/surface.ts`
+- [x] 3 Type components: Eyebrow, Heading, Prose, Numeral
+- [x] 4 UI primitives: Button, SmartLink, Chip/StatusChip, Field/TextArea/Select/Checkbox, Divider, Kbd, Icon — copy in `src/content/{ui,outcomes}.ts`; `surface-invert` colours for primary/selected
+- [x] 5 /lab page (dev only; notFound in production) — reviewed at 375/768/1440 + reduced; focus rings checked on all 5 surfaces
+- [x] 6 Unit tests: cx, contrast (+ inline parser in P2 task 3)
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->

@@ -300,3 +300,90 @@
   [data-surface="ink"] &, [data-surface="ultramarine"] & { color: var(--color-cherenkov); }
   [data-surface="cadmium"] & { color: var(--color-ink); }
 }
+
+/* The surface's inverse, for primary buttons and selected chips: ink on light grounds, paper on
+   dark ones (DESIGN §9.4). Derived from existing tokens; no new colours. */
+@theme inline {
+  --color-surface-invert: var(--surface-invert);
+  --color-surface-on-invert: var(--surface-on-invert);
+}
+
+@theme {
+  --animate-progress: progress 1.2s var(--ease-in-out) infinite;
+  @keyframes progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+@layer base {
+  :root, [data-surface="paper"], [data-surface="paper-2"], [data-surface="cadmium"] {
+    --surface-invert: var(--color-ink);
+    --surface-on-invert: var(--color-on-dark);
+  }
+  [data-surface="ink"], [data-surface="ultramarine"] {
+    --surface-invert: var(--color-paper);
+    --surface-on-invert: var(--color-ink);
+  }
+}
+
+/* Article prose (DESIGN §9.11): serif body with oldstyle figures, 64–70 ch measure. */
+@layer components {
+  .prose-article {
+    font-family: var(--font-serif);
+    font-size: var(--text-article);
+    line-height: var(--text-article--line-height);
+    letter-spacing: var(--text-article--letter-spacing);
+    font-variant-numeric: oldstyle-nums proportional-nums;
+    max-width: 68ch;
+    color: var(--surface-fg);
+
+    & > * + * { margin-top: 1.1em; }
+    & h2 {
+      margin-top: 64px;
+      font-size: var(--text-display-s);
+      line-height: var(--text-display-s--line-height);
+      letter-spacing: var(--text-display-s--letter-spacing);
+      font-weight: var(--text-display-s--font-weight);
+    }
+    & h3 {
+      margin-top: 40px;
+      font-family: var(--font-sans);
+      font-size: var(--text-title);
+      line-height: var(--text-title--line-height);
+      letter-spacing: var(--text-title--letter-spacing);
+      font-weight: var(--text-title--font-weight);
+    }
+    & h2 + *, & h3 + * { margin-top: 16px; }
+    & em, & i { font-family: var(--font-serif-italic); font-style: italic; }
+    & strong, & b { font-weight: 600; }
+    & a { @apply link-prose; }
+    & code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      font-variant-numeric: normal;
+      background-color: var(--surface-raise);
+      padding: 0.1em 0.3em;
+    }
+    & ul, & ol { padding-left: 1.5em; }
+    & ul > li { position: relative; }
+    & ul > li::before { content: "–"; position: absolute; left: -1.1em; color: var(--surface-subtle); }
+    & ol { list-style: decimal; }
+    & ol > li::marker { color: var(--surface-subtle); font-variant-numeric: lining-nums tabular-nums; }
+    & li + li { margin-top: 0.4em; }
+    & blockquote {
+      margin-block: 40px;
+      border-left: 2px solid var(--color-ultramarine);
+      padding-left: 24px;
+      font-family: var(--font-serif-italic);
+      font-style: italic;
+      font-size: var(--text-display-s);
+      line-height: var(--text-display-s--line-height);
+      hanging-punctuation: first;
+    }
+    /* Chromium has no hanging-punctuation: hang the opening quote by hand (DESIGN §3.4). */
+    @supports not (hanging-punctuation: first) {
+      & blockquote { text-indent: -0.4em; }
+    }
+  }
+}

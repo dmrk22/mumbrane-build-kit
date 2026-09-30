@@ -3,6 +3,10 @@ import { routeDir, WIDTHS } from '../../scripts/shots.ts'
 
 const routes = (process.env.SHOTS_ROUTES ?? '/').split(',').filter(Boolean)
 
+// A full-page capture grows the viewport to the page height, so no scrollbar fills the reserved
+// `scrollbar-gutter`; it would show as a strip of the root background along the right edge.
+const FULL = { fullPage: true, style: 'html { scrollbar-gutter: auto; }' }
+
 async function settle(page: Page) {
   await page.waitForLoadState('networkidle')
   await page.evaluate(() => document.fonts.ready)
@@ -21,7 +25,7 @@ for (const route of routes) {
       await page.setViewportSize({ width, height: 900 })
       await page.goto(route)
       await settle(page)
-      await page.screenshot({ path: `${dir}/${width}.png`, fullPage: true })
+      await page.screenshot({ path: `${dir}/${width}.png`, ...FULL })
     })
   }
 
@@ -30,6 +34,6 @@ for (const route of routes) {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto(route)
     await settle(page)
-    await page.screenshot({ path: `${dir}/1440-reduced.png`, fullPage: true })
+    await page.screenshot({ path: `${dir}/1440-reduced.png`, ...FULL })
   })
 }
