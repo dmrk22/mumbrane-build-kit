@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   await headers()
   return (
     <html lang="en" data-surface="paper" className={fontVars}>
-      <body className="bg-paper font-sans text-text antialiased">
+      <body>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2"

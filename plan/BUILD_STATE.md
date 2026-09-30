@@ -8,7 +8,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | Phase | Name | Status | Started | Done | Commit / tag |
 |---|---|---|---|---|---|
 | P0 | Setup (`/setup`) | done | 2026-09-30 | 2026-09-30 | `p00-setup` |
-| P1 | Foundations | not started | | | |
+| P1 | Foundations | in progress | 2026-10-01 | | |
 | P2 | Platform: security, metadata, errors | not started | | | |
 | P3 | Brand and chrome | not started | | | |
 | P4 | Motion system and art engine | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P1 (not started)
-- Next task: run `/go` → P1 task 1 (globals.css base layer)
+- Phase: P1 (in progress)
+- Next task: P1 task 1 (globals.css base layer)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -40,10 +40,15 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] 8 Committed and tagged `p00-setup`; handoff note written
 
 ## Phase task lists
-<!-- When a phase starts, copy its tasks from BUILD_PLAN as checkboxes here, e.g.
+<!-- When a phase starts, copy its tasks from BUILD_PLAN as checkboxes here. -->
+
 ### P1 — Foundations
-- [ ] 1 globals.css base layer … — note
--->
+- [ ] 1 globals.css: tokens verbatim + base layer + typographic defaults
+- [ ] 2 Layout primitives: Container, Section, Grid
+- [ ] 3 Type components: Eyebrow, Heading, Prose, Numeral
+- [ ] 4 UI primitives: Button, SmartLink, Chip/StatusChip, Field/TextArea/Select/Checkbox, Divider, Kbd, Icon
+- [ ] 5 /lab page (dev only; notFound in production)
+- [ ] 6 Unit tests: cx, contrast (+ inline parser in P2 task 3)
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->

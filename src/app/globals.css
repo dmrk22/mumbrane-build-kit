@@ -223,3 +223,80 @@
     [data-surface="ink"], [data-surface="ultramarine"] { --surface-muted: var(--color-on-dark); --surface-subtle: var(--color-on-dark-2); }
   }
 }
+
+/* ==========================================================================
+   Base layer (DESIGN §3.4, §5, §10). Everything below is ours; the tokens above stay verbatim.
+   ========================================================================== */
+
+@layer base {
+  /* A surface paints itself: sections only set data-surface. */
+  [data-surface] {
+    background-color: var(--surface-bg);
+    color: var(--surface-fg);
+  }
+
+  html {
+    scrollbar-gutter: stable;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-optical-sizing: auto;
+    font-synthesis: none; /* a faux italic/bold is a bug to fix, not to hide */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3 { text-wrap: balance; }
+  p, li, dd, figcaption, blockquote { text-wrap: pretty; }
+
+  /* Serif italics come from their own font instance (tokens: --font-serif-italic). */
+  .font-serif em, .font-serif i, .font-serif-italic { font-family: var(--font-serif-italic); font-style: italic; }
+
+  code, kbd, samp, pre { font-family: var(--font-mono); font-variant-ligatures: none; }
+
+  ::selection { background-color: var(--color-cadmium); color: var(--color-ink); }
+
+  :focus-visible {
+    outline: 2px solid var(--surface-accent);
+    outline-offset: 2px;
+  }
+
+  [id] { scroll-margin-top: 96px; }
+
+  /* Main is focused programmatically on route change (DESIGN §7.9); no ring on a landmark. */
+  main:focus { outline: none; }
+
+  @media (forced-colors: active) {
+    :focus-visible { outline-color: Highlight; }
+  }
+}
+
+/* Reduced motion (DESIGN §7.0). Unlayered on purpose: unlayered rules beat every layered utility
+   without !important. GSAP motion is gated separately by gsap.matchMedia(). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
+  }
+}
+
+/* Links inside running text (DESIGN §3.4): 1 px underline, thickens on hover, no colour jump. */
+@utility link-prose {
+  color: var(--color-ultramarine-fg);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-thickness var(--duration-hover) var(--ease-out);
+  &:hover { text-decoration-thickness: 2px; }
+  [data-surface="ink"] &, [data-surface="ultramarine"] & { color: var(--color-cherenkov); }
+  [data-surface="cadmium"] & { color: var(--color-ink); }
+}
