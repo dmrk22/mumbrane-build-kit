@@ -22,7 +22,16 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  // redirects(): PAGES §0.6
+  // Legacy URLs of the current site (PAGES §0.6); constant internal destinations only.
+  async redirects() {
+    return [
+      { source: '/releases', destination: '/moth#evidence', permanent: true },
+      { source: '/privacy', destination: '/legal/privacy', permanent: true },
+      { source: '/terms', destination: '/legal/terms', permanent: true },
+      { source: '/login', destination: '/console', permanent: false },
+      { source: '/:path*.md', destination: '/md/:path*', permanent: true },
+    ]
+  },
 }
 
 export default nextConfig

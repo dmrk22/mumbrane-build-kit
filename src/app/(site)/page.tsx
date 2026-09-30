@@ -1,11 +1,16 @@
 import { LOCKUP, MARK, WORDMARK } from '@/components/brand/mark-geometry'
 import { site } from '@/content/site'
+import { JsonLd } from '@/lib/security/json-ld'
+import { homeJsonLd, routeMetadata } from '@/lib/seo'
+
+export const metadata = routeMetadata('/')
 
 // P0 placeholder: the locked lockup on paper, drawn from the generated geometry. Replaced in P6.
 export default function Home() {
   const { compact } = MARK.weights
   return (
     <main id="main" className="grid min-h-dvh place-items-center bg-paper px-6 text-ink">
+      <JsonLd data={homeJsonLd()} />
       <h1 className="w-full max-w-160">
         <svg viewBox={LOCKUP.viewBox} role="img" aria-label={site.name} className="block h-auto w-full">
           <g

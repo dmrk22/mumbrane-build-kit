@@ -117,3 +117,16 @@ test('shots: route folders and output paths', () => {
     '.shots/moth/1440-reduced.png',
   ])
 })
+
+test('e2e route discovery: page files map to registry paths (groups dropped, [slug] matches one segment)', async () => {
+  const { matchesPattern, pagePatterns } = await import('../e2e/utils.ts')
+  assert.ok(matchesPattern('/', []))
+  assert.ok(matchesPattern('/legal/terms', ['legal', '[slug]']))
+  assert.ok(!matchesPattern('/legal', ['legal', '[slug]']))
+  assert.ok(!matchesPattern('/legal/a/b', ['legal', '[slug]']))
+  assert.ok(!matchesPattern('/moth', ['[...path]']))
+  assert.ok(!matchesPattern('/moth', []))
+  const patterns = pagePatterns().map((p) => `/${p.join('/')}`)
+  assert.ok(patterns.includes('/'), 'the (site) group home page is found')
+  assert.ok(patterns.includes('/lab'), 'the (dev) group lab page is found')
+})

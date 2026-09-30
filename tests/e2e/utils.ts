@@ -1,9 +1,37 @@
+import { readdirSync } from 'node:fs'
+import { join } from 'node:path'
 import type { Page } from '@playwright/test'
+import { ROUTES as REGISTRY } from '../../src/content/routes.ts'
 
 export const prod = !!process.env.E2E_PROD
 
-/** HTML routes to check. Grows with the route registry (src/content/routes.ts, P2). */
-export const ROUTES = ['/'] as const
+/** App route patterns with a page file, e.g. ['', 'legal/[slug]'] (route groups removed). */
+export function pagePatterns(dir = 'src/app', prefix: string[] = []): string[][] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    if (e.isFile()) return e.name === 'page.tsx' ? [prefix] : []
+    if (!e.isDirectory() || e.name.startsWith('_')) return []
+    const segment = /^\(.+\)$/.test(e.name) ? [] : [e.name]
+    return pagePatterns(join(dir, e.name), [...prefix, ...segment])
+  })
+}
+
+export function matchesPattern(path: string, pattern: readonly string[]): boolean {
+  const parts = path.split('/').filter(Boolean)
+  return (
+    parts.length === pattern.length &&
+    pattern.every((seg, i) => seg === parts[i] || (seg.startsWith('[') && !seg.startsWith('[...')))
+  )
+}
+
+const patterns = pagePatterns()
+
+/**
+ * HTML routes to check: every registry route whose page exists so far (the registry lists the
+ * whole site from P2; pages arrive phase by phase). `/lab` is dev-only and not in the registry.
+ */
+export const ROUTES = REGISTRY.map((r) => r.path).filter((path) =>
+  patterns.some((p) => matchesPattern(path, p)),
+)
 export const MISSING = '/this-page-does-not-exist'
 
 export type Violation = { disposition: string; directive: string; blockedURI: string }

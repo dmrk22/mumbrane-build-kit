@@ -67,8 +67,8 @@ test.describe('@security', () => {
     const css = assets.find((u) => u.endsWith('.css'))
     expect(js, 'a _next/static JS file').toBeTruthy()
     expect(css, 'a _next/static CSS file').toBeTruthy()
-    // robots.txt and /paintings arrive in P2/P5; the icon and security.txt stand in for public files.
-    for (const url of [js, css, '/icons/icon-192.png', '/.well-known/security.txt', MISSING]) {
+    // /paintings arrives in P5; the icon and security.txt stand in for public images and files.
+    for (const url of [js, css, '/icons/icon-192.png', '/.well-known/security.txt', '/robots.txt', MISSING]) {
       const res = await request.get(url ?? '')
       expectStaticHeaders(res.headers(), url ?? '')
     }
