@@ -272,3 +272,24 @@ test.describe('@motion company blocks failsafe', () => {
     await expect.poll(() => copy.evaluate((e) => getComputedStyle(e).opacity), { timeout: 6000 }).toBe('1')
   })
 })
+
+test.describe('@motion @smoke pinned sections unmount cleanly', () => {
+  // Regression: the pin moves the section into a GSAP pin-spacer; unpinning in a passive cleanup ran
+  // after React's removeChild, so leaving a pinned page threw NotFoundError and showed the error page.
+  for (const from of ['/', '/company']) {
+    test(`client navigation away from ${from} keeps the next page`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'pins are desktop only')
+      await page.setViewportSize({ width: 1440, height: 900 })
+      const errors: string[] = []
+      page.on('pageerror', (e) => errors.push(e.message))
+      page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
+      await page.goto(from)
+      await page.waitForFunction(() => document.querySelector('.pin-spacer'))
+      await page.locator('header a[href="/pricing"]').first().dispatchEvent('click')
+      await expect(page).toHaveURL(/\/pricing$/)
+      await expect(page.locator('#main h1').first()).toBeVisible()
+      await expect(page.getByText('Something went wrong')).toHaveCount(0)
+      expect(errors.filter((e) => /removeChild|NotFoundError|not a child/i.test(e))).toEqual([])
+    })
+  }
+})

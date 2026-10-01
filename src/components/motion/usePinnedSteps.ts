@@ -1,6 +1,6 @@
 'use client'
 
-import { type RefObject, useCallback, useEffect, useRef } from 'react'
+import { type RefObject, useCallback, useLayoutEffect, useRef } from 'react'
 import { loadMotion } from './load'
 
 // DESIGN §7.0 pins: desktop ≥ 1024 only, motion allowed, scrub 0.6, snapped to steps, ≤ 200 vh.
@@ -22,7 +22,10 @@ export function usePinnedSteps(
   latest.current = onStep
   const range = useRef<Range | null>(null)
 
-  useEffect(() => {
+  // Layout effect, not passive: `pin` moves the element into a GSAP pin-spacer, and on unmount
+  // React removes the element from its original parent before passive cleanups run. A layout
+  // cleanup unpins first, so the removeChild finds it (NotFoundError on navigating away otherwise).
+  useLayoutEffect(() => {
     const el = ref.current
     if (!el || steps < 2) return
     let revert: (() => void) | undefined
