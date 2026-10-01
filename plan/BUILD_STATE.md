@@ -20,14 +20,14 @@ Update after every task: tick the box, add a one-line note, commit.
 | P10 | Solutions | done | 2026-10-01 | 2026-10-01 | `p10-solutions` |
 | P11 | Developers, Pricing, Changelog, Status | done | 2026-10-01 | 2026-10-01 | `p11-developers` |
 | P12 | Console preview | done | 2026-10-01 | 2026-10-01 | `p12-console` |
-| P13 | Legal, llms.txt, OG images, completeness | not started | | | |
+| P13 | Legal, llms.txt, OG images, completeness | done | 2026-10-01 | 2026-10-01 | `p13-legal` |
 | P14 | QA, hardening, polish, final report | not started | | | |
 
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P13 (not started)
-- Next task: P13 Legal, llms.txt, OG images, completeness — task 1
+- Phase: P14 (not started)
+- Next task: P14 QA, hardening, polish, final report — task 1 (full production e2e on all three projects)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,6 +99,14 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P13 — Legal, llms.txt, OG images, completeness
+- [x] `/legal/[slug]` (six pages from `src/content/legal.ts`): terms + privacy generated from the source (`LEGAL_BODIES`), privacy's added sentence as a note under "Updated — pending owner review"; enterprise terms, cookies, privacy choices (GPC island) and responsible disclosure as Drafts; rail with `aria-current`, wrapping above the title below 1024 px (D-125)
+- [x] `/md/*` for the key pages, composed from the content modules (`src/content/mdDocs.ts`, D-123) + `/llms.txt` (Core pages, Publications)
+- [x] Social cards: `src/content/og.ts` (7 families + one per article), template `/lab/og/[family]` (404 in production), `pnpm og` → 11 PNGs in `public/og`; the default card stays the brand file (D-124)
+- [x] Metadata audit in `seo.spec`: title, description, canonical, og:image + twitter:image (and the PNG exists) on every route; llms.txt → every `/md` doc is markdown, noindex, with a live canonical; sitemap test unchanged (legal routes now built)
+- [x] Tests: articles.test (legal wording; a heading right under the title is kept), seo.test (every route → an existing card), pages.spec legal (banners, rail, GPC, 404), security.spec (`/lab/og` 404 in production)
+- Screens reviewed: privacy 375/1440, responsible-disclosure 768, privacy-choices 1440; all OG cards
+
 ### P12 — Console preview
 - [x] Shell: `console/layout.tsx` (theme bootstrap, `ConsoleSession`), `ConsoleChrome` (rail ≥ 768 / bottom tabs, "Simulation" tag), `ThemeControl`, `ShortcutsDialog`
 - [x] `/console` entry (four worlds, simulated outcome squares, no credential fields); `/console/playground` (`AskBar`, `WorldPanel`, `ResultCard`, `Evidence`; definition variants, rebuild, replay; drawer < 1280, inline evidence < 1024)
@@ -142,6 +150,16 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P13 — 2026-10-01
+- Legal: `src/content/legal.ts` (`LEGAL`, `LEGAL_UI`, `legalDoc`). A new legal page needs a registry entry and a `LEGAL` entry (the type requires both). Terms/privacy text: edit the source, then `node scripts/articles.ts`.
+- Markdown and llms.txt read one list, `MD_DOCS` in `src/content/mdDocs.ts`; add documents there.
+- Social cards: `OG_CARDS`/`ogImage` in `src/content/og.ts`; `pageMetadata` picks the card from the path. Re-run `pnpm og` after changing a card's copy or adding an article. `public/og/default.png` is the brand file: never generate it (brand.test locks it).
+- The OG template is `src/app/lab/og/[family]/page.tsx`, outside `(dev)` only for the depth budget (D-124).
+- Gotcha: `git mv -k` on untracked paths is a silent no-op that exits 0 — use `mv`, then check.
+- Gotcha: brand.test compared PNGs with `assert.deepEqual`; a mismatch stalled for minutes building a diff. Now `Buffer.equals` (instant, names both files).
+- Gotcha: after moving a route, stale `.next/dev/types/validator.ts` fails `tsc` — run `next typegen` and delete `.next/dev/types`.
+- Budgets after P13: source files 211/230, components 73/80.
 
 ### P12 — 2026-10-01
 - Simulator + backend seam: `src/lib/console/{types,sim,engine}.ts` (`ConsoleEngine`: ask/active/rebuild/replay/build — the Neon backend replaces `SimulatorEngine` here). Copy: `src/content/console/{worlds,ui}.ts`. Components: `src/components/console/` (12). Theme CSS: `src/app/console/console.css`.
@@ -257,7 +275,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [ ] Any real job openings to list? — careers page has none
 - [ ] Confirm the six one-line glosses under "Areas we care about" on /careers (authored, D-115)
 - [ ] Review the authored solution copy: rulebook bullets, evidence points, domain next steps, four illustrative worlds, six sketches (`src/content/solutions.ts`, D-117)
-- [ ] Review of the drafted legal pages (cookies, privacy choices, enterprise terms, disclosure)
+- [ ] Review of the drafted legal pages (cookies, privacy choices, enterprise terms, disclosure incl. the "Safe harbor" sentence) and the sentence added to privacy; set effective dates if they differ from 2026-10-01; list any cookie the host adds (e.g. bot protection) on /legal/cookies (D-125)
 - [ ] Remove the `nextjs-agent-rules` block that `next dev` appended to CLAUDE.md (Claude cannot edit it; `agentRules: false` stops it recurring) (D-105)
 - [x] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103) — accepted, owner 2026-10-01 (D-106)
 - [x] The current site's markdown declares canonical https://mumbrane.ai/… — superseded: mumbrane.com is canonical (D-106)
@@ -271,6 +289,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - Claims audits: 2026-10-01 (P7) — claims.test green; every figure on / , /moth, /developers/models traced to releases.md; labels present (Explanatory example, Proposed, Illustrative); no forbidden words
 - Claims audits: 2026-10-01 (P10) — claims.test green; /solutions, the four solution pages and /solutions/use-cases carry no numbers, customers, results or ROI; every world labelled (Illustrative / Illustrative sketch / Synthetic example world); avoid-list and forbidden-list grep over company, contact, solutions content: only the verbatim Company-block "Unlocked" and the source contact lede ("unlock") — both allowed by CONTENT §1. (Correction, P11: that first grep skipped the then-untracked solutions.ts; re-run with `git grep --untracked`, it shows only "customer" as the support role and the negation "not a customer deployment" — no claim.)
 - Claims audits: 2026-10-01 (P11) — claims.test green; `git grep --untracked` over developers and pricing content: only code comments and the verbatim status note "We will not show uptime numbers we do not measure" (allowlisted in claims.test); JSON tagged "Illustrative — not the Preview 004 schema"; no prices, endpoints, SDKs or CLI commands; e2e asserts no uptime figures, no currency, changelog dates = article dates
+- Claims audits: 2026-10-01 (P13) — claims.test green; `git grep --untracked` (avoid list, forbidden list, numeric patterns) over legal.ts, mdDocs.ts, og.ts, the legal page, llms.txt, the OG template and GpcNotice: no hits. Draft and review banners on every legal page except terms; markdown documents reuse traced content only.
 - Trusted Types trial: —
 - Dependency changes / advisories: —
 

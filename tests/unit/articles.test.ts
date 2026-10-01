@@ -1,8 +1,15 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
-import { convertMarkdown, generate, rewriteLinks, sourcePath, typography } from '../../scripts/articles.ts'
-import { BODIES } from '../../src/content/articleBodies.ts'
+import {
+  convertMarkdown,
+  generate,
+  LEGAL_SOURCES,
+  rewriteLinks,
+  sourcePath,
+  typography,
+} from '../../scripts/articles.ts'
+import { BODIES, LEGAL_BODIES } from '../../src/content/articleBodies.ts'
 import { ARTICLES } from '../../src/content/articles.ts'
 import { ArticleSchema, BlockSchema } from '../../src/content/schemas.ts'
 
@@ -41,6 +48,25 @@ test('bodies keep the source wording word for word', () => {
         '',
     )
     assert.deepEqual(actual, expected, a.slug)
+  }
+})
+
+test('legal bodies keep the source wording; a heading right under the title is kept', () => {
+  assert.deepEqual(convertMarkdown('# T\n## First\n\nText.\n'), [
+    { type: 'h2', text: 'First', id: 'first' },
+    { type: 'p', text: 'Text.' },
+  ])
+  for (const s of LEGAL_SOURCES) {
+    const src = readFileSync(`src/content/source/${s}.md`, 'utf8').replace(/^---\n[\s\S]*?\n---\n/, '')
+    const afterTitle = src.split('\n').slice(src.split('\n').findIndex((l) => l.startsWith('# ')) + 1)
+    const blocks = LEGAL_BODIES[s]
+    for (const b of blocks) BlockSchema.parse(b)
+    assert.equal(blocks[0]?.type, 'h2', s)
+    assert.deepEqual(
+      words(blocks.map((b) => ('text' in b ? b.text : '')).join(' ')),
+      words(afterTitle.join('\n').replace(/^#+ /gm, '')),
+      s,
+    )
   }
 })
 

@@ -82,6 +82,7 @@ test('mark-geometry.ts is exactly what scripts/brand.ts generates (no hand edits
 test('favicon, icons and default OG card exist in public/', () => {
   for (const [from, to] of ICON_COPIES) {
     assert.ok(existsSync(to), to)
-    assert.deepEqual(readFileSync(to), readFileSync(from), to)
+    // Buffer.equals, not deepEqual: on a mismatch, deepEqual diffs whole PNGs for minutes.
+    assert.ok(readFileSync(to).equals(readFileSync(from)), `${to} is not a byte copy of ${from}`)
   }
 })

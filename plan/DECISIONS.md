@@ -484,3 +484,44 @@ example in its outcome colour, computed on the server by the same simulator (so 
 construction and labelled as simulated). Decorative (`aria-hidden`); the label carries the meaning.
 **Alternatives**: No preview (plainer); a sample answer (longer cards).
 **Status**: Decided.
+
+### D-123 — Markdown documents for key pages come from the content modules (2026-10-01)
+**Context**: PAGES §0.7 / CONTENT §6 ask for `/md/index`, `/md/moth`, `/md/research`, `/md/news`,
+`/md/contact`, `/md/changelog`, `/md/legal/terms` and `/md/legal/privacy`. The harvested source has
+markdown for most of them, but it predates this site: its `changelog.md` says there are no entries
+while `/changelog` lists four dated ones, and `index.md` is the old home page.
+**Decision**: `src/content/mdDocs.ts` composes each key page's document from the same content
+modules its HTML page renders (headings, ledes, lists, the Moth evidence tables via `claims.ts`);
+legal pages and articles reuse their blocks. `/llms.txt` lists every document under "Core pages"
+and "Publications" with its registry description. The live terms and privacy texts are generated
+from the source by `scripts/articles.ts`, which now also emits `LEGAL_BODIES` and keeps a heading
+that sits directly under the title.
+**Alternatives**: Serve the harvested files (contradicts the site); hand-written markdown (drifts).
+**Status**: Decided.
+
+### D-124 — Social cards: the brand default, generated families, template outside `(dev)` (2026-10-01)
+**Context**: CONTENT §6 lists the families default, moth, research (per article), news (per post),
+company, solutions, developers and legal. `brand/og-default.png` is the owner's default card, copied
+to `public/og/default.png` and held byte-identical by `brand.test.ts`. BUILD_PLAN names
+`src/app/(dev)/lab/og/[family]/page.tsx`, five directory levels under `src/` (budget: four).
+**Decision**: The default card stays the brand file and is never generated. `pnpm og` generates the
+seven other families and one card per article (`src/content/og.ts`: titles from each section's own
+copy; `ogImage(path)` maps a route by prefix, an article to its own card, anything else to the
+default). The template lives at `src/app/lab/og/[family]/page.tsx`: the same URL, 404 in production
+(asserted). The `(dev)` group has no layout, so nothing else changes.
+**Alternatives**: Regenerate the default (breaks the brand lock); `/lab/og?family=` (changes the
+URL in PAGES §0.9).
+**Status**: Decided.
+
+### D-125 — Legal page details (2026-10-01)
+**Context**: CONTENT §3.13 and SECURITY §9.2 leave a few placements open.
+**Decision**: "Last updated" is the date the text last changed on this site (2026-10-01 for all six;
+the owner may set effective dates). The sentence added to privacy is an info note under
+"Information you provide", under the "Updated — pending owner review." banner. The disclosure page
+mirrors the repository SECURITY.md (US spelling, Oxford commas) plus the drafted "Safe harbor"
+sentence, and states no response time (D-006). The GPC notice is a client island (`GpcNotice`) that
+shows server-rendered children only when `navigator.globalPrivacyControl` is true; nothing is
+stored or sent. Below 1024 px the legal rail wraps above the title, so reading order matches the DOM.
+**Alternatives**: A draft banner on privacy (it is the live text plus one sentence); a notice built
+in the client (ships the Note and Icon code).
+**Status**: Decided; the legal texts await owner review (open question).

@@ -1,4 +1,6 @@
 import { expect, test } from '@playwright/test'
+import { MD_DOCS } from '../../src/content/mdDocs.ts'
+import { ogImage } from '../../src/content/og.ts'
 import { REGISTRY } from '../../src/content/routes.ts'
 import { ROUTES, visit } from './utils.ts'
 
@@ -64,6 +66,13 @@ test.describe('@seo', () => {
       const canonical = await page.locator('link[rel="canonical"]').getAttribute('href')
       expect(new URL(canonical ?? '').href).toBe(new URL(route, SITE).href)
       await expect(page.locator('h1')).toHaveCount(1)
+      // Its family's social card (CONTENT §6), and the card exists.
+      const card = ogImage(route)
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', `${SITE}${card}`)
+      await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', `${SITE}${card}`)
+      const image = await page.request.get(card)
+      expect(image.status(), card).toBe(200)
+      expect(image.headers()['content-type']).toBe('image/png')
     })
   }
 
@@ -126,5 +135,42 @@ test.describe('@seo articles and markdown alternates', () => {
     expect(xml).toMatch(
       /<loc>https:\/\/mumbrane\.com\/research\/toward-field-based-intelligence<\/loc>\s*<lastmod>2026-09-22/,
     )
+  })
+})
+
+test.describe('@seo llms.txt and markdown documents (CONTENT §6)', () => {
+  test('llms.txt lists every markdown document; each is markdown whose canonical page exists', async ({
+    request,
+  }) => {
+    const res = await request.get('/llms.txt')
+    expect(res.status()).toBe(200)
+    expect(res.headers()['content-type']).toBe('text/plain; charset=utf-8')
+    const body = await res.text()
+    expect(body.startsWith('# Mumbrane\n\n> ')).toBe(true)
+    expect(body).toContain('\n## Core pages\n')
+    expect(body).toContain('\n## Publications\n')
+    const links = [...body.matchAll(/\]\((https:\/\/mumbrane\.com\/md\/[^)]+)\)/g)].map((m) => m[1] ?? '')
+    expect(links).toHaveLength(MD_DOCS.length)
+    for (const key of [
+      'index',
+      'moth',
+      'research',
+      'news',
+      'contact',
+      'changelog',
+      'legal/terms',
+      'legal/privacy',
+    ])
+      expect(links).toContain(`${SITE}/md/${key}`)
+    for (const href of links) {
+      const md = await request.get(new URL(href).pathname)
+      expect(md.status(), href).toBe(200)
+      expect(md.headers()['content-type']).toBe('text/markdown; charset=utf-8')
+      expect(md.headers()['x-robots-tag']).toBe('noindex')
+      const text = await md.text()
+      expect(text, href).not.toMatch(/<(?!\/)[a-z]/i)
+      const canonical = text.match(/^canonical: "([^"]+)"$/m)?.[1] ?? ''
+      expect((await request.get(new URL(canonical).pathname)).status(), canonical).toBe(200)
+    }
   })
 })

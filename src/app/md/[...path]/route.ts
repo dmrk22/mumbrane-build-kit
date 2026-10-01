@@ -1,29 +1,25 @@
-import { ARTICLES, articleBody, articlePath } from '@/content/articleDocs'
+import { MD_DOCS } from '@/content/mdDocs'
 import { publicEnv } from '@/lib/env'
 import { toMarkdown } from '@/lib/markdown'
 
 // Markdown alternates (PAGES §0.7): GET only, an allowlist built from content, static at build.
-// Key pages (index, moth, research, …) join in P13 with llms.txt.
 export const dynamic = 'force-static'
 
 const DOCS: ReadonlyMap<string, string> = new Map(
-  ARTICLES.map((a) => {
-    const path = articlePath(a)
-    return [
-      path.slice(1),
-      toMarkdown(
-        {
-          title: a.title,
-          description: a.description,
-          canonical: new URL(path, publicEnv.siteUrl).href,
-          published: a.published,
-          ...('updated' in a ? { updated: a.updated } : {}),
-          authors: a.authors,
-        },
-        articleBody(a.slug),
-      ),
-    ]
-  }),
+  MD_DOCS.map((d) => [
+    d.key,
+    toMarkdown(
+      {
+        title: d.title,
+        description: d.description,
+        canonical: new URL(d.path, publicEnv.siteUrl).href,
+        ...(d.published ? { published: d.published } : {}),
+        ...(d.updated ? { updated: d.updated } : {}),
+        ...(d.authors ? { authors: d.authors } : {}),
+      },
+      d.blocks,
+    ),
+  ]),
 )
 
 export function generateStaticParams() {

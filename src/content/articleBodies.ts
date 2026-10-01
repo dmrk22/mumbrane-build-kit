@@ -401,3 +401,82 @@ export const BODIES: Record<string, Block[]> = {
     }
   ]
 }
+
+export const LEGAL_BODIES: Record<'terms' | 'privacy', Block[]> = {
+  "terms": [
+    {
+      "type": "h2",
+      "text": "Using the site",
+      "id": "using-the-site"
+    },
+    {
+      "type": "p",
+      "text": "You may use this site to learn about Mumbrane and contact the lab. Do not interfere with its operation, attempt unauthorized access, or use it in a way that violates applicable law."
+    },
+    {
+      "type": "h2",
+      "text": "Research materials",
+      "id": "research-materials"
+    },
+    {
+      "type": "p",
+      "text": "Unless a page states otherwise, site content is provided for information and discussion. Research notes may describe hypotheses and incomplete work; they are not warranties, professional advice, or claims of a released system."
+    },
+    {
+      "type": "h2",
+      "text": "External services",
+      "id": "external-services"
+    },
+    {
+      "type": "p",
+      "text": "Links to third-party sites and authentication services are governed by their own terms. Mumbrane is not responsible for content or services operated by third parties."
+    },
+    {
+      "type": "h2",
+      "text": "Changes and contact",
+      "id": "changes-and-contact"
+    },
+    {
+      "type": "p",
+      "text": "We may update these terms as the site develops. Questions can be sent to [hello@mumbrane.com](mailto:hello@mumbrane.com)."
+    }
+  ],
+  "privacy": [
+    {
+      "type": "h2",
+      "text": "Information you provide",
+      "id": "information-you-provide"
+    },
+    {
+      "type": "p",
+      "text": "When you contact Mumbrane, we may receive your name, email address, affiliation, and the contents of your message. If account access is enabled, the authentication provider may process the identifiers required to sign you in."
+    },
+    {
+      "type": "h2",
+      "text": "How information is used",
+      "id": "how-information-is-used"
+    },
+    {
+      "type": "p",
+      "text": "We use submitted information to respond to inquiries, coordinate research, operate the site, maintain security, and comply with applicable obligations. We do not sell personal information."
+    },
+    {
+      "type": "h2",
+      "text": "Retention and access",
+      "id": "retention-and-access"
+    },
+    {
+      "type": "p",
+      "text": "We keep information only for as long as it is useful for the purpose it was collected or required by law. You may ask about, correct, or request deletion of personal information by contacting [hello@mumbrane.com](mailto:hello@mumbrane.com)."
+    },
+    {
+      "type": "h2",
+      "text": "Updates",
+      "id": "updates"
+    },
+    {
+      "type": "p",
+      "text": "This notice may change as the lab and its systems evolve. Material revisions will be reflected on this page."
+    }
+  ]
+}

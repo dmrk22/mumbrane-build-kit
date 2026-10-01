@@ -103,3 +103,44 @@ test.describe('@smoke honest status, pricing and changelog (CONTENT §4)', () =>
     for (const d of dates) expect(real.has(d ?? '')).toBe(true)
   })
 })
+
+test.describe('@smoke legal (CONTENT §3.13)', () => {
+  const banners = {
+    terms: null,
+    privacy: 'Updated — pending owner review.',
+    'enterprise-terms': 'Draft — pending owner and legal review. This page is not yet in force.',
+    cookies: 'Draft — pending owner and legal review. This page is not yet in force.',
+    'privacy-choices': 'Draft — pending owner and legal review. This page is not yet in force.',
+    'responsible-disclosure': 'Draft — pending owner and legal review. This page is not yet in force.',
+  } as const
+  for (const [slug, banner] of Object.entries(banners)) {
+    test(`/legal/${slug}: last updated, banner where required, current page in the rail`, async ({
+      page,
+    }) => {
+      await page.goto(`/legal/${slug}`)
+      await expect(page.getByText(/^Last updated /)).toBeVisible()
+      const drafts = page.getByText(/^(Draft|Updated) — pending/)
+      if (banner) await expect(drafts).toHaveText(banner)
+      else await expect(drafts).toHaveCount(0)
+      const rail = page.getByRole('navigation', { name: 'Legal pages' })
+      await expect(rail.getByRole('link')).toHaveCount(6)
+      await expect(rail.locator('[aria-current="page"]')).toHaveAttribute('href', `/legal/${slug}`)
+    })
+  }
+
+  test('privacy choices: the GPC notice shows only when the browser sends the signal', async ({ page }) => {
+    const notice = page.getByText('Your browser’s Global Privacy Control signal is on — noted.')
+    await page.goto('/legal/privacy-choices')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Privacy choices')
+    await expect(notice).toHaveCount(0)
+    await page.addInitScript(() =>
+      Object.defineProperty(Navigator.prototype, 'globalPrivacyControl', { get: () => true }),
+    )
+    await page.reload()
+    await expect(notice).toBeVisible()
+  })
+
+  test('an unknown legal page is a 404', async ({ request }) => {
+    expect((await request.get('/legal/not-a-page')).status()).toBe(404)
+  })
+})

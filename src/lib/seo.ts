@@ -1,5 +1,6 @@
 // Page metadata (CONTENT §6). Canonical and social URLs are absolute on publicEnv.siteUrl.
 import type { Metadata } from 'next'
+import { ogImage as ogImageFor } from '../content/og.ts'
 import { type RoutePath, routeFor } from '../content/routes.ts'
 import { site } from '../content/site.ts'
 import { SOCIAL } from '../content/social.ts'
@@ -9,7 +10,7 @@ export type PageMeta = {
   title: string
   description: string
   path: `/${string}`
-  /** A generated card under /og (P13); every family falls back to the default card. */
+  /** A generated card under /og; by default the route's family card (content/og.ts). */
   ogImage?: `/og/${string}.png`
   noindex?: boolean
 }
@@ -23,7 +24,7 @@ export function pageMetadata({
   title,
   description,
   path,
-  ogImage = '/og/default.png',
+  ogImage = ogImageFor(path),
   noindex = false,
 }: PageMeta): Metadata {
   const url = new URL(path, publicEnv.siteUrl).href

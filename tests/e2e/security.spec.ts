@@ -115,7 +115,8 @@ test.describe('@security', () => {
 
   if (prod) {
     test('/lab is not served in production', async ({ request }) => {
-      expect((await request.get('/lab')).status()).toBe(404)
+      for (const path of ['/lab', '/lab/motion', '/lab/og/moth'])
+        expect((await request.get(path)).status(), path).toBe(404)
     })
   }
 

@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
+import { existsSync } from 'node:fs'
 import { test } from 'node:test'
-import { ROUTES } from '../../src/content/routes.ts'
+import { DEFAULT_OG, OG_CARDS, ogImage } from '../../src/content/og.ts'
+import { REGISTRY, ROUTES } from '../../src/content/routes.ts'
 import { fullTitle, pageMetadata, routeMetadata } from '../../src/lib/seo.ts'
 
 test('pageMetadata builds canonical, Open Graph and Twitter from the site URL', () => {
@@ -15,15 +17,39 @@ test('pageMetadata builds canonical, Open Graph and Twitter from the site URL', 
   assert.equal(og.url, 'https://mumbrane.com/moth')
   assert.equal(og.title, 'Moth — Mumbrane')
   assert.deepEqual(og.images[0], {
-    url: 'https://mumbrane.com/og/default.png',
+    url: 'https://mumbrane.com/og/moth.png',
     width: 1200,
     height: 630,
     alt: 'Moth — Mumbrane',
   })
   const tw = m.twitter as { card: string; images: string[] }
   assert.equal(tw.card, 'summary_large_image')
-  assert.deepEqual(tw.images, ['https://mumbrane.com/og/default.png'])
+  assert.deepEqual(tw.images, ['https://mumbrane.com/og/moth.png'])
   assert.equal(m.robots, undefined)
+})
+
+test('every route shares a card that exists: its family by prefix, articles their own', () => {
+  const families = new Set(OG_CARDS.map((c) => c.family))
+  assert.equal(families.size, OG_CARDS.length, 'families unique')
+  // The default card is the brand's own file; pnpm og must never overwrite it (brand.test.ts).
+  assert.ok(!families.has('default'))
+  for (const r of REGISTRY) {
+    const image = ogImage(r.path)
+    const family = image.slice('/og/'.length, -'.png'.length)
+    assert.ok(image === DEFAULT_OG || families.has(family), `${r.path} → ${image}`)
+    assert.ok(existsSync(`public${image}`), `${image} exists (pnpm og)`)
+  }
+  assert.equal(ogImage('/'), DEFAULT_OG)
+  assert.equal(ogImage('/developers/models'), '/og/moth.png')
+  assert.equal(ogImage('/developers/docs'), '/og/developers.png')
+  assert.equal(ogImage('/research'), '/og/research.png')
+  assert.equal(
+    ogImage('/research/toward-field-based-intelligence'),
+    '/og/research-toward-field-based-intelligence.png',
+  )
+  assert.equal(ogImage('/legal/terms'), '/og/legal.png')
+  assert.equal(ogImage('/console/keys'), '/og/default.png')
+  assert.equal(ogImage('/mothy'), '/og/default.png')
 })
 
 test('home uses the absolute site title; noindex routes say so', () => {
