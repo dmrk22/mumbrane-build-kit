@@ -246,15 +246,19 @@ main h1[tabindex="-1"]:focus {
       );
     }
   }
-  /* Below 1024 px the H1 is a single text box that lifts into place (transform only, so it is
-     painted — and counted as the LCP — from its first frame). */
+  /* Each entrance element keeps one animation-name at every width; only its @keyframes differ by
+     breakpoint (below). Swapping the name would restart the entrance when a window or tablet
+     crosses 1024 px, blanking the lede for a second; changed keyframes merely update it.
+     Below 1024 px the H1 is a single text box that lifts into place (transform only, so it is
+     painted — and counted as the LCP — from its first frame); from 1024 px its lines move. */
   .hero-title {
-    animation: hero-lift var(--duration-hero) var(--ease-out) 200ms both;
+    animation: hero-title var(--duration-hero) var(--ease-out) 200ms both;
+  }
+  .hero-d-line-0,
+  .hero-d-line-1 {
+    animation: hero-line var(--duration-hero) var(--ease-out) both;
   }
   @media (min-width: 1024px) {
-    .hero-title {
-      animation: none;
-    }
     /* Line masks keep room for descenders and the italic's overhang. */
     .hero-line {
       display: block;
@@ -266,20 +270,11 @@ main h1[tabindex="-1"]:focus {
     .hero-line-inner {
       display: block;
     }
-    .hero-d-line-0,
-    .hero-d-line-1 {
-      animation: hero-line var(--duration-hero) var(--ease-out) both;
-    }
   }
   /* Below 1024 px hero text lifts without fading, so it is painted in the first frame: a phone's
      main thread is busy with JS for seconds, and a fade-in would push the LCP to its end. */
   .hero-rise {
-    animation: hero-lift var(--duration-reveal) var(--ease-out) both;
-  }
-  @media (min-width: 1024px) {
-    .hero-rise {
-      animation-name: hero-rise;
-    }
+    animation: hero-rise var(--duration-reveal) var(--ease-out) both;
   }
   .hero-d1 {
     animation-delay: 120ms;
@@ -313,22 +308,41 @@ main h1[tabindex="-1"]:focus {
     animation: scroll-hint 2.4s var(--ease-in-out) infinite;
   }
 }
+/* Hero entrance keyframes: below 1024 px text lifts without fading and the H1 moves as one box;
+   from 1024 px text rises with a fade and the H1 moves line by line. */
 @keyframes hero-rise {
   from {
-    opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
 }
-/* The H1 rises from 40 %, not from fully masked: mostly painted in its first frame, it stays the
-   LCP element (a line fully hidden by its mask is not counted until it is revealed). */
-@keyframes hero-line {
-  from {
-    transform: translateY(40%);
-  }
-}
-@keyframes hero-lift {
+@keyframes hero-title {
   from {
     transform: translateY(12px);
+  }
+}
+@keyframes hero-line {
+  from {
+    transform: none;
+  }
+}
+@media (min-width: 1024px) {
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes hero-title {
+    from {
+      transform: none;
+    }
+  }
+  /* The H1 rises from 40 %, not from fully masked: mostly painted in its first frame, it stays
+     the LCP element (a line fully hidden by its mask is not counted until it is revealed). */
+  @keyframes hero-line {
+    from {
+      transform: translateY(40%);
+    }
   }
 }
 @keyframes scroll-hint {

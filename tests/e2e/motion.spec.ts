@@ -44,6 +44,32 @@ test.describe('@motion', () => {
     })
   }
 
+  test('the home hero entrance plays once: crossing 1024 px does not replay it', async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, 'a desktop window resize or a tablet rotation')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/')
+    const entrance = (wait: boolean) =>
+      page.evaluate(async (wait) => {
+        const hero = document
+          .getAnimations()
+          .filter((a) => a instanceof CSSAnimation && /^hero-(rise|title|line)$/.test(a.animationName))
+        // One awaited evaluate, not a poll: each polled evaluate takes a trace snapshot, and those
+        // stretch the running animations past any timeout (a harness effect, not the page's).
+        if (wait) await Promise.all(hero.map((a) => a.finished))
+        return hero.filter((a) => a.playState === 'running').length
+      }, wait)
+    expect(await entrance(true)).toBe(0)
+    const lede = page.locator('#home-title + p')
+    for (const width of [900, 1440]) {
+      await page.setViewportSize({ width, height: 900 })
+      expect(await entrance(false), `entrance replayed at ${width} px`).toBe(0)
+      await expect(lede).toHaveCSS('opacity', '1')
+    }
+  })
+
   test('motion lab: GSAP, SplitText and the shaders run with zero CSP violations', async ({ page }) => {
     test.skip(prod, 'the lab is development-only')
     const violations = await collectViolations(page)
