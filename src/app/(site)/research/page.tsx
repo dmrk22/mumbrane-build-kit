@@ -61,7 +61,8 @@ export default function ResearchPage() {
         </Heading>
         <Reveal stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-3">
           {inquiry.lines.map((line, i) => (
-            <div key={line.name} className="flex flex-col gap-4">
+            // Subgrid rows: the plates share one height and the glosses one top, whatever their length.
+            <div key={line.name} className="row-span-2 grid grid-rows-subgrid gap-4">
               <Plate
                 paintingId={line.painting}
                 number={i + 1}

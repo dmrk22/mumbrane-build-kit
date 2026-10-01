@@ -34,6 +34,10 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
   it). Not done by owner choice: the 8-style size scale, uppercase labels, colours, spacing.
 - 2026-10-02 home hero replaced by "the membrane" (D-137): facts dent a borderless sheet, three
   questions settle once, then it rests; click, tap or the keyboard chip drops another.
+- 2026-10-02 paintings are plain oil (D-139): no scan slices or sorted blocks anywhere; the five
+  affected paintings re-rendered (the other five came out byte-identical). The /research inquiry
+  plates sit on subgrid rows, so a short gloss no longer stretches its plate. `/paintings/*` keeps
+  its filenames under a 24 h `max-age`: a browser that saw the old images needs a reload from origin.
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused

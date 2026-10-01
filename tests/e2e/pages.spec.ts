@@ -153,6 +153,23 @@ test('@smoke an article title keeps a hyphenated compound on one line', async ({
   expect(await compound.evaluate((el) => el.getClientRects().length)).toBe(1)
 })
 
+// Regression: a plate absorbed the length of the gloss under it, so Plate III (one-line gloss)
+// stood taller than its neighbours and its strip and gloss sat lower.
+test('@smoke the research inquiry plates and their glosses line up', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'one column on phones')
+  await page.goto('/research')
+  const boxes = (sel: string) =>
+    page
+      .locator(`#lines-of-inquiry ${sel}`)
+      .evaluateAll((els) => els.map((e) => ({ top: e.getBoundingClientRect().top, h: e.clientHeight })))
+  const plates = await boxes('article.plate')
+  const glosses = await boxes('div:has(> div > article.plate) > p')
+  expect(plates).toHaveLength(3)
+  expect(glosses).toHaveLength(3)
+  expect(new Set(plates.map((b) => b.h)).size).toBe(1)
+  expect(new Set(glosses.map((b) => Math.round(b.top))).size).toBe(1)
+})
+
 // Regression: the field redesign replaced Moth's butterfly figure; the owner wants it in the hero.
 test('@smoke the Moth hero shows Fig. 1, the butterfly curve with its equations', async ({ page }) => {
   await page.goto('/moth')
