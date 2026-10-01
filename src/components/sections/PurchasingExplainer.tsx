@@ -52,13 +52,13 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
             <span
               aria-hidden="true"
               className={cx(
-                'relative h-6 w-10 rounded-pill border transition-colors duration-(--duration-micro)',
+                'relative h-6 w-10 rounded-md border transition-colors duration-(--duration-micro)',
                 source === 'audit' ? 'border-ink bg-ink' : 'border-text-3 bg-paper',
               )}
             >
               <span
                 className={cx(
-                  'absolute top-0.5 size-4.5 rounded-full transition-transform duration-(--duration-ui) ease-out',
+                  'absolute top-0.5 size-4.5 rounded-md transition-transform duration-(--duration-ui) ease-out',
                   source === 'audit' ? 'translate-x-4.5 bg-paper' : 'translate-x-0.5 bg-text-2',
                 )}
               />
@@ -68,7 +68,7 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
         </div>
         <div className={cx('flex flex-wrap items-center gap-4', !stale && 'invisible')} aria-hidden={!stale}>
           <p className="flex items-center gap-2 text-small text-ice-fg">
-            <span aria-hidden="true" className="size-2 rounded-full bg-ice" />
+            <span aria-hidden="true" className="size-2 rounded-md bg-ice" />
             {p.changed}
           </p>
           <button
@@ -78,7 +78,7 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
               setBuilt(source)
               setAnnouncement(p.announce[source])
             }}
-            className="inline-flex h-11 items-center rounded-pill bg-ink px-5 text-small font-medium text-on-dark transition-[scale] duration-(--duration-micro) active:scale-[0.98] disabled:cursor-not-allowed"
+            className="inline-flex h-11 items-center rounded-md bg-ink px-5 text-small font-medium text-on-dark transition-[scale] duration-(--duration-micro) active:scale-[0.98] disabled:cursor-not-allowed"
           >
             {p.rebuild}
           </button>

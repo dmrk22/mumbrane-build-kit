@@ -37,12 +37,12 @@ export function SettingsView() {
       <Row title={settings.theme}>
         <fieldset>
           <legend className="sr-only">{settings.theme}</legend>
-          <div className="inline-flex rounded-sm border border-surface-rule p-1">
+          <div className="inline-flex rounded-md border border-surface-rule p-1">
             {THEMES.map((t) => (
               <label
                 key={t}
                 className={cx(
-                  'flex h-9 cursor-pointer items-center rounded-xs px-4 text-small transition-[color,background-color] duration-(--duration-micro) ease-out has-focus-visible:outline-2 has-focus-visible:outline-surface-accent pointer-coarse:h-11',
+                  'flex h-9 cursor-pointer items-center rounded-md px-4 text-small transition-[color,background-color] duration-(--duration-micro) ease-out has-focus-visible:outline-2 has-focus-visible:outline-surface-accent pointer-coarse:h-11',
                   theme === t
                     ? 'bg-surface-invert text-surface-on-invert'
                     : 'text-surface-muted hover:text-surface-fg',

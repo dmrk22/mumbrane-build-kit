@@ -49,7 +49,7 @@ function StatusWord({ status }: { status: Status }) {
 }
 
 const CITE =
-  'rounded-xs text-left decoration-1 underline-offset-[0.2em] hover:underline focus-visible:outline-2 focus-visible:outline-surface-accent'
+  'rounded-md text-left decoration-1 underline-offset-[0.2em] hover:underline focus-visible:outline-2 focus-visible:outline-surface-accent'
 
 function TraceNode({ trace, onCite }: { trace: Trace; onCite: (key: string) => void }) {
   return (
@@ -210,7 +210,7 @@ export function Evidence({
           <button
             type="button"
             onClick={onReplay}
-            className="ml-auto inline-flex h-8 items-center gap-1.5 rounded-pill border border-surface-fg/25 px-3 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
+            className="ml-auto inline-flex h-8 items-center gap-1.5 rounded-md border border-surface-fg/25 px-3 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
           >
             <Icon name="replay" className="size-4" />
             {CONSOLE_UI.results.replay}
@@ -225,7 +225,7 @@ export function Evidence({
             type="button"
             aria-expanded={json}
             onClick={() => onJson(!json)}
-            className="inline-flex h-8 items-center gap-1.5 rounded-pill border border-surface-fg/25 px-3 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
+            className="inline-flex h-8 items-center gap-1.5 rounded-md border border-surface-fg/25 px-3 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
           >
             <Icon name={json ? 'minus' : 'plus'} className="size-4" />
             {json ? evidence.hideJson : evidence.showJson}
@@ -234,7 +234,7 @@ export function Evidence({
             <button
               type="button"
               onClick={() => download(code, evidence.filename(result.id))}
-              className="inline-flex h-8 items-center gap-1.5 rounded-pill border border-surface-fg/25 px-3 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
+              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-surface-fg/25 px-3 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
             >
               <Icon name="download" className="size-4" />
               {evidence.download}

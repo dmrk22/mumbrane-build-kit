@@ -3,12 +3,12 @@ import { ui } from '@/content/ui'
 import { cx } from '@/lib/cx'
 import { Icon } from './Icon'
 
-// DESIGN §9.5: label above, hint below, error below the hint; inputs 48 px, 4 px radius, text-3
+// DESIGN §9.5: label above, hint below, error below the hint; inputs 48 px, 8 px radius, text-3
 // border (≥ 3:1 non-text contrast), paper ground, clay-fg when invalid.
 type Meta = { id: string; label: ReactNode; hint?: ReactNode; error?: ReactNode | undefined }
 
 const CONTROL =
-  'w-full rounded-sm border bg-paper px-3.5 text-body text-text transition-[color,background-color,border-color] duration-(--duration-micro) ease-out placeholder:text-text-3 disabled:cursor-not-allowed disabled:bg-paper-2 disabled:text-text-3'
+  'w-full rounded-md border bg-paper px-3.5 text-body text-text transition-[color,background-color,border-color] duration-(--duration-micro) ease-out placeholder:text-text-3 disabled:cursor-not-allowed disabled:bg-paper-2 disabled:text-text-3'
 
 function describedBy({ id, hint, error }: Meta): string | undefined {
   const ids = [hint ? `${id}-hint` : '', error ? `${id}-error` : ''].filter(Boolean)
@@ -118,7 +118,7 @@ export function Checkbox({ id, label, hint, error, ...rest }: Meta & CheckRest) 
             aria-describedby={describedBy({ id, label, hint, error })}
             aria-invalid={error ? true : undefined}
             className={cx(
-              'peer size-5 cursor-pointer appearance-none rounded-xs border bg-paper transition-[color,background-color,border-color] duration-(--duration-micro) ease-out checked:border-ink checked:bg-ink disabled:cursor-not-allowed disabled:opacity-50',
+              'peer size-5 cursor-pointer appearance-none rounded-md border bg-paper transition-[color,background-color,border-color] duration-(--duration-micro) ease-out checked:border-ink checked:bg-ink disabled:cursor-not-allowed disabled:opacity-50',
               border(error),
             )}
             {...rest}

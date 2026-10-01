@@ -128,7 +128,7 @@
   /* Spacing base (Tailwind multiplies this): 4px grid */
   --spacing: 0.25rem;
 
-  /* Radii — plates and stages are softly rounded; instrument windows stay square. */
+  /* Radii — one site radius, md (8 px), on every box (D-132); xl only on the footer card. */
   --radius-none: 0;
   --radius-xs: 2px;
   --radius-sm: 4px;

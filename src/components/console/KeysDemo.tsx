@@ -36,7 +36,7 @@ export function KeysDemo() {
           <form method="dialog">
             <button
               type="submit"
-              className="grid size-9 place-items-center rounded-sm hover:bg-surface-raise"
+              className="grid size-9 place-items-center rounded-md hover:bg-surface-raise"
             >
               <Icon name="close" label={keys.dialog.close} className="size-4" />
             </button>
@@ -69,7 +69,7 @@ export function KeysDemo() {
                 name="name"
                 maxLength={64}
                 autoComplete="off"
-                className="h-11 rounded-sm border border-surface-subtle bg-surface-raise px-3.5 text-body text-surface-fg"
+                className="h-11 rounded-md border border-surface-subtle bg-surface-raise px-3.5 text-body text-surface-fg"
               />
             </div>
             <fieldset>

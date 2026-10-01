@@ -34,7 +34,7 @@ export default function SalesPage() {
                   <li key={item.text} className="relative py-3 pl-6 text-body">
                     <span
                       aria-hidden="true"
-                      className="absolute top-1/2 -left-[4.5px] size-2 -translate-y-1/2 rounded-full bg-surface-fg"
+                      className="absolute top-1/2 -left-[4.5px] size-2 -translate-y-1/2 rounded-md bg-surface-fg"
                     />
                     {item.text}
                   </li>
@@ -44,7 +44,7 @@ export default function SalesPage() {
           </div>
           <div
             data-surface="paper"
-            className="col-span-12 rounded-xl p-6 shadow-menu md:p-10 lg:col-span-6 lg:col-start-7"
+            className="col-span-12 rounded-md p-6 shadow-menu md:p-10 lg:col-span-6 lg:col-start-7"
           >
             <PreviewForm
               kind="sales"

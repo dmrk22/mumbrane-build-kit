@@ -64,7 +64,7 @@ export function WorldPanel({
       <div className="px-5 pt-5 pb-5">
         <fieldset>
           <legend className="font-mono text-label text-surface-subtle">{copy.label}</legend>
-          <div className="mt-3 grid grid-cols-2 gap-1 rounded-sm border border-surface-rule p-1">
+          <div className="mt-3 grid grid-cols-2 gap-1 rounded-md border border-surface-rule p-1">
             {WORLDS.map((w) => (
               <button
                 key={w.id}
@@ -72,7 +72,7 @@ export function WorldPanel({
                 aria-pressed={w.id === world.id}
                 onClick={() => onWorld(w.id)}
                 className={cx(
-                  'h-8 rounded-xs px-2 text-small transition-[color,background-color] duration-(--duration-micro) ease-out pointer-coarse:h-11',
+                  'h-8 rounded-md px-2 text-small transition-[color,background-color] duration-(--duration-micro) ease-out pointer-coarse:h-11',
                   w.id === world.id
                     ? 'bg-surface-invert text-surface-on-invert'
                     : 'text-surface-muted hover:bg-surface-raise hover:text-surface-fg',
@@ -85,7 +85,7 @@ export function WorldPanel({
         </fieldset>
         <p className="mt-5 text-small text-surface-muted">{world.blurb}</p>
         <p className="mt-4 flex items-center gap-2 font-mono text-label text-surface-fg">
-          <span aria-hidden="true" className="size-1.5 rounded-full bg-(--console-ok)" />
+          <span aria-hidden="true" className="size-1.5 rounded-md bg-(--console-ok)" />
           <span key={build.id} className="console-fade">
             {copy.build(build.id, true)}
           </span>
@@ -99,7 +99,7 @@ export function WorldPanel({
             <li
               key={d.id}
               data-flash={flash === citeKey.definition(d.term)}
-              className="rounded-sm border border-surface-rule bg-surface-raise p-3.5"
+              className="rounded-md border border-surface-rule bg-surface-raise p-3.5"
             >
               <p key={d.text} className="console-fade text-small text-surface-fg">
                 {d.text}
@@ -109,7 +109,7 @@ export function WorldPanel({
                 {d.requires.map((r) => (
                   <li
                     key={r.text}
-                    className="rounded-xs border border-surface-rule px-1.5 py-0.5 font-mono text-label text-surface-muted"
+                    className="rounded-md border border-surface-rule px-1.5 py-0.5 font-mono text-label text-surface-muted"
                   >
                     {r.text}
                   </li>
@@ -134,7 +134,7 @@ export function WorldPanel({
                     key={f.text}
                     data-flash={flash === citeKey.fact(f.text)}
                     className={cx(
-                      'rounded-xs px-1 font-mono text-code',
+                      'rounded-md px-1 font-mono text-code',
                       f.type === 'property' && f.negated ? 'text-(--console-gap)' : 'text-surface-muted',
                     )}
                   >
@@ -157,7 +157,7 @@ export function WorldPanel({
                 <label
                   key={o.id ?? 'base'}
                   className={cx(
-                    'flex cursor-pointer gap-3 rounded-sm border p-3 transition-[border-color,background-color] duration-(--duration-micro) ease-out',
+                    'flex cursor-pointer gap-3 rounded-md border p-3 transition-[border-color,background-color] duration-(--duration-micro) ease-out',
                     checked
                       ? 'border-surface-fg/50 bg-surface-raise'
                       : 'border-surface-rule hover:bg-surface-raise',

@@ -23,7 +23,7 @@ export function HomeHero() {
             href={h.announcement.href}
             className="hero-rise hero-d1 group inline-flex max-w-full items-center gap-2.5 font-mono text-label text-surface-muted transition-colors duration-(--duration-hover) hover:text-surface-fg"
           >
-            <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-surface-accent" />
+            <span aria-hidden="true" className="size-1.5 shrink-0 rounded-md bg-surface-accent" />
             <span className="truncate decoration-1 underline-offset-[0.25em] group-hover:underline">
               {h.announcement.label}
             </span>

@@ -17,14 +17,14 @@ export default function GlobalError({ retry }: { error: Error & { digest?: strin
             <button
               type="button"
               onClick={() => retry()}
-              className="h-11 rounded-pill bg-ink px-5 text-small text-on-dark"
+              className="h-11 rounded-md bg-ink px-5 text-small text-on-dark"
             >
               {retryLabel}
             </button>
             {/* A full reload on purpose: the app shell itself failed, so client navigation can't be trusted. */}
             <a
               href="/"
-              className="inline-flex h-11 items-center rounded-pill border border-ink/40 px-5 text-small"
+              className="inline-flex h-11 items-center rounded-md border border-ink/40 px-5 text-small"
             >
               {home}
             </a>

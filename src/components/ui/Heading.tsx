@@ -48,7 +48,7 @@ export function Eyebrow({
 }) {
   return (
     <Tag className={cx('flex items-center gap-2.5 font-mono text-label text-surface-subtle', className)}>
-      {dot && <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-surface-accent" />}
+      {dot && <span aria-hidden="true" className="size-1.5 shrink-0 rounded-md bg-surface-accent" />}
       <span>{children}</span>
     </Tag>
   )

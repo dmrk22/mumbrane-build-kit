@@ -33,7 +33,7 @@ export default function ConsoleEntry() {
               <span
                 aria-hidden="true"
                 className={cx(
-                  'shrink-0 rounded-full',
+                  'shrink-0 rounded-md',
                   last ? 'size-3 bg-surface-accent' : 'size-2 bg-surface-fg',
                 )}
               />
@@ -47,7 +47,7 @@ export default function ConsoleEntry() {
       </ol>
 
       <h2 className="sr-only">{entry.worlds}</h2>
-      <ul className="mt-14 grid gap-px overflow-hidden rounded-lg border border-surface-rule bg-surface-rule md:grid-cols-2">
+      <ul className="mt-14 grid gap-px overflow-hidden rounded-md border border-surface-rule bg-surface-rule md:grid-cols-2">
         {WORLDS.map((w) => {
           const build = makeBuild(w, null)
           const main = w.definitions.at(-1)

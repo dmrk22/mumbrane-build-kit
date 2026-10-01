@@ -610,3 +610,16 @@ owner asked for the butterfly figure with its equations back on /moth.
 hero's figure slot. LayerStack stays for the dev lab; the hero's layer copy is removed.
 **Alternatives**: Show both figures on /moth (not asked; crowds the hero).
 **Status**: Decided (owner instruction in session).
+
+### D-132 — One corner radius across the site (2026-10-01)
+**Context**: Seven radii were in use (2, 4, 8, 16, 28 px, pill, circle). The owner asked for every
+pill and circle to become a box with the same curve everywhere, keeping the footer card as it is.
+**Decision**: Every rounded HTML box computes to exactly 8 px (`rounded-md`); the footer card keeps
+28 px (`data-footer-card`). 8, not 12: any radius ≥ half an element's height draws a pill, and the
+smallest boxes (the 24 px button arrow chip) need r < 12 to read as boxes. SVG chips use rx 8 in
+drawing units; the 10-unit outcome glyph boxes use 3.6 (the 22-unit chip's shape at their scale);
+no SVG rect may have 2·rx ≥ its shorter side. Dots under 16 px still render round: 8 px clamps to
+half their size. An e2e test measures every element and pseudo-element on every route.
+**Alternatives**: 12 px (arrow chip and 24 px controls stay circles/pills); per-size radii (not
+one value).
+**Status**: Decided (owner instruction in session).

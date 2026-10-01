@@ -53,7 +53,7 @@ export function answerLines(r: Result): string[] {
 }
 
 const ACTION =
-  'inline-flex h-8 items-center gap-1.5 rounded-pill px-2 text-caption text-surface-muted transition-[color,background-color] duration-(--duration-micro) ease-out hover:bg-surface-raise hover:text-surface-fg pointer-coarse:h-11'
+  'inline-flex h-8 items-center gap-1.5 rounded-md px-2 text-caption text-surface-muted transition-[color,background-color] duration-(--duration-micro) ease-out hover:bg-surface-raise hover:text-surface-fg pointer-coarse:h-11'
 
 /**
  * One result in the stream (CONSOLE §7): outcome chip, the question as typed (text only), the build
@@ -96,10 +96,7 @@ export function ResultCard({
       )}
     >
       {selected && (
-        <span
-          aria-hidden="true"
-          className="absolute inset-y-4 -left-px w-0.5 rounded-full bg-surface-accent"
-        />
+        <span aria-hidden="true" className="absolute inset-y-4 -left-px w-0.5 rounded-md bg-surface-accent" />
       )}
       <div className="flex flex-wrap items-start gap-x-3 gap-y-2 px-5 pt-4">
         {r ? <StatusChip outcome={CONSOLE_UI.chip[r.outcome]} className="mt-0.5" /> : null}
@@ -126,7 +123,7 @@ export function ResultCard({
         )}
       </div>
 
-      <div className="space-y-1.5 px-5 pt-3 pb-4 text-body text-surface-fg [&_code]:rounded-xs [&_code]:bg-surface-raise [&_code]:px-1 [&_code]:py-px [&_code]:font-mono [&_code]:text-code">
+      <div className="space-y-1.5 px-5 pt-3 pb-4 text-body text-surface-fg [&_code]:rounded-md [&_code]:bg-surface-raise [&_code]:px-1 [&_code]:py-px [&_code]:font-mono [&_code]:text-code">
         {r ? (
           answerLines(r).map((line, i) => (
             <p key={line} className={cx(i > 0 && 'text-small text-surface-muted')}>
@@ -148,7 +145,7 @@ export function ResultCard({
             <button
               type="button"
               onClick={() => onAsk(suggestion)}
-              className="inline-flex min-h-8 items-center rounded-pill border border-surface-fg/25 px-3 py-1 text-left text-small text-surface-fg hover:bg-surface-raise pointer-coarse:min-h-11"
+              className="inline-flex min-h-8 items-center rounded-md border border-surface-fg/25 px-3 py-1 text-left text-small text-surface-fg hover:bg-surface-raise pointer-coarse:min-h-11"
             >
               {suggestion}
             </button>

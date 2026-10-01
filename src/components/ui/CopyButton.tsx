@@ -25,7 +25,7 @@ export function CopyButton({ text, label, className }: { text: string; label: st
           timer.current = setTimeout(() => setCopied(false), 1600)
         }}
         className={cx(
-          'grid size-8 place-items-center rounded-xs text-surface-muted hover:text-surface-fg print:hidden',
+          'grid size-8 place-items-center rounded-md text-surface-muted hover:text-surface-fg print:hidden',
           className,
         )}
       >

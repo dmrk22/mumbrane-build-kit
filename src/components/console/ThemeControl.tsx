@@ -80,7 +80,7 @@ export function ThemeControl() {
   const theme = useConsoleTheme()
   useLayoutEffect(() => apply(snapshot()), [])
   return (
-    <fieldset className="flex rounded-sm border border-surface-rule p-0.5">
+    <fieldset className="flex rounded-md border border-surface-rule p-0.5">
       <legend className="sr-only">{CONSOLE_UI.theme.label}</legend>
       {OPTIONS.map((o) => (
         <button
@@ -89,7 +89,7 @@ export function ThemeControl() {
           aria-pressed={theme === o.value}
           onClick={() => setConsoleTheme(o.value)}
           className={cx(
-            'grid h-7 w-8 place-items-center rounded-xs transition-[color,background-color] duration-(--duration-micro) ease-out pointer-coarse:h-10 pointer-coarse:w-11',
+            'grid h-7 w-8 place-items-center rounded-md transition-[color,background-color] duration-(--duration-micro) ease-out pointer-coarse:h-10 pointer-coarse:w-11',
             theme === o.value
               ? 'bg-surface-invert text-surface-on-invert'
               : 'text-surface-muted hover:text-surface-fg',

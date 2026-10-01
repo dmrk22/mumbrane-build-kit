@@ -288,7 +288,7 @@ function MenuPanel({
           the wrapper's hover gap must stay transparent. */}
       <div
         data-surface={surface}
-        className="w-56 rounded-lg border border-surface-rule px-2 py-3 shadow-menu"
+        className="w-56 rounded-md border border-surface-rule px-2 py-3 shadow-menu"
       >
         <ul className="flex flex-col">
           {menu.links.map((l) => (
@@ -298,7 +298,7 @@ function MenuPanel({
             >
               <SmartLink
                 href={l.href}
-                className="block rounded-sm px-3 py-1.5 text-small underline decoration-transparent decoration-1 underline-offset-[0.3em] transition-colors duration-(--duration-hover) hover:decoration-current aria-[current=page]:decoration-current"
+                className="block rounded-md px-3 py-1.5 text-small underline decoration-transparent decoration-1 underline-offset-[0.3em] transition-colors duration-(--duration-hover) hover:decoration-current aria-[current=page]:decoration-current"
                 aria-current={isCurrent(pathname, l.href) ? 'page' : undefined}
                 prefetch={false}
                 onClick={onNavigate}

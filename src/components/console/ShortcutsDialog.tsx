@@ -51,7 +51,7 @@ export function ShortcutsDialog() {
         type="button"
         aria-haspopup="dialog"
         onClick={() => dialog.current?.showModal()}
-        className="hidden size-8 place-items-center rounded-sm text-surface-muted hover:text-surface-fg md:grid pointer-coarse:size-11"
+        className="hidden size-8 place-items-center rounded-md text-surface-muted hover:text-surface-fg md:grid pointer-coarse:size-11"
       >
         <span aria-hidden="true" className="font-mono text-label">
           ?
@@ -71,7 +71,7 @@ export function ShortcutsDialog() {
           <form method="dialog">
             <button
               type="submit"
-              className="grid size-9 place-items-center rounded-sm hover:bg-surface-raise"
+              className="grid size-9 place-items-center rounded-md hover:bg-surface-raise"
             >
               <Icon name="close" label={shortcuts.close} className="size-4" />
             </button>

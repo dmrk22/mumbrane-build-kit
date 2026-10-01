@@ -7,9 +7,9 @@ import { SmartLink } from './SmartLink'
 // DESIGN §9.4 + §7.7. Primary inverts the surface (ink on paper, paper on ink/moss).
 const VARIANT = {
   primary:
-    'rounded-pill bg-surface-invert text-surface-on-invert inset-ring inset-ring-transparent hover:inset-ring-surface-on-invert/30',
-  secondary: 'rounded-pill border border-surface-fg/40 text-surface-fg hover:bg-surface-raise',
-  ink: 'rounded-pill bg-ink text-on-dark hover:bg-ink-3',
+    'rounded-md bg-surface-invert text-surface-on-invert inset-ring inset-ring-transparent hover:inset-ring-surface-on-invert/30',
+  secondary: 'rounded-md border border-surface-fg/40 text-surface-fg hover:bg-surface-raise',
+  ink: 'rounded-md bg-ink text-on-dark hover:bg-ink-3',
   text: 'text-surface-fg underline decoration-1 underline-offset-[0.22em] hover:decoration-2',
 } as const
 
@@ -52,7 +52,7 @@ export function Button(props: AsLink | AsButton) {
       {arrow && pill && (
         <span
           aria-hidden="true"
-          className="grid size-6 place-items-center rounded-full bg-current/12 transition-transform duration-(--duration-hover) ease-out group-hover:translate-x-0.5"
+          className="grid size-6 place-items-center rounded-md bg-current/12 transition-transform duration-(--duration-hover) ease-out group-hover:translate-x-0.5"
         >
           <Icon name="arrow-right" className="size-3.5" />
         </span>

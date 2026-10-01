@@ -41,7 +41,7 @@ export function Plate({
     <InView className={cx('h-full', className)}>
       <article
         data-surface="paper"
-        className="plate group relative flex h-full flex-col rounded-lg border border-surface-rule p-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-surface-accent"
+        className="plate group relative flex h-full flex-col rounded-md border border-surface-rule p-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-surface-accent"
       >
         <header className="flex items-baseline justify-between font-mono text-label text-surface-subtle">
           <span>Plate {roman(number)}</span>

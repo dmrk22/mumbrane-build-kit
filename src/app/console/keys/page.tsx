@@ -35,7 +35,7 @@ export default function KeysPage() {
         <tbody>
           <tr>
             <td colSpan={keys.columns.length} className="px-4 py-14 text-center">
-              <span className="mx-auto mb-3 grid size-10 place-items-center rounded-full border border-surface-rule text-surface-subtle">
+              <span className="mx-auto mb-3 grid size-10 place-items-center rounded-md border border-surface-rule text-surface-subtle">
                 <Icon name="key" />
               </span>
               <span className="text-small text-surface-muted">{keys.empty}</span>

@@ -34,8 +34,8 @@ function median(values: readonly number[]): number {
 function Bar({ value, max, fill }: { value: number; max: number; fill: string }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 100 6" preserveAspectRatio="none" className="h-1.5 w-full">
-      <rect width="100" height="6" rx="1" className="fill-surface-rule" />
-      <rect width={max ? (value / max) * 100 : 0} height="6" rx="1" className={fill} />
+      <rect width="100" height="6" className="fill-surface-rule" />
+      <rect width={max ? (value / max) * 100 : 0} height="6" className={fill} />
     </svg>
   )
 }

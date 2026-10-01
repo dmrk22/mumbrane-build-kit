@@ -1,4 +1,5 @@
 import { expect, type Page, test } from '@playwright/test'
+import { MISSING, ROUTES, visit } from './utils.ts'
 
 // Page behaviours that are not chrome, motion or forms (PAGES §9).
 
@@ -173,3 +174,41 @@ test('@smoke on an ink section the release window stands off the ground', async 
   await expect(win).toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)')
   expect(await win.evaluate((el) => getComputedStyle(el).boxShadow)).toContain('0px 0px 0px 1px')
 })
+
+// One corner radius for the whole site (owner request, D-132): every rounded box, pseudo-element
+// and corner computes to exactly 8 px, except the footer card's 28 px. Measured, not grepped.
+for (const route of [...ROUTES, MISSING]) {
+  test(`one corner radius on ${route}`, async ({ page }) => {
+    await page.goto(visit(route))
+    const off = await page.evaluate(() => {
+      const bad: string[] = []
+      const corners = ['TopLeft', 'TopRight', 'BottomRight', 'BottomLeft'] as const
+      for (const el of document.querySelectorAll('body *')) {
+        if (el instanceof SVGElement && !(el instanceof SVGSVGElement)) continue
+        const allowed = el.hasAttribute('data-footer-card') ? '28px' : '8px'
+        for (const pseudo of [null, '::before', '::after']) {
+          const cs = getComputedStyle(el, pseudo)
+          for (const c of corners) {
+            const v = cs.getPropertyValue(
+              `border-${c.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`).slice(1)}-radius`,
+            )
+            if (v !== '0px' && v !== allowed) {
+              bad.push(
+                `${el.tagName.toLowerCase()}.${String(el.getAttribute('class')).slice(0, 60)}${pseudo ?? ''} ${c}=${v}`,
+              )
+              break
+            }
+          }
+        }
+      }
+      // SVG boxes: the site radius in drawing units (8), or the glyph-scale 3.6; never a pill.
+      for (const r of document.querySelectorAll('svg rect[rx]')) {
+        const [rx, w, h] = ['rx', 'width', 'height'].map((a) => Number(r.getAttribute(a)))
+        if (!(rx === 8 || rx === 3.6) || 2 * (rx ?? 0) >= Math.min(w ?? 0, h ?? 0))
+          bad.push(`svg rect rx=${rx} ${w}x${h}`)
+      }
+      return [...new Set(bad)]
+    })
+    expect(off).toEqual([])
+  })
+}

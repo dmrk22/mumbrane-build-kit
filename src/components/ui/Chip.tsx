@@ -5,7 +5,7 @@ import { OUTCOMES, type Outcome } from '@/content/outcomes'
 import { cx } from '@/lib/cx'
 
 const CHIP =
-  'inline-flex h-8 items-center gap-2 rounded-pill border px-3.5 font-sans text-small transition-[color,background-color,border-color] duration-(--duration-micro) ease-out'
+  'inline-flex h-8 items-center gap-2 rounded-md border px-3.5 font-sans text-small transition-[color,background-color,border-color] duration-(--duration-micro) ease-out'
 
 /**
  * Tag or filter pill (DESIGN §9.7). With `pressed` it renders a toggle button; otherwise a label.
@@ -88,7 +88,7 @@ export function StatusChip({ outcome, className }: { outcome: Outcome; className
   return (
     <span
       className={cx(
-        'inline-flex h-7 items-center gap-2 rounded-xs px-2.5 font-sans text-small font-medium whitespace-nowrap',
+        'inline-flex h-7 items-center gap-2 rounded-md px-2.5 font-sans text-small font-medium whitespace-nowrap',
         TONE[outcome],
         className,
       )}
@@ -101,13 +101,13 @@ export function StatusChip({ outcome, className }: { outcome: Outcome; className
 
 /**
  * A content label (CONTENT §4): Preview, Illustrative, Simulation, Proposed, Draft, Synthetic
- * example world, Conceptual illustration, Explanatory example. Mono, 2 px radius, bordered.
+ * example world, Conceptual illustration, Explanatory example. Mono, 8 px radius, bordered.
  */
 export function Tag({ className, children }: { className?: string; children: ReactNode }) {
   return (
     <span
       className={cx(
-        'inline-flex min-h-6 items-center rounded-xs border border-surface-fg/30 px-2 py-0.5 font-mono text-label text-surface-muted',
+        'inline-flex min-h-6 items-center rounded-md border border-surface-fg/30 px-2 py-0.5 font-mono text-label text-surface-muted',
         className,
       )}
     >

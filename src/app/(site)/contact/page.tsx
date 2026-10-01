@@ -37,7 +37,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <li key={e.address}>
                   <p className="font-mono text-label text-surface-subtle">{e.label}</p>
                   <div className="mt-3 flex items-center gap-3">
-                    <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-surface-fg" />
+                    <span aria-hidden="true" className="size-2 shrink-0 rounded-md bg-surface-fg" />
                     <span aria-hidden="true" className="h-px w-10 shrink-0 bg-surface-accent sm:w-16" />
                     <SmartLink
                       href={`mailto:${e.address}`}
@@ -54,7 +54,7 @@ export default async function ContactPage({ searchParams }: Props) {
           </div>
           <div
             data-surface="paper"
-            className="col-span-12 rounded-xl p-6 shadow-menu md:p-10 lg:col-span-6 lg:col-start-7"
+            className="col-span-12 rounded-md p-6 shadow-menu md:p-10 lg:col-span-6 lg:col-start-7"
           >
             <PreviewForm
               kind="contact"

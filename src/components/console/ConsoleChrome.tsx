@@ -56,7 +56,7 @@ function NavLink({ item, pathname }: { item: Item; pathname: string }) {
       href={item.href}
       aria-current={current ? 'page' : undefined}
       className={cx(
-        'inline-flex h-8 items-center gap-2 rounded-pill px-3 text-small text-surface-muted transition-colors duration-(--duration-micro) ease-out hover:text-surface-fg',
+        'inline-flex h-8 items-center gap-2 rounded-md px-3 text-small text-surface-muted transition-colors duration-(--duration-micro) ease-out hover:text-surface-fg',
         current && 'bg-surface-raise text-surface-fg',
       )}
     >
