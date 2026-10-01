@@ -75,7 +75,7 @@ export default async function SolutionPage({ params }: Props) {
           </div>
           <aside
             aria-labelledby="limits-title"
-            className="col-span-12 border border-surface-rule bg-surface p-6 md:p-8 lg:col-span-5"
+            className="col-span-12 rounded-md border border-surface-rule bg-surface p-6 md:p-8 lg:col-span-5"
           >
             <h2 id="limits-title" className="font-mono text-label text-surface-subtle">
               {ui.limits.title}

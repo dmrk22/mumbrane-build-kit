@@ -34,7 +34,7 @@ export default function DocsPage() {
               {DOCS.title}
             </h1>
             <p className="mt-6 max-w-[56ch] text-lede text-surface-muted">{DOCS.lede}</p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border border-surface-rule bg-surface-raise p-5 text-small">
+            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-md border border-surface-rule bg-surface-raise p-5 text-small">
               <Icon name="book" className="size-5 shrink-0 text-surface-muted" />
               <span>{DOCS.delivery.text}</span>
               {DOCS.delivery.files.map((f) => (

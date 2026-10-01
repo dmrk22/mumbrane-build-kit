@@ -28,7 +28,7 @@ function Card({
     <SmartLink
       href={href}
       className={cx(
-        'group flex h-full flex-col justify-between gap-10 border border-surface-rule bg-surface p-6 transition-colors duration-(--duration-hover) hover:bg-surface-raise md:p-8',
+        'group flex h-full flex-col justify-between gap-10 rounded-md border border-surface-rule bg-surface p-6 transition-colors duration-(--duration-hover) hover:bg-surface-raise md:p-8',
         wide && 'md:flex-row md:items-end',
       )}
     >

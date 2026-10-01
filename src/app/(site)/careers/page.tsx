@@ -27,7 +27,7 @@ export default function CareersPage() {
         <Heading level={2} size="display-m" id="principles-title">
           {principles.title}
         </Heading>
-        <ol className="mt-12 grid gap-px border border-surface-rule bg-surface-rule md:grid-cols-2">
+        <ol className="mt-12 grid gap-px overflow-hidden rounded-md border border-surface-rule bg-surface-rule md:grid-cols-2">
           {principles.items.map((p, i) => (
             <li key={p} className="flex min-h-44 flex-col justify-between gap-8 bg-surface p-6 md:p-8">
               <span className="font-mono text-label text-surface-subtle tabular-nums">

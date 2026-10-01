@@ -24,7 +24,10 @@ export default function ModelsPage() {
         </h1>
         <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{hero.lede}</p>
 
-        <article aria-labelledby="model-card-title" className="mt-14 border border-surface-rule">
+        <article
+          aria-labelledby="model-card-title"
+          className="mt-14 overflow-hidden rounded-md border border-surface-rule"
+        >
           <header className="flex flex-wrap items-center justify-between gap-4 border-b border-surface-rule bg-surface-raise px-6 py-5">
             <Heading level={2} size="display-s" id="model-card-title">
               {card.name}
@@ -73,7 +76,7 @@ export default function ModelsPage() {
         </Button>
         <aside
           aria-labelledby="upcoming-title"
-          className="mt-16 flex flex-col gap-4 border border-dashed border-surface-rule p-8"
+          className="mt-16 flex flex-col gap-4 rounded-md border border-dashed border-surface-rule p-8"
         >
           <div className="flex flex-wrap items-center gap-3">
             <Heading level={2} size="title" id="upcoming-title">

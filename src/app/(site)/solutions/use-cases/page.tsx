@@ -16,7 +16,7 @@ const hrefFor = (f: UseCaseFilter) => (f === 'all' ? PATH : `${PATH}?domain=${f}
 
 function Card({ item, badge, noExample }: { item: UseCase; badge: string; noExample: string }) {
   return (
-    <li className="flex flex-col gap-5 border border-surface-rule bg-surface p-6">
+    <li className="flex flex-col gap-5 rounded-md border border-surface-rule bg-surface p-6">
       <Tag className="self-start">{badge}</Tag>
       <h3 className="font-display text-display-s">{item.name}</h3>
       <p className="text-lede">{item.definition}</p>

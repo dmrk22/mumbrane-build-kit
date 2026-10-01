@@ -200,6 +200,17 @@ for (const route of [...ROUTES, MISSING]) {
             }
           }
         }
+        // A box framed on all four sides and larger than 32 px must be rounded too, not square.
+        if (el instanceof SVGElement) continue
+        const cs = getComputedStyle(el)
+        const framed = ['top', 'right', 'bottom', 'left'].every(
+          (s) =>
+            Number.parseFloat(cs.getPropertyValue(`border-${s}-width`)) > 0 &&
+            cs.getPropertyValue(`border-${s}-color`) !== 'rgba(0, 0, 0, 0)',
+        )
+        const box = el.getBoundingClientRect()
+        if (framed && box.width > 32 && box.height > 32 && cs.borderTopLeftRadius !== allowed)
+          bad.push(`square box ${el.tagName.toLowerCase()}.${String(el.getAttribute('class')).slice(0, 60)}`)
       }
       // SVG boxes: the site radius in drawing units (10), or the glyph-scale 4.5; never a pill.
       for (const r of document.querySelectorAll('svg rect[rx]')) {

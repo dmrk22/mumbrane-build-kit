@@ -86,7 +86,7 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
       </div>
 
       <div className="col-span-12 lg:col-span-5 lg:col-start-8">
-        <div className="border border-surface-rule bg-surface-raise p-6">
+        <div className="rounded-md border border-surface-rule bg-surface-raise p-6">
           <div className="flex items-center justify-between gap-4">
             <h3 className="font-mono text-label text-surface-subtle">{p.headings.results}</h3>
             <Tag>{p.label}</Tag>

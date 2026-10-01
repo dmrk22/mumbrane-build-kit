@@ -168,7 +168,7 @@ function Block({
       <span aria-hidden="true" className={cx('block-fill absolute inset-0', fill.bg)} />
       <span
         aria-hidden="true"
-        className="block-lock block-hatch absolute inset-0 border border-surface-rule text-on-dark-3"
+        className="block-lock block-hatch absolute inset-0 rounded-md border border-surface-rule text-on-dark-3"
       >
         <span className="absolute top-4 left-4 font-mono text-label tabular-nums lg:top-5 lg:left-5">
           {String(block.step).padStart(2, '0')}

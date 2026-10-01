@@ -23,7 +23,7 @@ export function Note({
 }) {
   const t = TONE[tone]
   return (
-    <aside className={cx('flex gap-4 border p-5', t.box, className)}>
+    <aside className={cx('flex gap-4 rounded-md border p-5', t.box, className)}>
       <Icon name={t.icon} className="mt-0.5" />
       <div className="flex flex-col gap-2 text-small">
         {title && <p className="font-medium">{title}</p>}

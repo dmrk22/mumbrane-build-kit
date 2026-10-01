@@ -43,7 +43,7 @@ export default function PricingPage() {
             <li
               key={p.name}
               className={cx(
-                'flex flex-col gap-6 border border-t-4 border-surface-rule bg-surface p-6 md:p-8',
+                'flex flex-col gap-6 rounded-md border border-t-4 border-surface-rule bg-surface p-6 md:p-8',
                 RULE[p.pigment],
               )}
             >

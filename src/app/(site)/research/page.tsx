@@ -33,7 +33,7 @@ export default function ResearchPage() {
           <Container className="absolute inset-x-0 bottom-6 lg:bottom-10">
             <p
               data-surface="paper"
-              className="glass-card inline-flex border px-4 py-2.5 font-mono text-label"
+              className="glass-card inline-flex rounded-md border px-4 py-2.5 font-mono text-label"
             >
               {hero.caption}, {ARTICLE_UI.seed.toLowerCase()} {heroSeed}
             </p>

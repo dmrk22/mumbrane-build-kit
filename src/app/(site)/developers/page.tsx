@@ -46,7 +46,7 @@ export default function DevelopersPage() {
             illustrative={results.jsonTag}
             className="col-span-12 lg:col-span-7"
           />
-          <figure className="col-span-12 border border-surface-rule bg-surface lg:col-span-5">
+          <figure className="col-span-12 rounded-md border border-surface-rule bg-surface lg:col-span-5">
             <figcaption className="flex h-10 items-center border-b border-surface-rule px-4 font-mono text-label text-surface-subtle">
               {results.englishLabel}
             </figcaption>

@@ -20,7 +20,7 @@ export function CodeBlock({
   className?: string
 }) {
   return (
-    <figure className={cx('code-block border border-surface-rule', className)}>
+    <figure className={cx('code-block rounded-md border border-surface-rule', className)}>
       <figcaption className="flex min-h-10 items-center gap-3 border-b border-surface-rule py-1.5 pr-1 pl-4">
         <span className="font-mono text-label text-surface-subtle">{label}</span>
         {illustrative && <Tag>{illustrative === true ? ui.illustrative : illustrative}</Tag>}
