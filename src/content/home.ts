@@ -46,22 +46,30 @@ export const HOME = {
   },
 
   how: {
+    eyebrow: 'how moth works',
     title: 'Build the field. Let the question settle.',
-    lede: 'Encoders place each fact. Your definitions decide what counts.',
+    lede: 'Follow one small purchasing world: what you write down, how it becomes a field, and where two questions come to rest.',
     steps: [
-      { name: 'Define', text: 'Your facts and definitions: the only source of truth.' },
-      { name: 'Encode', text: 'Pretrained encoders place each fact; the field is fixed as a build.' },
+      {
+        name: 'Define',
+        text: 'Write down the facts, and what your words mean. Nothing else counts as true.',
+      },
+      { name: 'Encode', text: 'Encoders place each fact in the field, and the field is fixed as a build.' },
       { name: 'Ask', text: 'A question enters the field. Asking never changes it.' },
-      { name: 'Settle', text: 'It comes to rest where your definitions support it, and is checked.' },
-      { name: 'Replay', text: 'Same build, same answer, same evidence.' },
+      { name: 'Settle', text: 'It comes to rest where your definitions lead, or stops and says why.' },
+      { name: 'Replay', text: 'Same build, same question: the same answer, with the same evidence.' },
     ],
-    // The purchasing world as two chains: one reaches its answer, one has no support.
+    // The purchasing world as a map of the field (D-138): each question's path either runs down
+    // into its answer's basin or stops on flat ground where no definition leads on.
     diagram: {
-      rules: [
-        ['approved supplier', 'passed inspection'],
-        ['purchase-ready', 'has funds', 'approved supplier'],
+      world: 'purchasing world',
+      definitionsLabel: 'definitions',
+      definitions: [
+        { term: 'approved supplier', means: '= passed inspection' },
+        { term: 'purchase-ready', means: '= has funds + approved supplier' },
       ],
-      build: 'build f3a9',
+      fieldLabel: 'the field',
+      build: 'build f3a9 · fixed',
       chains: [
         {
           query: 'orderone?',
@@ -78,7 +86,9 @@ export const HOME = {
           note: 'no support · audit is not inspection',
         },
       ],
-      replay: 'replay f3a9 · same runtime · same answer',
+      replay: 'replay f3a9 · same answer · same evidence',
+      // Keys `href` and `path` are reserved for links (links.test), hence `route`.
+      legend: { record: 'on record', missing: 'missing', route: 'path to an answer', none: 'no support' },
       label: 'Diagram: the purchasing example, step by step.',
     },
     caption:

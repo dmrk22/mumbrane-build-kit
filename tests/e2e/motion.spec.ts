@@ -207,6 +207,35 @@ test.describe('@motion home hero membrane (D-137)', () => {
   })
 })
 
+test.describe('@motion how moth works (D-138)', () => {
+  // Regression: the pin reported its step only on the first scroll inside it, so the finished map
+  // showed while the section approached and then jumped back to step one as it pinned.
+  test('desktop: below the fold, the pinned map waits at its first step', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop pin')
+    await page.goto('/')
+    await page.waitForFunction(() => document.querySelector('#how-moth-works')?.closest('.pin-spacer'))
+    const current = page.locator('#how-moth-works [aria-current="step"]')
+    await expect(current).toContainText(HOME.how.steps[0]?.name ?? '')
+    // Regression: the settle paths were selected by `path[pathLength]` under the step attribute,
+    // which Chromium never restyles on change, so they stayed drawn at every step.
+    const settle = page.locator('#how-moth-works .hw-draw .dg-accent').first()
+    await expect
+      .poll(() => settle.evaluate((p) => getComputedStyle(p).strokeDashoffset), { timeout: 4000 })
+      .toBe('1px')
+  })
+
+  // Regression: drawn paths measured their dash on screen (non-scaling stroke) against a length in
+  // drawing units, so on figures drawn larger than their viewBox the lines stopped short.
+  test('drawn paths measure their dash in drawing units', async ({ page }) => {
+    await page.goto('/')
+    const effects = await page.$$eval('path.dg-accent[pathLength]', (paths) =>
+      paths.map((p) => getComputedStyle(p).vectorEffect),
+    )
+    expect(effects.length).toBeGreaterThan(0)
+    expect(new Set(effects)).toEqual(new Set(['none']))
+  })
+})
+
 test.describe('@motion company blocks (DESIGN §7.6)', () => {
   const counter = (page: Page) => page.locator('[data-blocks] p.tabular-nums')
   const opacityOfCopy = (page: Page) =>

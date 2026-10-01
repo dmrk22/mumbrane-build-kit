@@ -729,3 +729,22 @@ interventions in §8.1.
 **Alternatives**: keep them on the /research hero only; keep as designed; redraw them bolder like
 the reference card (changes the reference shader maths, which DESIGN §8.2 forbids).
 **Status**: Decided (owner instruction in session).
+
+### D-138 — How Moth works as a map of the field (2026-10-02)
+**Context**: The owner found the home "How Moth works" section plain and hard to follow: a bare
+chain of chips on black, unconnected to the membrane hero above it, with no key to its marks.
+**Decision**: Owner-chosen "field map": the hero's field seen from above. The purchasing example
+is drawn as a map (facts as wells, the supported answer as a basin, the unsupported path stopping
+on flat ground) in a framed instrument panel (crop marks, dot screen, a live "02 / 05 · encode"
+readout), over a section backdrop of equipotential rings and field lines; a legend names the four
+marks; plainer step copy tied to the example (owner-approved); an eyebrow and a progress rail.
+Honesty caption unchanged. Fixed on the way, each with a regression test: (1) Chromium does not
+restyle a descendant matched through an SVG attribute selector (`path[pathLength]`) when an
+ancestor attribute changes, so the old section's paths never redrew between steps; the draw rules
+now select by class. (2) A `pathLength` dash measured against a non-scaling stroke stops short on
+figures drawn larger than their viewBox (the home principle figure stopped at about 75 %); drawn
+`.dg-accent` paths now measure in drawing units. (3) `usePinnedSteps` reports the pin's step on
+creation, so a section below the fold starts at its first step instead of jumping back as it
+pins (the Company blocks gain the same).
+**Alternatives**: a metro-map version of the chain; today's chain with only the atmosphere added.
+**Status**: Decided (owner instruction in session).

@@ -1,5 +1,5 @@
-/* The membrane (FieldCanvas, FieldStill; D-137), in its own file so art.css stays within budget.
-   The server still shows until the canvas draws its first frame. With scripting and motion the
+/* The field's two figures, in their own file so art.css stays within budget: the hero's membrane
+   (FieldCanvas, FieldStill; D-137) and How Moth works' map of it (below). The server still shows until the canvas draws its first frame. With scripting and motion the
    canvas forms the field from empty paper, so the still waits hidden; if the canvas never draws, a
    failsafe shows it after 4 s. The failsafe lives only on :not([data-ready]): a finished
    `forwards` animation would otherwise outrank the ready rule. */
@@ -95,5 +95,112 @@
   .field > .field-poster {
     opacity: 1;
     animation: none;
+  }
+}
+
+/* How Moth works (HowItWorks, D-138): the same field from above, as a map. Parts fade in as their
+   step arrives and paths draw left to right; the replay sweeps a scan line across once. */
+@layer components {
+  .hw-part {
+    transition: opacity 520ms var(--ease-out);
+  }
+  .hw-part[data-on="false"] {
+    opacity: 0;
+  }
+  /* By class, never `path[pathLength]`: Chromium does not restyle a descendant matched through an
+     SVG attribute selector when an ancestor's attribute changes, so the paths never redrew. */
+  /* Gap 2, not 1: offset by the full length, a 1-unit gap ends in a zero-length dash that the
+     round cap still paints as a dot. */
+  .hw-draw .dg-accent {
+    stroke-dasharray: 1 2;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1100ms var(--ease-in-out);
+  }
+  .hw-draw[data-on="false"] .dg-accent {
+    stroke-dashoffset: 1;
+  }
+  .hw-draw .dg-dash {
+    transition: opacity 420ms var(--ease-out) 900ms;
+  }
+  .hw-draw[data-on="false"] .dg-dash {
+    opacity: 0;
+    transition-delay: 0ms;
+  }
+  .hw-ghost {
+    stroke-opacity: 0.5;
+  }
+  :is(.hw-route, .hw-contour) {
+    stroke-opacity: 0.22;
+  }
+  .hw-contour {
+    stroke-dasharray: 1.5 3.5;
+  }
+  .hw-halo {
+    stroke-opacity: 0.45;
+  }
+  .hw-scan {
+    opacity: 0;
+  }
+  .hw-text {
+    padding-top: 0.35rem;
+    padding-bottom: 0.4rem;
+  }
+  /* Two lines reserved, so the centred column does not jump as one- and two-line steps swap. */
+  @media (min-width: 1024px) {
+    .hw-open {
+      min-height: calc(2lh + 0.75rem);
+    }
+  }
+  @media (min-width: 1024px) {
+    .hw-closed {
+      display: none;
+    }
+  }
+  /* The backdrop: equipotential rings and field lines, faint, fading away from the text. */
+  .hw-backdrop {
+    stroke: var(--surface-fg);
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-ink) 30%,
+      var(--color-ink) 70%,
+      transparent
+    );
+  }
+  @media (min-width: 1024px) {
+    .hw-backdrop {
+      mask-image: linear-gradient(to right, transparent 10%, var(--color-ink) 55%);
+    }
+  }
+  .hw-ring {
+    stroke-opacity: 0.08;
+    stroke-dasharray: 1.5 4;
+    vector-effect: non-scaling-stroke;
+  }
+  .hw-ring.hw-index {
+    stroke-opacity: 0.14;
+    stroke-dasharray: none;
+  }
+  .hw-spoke {
+    stroke-opacity: 0.04;
+    vector-effect: non-scaling-stroke;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hw-scan[data-on="true"] {
+    animation: hw-scan 1400ms var(--ease-in-out) both;
+  }
+}
+@keyframes hw-scan {
+  from {
+    opacity: 0.9;
+    transform: translateX(32px);
+  }
+  85% {
+    opacity: 0.9;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(768px);
   }
 }

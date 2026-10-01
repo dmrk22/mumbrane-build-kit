@@ -195,6 +195,11 @@
     stroke-linecap: round;
     vector-effect: non-scaling-stroke;
   }
+  /* A path drawn on with `pathLength` measures its dash in drawing units; a non-scaling stroke
+     measures it on screen, so on a figure drawn larger than its viewBox the line stopped short. */
+  .dg-accent[pathLength] {
+    vector-effect: none;
+  }
   .dg-dash {
     stroke-dasharray: 3 4;
   }
@@ -242,43 +247,6 @@
   }
 }
 
-/* How Moth works (HowItWorks): parts fade in as their step arrives; a path draws left to right. */
-@layer components {
-  .hw-part {
-    transition: opacity 520ms var(--ease-out);
-  }
-  .hw-part[data-on="false"] {
-    opacity: 0;
-  }
-  .hw-draw path[pathLength] {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 0;
-    transition: stroke-dashoffset 1100ms var(--ease-in-out);
-  }
-  .hw-draw[data-on="false"] path[pathLength] {
-    stroke-dashoffset: 1;
-  }
-  .hw-draw .dg-dash {
-    transition: opacity 420ms var(--ease-out) 900ms;
-  }
-  .hw-draw[data-on="false"] .dg-dash {
-    opacity: 0;
-    transition-delay: 0ms;
-  }
-  .hw-ghost {
-    stroke-opacity: 0.5;
-  }
-  .hw-text {
-    padding-top: 0.35rem;
-    padding-bottom: 0.4rem;
-  }
-  @media (min-width: 1024px) {
-    .hw-closed {
-      display: none;
-    }
-  }
-}
-
 /* The principle figure: both paths draw from your facts to Moth, then one reaches its answer and
    the other breaks into "no support". */
 @media (prefers-reduced-motion: no-preference) {
@@ -307,7 +275,8 @@
     opacity: 0;
     transform: translateY(-28px);
   }
-  [data-reveal="pending"].layer-stack .ls-path path[pathLength] {
+  /* By class, not path[pathLength]: see .hw-draw in field.css (stale styles on attribute change). */
+  [data-reveal="pending"].layer-stack .ls-path .dg-accent {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
   }
@@ -326,7 +295,7 @@
   [data-reveal="done"].layer-stack .ls-2 {
     transition-delay: 280ms;
   }
-  [data-reveal="done"].layer-stack .ls-path path[pathLength] {
+  [data-reveal="done"].layer-stack .ls-path .dg-accent {
     stroke-dasharray: 1;
     animation: mark-draw 1200ms var(--ease-in-out) 900ms both;
   }

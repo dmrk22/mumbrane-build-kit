@@ -34,6 +34,10 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
   it). Not done by owner choice: the 8-style size scale, uppercase labels, colours, spacing.
 - 2026-10-02 home hero replaced by "the membrane" (D-137): facts dent a borderless sheet, three
   questions settle once, then it rests; click, tap or the keyboard chip drops another.
+- 2026-10-02 "How Moth works" redrawn as a map of the field (D-138): framed panel, ring backdrop,
+  legend, plainer copy. Draw rules select by class (Chromium leaves `path[pathLength]` stale on
+  ancestor changes); drawn `.dg-accent` paths measure in drawing units; pins report their step on
+  creation.
 - 2026-10-02 paintings are plain oil (D-139): no scan slices or sorted blocks anywhere; the five
   affected paintings re-rendered (the other five came out byte-identical). The /research inquiry
   plates sit on subgrid rows, so a short gloss no longer stretches its plate. `/paintings/*` keeps

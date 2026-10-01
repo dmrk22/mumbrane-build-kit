@@ -54,6 +54,10 @@ export function usePinnedSteps(
           },
         })
         range.current = { start: st.start, end: st.end }
+        // Report where the pin stands now, not only on the first scroll inside it: a section still
+        // below the viewport starts at its first step instead of jumping back there as it pins.
+        current = Math.round(st.progress * (steps - 1))
+        latest.current(current)
         // The spacer GSAP inserts has no ground of its own; give it the section's, so fast scrolls
         // and full-page captures never show the page colour through it.
         const spacer = el.parentElement
