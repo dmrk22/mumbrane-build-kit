@@ -3,10 +3,11 @@ import { cx } from '@/lib/cx'
 import type { Surface } from '@/lib/surface'
 import { Container } from './Container'
 
-// Section padding 64 / 96 / 128 px (DESIGN §4.2); heroes and pins set their own ('none').
+// Section padding 64 / 96 / 128 px (DESIGN §4.2); heroes and pins set their own ('none'). The
+// page's last section ends shorter: the footer brings its own top padding.
 const RHYTHM = {
-  default: 'py-16 md:py-24 lg:py-32',
-  compact: 'py-12 md:py-16 lg:py-20',
+  default: 'py-16 last:pb-10 md:py-24 md:last:pb-12 lg:py-32 lg:last:pb-16',
+  compact: 'py-12 last:pb-10 md:py-16 md:last:pb-12 lg:py-20 lg:last:pb-16',
   none: '',
 } as const
 

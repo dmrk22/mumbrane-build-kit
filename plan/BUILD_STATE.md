@@ -175,16 +175,17 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 ## Handoff notes
 
 ### Header condense (2026-10-01, owner request)
-Header is 56 px at every width (was 60/72). Menus are compact cards anchored under their trigger
-(links + one feature row), not full-width mega panels. Current/open/hover nav items are underlined
-via text-decoration, never boxed. The Company menu is gone from the header (Company, Careers,
-Contact remain in the footer; Research and News stay as top-level links). Button gained `size="sm"`.
+Header is 56 px at every width (was 60/72). Menus are small Anthropic-style lists: labels only,
+one width (w-56), centred under the trigger; the old feature cards became plain first items
+(Solutions → Overview, Developer → Moth). Current/open/hover nav items are underlined via
+text-decoration, never boxed. No Company menu in the header (Research and News are top-level
+links). Button gained `size="sm"`. Descriptions stay in nav data for the mobile sheet.
 
-### Footer card (2026-10-01, owner request)
-Footer is a raised `paper` card (rounded-xl, `--shadow-card`) on a `paper-2` band, no longer the
-`deep` surface: lockup + tagline + social text links, three link columns (Solutions, Developer,
-Company), legal links underlined in the bottom row. The giant wordmark rises faintly beneath, full
-and uncropped (logo lock). Social stays as text: no third-party brand glyphs. 816 → 637 px at 1440.
+### Footer card (2026-10-01, owner request, D-130)
+Footer stays on `deep`, as a raised card (`bg-surface-raise`, rounded-xl) with the six owner
+columns: Solutions, Company, Developer, Enterprise, Legal, Social. The giant wordmark sits below
+the card and fades out downward via a mask on its wrapper. The page's last `Section` ends with a
+shorter bottom padding (`last:pb-*`) so the gap above the footer is about half what it was.
 
 ### Redesign R2 — "field" (2026-10-01, D-129)
 Supersedes R1. Logic notation, theorem labels, ProofSheet, Turnstile, StringModel, MothCurve,

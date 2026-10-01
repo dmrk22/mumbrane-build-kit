@@ -591,3 +591,14 @@ stacked layers. Console: top bar instead of the rail, entry and evidence redrawn
 vocabulary. Contact and sales: dark page, address routes drawn as paths, form on a paper card.
 **Alternatives**: Iterate on round 1 (rejected by the owner).
 **Status**: Decided (owner instruction in session).
+
+### D-130 — Footer wordmark fades out downward (2026-10-01)
+**Context**: The owner asked for the giant footer wordmark to sit below the footer card and lose
+opacity toward the bottom, after a reference. Rule 3 allows opacity on the wordmark but lists no
+gradient fade.
+**Decision**: The wordmark keeps one uniform colour (currentColor at low opacity); the fade is a
+CSS mask on its wrapper, so the logo's paths, proportions and fill are untouched. The footer card
+sits on the deep surface with six columns: Solutions, Company, Developer, Enterprise, Legal, Social.
+**Alternatives**: Plain uniform opacity (does not match the owner's reference); cropping the
+wordmark at the page edge (not requested).
+**Status**: Decided (owner instruction in session).

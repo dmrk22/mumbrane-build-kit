@@ -254,8 +254,8 @@ export function Header({
 type MenuData = HeaderNav['menus'][number]
 
 /**
- * A dropdown disclosure card anchored under its trigger: a labelled region of links, not an ARIA
- * menu. The top padding is part of the panel so the pointer can cross the gap without leaving it.
+ * A compact dropdown centred under its trigger, one width for every menu: a labelled region of
+ * links, not an ARIA menu. The top padding is part of the panel so the pointer can cross the gap.
  */
 function MenuPanel({
   menu,
@@ -280,12 +280,12 @@ function MenuPanel({
       data-open={open}
       onPointerEnter={onPointerEnter}
       className={cx(
-        'absolute top-full left-0 pt-2',
+        'absolute top-full left-1/2 -translate-x-1/2 pt-2',
         'invisible -translate-y-1 opacity-0 transition-[opacity,translate,visibility] duration-[160ms] ease-in',
         'data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100 data-[open=true]:duration-[240ms] data-[open=true]:ease-out',
       )}
     >
-      <div className="w-92 rounded-lg border border-surface-rule bg-surface p-2 text-surface-fg shadow-menu">
+      <div className="w-56 rounded-lg border border-surface-rule bg-surface px-2 py-3 text-surface-fg shadow-menu">
         <ul className="flex flex-col">
           {menu.links.map((l) => (
             <li
@@ -294,40 +294,16 @@ function MenuPanel({
             >
               <SmartLink
                 href={l.href}
-                className="group flex items-center gap-3 rounded-md px-3 py-2 transition-colors duration-(--duration-hover) hover:bg-surface-raise aria-[current=page]:bg-surface-raise"
+                className="block rounded-sm px-3 py-1.5 text-small underline decoration-transparent decoration-1 underline-offset-[0.3em] transition-colors duration-(--duration-hover) hover:decoration-current aria-[current=page]:decoration-current"
                 aria-current={isCurrent(pathname, l.href) ? 'page' : undefined}
                 prefetch={false}
                 onClick={onNavigate}
               >
-                <span className="flex min-w-0 flex-1 flex-col">
-                  <span className="text-small font-medium">{l.label}</span>
-                  {'description' in l && l.description && (
-                    <span className="text-caption text-surface-muted">{l.description}</span>
-                  )}
-                </span>
-                <Icon
-                  name="arrow-right"
-                  className="size-4 shrink-0 -translate-x-1 opacity-0 transition-[opacity,translate] duration-(--duration-hover) ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
-                />
+                {l.label}
               </SmartLink>
             </li>
           ))}
         </ul>
-        <SmartLink
-          href={menu.feature.href}
-          prefetch={false}
-          onClick={onNavigate}
-          className="group mt-2 flex items-end gap-3 rounded-md border-t border-surface-rule bg-surface-raise px-3 pt-3 pb-3 transition-colors duration-(--duration-hover) hover:bg-surface-fg/8"
-        >
-          <span className="flex min-w-0 flex-1 flex-col gap-1">
-            <span className="font-mono text-label text-surface-subtle">{menu.feature.eyebrow}</span>
-            <span className="text-small font-medium">{menu.feature.title}</span>
-          </span>
-          <Icon
-            name="arrow-right"
-            className="size-4 shrink-0 transition-transform duration-(--duration-hover) ease-out group-hover:translate-x-0.5"
-          />
-        </SmartLink>
       </div>
     </section>
   )

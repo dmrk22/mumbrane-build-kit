@@ -93,7 +93,7 @@ test.describe('header theming', () => {
     const h = page.locator(header)
     await expect(h).toHaveAttribute('data-surface', 'paper')
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    await expect(h).toHaveAttribute('data-surface', 'paper-2')
+    await expect(h).toHaveAttribute('data-surface', 'deep')
   })
 })
 
@@ -131,6 +131,37 @@ test.describe('@a11y menus', () => {
     await expect(page.locator('#menu-developer')).toBeVisible()
     await page.getByRole('link', { name: 'Research', exact: true }).last().focus() // outside: in main
     await expect(page.locator('#menu-developer')).toBeHidden()
+  })
+
+  test('every dropdown has one width and is centred under its trigger', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop navigation')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto(MISSING)
+    const widths = new Set<number>()
+    for (const id of ['solutions', 'developer']) {
+      await page.locator(`#menu-trigger-${id}`).click()
+      const card = page.locator(`#menu-${id} > div`)
+      await expect(card).toBeVisible()
+      await expect(card).toHaveCSS('opacity', '1')
+      const t = await page.locator(`#menu-trigger-${id}`).boundingBox()
+      const c = await card.boundingBox()
+      if (!t || !c) throw new Error(`no box for ${id}`)
+      widths.add(Math.round(c.width))
+      expect(Math.abs(t.x + t.width / 2 - (c.x + c.width / 2))).toBeLessThan(1)
+    }
+    expect(widths.size).toBe(1)
+  })
+
+  test('the footer lists the six owner columns', async ({ page }) => {
+    await page.goto(MISSING)
+    await expect(page.locator('footer nav h2')).toHaveText([
+      'Solutions',
+      'Company',
+      'Developer',
+      'Enterprise',
+      'Legal',
+      'Social',
+    ])
   })
 
   test('no Company menu; current page underlined, not boxed', async ({ page, isMobile }) => {

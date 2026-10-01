@@ -4,20 +4,11 @@ import { type RoutePath, routeFor } from './routes.ts'
 import { SOCIAL } from './social.ts'
 
 export type NavLink = { label: string; href: string; description?: string }
-export type FeatureCard = {
-  eyebrow: string
-  title: string
-  text: string
-  href: string
-  secondary?: NavLink
-  meta?: string
-}
 export type Menu = {
   id: string
   label: string
   links: NavLink[]
-  feature: FeatureCard
-  /** The section's own overview page, reached through the feature card: current there too. */
+  /** The section's own overview page: the trigger is current there too. */
   index?: string
 }
 
@@ -34,24 +25,19 @@ export const HEADER = {
       label: 'Solutions',
       index: '/solutions',
       links: [
+        { ...link('/solutions', 'Where closed-world reasoning fits'), label: 'Overview' },
         link('/solutions/business', 'Decisions that follow your policies'),
         link('/solutions/customer-support', 'Answers grounded in your rules'),
         link('/solutions/legal', 'Check conditions against defined terms'),
         link('/solutions/security', 'Policy decisions you can audit'),
         link('/solutions/use-cases', 'Example worlds, from purchasing to venues'),
       ],
-      feature: {
-        eyebrow: 'Overview',
-        title: 'Where closed-world reasoning fits',
-        text: 'Decisions that already have a rulebook, checked case by case, with the evidence kept.',
-        href: '/solutions',
-        meta: 'Purchasing · Libraries · Trails · Venues',
-      },
     },
     {
       id: 'developer',
       label: 'Developer',
       links: [
+        link('/moth', 'Configurable classification with checked answers'),
         link('/developers', 'Lifecycle, concepts and outcomes'),
         link('/developers/docs', 'Concepts and contracts for Preview 004'),
         link('/developers/models', 'Moth Inference Preview 004'),
@@ -60,13 +46,6 @@ export const HEADER = {
         link('/changelog', 'Models, research and products'),
         link('/status', 'Not yet monitored'),
       ],
-      feature: {
-        eyebrow: 'Moth · Preview 004',
-        title: 'Configurable classification with checked answers',
-        text: 'Define the world, compile it, ask, and inspect the evidence.',
-        href: '/moth',
-        secondary: { label: 'Release & evidence', href: '/moth#evidence' },
-      },
     },
   ] satisfies Menu[],
   links: [link('/pricing'), link('/news'), link('/research')],
@@ -79,8 +58,7 @@ export const HEADER = {
 } as const
 
 export const FOOTER = {
-  tagline:
-    'Intelligence for closed worlds. Moth answers only from the facts and definitions you supply, and shows its evidence.',
+  tagline: 'Intelligence for closed worlds.',
   columns: [
     {
       title: 'Solutions',
@@ -93,38 +71,36 @@ export const FOOTER = {
       ],
     },
     {
+      title: 'Company',
+      links: [link('/company'), link('/careers'), link('/news'), link('/contact'), link('/research')],
+    },
+    {
       title: 'Developer',
       links: [
         link('/developers'),
-        link('/developers/docs'),
+        link('/pricing'),
         link('/developers/models'),
         link('/console'),
-        link('/pricing'),
         link('/changelog'),
+        link('/developers/docs'),
         link('/status'),
       ],
     },
+    { title: 'Enterprise', links: [link('/contact/sales')] },
     {
-      title: 'Company',
+      title: 'Legal',
       links: [
-        link('/company'),
-        link('/research'),
-        link('/news'),
-        link('/careers'),
-        link('/contact'),
-        link('/contact/sales'),
+        link('/legal/terms'),
+        link('/legal/enterprise-terms'),
+        link('/legal/privacy'),
+        link('/legal/cookies'),
+        link('/legal/privacy-choices'),
       ],
     },
+    { title: 'Social', links: SOCIAL.map((s) => ({ label: s.label, href: s.href })) },
   ] satisfies { title: string; links: NavLink[] }[],
-  social: SOCIAL.map((s) => ({ label: s.label, href: s.href })) satisfies NavLink[],
   legal: {
     copyright: '© 2026 Mumbrane',
-    links: [
-      link('/legal/terms'),
-      link('/legal/enterprise-terms'),
-      link('/legal/privacy'),
-      link('/legal/cookies'),
-      link('/legal/privacy-choices'),
-    ] satisfies NavLink[],
+    motto: 'Evidence, retained.',
   },
 } as const

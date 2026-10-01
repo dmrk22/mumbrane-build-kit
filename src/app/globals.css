@@ -153,7 +153,6 @@
   /* Elevation — rationed: the instrument window's printed offset, menus. */
   --shadow-window: 5px 5px 0 0 oklch(0.155 0.003 260 / 0.14);
   --shadow-menu: 0 24px 60px -24px oklch(0.12 0.003 260 / 0.4);
-  --shadow-card: 0 20px 48px -28px oklch(0.12 0.003 260 / 0.22);
 
   /* Breakpoints */
   --breakpoint-sm: 40rem;   /* 640 */
