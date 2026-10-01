@@ -19,15 +19,15 @@ Update after every task: tick the box, add a one-line note, commit.
 | P9 | Company, Careers, Contact | done | 2026-10-01 | 2026-10-01 | `p09-company` |
 | P10 | Solutions | done | 2026-10-01 | 2026-10-01 | `p10-solutions` |
 | P11 | Developers, Pricing, Changelog, Status | done | 2026-10-01 | 2026-10-01 | `p11-developers` |
-| P12 | Console preview | in progress | 2026-10-01 | | |
+| P12 | Console preview | done | 2026-10-01 | 2026-10-01 | `p12-console` |
 | P13 | Legal, llms.txt, OG images, completeness | not started | | | |
 | P14 | QA, hardening, polish, final report | not started | | | |
 
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P12 (not started)
-- Next task: P12 Console preview — resume at "NEXT (1)" in the P12 handoff note (console layout)
+- Phase: P13 (not started)
+- Next task: P13 Legal, llms.txt, OG images, completeness — task 1
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,6 +99,13 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P12 — Console preview
+- [x] Shell: `console/layout.tsx` (theme bootstrap, `ConsoleSession`), `ConsoleChrome` (rail ≥ 768 / bottom tabs, "Simulation" tag), `ThemeControl`, `ShortcutsDialog`
+- [x] `/console` entry (four worlds, simulated outcome squares, no credential fields); `/console/playground` (`AskBar`, `WorldPanel`, `ResultCard`, `Evidence`; definition variants, rebuild, replay; drawer < 1280, inline evidence < 1024)
+- [x] `/console/keys` (preview flow, nothing created), `/console/usage` (this session only), `/console/settings` (theme, reset with inline confirmation, profile placeholders)
+- [x] Simulator golden + hostile unit tests (`console-sim.test.ts`, incl. `suggest()`); `console.spec.ts` 10 tests: three actions to evidence, axe light + dark, theme before first paint, keyboard only, noindex
+- Measured (prod, 2026-10-01): first-load JS /console 181.3 KB, /playground 190.7, /keys 184.3, /usage 184.6, /settings 184.4 (budget 230); CSS 23.3 KB; `pnpm verify` green (e2e 649 passed / 48 skipped, perf 36 passed)
+
 ### P11 — Developers, Pricing, Changelog, Status
 - [x] `src/content/developers.ts` (CONCEPTS, DEVELOPERS, DOCS — wording by reference to `MOTH`), `src/content/pricing.ts` (PRICING, CHANGELOG, STATUS per CONTENT §3.10–§3.12)
 - [x] `/developers` — hero + status note, lifecycle `Pipeline` (6 stages), 7 concepts, illustrative JSON + checked English, supported questions, outcomes, `LimitsGrid`, "When the hosted API arrives"
@@ -136,10 +143,14 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
 
-### P12 — IN PROGRESS (resumed 2026-10-01; all routes built, closing with `pnpm verify`)
-- [x] (1) layout + theme bootstrap (`ThemeBootstrap` renders the script only into server HTML; root `<html suppressHydrationWarning>` for the pre-paint attribute) (2) `ConsoleChrome` + `ThemeControl` + `ShortcutsDialog` (3) `/console` entry (simulated outcome dots per world) (4) `/console/playground` (`Playground`, `AskBar`, `WorldPanel`, `ResultCard`, `Evidence`; drawer < 1280, inline evidence < 1024) (5) keys / usage / settings (6) `tests/e2e/console.spec.ts` — 10 tests, chromium + mobile 19/19, webkit @smoke 2/2 (dev) (7) shots reviewed 375/768/1100/1440, light + dark
-- `suggest()` in sim.ts (rephrasing for refusals) + unit test; `ConsoleEngine.build(id)` added to the seam.
-- NEXT: `pnpm verify` (prod e2e + perf ≤ 230 KB), handoff note, mark done, tag `p12-console`.
+### P12 — 2026-10-01
+- Simulator + backend seam: `src/lib/console/{types,sim,engine}.ts` (`ConsoleEngine`: ask/active/rebuild/replay/build — the Neon backend replaces `SimulatorEngine` here). Copy: `src/content/console/{worlds,ui}.ts`. Components: `src/components/console/` (12). Theme CSS: `src/app/console/console.css`.
+- Session state is in memory only (`ConsoleSession`, newest first, capped); the theme is the one persisted value (localStorage `mb-console-theme`, try/catch). No network from the console — keeps the pricing card's "Nothing you type leaves the page" true.
+- Theme before first paint: `public/console-theme.js` via `ThemeBootstrap`, server HTML only; root `<html suppressHydrationWarning>` (D-120). Shell placements D-121; entry outcome squares D-122.
+- `suggest()` (rephrasing for refusals) re-asks its own candidate and falls back to the world's first example, so a bad rewrite is never offered.
+- The mobile project skips the keyboard-only test (no physical keyboard); webkit runs the @smoke pair.
+- Budgets after P12: source files 203/230, components 72/80 — P13/P14 have little room for new components.
+- Pushes: D-119 allows them, but the guard and CLAUDE.md still refuse until the owner applies D-119's protected-file edits; commits stay local.
 
 ### P11 — 2026-10-01
 - `git grep` skips untracked files: audits of new content must use `git grep --untracked` (the P10 audit was re-run; see the claims log).
@@ -250,6 +261,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [ ] Remove the `nextjs-agent-rules` block that `next dev` appended to CLAUDE.md (Claude cannot edit it; `agentRules: false` stops it recurring) (D-105)
 - [x] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103) — accepted, owner 2026-10-01 (D-106)
 - [x] The current site's markdown declares canonical https://mumbrane.ai/… — superseded: mumbrane.com is canonical (D-106)
+- [ ] Pushing (D-119): the guard still refuses `git remote`/`git push` and CLAUDE.md still says "Never push" — apply D-119's protected-file edits if Claude should push; until then commits stay local
 - [ ] **Before any deploy (after P14):** owner lifts the "never deploy" rule in CLAUDE.md and removes `Bash(vercel *)` from the deny list in `.claude/settings.json`. Plan (D-106): Claude deploys to a Vercel test URL first (not mumbrane.com); mumbrane.com is connected only after the owner has tested and approved.
 
 ## Known issues
