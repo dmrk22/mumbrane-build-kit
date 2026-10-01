@@ -53,7 +53,7 @@ export function HowItWorks({ how }: { how: How }) {
     <section
       ref={ref}
       id="how-moth-works"
-      data-surface="ink"
+      data-surface="paper"
       aria-labelledby="how-title"
       className="relative flex items-center overflow-x-clip py-20 md:py-28 lg:min-h-dvh lg:pt-24 lg:pb-12"
     >

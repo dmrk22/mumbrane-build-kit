@@ -67,7 +67,7 @@ function PrincipleFigure() {
   )
 }
 
-// Surfaces: paper · paper · ink · paper · paper-2 · paper · ink · paper-2.
+// Surfaces, light to dark into the footer: paper ×4 · paper-2 ×2 · ink ×2.
 export default function Home() {
   const { principle, how, evidence, compounding, research, release, getStarted } = HOME
   const plates = research.plates.flatMap((slug) => articleBySlug(slug) ?? [])
@@ -152,7 +152,7 @@ export default function Home() {
         <p className="mt-16 max-w-[56ch] text-lede">{compounding.closing}</p>
       </Section>
 
-      <Section surface="paper" id="research" labelledBy="research-title">
+      <Section surface="paper-2" id="research" labelledBy="research-title">
         <div className="flex flex-wrap items-baseline-last justify-between gap-x-6 gap-y-4">
           <SplitReveal className="max-w-[44rem]">
             <Heading level={2} size="display-m" id="research-title">
@@ -211,7 +211,7 @@ export default function Home() {
         </Grid>
       </Section>
 
-      <Section surface="paper-2" id="get-started" labelledBy="start-title">
+      <Section surface="ink" id="get-started" labelledBy="start-title">
         <Heading level={2} size="display-l" id="start-title" className="max-w-[14ch]">
           {getStarted.title}
         </Heading>
