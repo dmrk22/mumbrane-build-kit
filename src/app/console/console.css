@@ -36,6 +36,7 @@
     --surface-raise: var(--color-ink-2);
     --surface-accent: var(--color-ice);
     color-scheme: dark;
+    --serif-shift: -25;
   }
   html[data-console-theme="dark"] [data-console-panel] {
     --surface-bg: var(--color-ink-2);
@@ -58,6 +59,7 @@
       --surface-invert: var(--color-paper);
       --surface-on-invert: var(--color-ink);
       color-scheme: dark;
+      --serif-shift: -25;
     }
     html:not([data-console-theme="light"]) [data-console-panel] {
       --surface-bg: var(--color-ink-2);

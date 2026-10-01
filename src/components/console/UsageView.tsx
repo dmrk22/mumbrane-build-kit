@@ -48,7 +48,7 @@ export function UsageView() {
   if (entries.length === 0) {
     return (
       <div className="rounded-md border border-dashed border-surface-rule px-6 py-14 text-center">
-        <p className="text-body text-surface-muted">{usage.empty}</p>
+        <p className="font-sans text-body text-surface-muted">{usage.empty}</p>
         <Button href="/console" arrow className="mt-6">
           {usage.open}
         </Button>
@@ -84,7 +84,7 @@ export function UsageView() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <section data-console-panel className="rounded-md border border-surface-rule bg-surface px-5 py-5">
-          <h3 className="text-small font-semibold">{usage.outcomes}</h3>
+          <h3 className="text-small font-medium">{usage.outcomes}</h3>
           <ul className="mt-4 space-y-3.5">
             {counts.map(({ o, n }) => (
               <li key={o}>
@@ -100,7 +100,7 @@ export function UsageView() {
           </ul>
         </section>
         <section data-console-panel className="rounded-md border border-surface-rule bg-surface px-5 py-5">
-          <h3 className="text-small font-semibold">{usage.worlds}</h3>
+          <h3 className="text-small font-medium">{usage.worlds}</h3>
           <ul className="mt-4 space-y-3.5">
             {worlds.map(({ w, n }) => (
               <li key={w.id}>

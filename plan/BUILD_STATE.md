@@ -28,6 +28,10 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 ## Current focus
 - Phase: build complete — `v0.1.0-preview` (final report at the end of this file)
 - Next: owner review of the open questions below; then the deploy plan (D-106) once the owner lifts the deploy rule
+- 2026-10-01 font change (D-135): Source Serif 4 / Fustat / Commit Mono by role, sizes unchanged.
+  The serif size classes carry the serif via the base-layer role rule in globals.css; interface
+  text at a prose size needs `font-sans`. Commit Mono lives in `brand/fonts/` (OFL licence beside
+  it). Not done by owner choice: the 8-style size scale, uppercase labels, colours, spacing.
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused

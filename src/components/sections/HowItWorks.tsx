@@ -15,7 +15,7 @@ const ASK = 2
 const CHECK = 3
 const REPLAY = 4
 
-const CHAR = 6.7 // Geist Mono at 11 px, per character
+const CHAR = 6.6 // Commit Mono at 11 px, per character (measured in Chromium)
 const chipW = (text: string) => Math.round(text.length * CHAR + 22)
 
 function Chip({ x, y, text, strong = false }: { x: number; y: number; text: string; strong?: boolean }) {

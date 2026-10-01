@@ -30,7 +30,7 @@ export function KeysDemo() {
         className="console-modal m-auto w-[min(460px,calc(100vw-2rem))] rounded-md border border-surface-rule bg-surface p-0 text-surface-fg shadow-menu"
       >
         <div className="flex items-center justify-between border-b border-surface-rule py-2 pr-2 pl-5">
-          <h2 id="key-title" className="text-small font-semibold">
+          <h2 id="key-title" className="text-small font-medium">
             {keys.dialog.title}
           </h2>
           <form method="dialog">
@@ -44,7 +44,7 @@ export function KeysDemo() {
         </div>
         {done ? (
           <div className="px-5 py-6">
-            <p role="status" className="flex items-start gap-2.5 text-body">
+            <p role="status" className="flex items-start gap-2.5 font-sans text-body">
               <Icon name="info" className="mt-0.5" />
               {keys.dialog.done}
             </p>
@@ -69,7 +69,7 @@ export function KeysDemo() {
                 name="name"
                 maxLength={64}
                 autoComplete="off"
-                className="h-11 rounded-md border border-surface-subtle bg-surface-raise px-3.5 text-body text-surface-fg"
+                className="h-11 rounded-md border border-surface-subtle bg-surface-raise px-3.5 font-sans text-body text-surface-fg"
               />
             </div>
             <fieldset>

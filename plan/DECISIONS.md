@@ -653,3 +653,25 @@ known to be negation-blind (arXiv 2504.00584), hence "nearness is not meaning".
 **Alternatives**: present tense for Moth (contradicts releases.md); pure similarity settling
 (contradicts the audit ≠ inspection example).
 **Status**: Decided (owner instruction in session). CONTENT.md §1 voice predates this framing.
+
+### D-135 — Owner-directed font change: Source Serif 4, Fustat, Commit Mono (2026-10-01)
+**Context**: The owner supplied a type system and asked for the fonts only (no colours, spacing,
+layout, measures or casing). Roles: prose → serif, interface → sans, data → mono.
+**Decision**: Source Serif 4 for headlines, ledes and body text (roman preloaded as the hero's LCP
+face; italic instance not preloaded); Fustat for interface text (the body default); Commit Mono
+v1.143 variable woff2 (`brand/fonts/`, SIL OFL licence alongside; not on Google Fonts, so
+`next/font/local`) for labels, meta and code. Mona Sans and Geist Mono removed. Every serif size
+class carries the serif and its weight through one base-layer role rule (Display 350, others 400;
+−25 on ink/deep surfaces and the console's dark theme via `--serif-shift`, restated 0 on light
+surfaces so nested cards reset); interface text at a prose size opts out with `font-sans` and
+keeps Fustat's 400/500 unshifted. Line height and tracking of the serif
+tokens follow the owner's spec (Display 1.02/−0.03em, Title 1.1/−0.02em, Heading 1.2/−0.01em,
+Lead 1.45, Body 1.6); sizes unchanged. Weights limited to serif 350/400, Fustat 400/500, mono 400:
+no bold headlines, `font-semibold` gone, prose `strong` renders as serif italic (italic is the only
+emphasis; one italic accent word per headline allowed). Display headlines shift −0.04em for
+optical alignment; inline code is 0.88em. Fallback metrics come from next/font (size-adjust).
+Supersedes the family rows of DESIGN §3.1/§3.3 and D-129's "Mona Sans / Geist Mono".
+**Alternatives**: the owner's full 8-style size scale, uppercase labels and colours (out of scope
+by owner instruction); keeping Geist Mono (owner chose Commit Mono); renaming ~95 class uses to
+carry the family per usage (the role rule does it in one place).
+**Status**: Decided (owner instruction in session).

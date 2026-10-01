@@ -1,30 +1,32 @@
-import { Geist_Mono, Mona_Sans, Source_Serif_4 } from 'next/font/google'
+import { Fustat, Source_Serif_4 } from 'next/font/google'
+import localFont from 'next/font/local'
 
-// next/font downloads these at build time and serves them from our origin: no runtime requests.
-// Mona Sans keeps its wdth axis: headlines are set semi-expanded with `font-stretch`.
-const mona = Mona_Sans({
+// next/font serves every face from our origin with a size-adjusted fallback: no runtime requests,
+// no layout jump on swap. Roles (D-135): prose in the serif, interface in Fustat, data in mono.
+const fustat = Fustat({
   subsets: ['latin'],
   display: 'swap',
-  axes: ['wdth'],
-  variable: '--font-mona',
-  preload: true,
-})
-
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-geist-mono',
+  variable: '--font-fustat',
   preload: false,
 })
 
-// The serif is for long-form article prose only, so neither instance is preloaded.
+// Not on Google Fonts: the official v1.143 variable file (brand/fonts, SIL OFL 1.1).
+const commitMono = localFont({
+  src: '../../brand/fonts/CommitMono-VF.woff2',
+  weight: '200 700',
+  display: 'swap',
+  variable: '--font-commit-mono',
+  preload: false,
+})
+
+// The roman carries the hero headline (LCP), so it is the only face preloaded.
 const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
   display: 'swap',
   style: ['normal'],
   axes: ['opsz'],
   variable: '--font-source-serif',
-  preload: false,
+  preload: true,
 })
 
 const sourceSerifItalic = Source_Serif_4({
@@ -36,4 +38,4 @@ const sourceSerifItalic = Source_Serif_4({
   preload: false,
 })
 
-export const fontVars = [mona, geistMono, sourceSerif, sourceSerifItalic].map((f) => f.variable).join(' ')
+export const fontVars = [fustat, commitMono, sourceSerif, sourceSerifItalic].map((f) => f.variable).join(' ')

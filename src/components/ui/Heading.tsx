@@ -7,7 +7,7 @@ const SIZE = {
   'display-l': 'font-display text-display-l',
   'display-m': 'font-display text-display-m',
   'display-s': 'font-display text-display-s',
-  title: 'font-sans text-title',
+  title: 'font-display text-title',
 } as const
 
 export type HeadingSize = keyof typeof SIZE

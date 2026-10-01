@@ -12,7 +12,7 @@ export default function KeysPage() {
   return (
     <div className="mx-auto w-full max-w-4xl px-5 pt-8 pb-16 md:px-10 md:pt-12">
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <p className="flex max-w-[52ch] items-start gap-2.5 text-body text-surface-muted">
+        <p className="flex max-w-[52ch] items-start gap-2.5 font-sans text-body text-surface-muted">
           <Icon name="lock" className="mt-0.5 text-surface-subtle" />
           {keys.note}
         </p>

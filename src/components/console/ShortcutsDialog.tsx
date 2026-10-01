@@ -65,7 +65,7 @@ export function ShortcutsDialog() {
         className="console-modal m-auto w-[min(440px,calc(100vw-2rem))] rounded-md border border-surface-rule bg-surface p-0 text-surface-fg shadow-menu"
       >
         <div className="flex items-center justify-between border-b border-surface-rule py-2 pr-2 pl-5">
-          <h2 id="shortcuts-title" className="font-sans text-small font-semibold">
+          <h2 id="shortcuts-title" className="font-sans text-small font-medium">
             {shortcuts.title}
           </h2>
           <form method="dialog">

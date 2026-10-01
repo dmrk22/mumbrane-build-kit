@@ -123,7 +123,7 @@ export function ResultCard({
         )}
       </div>
 
-      <div className="space-y-1.5 px-5 pt-3 pb-4 text-body text-surface-fg [&_code]:rounded-md [&_code]:bg-surface-raise [&_code]:px-1 [&_code]:py-px [&_code]:font-mono [&_code]:text-code">
+      <div className="space-y-1.5 px-5 pt-3 pb-4 font-sans text-body text-surface-fg [&_code]:rounded-md [&_code]:bg-surface-raise [&_code]:px-1 [&_code]:py-px [&_code]:font-mono [&_code]:text-code">
         {r ? (
           answerLines(r).map((line, i) => (
             <p key={line} className={cx(i > 0 && 'text-small text-surface-muted')}>

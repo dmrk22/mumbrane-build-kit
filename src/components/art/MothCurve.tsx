@@ -45,7 +45,7 @@ export function MothCurve({ className }: { className?: string }) {
       </InView>
       <figcaption className="grid gap-3 border-t border-surface-rule pt-4 font-serif text-caption text-surface-muted xl:grid-cols-[auto_1fr] xl:gap-8">
         <p>
-          <span className="font-semibold text-surface-fg">Fig. 1.</span> Fay’s butterfly curve, 0 ≤{' '}
+          <span className="text-surface-fg">Fig. 1.</span> Fay’s butterfly curve, 0 ≤{' '}
           <i className="font-serif-italic">t</i> ≤ 12π.
         </p>
         <p className="font-serif-italic xl:text-right">

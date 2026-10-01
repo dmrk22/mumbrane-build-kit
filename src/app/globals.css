@@ -62,52 +62,44 @@
   --color-refused: var(--color-lilac);      /* language refusal */
   --color-limit: var(--color-paper-3);      /* resource stop / incomplete / incompatible */
 
-  /* Type families — variables are provided by next/font in src/app/fonts.ts.
-     Mona Sans carries everything you read and click (its wdth axis is set with font-stretch);
-     Geist Mono labels figures and data; the serif is kept for long-form article prose only. */
-  --font-sans: var(--font-mona), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Type families — variables are provided by next/font in src/app/fonts.ts (D-135).
+     Prose (headlines, ledes, body) reads in Source Serif 4; interface in Fustat; data in
+     Commit Mono. */
+  --font-sans: var(--font-fustat), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-source-serif), ui-serif, Georgia, "Times New Roman", serif;
   --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), ui-serif, Georgia, serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-mono: var(--font-commit-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Type scale — fluid between 375px and 1440px viewports. Display sizes are set in Mona Sans. */
+  /* Type scale — fluid between 375px and 1440px viewports. Display sizes down to `article` are
+     serif; their weight comes from the role rule in the base layer (it drops on dark grounds). */
   --text-display-xl: clamp(3.25rem, 1.2rem + 8.4vw, 9.25rem);
-  --text-display-xl--line-height: 0.9;
-  --text-display-xl--letter-spacing: -0.045em;
-  --text-display-xl--font-weight: 480;
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.03em;
   /* The home hero's headline: between display-l and display-xl, two lines beside the field. */
   --text-hero: clamp(3rem, 1.5rem + 4.4vw, 6.25rem);
-  --text-hero--line-height: 0.94;
-  --text-hero--letter-spacing: -0.042em;
-  --text-hero--font-weight: 480;
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.03em;
   --text-display-l: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
-  --text-display-l--line-height: 0.98;
-  --text-display-l--letter-spacing: -0.038em;
-  --text-display-l--font-weight: 480;
+  --text-display-l--line-height: 1.02;
+  --text-display-l--letter-spacing: -0.03em;
   --text-display-m: clamp(1.875rem, 1.1rem + 3.1vw, 3.75rem);
-  --text-display-m--line-height: 1.04;
-  --text-display-m--letter-spacing: -0.032em;
-  --text-display-m--font-weight: 500;
+  --text-display-m--line-height: 1.1;
+  --text-display-m--letter-spacing: -0.02em;
   --text-display-s: clamp(1.5rem, 1.2rem + 1.25vw, 2.375rem);
-  --text-display-s--line-height: 1.1;
-  --text-display-s--letter-spacing: -0.024em;
-  --text-display-s--font-weight: 500;
+  --text-display-s--line-height: 1.2;
+  --text-display-s--letter-spacing: -0.01em;
   --text-title: clamp(1.1875rem, 1.1rem + 0.38vw, 1.4375rem);
-  --text-title--line-height: 1.22;
-  --text-title--letter-spacing: -0.012em;
-  --text-title--font-weight: 560;
+  --text-title--line-height: 1.2;
+  --text-title--letter-spacing: -0.01em;
   --text-lede: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
-  --text-lede--line-height: 1.5;
-  --text-lede--letter-spacing: -0.004em;
-  --text-lede--font-weight: 400;
+  --text-lede--line-height: 1.45;
+  --text-lede--letter-spacing: 0em;
   --text-body: 1.0625rem;
-  --text-body--line-height: 1.62;
+  --text-body--line-height: 1.6;
   --text-body--letter-spacing: 0em;
-  --text-body--font-weight: 400;
   --text-article: clamp(1.1875rem, 1.13rem + 0.24vw, 1.3125rem);
-  --text-article--line-height: 1.62;
-  --text-article--letter-spacing: -0.003em;
-  --text-article--font-weight: 400;
+  --text-article--line-height: 1.6;
+  --text-article--letter-spacing: 0em;
   --text-small: 0.9375rem;
   --text-small--line-height: 1.5;
   --text-small--letter-spacing: 0em;
@@ -119,7 +111,7 @@
   --text-label: 0.6875rem;
   --text-label--line-height: 1.35;
   --text-label--letter-spacing: 0.02em;
-  --text-label--font-weight: 450;
+  --text-label--font-weight: 400;
   --text-code: 0.8125rem;
   --text-code--line-height: 1.7;
   --text-code--letter-spacing: 0em;
@@ -179,31 +171,31 @@
     --surface-bg: var(--color-paper); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
     --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper-2);
     --surface-accent: var(--color-ice-fg);
-    color-scheme: light;
+    color-scheme: light; --serif-shift: 0;
   }
   [data-surface="paper-2"] {
     --surface-bg: var(--color-paper-2); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
     --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper);
     --surface-accent: var(--color-ice-fg);
-    color-scheme: light;
+    color-scheme: light; --serif-shift: 0;
   }
   [data-surface="ink"] {
     --surface-bg: var(--color-ink); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
     --surface-subtle: var(--color-on-dark-3); --surface-rule: var(--color-rule-dark); --surface-raise: var(--color-ink-2);
     --surface-accent: var(--color-ice);
-    color-scheme: dark;
+    color-scheme: dark; --serif-shift: -25;
   }
   [data-surface="deep"] {
     --surface-bg: var(--color-deep); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
     --surface-subtle: var(--color-on-dark-3); --surface-rule: oklch(0.96 0.004 95 / 0.14); --surface-raise: var(--color-ink);
     --surface-accent: var(--color-ice);
-    color-scheme: dark;
+    color-scheme: dark; --serif-shift: -25;
   }
   [data-surface="ice"] {
     --surface-bg: var(--color-ice-soft); --surface-fg: var(--color-text); --surface-muted: var(--color-ice-ink);
     --surface-subtle: var(--color-ice-ink); --surface-rule: oklch(0.18 0.004 260 / 0.16); --surface-raise: var(--color-paper);
     --surface-accent: var(--color-ice-fg);
-    color-scheme: light;
+    color-scheme: light; --serif-shift: 0;
   }
   @media (prefers-contrast: more) {
     :root, [data-surface="paper"], [data-surface="paper-2"] { --surface-muted: var(--color-text); --surface-subtle: var(--color-text-2); }
@@ -238,18 +230,33 @@
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
     min-height: 100dvh;
-    font-feature-settings: "ss01", "cv11";
   }
 
-  /* Mona Sans headlines run semi-expanded; the serif uses real optical sizes. */
-  h1, h2, h3, .font-display { font-stretch: 112%; }
-  .font-serif, .font-serif-italic { font-stretch: normal; font-feature-settings: "kern", "liga", "onum"; }
+  /* Roles (D-135): prose sizes read in the serif; interface text stays Fustat (the body default)
+     and opts out at a prose size with `font-sans`, which wins from the utilities layer. Light text
+     on dark grounds reads heavier, so dark surfaces set --serif-shift: -25. */
+  .text-hero, .text-display-xl, .text-display-l, .text-display-m, .text-display-s,
+  .text-title, .text-lede, .text-body, .text-article {
+    font-family: var(--font-serif);
+  }
+  /* The weights are the serif's: text that opted out keeps Fustat's 400/500, unshifted. */
+  :is(.text-display-m, .text-display-s, .text-title, .text-lede, .text-body, .text-article):not(.font-sans, .font-mono) {
+    font-weight: calc(400 + var(--serif-shift, 0));
+  }
+  :is(.text-hero, .text-display-xl, .text-display-l):not(.font-sans, .font-mono) {
+    font-weight: calc(350 + var(--serif-shift, 0));
+    margin-inline-start: -0.04em; /* optical alignment: the serif's side bearing at display size */
+  }
+  .font-serif, .font-serif-italic { font-feature-settings: "kern", "liga", "onum"; }
 
   h1, h2, h3 { text-wrap: balance; }
   p, li, dd, figcaption, blockquote { text-wrap: pretty; }
 
-  /* Serif italics come from their own font instance (tokens: --font-serif-italic). */
-  .font-serif em, .font-serif i, .font-serif-italic { font-family: var(--font-serif-italic); font-style: italic; }
+  /* Serif italic is the only emphasis, from its own font instance (tokens: --font-serif-italic).
+     A headline may carry one italic accent word. */
+  :is(.font-serif, .font-display, .text-hero, .text-display-xl, .text-display-l, .text-display-m,
+    .text-display-s, .text-title, .text-lede, .text-body, .text-article) :is(em, i),
+  .font-serif-italic { font-family: var(--font-serif-italic); font-style: italic; }
 
   code, kbd, samp, pre { font-family: var(--font-mono); font-variant-ligatures: none; }
   p code, li code, td code { overflow-wrap: anywhere; }
@@ -287,15 +294,9 @@
   }
 }
 
-/* Display type: Mona Sans, semi-expanded. */
+/* Headlines: the serif (D-135). */
 @utility font-display {
-  font-family: var(--font-sans);
-  font-stretch: 112%;
-  font-feature-settings: "ss01";
-}
-@layer base {
-  /* Headlines carry no single-word accents: inline emphasis in a display line stays upright. */
-  .font-display em, .font-display i { font-style: normal; }
+  font-family: var(--font-serif);
 }
 
 /* Links inside running text (DESIGN §3.4): 1 px underline, thickens on hover, no colour jump. */

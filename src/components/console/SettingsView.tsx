@@ -17,7 +17,7 @@ function Row({ title, text, children }: { title: string; text?: string; children
   return (
     <section className="grid gap-4 border-b border-surface-rule py-7 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:gap-10">
       <div>
-        <h2 className="text-small font-semibold text-surface-fg">{title}</h2>
+        <h2 className="text-small font-medium text-surface-fg">{title}</h2>
         {text && <p className="mt-1 text-small text-surface-muted">{text}</p>}
       </div>
       {children && <div className="min-w-0">{children}</div>}

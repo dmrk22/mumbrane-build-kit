@@ -207,3 +207,13 @@ test('@console outlined chip controls share one border colour (the chip border)'
   ])
   expect(colours).toHaveLength(1)
 })
+
+// D-135 regressions: on the dark console the serif drops 25 in weight (the console's dark theme
+// must set --serif-shift too), and Fustat text at a prose size keeps 400 (the shift is the serif's).
+test('@console dark theme: the serif lightens, Fustat keeps its weight', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'dark' })
+  await page.goto('/console')
+  await expect(page.locator('h1')).toHaveCSS('font-weight', '375')
+  await page.goto('/console/keys')
+  await expect(page.locator('p.font-sans.text-body').first()).toHaveCSS('font-weight', '400')
+})

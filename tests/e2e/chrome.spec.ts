@@ -31,6 +31,50 @@ test('@smoke the home hero text fits a 320 px phone', async ({ page }) => {
   }
 })
 
+// D-135: prose in the serif, interface in Fustat, data in Commit Mono; all from our origin, and
+// only the hero's serif preloaded.
+test('@smoke fonts follow their roles and load from our origin', async ({ page }) => {
+  await page.goto('/')
+  const result = await page.evaluate(async () => {
+    await document.fonts.ready
+    const family = (sel: string) => {
+      const el = document.querySelector(sel)
+      return el ? getComputedStyle(el).fontFamily.split(',')[0]?.replaceAll('"', '') : 'missing'
+    }
+    const preloads = [...document.querySelectorAll('link[rel=preload][as=font]')].map((l) =>
+      (l.getAttribute('href') ?? '').split('/').pop(),
+    )
+    const preloaded = [...document.styleSheets]
+      .flatMap((s) => [...s.cssRules])
+      .filter((r): r is CSSFontFaceRule => r instanceof CSSFontFaceRule)
+      .filter((r) => preloads.some((p) => p && r.cssText.includes(p)))
+      .map(
+        (r) =>
+          `${r.style.getPropertyValue('font-family').replaceAll('"', '')} ${r.style.getPropertyValue('font-style')}`,
+      )
+    const origins = performance
+      .getEntriesByType('resource')
+      .filter((r) => r.name.includes('.woff2'))
+      .map((r) => new URL(r.name).origin)
+    return {
+      headline: family('#home-title'),
+      lede: family('#home-title + p'),
+      nav: family('header a[href]:not([href="/"])'),
+      label: family('main .font-mono'),
+      preloaded,
+      foreign: origins.filter((o) => o !== location.origin),
+    }
+  })
+  expect(result).toEqual({
+    headline: 'Source Serif 4',
+    lede: 'Source Serif 4',
+    nav: 'Fustat',
+    label: 'commitMono',
+    preloaded: ['Source Serif 4 normal'],
+    foreign: [],
+  })
+})
+
 test.describe('@smoke layout with motion', () => {
   // Regression: a hidden-until-its-step window, translated 24 px further right, pushed the pinned
   // Moth demo 8 px past the 1440 px viewport. Checked with motion on, after scrolling through.

@@ -183,7 +183,7 @@ function Block({
         <span className="flex items-end justify-between gap-3">
           <span
             className={cx(
-              'max-w-[24ch] font-display text-title leading-tight font-medium text-pretty',
+              'max-w-[24ch] font-display text-title leading-tight text-pretty',
               block.wide && 'xl:max-w-[28ch]',
             )}
           >

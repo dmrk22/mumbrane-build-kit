@@ -17,28 +17,25 @@
       font-size: var(--text-display-s);
       line-height: var(--text-display-s--line-height);
       letter-spacing: var(--text-display-s--letter-spacing);
-      font-weight: var(--text-display-s--font-weight);
     }
     & h3 {
       margin-top: 40px;
-      font-family: var(--font-sans);
       font-size: var(--text-title);
       line-height: var(--text-title--line-height);
       letter-spacing: var(--text-title--letter-spacing);
-      font-weight: var(--text-title--font-weight);
     }
     & h2 + *,
     & h3 + * {
       margin-top: 16px;
     }
+    /* Serif italic is the only emphasis: no bold inside sentences (D-135). */
     & em,
-    & i {
-      font-family: var(--font-serif-italic);
-      font-style: italic;
-    }
+    & i,
     & strong,
     & b {
-      font-weight: 600;
+      font-family: var(--font-serif-italic);
+      font-style: italic;
+      font-weight: inherit;
     }
     & a {
       @apply link-prose;
@@ -46,7 +43,7 @@
     /* Inline code only: code blocks (<pre>) style themselves. */
     & :not(pre) > code {
       font-family: var(--font-mono);
-      font-size: 0.85em;
+      font-size: 0.88em; /* matches the serif's letter heights */
       font-variant-numeric: normal;
       background-color: var(--surface-raise);
       padding: 0.1em 0.3em;

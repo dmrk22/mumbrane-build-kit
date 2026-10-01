@@ -67,7 +67,7 @@ export function AskBar({
             onKeyDown={onKey}
             placeholder={copy.placeholder(world.name, world.examples[0] ?? '')}
             aria-describedby={text.length > COUNTER_FROM ? 'ask-count' : undefined}
-            className="field-sizing-content max-h-32 min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 text-body text-surface-fg outline-none placeholder:text-surface-subtle"
+            className="field-sizing-content max-h-32 min-h-11 flex-1 resize-none bg-transparent px-3 py-2.5 font-sans text-body text-surface-fg outline-none placeholder:text-surface-subtle"
           />
           <Button type="submit" className="shrink-0">
             {copy.submit}

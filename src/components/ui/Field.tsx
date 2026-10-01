@@ -8,7 +8,7 @@ import { Icon } from './Icon'
 type Meta = { id: string; label: ReactNode; hint?: ReactNode; error?: ReactNode | undefined }
 
 const CONTROL =
-  'w-full rounded-md border bg-paper px-3.5 text-body text-text transition-[color,background-color,border-color] duration-(--duration-micro) ease-out placeholder:text-text-3 disabled:cursor-not-allowed disabled:bg-paper-2 disabled:text-text-3'
+  'w-full rounded-md border bg-paper px-3.5 font-sans text-body text-text transition-[color,background-color,border-color] duration-(--duration-micro) ease-out placeholder:text-text-3 disabled:cursor-not-allowed disabled:bg-paper-2 disabled:text-text-3'
 
 function describedBy({ id, hint, error }: Meta): string | undefined {
   const ids = [hint ? `${id}-hint` : '', error ? `${id}-error` : ''].filter(Boolean)

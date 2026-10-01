@@ -58,7 +58,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
               {nav.menus.map((menu) => (
                 <li key={menu.id}>
                   <details name="mobile-nav" className="nav-accordion group">
-                    <summary className="flex h-14 cursor-pointer list-none items-center justify-between text-title [&::-webkit-details-marker]:hidden">
+                    <summary className="flex h-14 cursor-pointer list-none items-center justify-between font-sans text-title [&::-webkit-details-marker]:hidden">
                       {menu.label}
                       <Icon
                         name="chevron-down"
@@ -75,7 +75,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
                             aria-current={pathname === l.href ? 'page' : undefined}
                             className="flex min-h-11 flex-col justify-center py-2 aria-[current=page]:underline"
                           >
-                            <span className="text-body">{l.label}</span>
+                            <span className="font-sans text-body">{l.label}</span>
                             {'description' in l && l.description && (
                               <span className="text-small text-surface-muted">{l.description}</span>
                             )}
@@ -93,7 +93,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
                     prefetch={false}
                     onClick={close}
                     aria-current={pathname === l.href ? 'page' : undefined}
-                    className="flex h-14 items-center text-title aria-[current=page]:underline"
+                    className="flex h-14 items-center font-sans text-title aria-[current=page]:underline"
                   >
                     {l.label}
                   </SmartLink>

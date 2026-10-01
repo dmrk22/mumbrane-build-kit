@@ -198,7 +198,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
             className="mb-5 flex items-center gap-3 rounded-md border border-surface-rule bg-surface py-2.5 pr-2.5 pl-4 xl:hidden"
           >
             <div className="min-w-0 flex-1">
-              <p className="truncate text-small font-semibold text-surface-fg">{world.name}</p>
+              <p className="truncate text-small font-medium text-surface-fg">{world.name}</p>
               <p className="font-mono text-label text-surface-subtle">
                 <span key={build.id} className="console-fade">
                   {worldCopy.build(build.id, true)}
@@ -283,7 +283,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
         className="console-scroll hidden border-l border-surface-rule bg-surface outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-surface-accent lg:block"
       >
         <div className="sticky top-0 z-10 flex h-12 items-center border-b border-surface-rule bg-surface px-5">
-          <h2 id="evidence-title" className="font-sans text-small font-semibold text-surface-fg">
+          <h2 id="evidence-title" className="font-sans text-small font-medium text-surface-fg">
             {evidenceCopy.title}
           </h2>
         </div>
@@ -303,7 +303,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
         className="console-drawer console-scroll bg-surface text-surface-fg shadow-menu"
       >
         <div className="sticky top-0 z-10 flex h-12 items-center justify-between border-b border-surface-rule bg-surface pr-2 pl-5">
-          <h2 id="drawer-title" className="text-small font-semibold">
+          <h2 id="drawer-title" className="text-small font-medium">
             {worldCopy.label}: {world.name}
           </h2>
           <form method="dialog">

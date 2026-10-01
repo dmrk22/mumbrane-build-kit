@@ -102,7 +102,7 @@ export function ConsoleChrome({ children }: { children: ReactNode }) {
           <SmartLink href="/" className="-ml-1 grid size-9 shrink-0 place-items-center" aria-label={nav.home}>
             <Mark width={28} />
           </SmartLink>
-          <p className="hidden font-display text-small font-semibold text-surface-fg sm:block">{nav.label}</p>
+          <p className="hidden text-small font-medium text-surface-fg sm:block">{nav.label}</p>
           <span aria-hidden="true" className="hidden text-surface-subtle sm:block">
             /
           </span>
