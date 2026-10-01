@@ -194,3 +194,16 @@ test.describe('@console', () => {
     await expect(page.getByText('No questions yet in this session.')).toBeVisible()
   })
 })
+
+test('@console pill controls share one border colour (the chip border)', async ({ page }) => {
+  // Below 1280 px the world drawer's pill shows next to the suggestion chips.
+  await page.setViewportSize({ width: 1024, height: 900 })
+  await page.goto('/console/playground?world=purchasing')
+  const pills = page.locator('button.rounded-pill.border').filter({ visible: true })
+  await expect(pills.first()).toBeVisible()
+  expect(await pills.count()).toBeGreaterThan(1)
+  const colours = await pills.evaluateAll((els) => [
+    ...new Set(els.map((e) => getComputedStyle(e).borderTopColor)),
+  ])
+  expect(colours).toHaveLength(1)
+})

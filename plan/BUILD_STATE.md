@@ -345,7 +345,8 @@ responsible-disclosure. Also `/md/*` (12 markdown documents), `/llms.txt`, robot
 manifest, `security.txt`, 11 generated social cards + the brand default.
 
 **Tests** (all green on the final tree): 100 unit · 825 e2e passed on chromium + mobile + webkit
-@smoke, 91 skipped by design · 42 perf · 11 OG captures. Full WebKit run: @security green; see K-2.
+@smoke, 91 skipped by design (+ the console pill-border test added afterwards, 2/2 on the same
+production build) · 42 perf · 11 OG captures. Full WebKit run: @security green; see K-2.
 
 **Budgets** (limit → actual)
 - Source files 230 → 212 · components 80 → 74 · dependencies 8 / 11 → 8 / 11 (exact pins)
