@@ -65,7 +65,7 @@ export function UsageView() {
 
   return (
     <div className="space-y-6">
-      <h2 className="font-mono text-label text-surface-subtle uppercase">{usage.title}</h2>
+      <h2 className="font-serif-italic text-small text-surface-subtle">{usage.title}</h2>
       <dl className="grid gap-4 sm:grid-cols-2">
         {[
           { label: usage.asked, value: String(entries.length) },

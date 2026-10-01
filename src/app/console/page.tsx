@@ -23,7 +23,7 @@ export default function ConsoleEntry() {
     <div className="mx-auto w-full max-w-5xl px-5 pt-10 pb-16 md:px-10 md:pt-16">
       <h1 className="font-display text-display-s">{entry.title}</h1>
       <p className="mt-4 max-w-[58ch] text-body text-surface-muted">{entry.text}</p>
-      <ol className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-label text-surface-subtle uppercase">
+      <ol className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif-italic text-small text-surface-subtle">
         {entry.steps.map((s, i) => (
           <li key={s} className="flex items-center gap-3">
             <span className="tabular-nums text-surface-fg">{String(i + 1).padStart(2, '0')}</span>

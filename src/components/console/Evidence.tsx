@@ -37,7 +37,7 @@ function StatusMark({ status }: { status: Status }) {
 
 function StatusWord({ status }: { status: Status }) {
   return (
-    <span className={cx('font-mono text-label whitespace-nowrap uppercase', GLYPH[status].tone)}>
+    <span className={cx('font-serif-italic text-small whitespace-nowrap', GLYPH[status].tone)}>
       {evidence.status[status]}
     </span>
   )
@@ -189,7 +189,7 @@ export function Evidence({
       )}
 
       <section>
-        <H className="mb-3 font-mono text-label text-surface-subtle uppercase">{evidence.trace}</H>
+        <H className="mb-3 font-serif-italic text-small text-surface-subtle">{evidence.trace}</H>
         {result.trace ? (
           <TraceNode trace={result.trace} onCite={onCite} />
         ) : (
@@ -198,7 +198,7 @@ export function Evidence({
       </section>
 
       <section>
-        <H className="mb-3 font-mono text-label text-surface-subtle uppercase">{evidence.build}</H>
+        <H className="mb-3 font-serif-italic text-small text-surface-subtle">{evidence.build}</H>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="font-mono text-code text-surface-fg">{result.buildId}</span>
           <span className="text-small text-surface-muted">{evidence.variant(variant?.label ?? null)}</span>

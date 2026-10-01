@@ -142,7 +142,7 @@ export const RULES: readonly Rule[] = [
   {
     id: 'no-raw-colour',
     re: /(?<![\w&])#[0-9a-fA-F]{3}(?:[0-9a-fA-F]{3}(?:[0-9a-fA-F]{2})?)?\b|rgba?\(|hsla?\(|oklch\(/,
-    hint: 'Use brand tokens (text-ink, bg-ultramarine, …).',
+    hint: 'Use brand tokens (text-ink, bg-moss, …).',
     applies: (f) => strict(f) && inComponents(f),
   },
   {

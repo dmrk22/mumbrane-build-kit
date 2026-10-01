@@ -228,7 +228,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
 
           <section aria-labelledby="results-title" className="mt-10">
             <div className="flex items-baseline justify-between border-b border-surface-rule pb-2">
-              <h2 id="results-title" className="font-mono text-label text-surface-subtle uppercase">
+              <h2 id="results-title" className="font-serif-italic text-small text-surface-subtle">
                 {copy.label}
               </h2>
               {entries.length > 0 && (

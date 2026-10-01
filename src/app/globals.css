@@ -277,6 +277,7 @@
   /* Martian Mono runs wide: code is set at its condensed width, and long tokens may break. */
   code, kbd, samp, pre { font-family: var(--font-mono); font-variant-ligatures: none; font-stretch: 87.5%; }
   p code, li code, td code { overflow-wrap: anywhere; }
+  .font-mono { font-stretch: 87.5%; }
 
   ::selection { background-color: var(--color-sulfur); color: var(--color-ink); }
 
