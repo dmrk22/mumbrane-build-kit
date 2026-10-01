@@ -87,6 +87,14 @@ test.describe('@motion header collapse', () => {
 })
 
 test.describe('header theming', () => {
+  test('the scrolled header has no dividing line under it', async ({ page }) => {
+    await page.goto(MISSING)
+    await page.evaluate(() => window.scrollTo(0, 400))
+    const h = page.locator(header)
+    await expect(h).toHaveAttribute('data-scrolled', 'true')
+    await expect(h).toHaveCSS('border-bottom-width', '0px')
+  })
+
   test('the header adopts the surface under it', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 400 }) // short enough that the footer passes under the header
     await page.goto(MISSING)

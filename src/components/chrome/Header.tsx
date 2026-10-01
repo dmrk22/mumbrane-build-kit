@@ -164,9 +164,9 @@ export function Header({
         data-scrolled={scrolled || open !== null}
         data-collapsed={collapsed}
         className={cx(
-          'sticky top-0 z-40 border-b border-transparent bg-transparent text-surface-fg print:hidden',
-          'transition-[background-color,border-color,color] duration-[240ms] ease-out',
-          'data-[scrolled=true]:border-surface-rule data-[scrolled=true]:bg-surface/86 data-[scrolled=true]:backdrop-blur-[14px] data-[scrolled=true]:backdrop-saturate-140',
+          'sticky top-0 z-40 bg-transparent text-surface-fg print:hidden',
+          'transition-[background-color,color] duration-[240ms] ease-out',
+          'data-[scrolled=true]:bg-surface/86 data-[scrolled=true]:backdrop-blur-[14px] data-[scrolled=true]:backdrop-saturate-140',
         )}
       >
         <div className="mx-auto flex h-14 w-full max-w-360 items-center px-5 sm:px-6 lg:px-10">
