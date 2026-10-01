@@ -187,6 +187,11 @@ test.describe('@motion home hero membrane (D-137)', () => {
     await hero(page).getByRole('link', { name: HOME.hero.secondary.label }).focus()
     await page.keyboard.press(browserName === 'webkit' ? 'Alt+Tab' : 'Tab')
     await expect(drop(page)).toBeFocused()
+    // Regressions: sr-only/not-sr-only stripped the chip's padding (17 px tall), and a mask on the
+    // figure's wrapper faded the chip out; the fade belongs to the drawings only.
+    await expect(drop(page)).toHaveCSS('opacity', '1')
+    expect((await drop(page).boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(28)
+    await expect(hero(page).locator('.field')).toHaveCSS('mask-image', 'none')
     await page.keyboard.press('Enter')
     await expect(hero(page).locator('.field')).toHaveAttribute('data-state', 'rest', { timeout: 20_000 })
     await expect(hero(page).locator('[aria-live="polite"]')).toHaveText(/came to rest/)
