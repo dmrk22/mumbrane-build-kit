@@ -276,13 +276,16 @@
   }
 }
 
-/* On dark grounds a window keeps its paper body and loses the printed shadow for a fine edge. */
-@layer components {
+/* Dark grounds: lifted title bar + light edge; utilities layer so it beats the window's own. */
+@layer utilities {
   :is([data-surface="ink"], [data-surface="deep"]) .instrument-window {
     box-shadow:
-      0 0 0 1px var(--color-rule-dark),
+      0 0 0 1px color-mix(in oklab, var(--color-on-dark) 22%, transparent),
       0 40px 80px -40px oklch(0 0 0 / 0.6);
     border-color: transparent;
+  }
+  :is([data-surface="ink"], [data-surface="deep"]) .instrument-window > figcaption {
+    background-color: var(--color-ink-3);
   }
 }
 

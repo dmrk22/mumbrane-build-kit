@@ -160,3 +160,16 @@ test('@smoke the Moth hero shows Fig. 1, the butterfly curve with its equations'
   await expect(fig.locator('figcaption')).toContainText('Fay’s butterfly curve')
   await expect(fig.locator('figcaption')).toContainText('x = sin t')
 })
+
+// Regression: on dark grounds the window's ink title bar, ink border and printed shadow vanished
+// into the section, and the dark-ground rule lost to the window's own utilities.
+test('@smoke on an ink section the release window stands off the ground', async ({ page }) => {
+  await page.goto('/')
+  const section = page.locator('#current-release')
+  const win = section.locator('.instrument-window')
+  const ground = await section.evaluate((el) => getComputedStyle(el).backgroundColor)
+  const bar = await win.locator('figcaption').evaluate((el) => getComputedStyle(el).backgroundColor)
+  expect(bar).not.toBe(ground)
+  await expect(win).toHaveCSS('border-top-color', 'rgba(0, 0, 0, 0)')
+  expect(await win.evaluate((el) => getComputedStyle(el).boxShadow)).toContain('0px 0px 0px 1px')
+})
