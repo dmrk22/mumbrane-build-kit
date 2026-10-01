@@ -687,3 +687,28 @@ roman is no longer preloaded. Italic accents apply to serif text only. Sizes, li
 tracking unchanged. Supersedes D-135's headline rows and the spec's "never bold a headline".
 **Alternatives**: a heavier serif headline (not the reference's look).
 **Status**: Decided (owner instruction in session).
+
+### D-137 — Home hero: the membrane (2026-10-02)
+**Context**: The owner asked for one widely recognised, sci-fi-feeling hero artifact that says what
+Mumbrane builds (D-134: data shapes a field, a question settles to an equilibrium, priority inputs
+pull harder) without breaking the paper, ink and one-accent look; "go all in at creativity".
+Prototyped live in the dev hero (browser pane, no files) before planning. The owner chose the
+rubber-sheet "spacetime fabric" as a borderless sheet (over the same sheet in a closed box, and
+over field lines in a box), click/tap to drop a question, and "play once, then rest".
+**Decision**: `FieldCanvas` (client) + `FieldStill` (server SVG, passed as children so its
+2,000-step settle never re-runs on hydration) over `src/lib/art/field.ts` (the sheet, pure) and
+`src/lib/art/scene.ts` (the timeline). Five facts dent a sheet pinned at |x|, |y| = 1: four light
+Lorentzian wells and a priority well shaped as a softened 1/r. A 1/r³ pull (Lorentzian) makes
+circular orbits unstable, so every orbit collapsed through the centre; the 1/r² pull of the
+priority well gives the coin-funnel spiral. Questions roll under slope-normalised gravity with light
+drag and a soft floor in each well; at rest needs low speed *and* a level slope (speed alone fired
+at the top of every swing, up to 0.36 from any well). Tested: every drop on a 19 × 19 grid rests
+within 0.01 of a well bottom; the opening is a spiral past a candidate, a light-well answer, a
+second spiral. The opening plays once; then the loop sleeps (`createLoop.setAwake`) until a click,
+a tap or the keyboard button, which announces where the question came to rest (`aria-live`).
+Desktop: a layer behind the right of the hero, masked toward the text and the horizon; below
+1024 px, in flow after the actions. Caption "Conceptual illustration…" (CONTENT §4); the canvas
+shows no numbers. Not electrostatics: a ball on a sheet, so D-134's Earnshaw caveat holds.
+**Alternatives**: the same sheet inside a closed-world box (prototyped; owner preferred no box);
+field lines in a box (flatter, more textbook); keeping the previous field figure.
+**Status**: Decided (owner instruction in session).

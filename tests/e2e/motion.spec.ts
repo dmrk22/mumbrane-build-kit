@@ -1,4 +1,5 @@
 import { expect, type Page, test } from '@playwright/test'
+import { HOME } from '../../src/content/home.ts'
 import { collectViolations, prod, ROUTES, visit } from './utils.ts'
 
 const LAB = '/lab/motion'
@@ -168,6 +169,36 @@ test.describe('@perf motion lab', () => {
     test.info().annotations.push({ type: 'gpu-timer', description: result })
     // Headless Chromium renders with SwiftShader and exposes no GPU timer: report, don't invent.
     test.skip(result === 'unavailable', 'EXT_disjoint_timer_query_webgl2 not exposed in headless Chromium')
+  })
+})
+
+test.describe('@motion home hero membrane (D-137)', () => {
+  const hero = (page: Page) => page.locator('section[aria-labelledby="home-title"]')
+  const drop = (page: Page) => page.getByRole('button', { name: HOME.hero.field.drop })
+
+  test('@smoke the keyboard drops a question that comes to rest, and hears where', async ({
+    page,
+    browserName,
+  }) => {
+    await page.goto('/')
+    await expect(hero(page).locator('.field')).toHaveAttribute('data-ready', 'true')
+    // The real keyboard path: from the hero's last action, Tab reaches the drop control. WebKit,
+    // like Safari, Tabs to buttons only with Option held (D-127).
+    await hero(page).getByRole('link', { name: HOME.hero.secondary.label }).focus()
+    await page.keyboard.press(browserName === 'webkit' ? 'Alt+Tab' : 'Tab')
+    await expect(drop(page)).toBeFocused()
+    await page.keyboard.press('Enter')
+    await expect(hero(page).locator('.field')).toHaveAttribute('data-state', 'rest', { timeout: 20_000 })
+    await expect(hero(page).locator('[aria-live="polite"]')).toHaveText(/came to rest/)
+  })
+
+  test('reduced motion: the still, no canvas run and no drop control', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/')
+    await expect(hero(page).locator('.field-poster')).toBeVisible()
+    await expect(drop(page)).toBeHidden()
+    await page.waitForTimeout(1000)
+    await expect(hero(page).locator('.field')).not.toHaveAttribute('data-ready', 'true')
   })
 })
 

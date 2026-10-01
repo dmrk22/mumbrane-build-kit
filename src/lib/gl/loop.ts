@@ -8,9 +8,11 @@ export type LoopDeps = {
 }
 
 export type Loop = {
-  /** Both must be true to run; the loop resumes where it paused (scene time never jumps). */
+  /** All three must be true to run; the loop resumes where it paused (scene time never jumps). */
   setOnScreen(onScreen: boolean): void
   setPageVisible(visible: boolean): void
+  /** False when the scene has nothing left to animate: it draws nothing until woken. */
+  setAwake(awake: boolean): void
   stop(): void
   readonly running: boolean
 }
@@ -25,6 +27,7 @@ export function createLoop(
   const minFrameMs = 1000 / fps
   let onScreen = false
   let pageVisible = true
+  let awake = true
   let stopped = false
   let id: number | undefined
   let last: number | undefined
@@ -46,7 +49,7 @@ export function createLoop(
   }
 
   const update = () => {
-    const shouldRun = onScreen && pageVisible && !stopped
+    const shouldRun = onScreen && pageVisible && awake && !stopped
     if (shouldRun && id === undefined) {
       last = undefined
       id = deps.raf(tick)
@@ -63,6 +66,10 @@ export function createLoop(
     },
     setPageVisible(v) {
       pageVisible = v
+      update()
+    },
+    setAwake(v) {
+      awake = v
       update()
     },
     stop() {

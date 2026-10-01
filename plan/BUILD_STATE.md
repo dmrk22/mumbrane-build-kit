@@ -32,6 +32,8 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
   The serif size classes carry the serif via the base-layer role rule in globals.css; interface
   text at a prose size needs `font-sans`. Commit Mono lives in `brand/fonts/` (OFL licence beside
   it). Not done by owner choice: the 8-style size scale, uppercase labels, colours, spacing.
+- 2026-10-02 home hero replaced by "the membrane" (D-137): facts dent a borderless sheet, three
+  questions settle once, then it rests; click, tap or the keyboard chip drops another.
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -177,6 +179,16 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Screens reviewed 375/768/1440 + reduced; fixed: light-cone labels (SVG text fell to ~7 px at 375 and one crossed the time axis → HTML labels on the type scale)
 
 ## Handoff notes
+
+### Home hero: the membrane (2026-10-02, owner request, D-137)
+`FieldCanvas` (client) + `FieldStill` (server SVG passed as `children`) over `src/lib/art/field.ts`
+(the sheet: wells, slope, settle, projection) and `src/lib/art/scene.ts` (timeline + drawable
+sheet). Opening plays once (three questions), then the loop sleeps via `createLoop.setAwake(false)`;
+a canvas click/tap or the keyboard chip ("Drop a question into the field", visible on focus)
+wakes it. `data-state` on `.field`: forming · settling · rest · idle (e2e reads it). Styles live in
+`src/app/field.css` (art.css was over 400 lines); the desktop mask is on the drawings, not the
+wrapper, so the chip stays crisp. WebKit e2e Tabs to the chip with Alt+Tab (D-127). Tuned
+constants are in field.ts with their reasons; `field.test.ts` guards basins, rests and the opening.
 
 ### Header condense (2026-10-01, owner request)
 Header is 56 px at every width (was 60/72). Menus are small Anthropic-style lists: labels only,

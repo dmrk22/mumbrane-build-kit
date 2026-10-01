@@ -1,0 +1,99 @@
+/* The membrane (FieldCanvas, FieldStill; D-137), in its own file so art.css stays within budget.
+   The server still shows until the canvas draws its first frame. With scripting and motion the
+   canvas forms the field from empty paper, so the still waits hidden; if the canvas never draws, a
+   failsafe shows it after 4 s. The failsafe lives only on :not([data-ready]): a finished
+   `forwards` animation would otherwise outrank the ready rule. */
+@layer components {
+  .field-poster :is(polyline, circle, path) {
+    vector-effect: non-scaling-stroke;
+  }
+  .field-sheet {
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.2;
+  }
+  .field-path {
+    stroke: var(--surface-accent);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .field-bead {
+    fill: var(--surface-fg);
+  }
+  .field-answer {
+    fill: var(--surface-accent);
+  }
+  .field-ring {
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.32;
+  }
+  .field-reticle {
+    stroke: var(--surface-accent);
+  }
+  .field-lead {
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.5;
+  }
+  .field-label {
+    fill: var(--surface-fg);
+    fill-opacity: 0.8;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  /* Scaled to a phone the still's labels would be unreadably small; the caption carries them. */
+  @media (max-width: 1023.98px) {
+    .field-labels {
+      display: none;
+    }
+  }
+  .field-canvas {
+    opacity: 0;
+    transition: opacity var(--duration-ui) var(--ease-out);
+  }
+  [data-ready="true"] > .field-canvas {
+    opacity: 1;
+  }
+  [data-ready="true"] > .field-poster {
+    opacity: 0;
+    transition: opacity var(--duration-ui) linear;
+  }
+  @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+    .field:not([data-ready]) > .field-poster {
+      opacity: 0;
+      animation: field-failsafe 1ms 4s forwards;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .field-canvas {
+      cursor: crosshair;
+    }
+  }
+  /* In the desktop hero the sheet fades toward the text and the horizon. On the drawings only,
+     not the wrapper, so the keyboard chip stays crisp. */
+  @media (min-width: 1024px) {
+    .hero .field > :is(.field-poster, .field-canvas) {
+      mask-image:
+        linear-gradient(to right, transparent, var(--color-ink) 30%),
+        linear-gradient(to bottom, transparent, var(--color-ink) 15%);
+      mask-composite: intersect;
+    }
+  }
+}
+
+@keyframes field-failsafe {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (forced-colors: active) {
+  /* The canvas keeps its own colours, so it never starts (FieldCanvas); the still shows at once in
+     system colours, without waiting for the failsafe. Unlayered: beats the layered rules above. */
+  .field-canvas {
+    display: none;
+  }
+  .field > .field-poster {
+    opacity: 1;
+    animation: none;
+  }
+}

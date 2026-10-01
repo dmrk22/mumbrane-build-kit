@@ -14,7 +14,24 @@ export const HOME = {
     lede: 'Your data becomes the field. A question settles where your facts and definitions support it; that equilibrium is the answer, with its evidence.',
     primary: { label: 'Explore Moth', href: '/moth' },
     secondary: { label: 'Read the research', href: '/research' },
-    field: { field: 'field', candidate: 'candidate', answer: 'answer' },
+    // The membrane (D-137): the figure's labels, its keyboard control and what that announces, and
+    // the caption marking it as a conceptual illustration (CONTENT §4).
+    field: {
+      facts: 'your facts',
+      priority: 'priority',
+      candidate: 'candidate',
+      question: 'question',
+      answer: 'answer',
+      forming: 'forming the field',
+      settling: 'settling',
+      rest: 'at rest',
+      drop: 'Drop a question into the field',
+      // {n} is the question's number, so a repeated outcome is still announced.
+      restedPriority: 'Question {n} came to rest in the priority well.',
+      restedFact: 'Question {n} came to rest at one of your facts.',
+      caption:
+        'Conceptual illustration. Your facts shape the field; a question rolls to rest where they support it.',
+    },
   },
 
   principle: {

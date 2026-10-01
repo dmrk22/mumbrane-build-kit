@@ -81,10 +81,6 @@
   .plate .plate-frame {
     border: 1px solid CanvasText;
   }
-  /* The field's canvas keeps its own colours; hidden, the still shows in system colours. */
-  .field-canvas {
-    display: none;
-  }
 }
 
 /* Section tags inside instrument windows (solution pages). */
@@ -179,49 +175,6 @@
     color-mix(in oklab, var(--surface-fg) 14%, transparent) 0 1px,
     transparent 1px 9px
   );
-}
-
-/* The field (FieldCanvas): the server still, hidden once the canvas has drawn its first frame. */
-@layer components {
-  .field-poster polyline,
-  .field-poster circle {
-    vector-effect: non-scaling-stroke;
-  }
-  .field-mesh {
-    stroke: var(--surface-fg);
-    stroke-opacity: 0.17;
-  }
-  .field-mesh .field-edge {
-    stroke-opacity: 0.5;
-  }
-  .field-faint {
-    stroke: var(--surface-fg);
-    stroke-opacity: 0.3;
-  }
-  .field-path {
-    stroke: var(--surface-accent);
-    stroke-width: 1.6;
-  }
-  .field-dot {
-    fill: var(--surface-accent);
-  }
-  .field-label {
-    fill: var(--surface-fg);
-    fill-opacity: 0.78;
-    font-family: var(--font-mono);
-    font-size: 11px;
-  }
-  .field-canvas {
-    opacity: 0;
-    transition: opacity var(--duration-hero) var(--ease-out);
-  }
-  [data-ready="true"] > .field-canvas {
-    opacity: 1;
-  }
-  [data-ready="true"] > .field-poster {
-    opacity: 0;
-    transition: opacity var(--duration-ui) linear;
-  }
 }
 
 /* Diagram marks, shared by every figure on the site (after the original mumbrane.com figures):

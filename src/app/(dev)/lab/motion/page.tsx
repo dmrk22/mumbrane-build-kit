@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { CropMarks } from '@/components/art/CropMarks'
 import { FieldCanvas } from '@/components/art/FieldCanvas'
+import { FieldStill } from '@/components/art/FieldStill'
 import { Guilloche } from '@/components/art/Guilloche'
 import { LayerStack } from '@/components/art/LayerStack'
 import { Painting } from '@/components/art/Painting'
@@ -15,6 +16,7 @@ import { ScrubText } from '@/components/motion/ScrubText'
 import { SplitReveal } from '@/components/motion/SplitReveal'
 import { StatusChip } from '@/components/ui/Chip'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
+import { HOME } from '@/content/home'
 import { HEX } from '@/lib/gl/colors'
 import { LabStatus } from './LabStatus'
 import { PinDemo } from './PinDemo'
@@ -89,10 +91,9 @@ export default function MotionLab() {
             Field and layers
           </Heading>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <FieldCanvas
-              labels={{ field: 'field', candidate: 'candidate', answer: 'answer' }}
-              className="aspect-[640/520]"
-            />
+            <FieldCanvas labels={HOME.hero.field} className="aspect-[4/3]">
+              <FieldStill labels={HOME.hero.field} />
+            </FieldCanvas>
             <LayerStack layers={['facts', 'definitions', 'field']} answer="answer" />
           </div>
         </Section>

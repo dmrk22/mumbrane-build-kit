@@ -1,13 +1,15 @@
 import { FieldCanvas } from '@/components/art/FieldCanvas'
+import { FieldStill } from '@/components/art/FieldStill'
 import { Container } from '@/components/layout/Container'
 import { Button } from '@/components/ui/Button'
 import { SmartLink } from '@/components/ui/SmartLink'
 import { HOME } from '@/content/home'
 
 /**
- * The home hero: the headline on the left, the field on the right — the original mumbrane.com
- * figure, alive. The entrance is CSS-only (motion.css), so the H1 stays the LCP element. Slides
- * under the transparent header.
+ * The home hero: the headline on the left, the membrane behind the right of the hero (D-137) —
+ * facts dent a sheet, a question rolls to rest. The text entrance is CSS-only (motion.css), so the
+ * H1 stays the LCP element. From 1024 px the figure is a full-bleed layer under the text column,
+ * fading toward it; below, it follows the actions. Slides under the transparent header.
  */
 export function HomeHero() {
   const h = HOME.hero
@@ -17,7 +19,7 @@ export function HomeHero() {
       aria-labelledby="home-title"
       className="hero relative -mt-15 overflow-hidden lg:-mt-18"
     >
-      <Container className="relative grid min-h-[max(640px,94svh)] grid-cols-[minmax(0,1fr)] items-center gap-y-6 pt-28 pb-16 lg:min-h-[min(100svh,960px)] lg:grid-cols-12 lg:gap-x-6 lg:pt-24 lg:pb-12">
+      <Container className="grid min-h-[max(640px,94svh)] grid-cols-[minmax(0,1fr)] items-center gap-y-6 pt-28 pb-16 lg:min-h-[min(100svh,960px)] lg:grid-cols-12 lg:gap-x-6 lg:pt-24 lg:pb-12">
         <div className="relative z-10 min-w-0 lg:col-span-7">
           <SmartLink
             href={h.announcement.href}
@@ -48,10 +50,17 @@ export function HomeHero() {
             </Button>
           </div>
         </div>
-        <FieldCanvas
-          labels={h.field}
-          className="hero-rise hero-d5 -mx-5 aspect-[640/520] sm:mx-0 lg:col-span-5 lg:-mr-10 lg:-ml-16 xl:-mr-20 xl:-ml-28"
-        />
+        <figure className="-mx-5 sm:-mx-6 lg:absolute lg:top-18 lg:right-0 lg:bottom-0 lg:left-[40%] lg:mx-0 xl:left-[30%]">
+          <FieldCanvas
+            labels={h.field}
+            className="aspect-square sm:aspect-[4/3] lg:absolute lg:inset-0 lg:aspect-auto"
+          >
+            <FieldStill labels={h.field} />
+          </FieldCanvas>
+          <figcaption className="mt-3 max-w-[52ch] px-5 font-mono text-label text-surface-subtle sm:px-6 lg:absolute lg:right-10 lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0 lg:text-right">
+            {h.field.caption}
+          </figcaption>
+        </figure>
       </Container>
     </section>
   )

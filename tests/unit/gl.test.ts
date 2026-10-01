@@ -74,6 +74,27 @@ test('loop caps fps, clamps long frames and pauses without a time jump', () => {
   assert.equal(loop.running, false, 'a stopped loop stays stopped')
 })
 
+test('an idle loop draws nothing until woken, and wakes without a time jump', () => {
+  const f = fakeFrames()
+  const frames: number[] = []
+  const loop = createLoop(60, (t) => frames.push(t), f.deps)
+  loop.setOnScreen(true)
+  f.advance(0)
+  f.advance(17)
+  assert.equal(frames.length, 1)
+  loop.setAwake(false)
+  assert.equal(loop.running, false)
+  assert.equal(f.pending, 0, 'no frame is even requested while idle')
+  loop.setAwake(true)
+  assert.equal(loop.running, true)
+  f.advance(60_000) // a minute at rest: re-stamps, the scene clock does not jump
+  f.advance(17)
+  assert.ok((frames.at(-1) ?? 0) - (frames[0] ?? 0) <= 0.05)
+  loop.setOnScreen(false)
+  loop.setAwake(true)
+  assert.equal(loop.running, false, 'awake is not enough off-screen')
+})
+
 test('device tier and DPR cap', () => {
   assert.equal(deviceTier({ hardwareConcurrency: 4 }), 'low')
   assert.equal(deviceTier({ hardwareConcurrency: 8, deviceMemory: 4 }), 'low')
