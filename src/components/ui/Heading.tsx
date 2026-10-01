@@ -60,3 +60,32 @@ export function Eyebrow({
     </Tag>
   )
 }
+
+/**
+ * A section heading with its own link (PAGES §11.2): the "#" appears on hover or focus, and is
+ * named for assistive tech ("Link to Fields"). A fragment link, so it works without JavaScript.
+ */
+export function AnchorHeading({
+  id,
+  label,
+  className,
+  children,
+}: {
+  id: string
+  label: string
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <h2 id={id} className={cx('group relative font-serif text-display-s text-balance', className)}>
+      {children}
+      <a
+        href={`#${id}`}
+        aria-label={label}
+        className="ml-3 font-mono text-title text-surface-subtle no-underline opacity-0 transition-opacity duration-(--duration-micro) group-hover:opacity-100 focus-visible:opacity-100"
+      >
+        #
+      </a>
+    </h2>
+  )
+}

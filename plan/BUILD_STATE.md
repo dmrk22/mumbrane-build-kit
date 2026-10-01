@@ -18,7 +18,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P8 | Research and News | done | 2026-10-01 | 2026-10-01 | `p08-research` |
 | P9 | Company, Careers, Contact | done | 2026-10-01 | 2026-10-01 | `p09-company` |
 | P10 | Solutions | done | 2026-10-01 | 2026-10-01 | `p10-solutions` |
-| P11 | Developers, Pricing, Changelog, Status | not started | | | |
+| P11 | Developers, Pricing, Changelog, Status | done | 2026-10-01 | 2026-10-01 | `p11-developers` |
 | P12 | Console preview | not started | | | |
 | P13 | Legal, llms.txt, OG images, completeness | not started | | | |
 | P14 | QA, hardening, polish, final report | not started | | | |
@@ -26,8 +26,8 @@ Update after every task: tick the box, add a one-line note, commit.
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P11 (not started)
-- Next task: P11 Developers, Pricing, Changelog, Status
+- Phase: P12 (not started)
+- Next task: P12 Console preview
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,6 +99,14 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P11 — Developers, Pricing, Changelog, Status
+- [x] `src/content/developers.ts` (CONCEPTS, DEVELOPERS, DOCS — wording by reference to `MOTH`), `src/content/pricing.ts` (PRICING, CHANGELOG, STATUS per CONTENT §3.10–§3.12)
+- [x] `/developers` — hero + status note, lifecycle `Pipeline` (6 stages), 7 concepts, illustrative JSON + checked English, supported questions, outcomes, `LimitsGrid`, "When the hosted API arrives"
+- [x] `/developers/docs` — sticky `DocsToc` (aria-current="location", measured on scroll), mobile `<details>` contents, `AnchorHeading`s, shared LanguageContract/LimitsGrid/OutcomeLedger, glossary `<dl>`, last reviewed
+- [x] `/pricing` (3 plans, no prices, `<details>` FAQ), `/changelog` (month ledger, real dates), `/status` (not yet monitored, empty 90-cell bars)
+- [x] Tests: pages.spec (docs contents incl. bottom → top regression; status/pricing/changelog honesty)
+- [x] Screens reviewed; claims audit logged
+
 ### P10 — Solutions
 - [x] `src/content/solutions.ts` — overview, four solutions (rulebook, illustrative field, domain next steps, evidence points, legal note), shared limits box (sourced), use cases (4 delivered + 6 sketches)
 - [x] `/solutions` — hero, 2 × 2 cards + wide use-cases card, Fit checklists, ink CTA; Solutions trigger current on the overview (`Menu.index`)
@@ -127,6 +135,13 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P11 — 2026-10-01
+- `git grep` skips untracked files: audits of new content must use `git grep --untracked` (the P10 audit was re-run; see the claims log).
+- `Tag` now wraps long labels (`min-h-6`); `CodeBlock` takes a custom tag string (`illustrative="…"`).
+- `LimitsGrid` is exported from `LanguageContract.tsx`; `LanguageContract limits={false}` omits it.
+- `DocsToc` + `AnchorHeading` are reusable for the legal pages (P13).
+- P12 must keep the pricing card true: "Nothing you type leaves the page" (SECURITY §7: no network in the console).
 
 ### P10 — 2026-10-01
 - `FieldWindow` (instrument/) renders any `FieldExample` (define, facts, questions → outcome + reason); reuse it for /developers examples.
@@ -237,7 +252,8 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Logs
 - Claims audits: 2026-10-01 (P7) — claims.test green; every figure on / , /moth, /developers/models traced to releases.md; labels present (Explanatory example, Proposed, Illustrative); no forbidden words
-- Claims audits: 2026-10-01 (P10) — claims.test green; /solutions, the four solution pages and /solutions/use-cases carry no numbers, customers, results or ROI; every world labelled (Illustrative / Illustrative sketch / Synthetic example world); avoid-list and forbidden-list grep over company, contact, solutions content: only the verbatim Company-block "Unlocked" and the source contact lede ("unlock") — both allowed by CONTENT §1
+- Claims audits: 2026-10-01 (P10) — claims.test green; /solutions, the four solution pages and /solutions/use-cases carry no numbers, customers, results or ROI; every world labelled (Illustrative / Illustrative sketch / Synthetic example world); avoid-list and forbidden-list grep over company, contact, solutions content: only the verbatim Company-block "Unlocked" and the source contact lede ("unlock") — both allowed by CONTENT §1. (Correction, P11: that first grep skipped the then-untracked solutions.ts; re-run with `git grep --untracked`, it shows only "customer" as the support role and the negation "not a customer deployment" — no claim.)
+- Claims audits: 2026-10-01 (P11) — claims.test green; `git grep --untracked` over developers and pricing content: only code comments and the verbatim status note "We will not show uptime numbers we do not measure" (allowlisted in claims.test); JSON tagged "Illustrative — not the Preview 004 schema"; no prices, endpoints, SDKs or CLI commands; e2e asserts no uptime figures, no currency, changelog dates = article dates
 - Trusted Types trial: —
 - Dependency changes / advisories: —
 

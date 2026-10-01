@@ -15,14 +15,15 @@ export function CodeBlock({
 }: {
   code: string
   label: string
-  illustrative?: boolean
+  /** true = the standard "Illustrative" tag; a string replaces its wording. */
+  illustrative?: boolean | string
   className?: string
 }) {
   return (
     <figure className={cx('code-block border border-surface-rule', className)}>
-      <figcaption className="flex h-10 items-center gap-3 border-b border-surface-rule pr-1 pl-4">
+      <figcaption className="flex min-h-10 items-center gap-3 border-b border-surface-rule py-1.5 pr-1 pl-4">
         <span className="font-mono text-label text-surface-subtle uppercase">{label}</span>
-        {illustrative && <Tag>{ui.illustrative}</Tag>}
+        {illustrative && <Tag>{illustrative === true ? ui.illustrative : illustrative}</Tag>}
         <CopyButton text={code} label={ui.copy} className="ml-auto" />
       </figcaption>
       {/* Wraps instead of scrolling: a horizontal scroller would need keyboard focus (axe), and wrapped

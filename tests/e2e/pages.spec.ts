@@ -55,3 +55,51 @@ test.describe('@smoke solutions', () => {
     expect((await request.get('/solutions/not-a-solution')).status()).toBe(404)
   })
 })
+
+test.describe('@smoke docs contents', () => {
+  // Regression: an IntersectionObserver missed headings that jumped from above the viewport to
+  // below the line (bottom → top), so "Glossary" stayed current at the top of the page.
+  test('marks the section being read, also after jumping back to the top', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'the sticky contents list is desktop-only')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto('/developers/docs')
+    const toc = page.getByRole('navigation', { name: 'Contents' })
+    const current = toc.locator('[aria-current="location"]')
+    await expect(current).toHaveText('Fields')
+    await page.evaluate(() => document.getElementById('outcomes')?.scrollIntoView())
+    await expect(current).toHaveText('Outcomes')
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+    await expect(current).toHaveText('Glossary')
+    await page.evaluate(() => window.scrollTo(0, 0))
+    await expect(current).toHaveText('Fields')
+  })
+})
+
+test.describe('@smoke honest status, pricing and changelog (CONTENT §4)', () => {
+  test('status: every component is "not yet monitored"; no uptime figures', async ({ page }) => {
+    await page.goto('/status')
+    await expect(page.locator('#components li', { hasText: 'Not yet monitored' })).toHaveCount(4)
+    const text = (await page.locator('main').textContent()) ?? ''
+    expect(text).not.toMatch(/operational|\d+(\.\d+)?\s?%/i)
+  })
+
+  test('pricing: no prices or currency anywhere', async ({ page }) => {
+    await page.goto('/pricing')
+    expect((await page.locator('main').textContent()) ?? '').not.toMatch(
+      /[$€£]\s?\d|\/\s?mo(nth)?\b|per seat/i,
+    )
+  })
+
+  test('changelog: every date is a real publication date', async ({ page }) => {
+    const { ARTICLES } = await import('../../src/content/articles.ts')
+    const real = new Set<string>(
+      ARTICLES.flatMap((a) => ['updated' in a ? a.updated : a.published, a.published]),
+    )
+    await page.goto('/changelog')
+    const dates = await page
+      .locator('main time')
+      .evaluateAll((els) => els.map((e) => e.getAttribute('datetime')))
+    expect(dates.length).toBeGreaterThan(0)
+    for (const d of dates) expect(real.has(d ?? '')).toBe(true)
+  })
+})

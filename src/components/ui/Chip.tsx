@@ -107,7 +107,7 @@ export function Tag({ className, children }: { className?: string; children: Rea
   return (
     <span
       className={cx(
-        'inline-flex h-6 items-center rounded-xs border border-surface-fg/30 px-2 font-mono text-label whitespace-nowrap text-surface-muted uppercase',
+        'inline-flex min-h-6 items-center rounded-xs border border-surface-fg/30 px-2 py-0.5 font-mono text-label text-surface-muted uppercase',
         className,
       )}
     >

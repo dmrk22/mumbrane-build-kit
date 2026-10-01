@@ -419,3 +419,20 @@ The Solutions menu is marked current on its overview page (`Menu.index`).
 **Alternatives**: Inventing example questions for the three undetailed worlds (would read as
 real results); leaving the template sections empty.
 **Status**: Decided; authored solution copy listed for owner review.
+
+### D-118 — Developers, pricing, changelog, status: sourced or labelled (2026-10-01)
+**Context**: CONTENT §3.9–§3.12 names the sections; the sources (releases.md, moth.md) hold the
+wording. The concept one-liners, the plan fact bullets and the illustrative JSON are not in the
+sources. The changelog source says "no published changelog entries yet"; CONTENT §3.11 lists
+entries dated by the real article publications.
+**Decision**: Docs and API overview reuse `MOTH` wording by reference (no duplicated copy). The
+seven concept lines restate source sentences; the JSON is tagged "Illustrative — not the Preview
+004 schema" and its checked-English twin sits beside it. Plan bullets state only what the
+sources say (local CLI, documentation and qualification evidence, four synthetic worlds; the
+console is a no-network simulation per SECURITY §7). Changelog entries use article dates only (an
+e2e test checks every date against the article metadata). Status shows "Not yet monitored" and
+an empty 90-cell bar; no numbers. The docs contents list measures heading positions on scroll
+(an IntersectionObserver missed bottom → top jumps; regression test in pages.spec).
+**Alternatives**: Copying source text into new modules (drift); a "Website launched" entry
+(waits for the owner, D-012).
+**Status**: Decided.
