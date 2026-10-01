@@ -114,9 +114,9 @@ export function HowItWorks({ how }: { how: How }) {
           </div>
 
           <figure className="col-span-12 lg:col-span-7 xl:col-span-8">
-            <div
-              role="region"
+            <section
               aria-label={d.label}
+              // biome-ignore lint/a11y/noNoninteractiveTabindex: a horizontally scrollable region must be keyboard-focusable (WCAG 2.1.1; axe scrollable-region-focusable).
               tabIndex={0}
               className="-mx-5 overflow-x-auto px-5 focus-visible:outline-2 focus-visible:outline-surface-accent sm:mx-0 sm:px-0"
             >
@@ -202,7 +202,7 @@ export function HowItWorks({ how }: { how: How }) {
                   </text>
                 </g>
               </svg>
-            </div>
+            </section>
             <figcaption className="mt-6 font-mono text-label text-surface-subtle">{how.caption}</figcaption>
           </figure>
         </div>

@@ -279,7 +279,9 @@
     animation-duration: 0.01ms;
     animation-delay: 0s;
     animation-iteration-count: 1;
-    transition-duration: 0.01ms;
+    /* 0s, not 0.01ms: with transition-property defaulting to `all`, any non-zero duration creates
+       a transition on every change, which can still read its start value a frame later. */
+    transition-duration: 0s;
     transition-delay: 0s;
     scroll-behavior: auto;
   }

@@ -86,14 +86,14 @@ export default function Home() {
           lead={principle.lead}
           rest={principle.rest}
         />
-        <div
-          role="region"
+        <section
           aria-label={principle.figureLabel}
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: a horizontally scrollable region must be keyboard-focusable (WCAG 2.1.1; axe scrollable-region-focusable).
           tabIndex={0}
           className="mt-16 overflow-x-auto focus-visible:outline-2 focus-visible:outline-surface-accent lg:mt-24"
         >
           <PrincipleFigure />
-        </div>
+        </section>
         <p className="mt-6 font-mono text-label text-surface-subtle">{principle.caption}</p>
       </Section>
 
