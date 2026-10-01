@@ -5,57 +5,33 @@ export const BODIES: Record<string, Block[]> = {
   "toward-field-based-intelligence": [
     {
       "type": "p",
-      "text": "What limits the intelligence a system can attain within our universe?"
+      "text": "What if knowledge were not stored as rules or answers, but as the shape of a field?"
     },
     {
       "type": "p",
-      "text": "Mumbrane begins with the hypothesis that intelligence is constrained by the physical conditions under which it operates: the information available to it, the resources it can use, and the causal relationships through which information becomes accessible. We aim to investigate whether these constraints define meaningful frontiers of attainable intelligence."
-    },
-    {
-      "type": "p",
-      "text": "Our proposed approach represents knowledge as a persistent, layered field. As knowledge accumulates, its relationships change the structure within which a problem is considered. A goal and its constraints shape an energy objective, and inference seeks a configuration that satisfies those conditions. Candidate results must then be checked against the original problem."
-    },
-    {
-      "type": "p",
-      "text": "We call this direction **field-based intelligence**. Its central research question is whether compounding knowledge and energy-guided dynamics can support increasingly general reasoning — and how physical principles, including relativity, might help us characterize its limits."
+      "text": "That is the direction Mumbrane is pursuing. The field is produced by the data itself. Reasoning is what happens when a new input is dropped into the field and allowed to settle. The point where it comes to rest is the answer."
     },
     {
       "type": "h2",
-      "text": "Knowledge that changes the field",
-      "id": "knowledge-that-changes-the-field"
+      "text": "The data is the field",
+      "id": "the-data-is-the-field"
     },
     {
       "type": "p",
-      "text": "Information gains meaning through relationships. An observation can support an explanation, challenge a previous belief, or introduce a constraint that changes an entire problem."
+      "text": "Pretrained encoders turn each piece of information into a point in a shared space. Each point shapes the field around it, the way a charge shapes the potential around it. There is no separate model on top: the stored data is the model. Whatever you put in becomes the truth."
     },
     {
       "type": "p",
-      "text": "We want accumulated knowledge to remain available as a structure that subsequent reasoning can use. In the layered field we envision, new information changes the relationships among possible states. Earlier knowledge supplies context; new evidence can refine it or expose contradictions within it."
-    },
-    {
-      "type": "p",
-      "text": "The ambition is compounding usefulness. Solving one problem should help establish structure that can inform another. More layers alone would not demonstrate progress: the question is whether their interactions improve reasoning while preserving provenance, uncertainty, and the ability to revise an assumption."
+      "text": "The charge picture is a metaphor. Fixed electric charges cannot hold a free charge in a stable resting place, so we build on smoother energy functions with real minima."
     },
     {
       "type": "h2",
-      "text": "A goal reshapes the landscape",
-      "id": "a-goal-reshapes-the-landscape"
+      "text": "Fix the field, then ask",
+      "id": "fix-the-field-then-ask"
     },
     {
       "type": "p",
-      "text": "Imagine a field that changes shape as evidence arrives. Some configurations become less compatible with what is known; others become more plausible. A goal then gives this landscape a direction."
-    },
-    {
-      "type": "p",
-      "text": "In our proposed runtime, a problem’s requirements shape an energy objective. Here, energy refers to a mathematical measure of how well a candidate configuration fits the objective and its constraints. Calling it energy does not, by itself, establish an equivalence with physical energy."
-    },
-    {
-      "type": "p",
-      "text": "Inference is envisioned as a process of adjusting the configuration toward a better fit. The layers contribute relevant knowledge, while the goal determines what the system is trying to resolve. This is the intuition behind the morphing fields in our visual language: information changes the space in which reasoning happens."
-    },
-    {
-      "type": "p",
-      "text": "The animation is an illustration of that idea, rather than evidence that the underlying research questions have been solved."
+      "text": "Building the field is the learning step. Once it is fixed, new inputs are shaped by the field but do not change it. A question enters as a new point, and its neighbors push and pull it until the forces balance. That resting point is what the system believes. Priority inputs carry more weight, so questions near them are pulled toward them harder."
     },
     {
       "type": "h2",
@@ -64,204 +40,83 @@ export const BODIES: Record<string, Block[]> = {
     },
     {
       "type": "p",
-      "text": "A system can settle into a stable state without answering the intended question correctly. An objective may be incomplete, constraints may conflict, or the dynamics may settle somewhere that is only locally favorable."
-    },
-    {
-      "type": "p",
-      "text": "Verification is therefore central to the direction we are pursuing. A candidate result needs to be evaluated against the original requirements, with unresolved constraints and uncertainty kept visible. Where independent checks are possible, they should contribute evidence for accepting or rejecting the result."
-    },
-    {
-      "type": "p",
-      "text": "Our aim is a reasoning process whose outputs can be examined: what conditions were satisfied, what evidence supported the result, and what remains unresolved."
+      "text": "A question can come to rest between similar memories rather than on any one of them. And nearness is not meaning: text encoders are known to place a sentence and its negation close together. So a resting point must be checked against the definitions that say what counts."
     },
     {
       "type": "h2",
-      "text": "Investigating the limits",
-      "id": "investigating-the-limits"
+      "text": "Close to known ideas",
+      "id": "close-to-known-ideas"
     },
     {
       "type": "p",
-      "text": "Mumbrane’s long-term hypothesis is that physical constraints may help define an attainable frontier for intelligence. Making that hypothesis precise requires specifying what intelligence means for a task, what resources are available, and how performance is measured."
+      "text": "There is mathematics to borrow. **Modern Hopfield networks** store patterns as minima of an energy landscape and retrieve one by letting a query settle; transformer attention is one step of this update. **Mean shift** moves a point to the weighted average of its neighbors until it stops. **Energy-based models** choose the answer with the lowest energy. Per-item weights correspond to priority inputs."
     },
     {
       "type": "p",
-      "text": "Relativity is part of this research agenda through questions about causality, access to information, and the relationship between local knowledge and a broader system. Its exact mathematical role in our approach remains an open question. We are not presenting a derived universal upper bound or a demonstrated relativistic theory of intelligence."
-    },
-    {
-      "type": "p",
-      "text": "Nor does the hypothesis establish that every problem can be solved. Applications in biology, protein science, or other domains would require their own representations, experiments, and validation. Claims about cryptographic inversion or foundational complexity questions would require separate mathematical evidence. They are not capabilities established by this proposal."
+      "text": "In short: memory as a landscape, inference as rolling downhill."
     },
     {
       "type": "h2",
-      "text": "Moth as an experimental foundation",
-      "id": "moth-as-an-experimental-foundation"
+      "text": "Moth as the first step",
+      "id": "moth-as-the-first-step"
     },
     {
       "type": "p",
-      "text": "Moth is the reasoning model we are developing to explore parts of this direction. In Preview 004, supported English facts, definitions, and interpretation skills compile into a reusable field. Native constraint reasoning establishes classifications, and checked English or JSON responses retain evidence for replay."
+      "text": "In Moth Preview 004, supported English facts and definitions compile into a fixed, versioned field, and native constraint reasoning establishes each answer with its evidence. It does not establish continuous energy optimization; the [release evidence](/moth#evidence) describes what exists today."
     },
     {
       "type": "p",
-      "text": "This gives us a way to test whether meanings survive compilation, whether definitions compose, and how results respond to changed criteria or missing facts. It does not establish continuous energy optimization or the proposed connection to relativity. The [Preview 004 release and evidence summary](/moth#evidence) describes the current implementation separately from this research hypothesis."
-    },
-    {
-      "type": "p",
-      "text": "The next questions are concrete. Does accumulated structure improve results on new tasks? Can the system revise its conclusions when evidence changes? Does it identify conflicting constraints? How do accuracy, verification, and computational cost compare with appropriate baselines?"
-    },
-    {
-      "type": "p",
-      "text": "These are the tests that must turn a compelling picture into a useful system. Mumbrane’s ambition is to understand how far field-based reasoning can go — and to establish that progress through results that others can inspect."
+      "text": "The open questions are concrete. Does a settled answer survive checking? How do accuracy and cost compare with appropriate baselines? And how far can field-based reasoning go in a physical universe, where causality limits which information can reach a decision?"
     }
   ],
   "introducing-moth-preview-004": [
     {
       "type": "p",
-      "text": "An application that decides whether an order is ready to purchase needs a definition of readiness. The definition might require available funds and an approved supplier. Another organization might use different criteria. Before an answer can be useful, those choices need to be explicit."
-    },
-    {
-      "type": "p",
-      "text": "Moth Preview 004 gives developers a local workflow for making that kind of decision from supplied knowledge. You author supported English facts, definitions and interpretation skills, then compile them into a field: a retained environment containing the represented knowledge and the artifacts needed to use it. Questions ask whether an entity satisfies a definition. Native reasoning works through the requirements, and a checked response presents the result in controlled English or JSON."
+      "text": "Moth is the model Mumbrane is building for field-based intelligence: your data becomes the field, and a question settles where that field supports it. Preview 004 is the first step."
     },
     {
       "type": "h2",
-      "text": "Define the decision",
-      "id": "define-the-decision"
+      "text": "What it does",
+      "id": "what-it-does"
     },
     {
       "type": "p",
-      "text": "The purchasing starter includes these definitions:"
+      "text": "You author supported English facts, definitions and interpretation skills. Moth compiles them into a fixed, versioned field; existing local BGE assets take part in compilation. A question asks whether an entity meets a definition. Native constraint reasoning works through the requirements, and a checked response gives the result in controlled English or JSON, with its evidence."
+    },
+    {
+      "type": "h2",
+      "text": "One example",
+      "id": "one-example"
     },
     {
       "type": "code",
       "lang": "text",
-      "text": "An approved supplier means a supplier who passed inspection.\nA purchase qualifies as a purchase-ready item when it has funds available and its supplier is an approved supplier.",
+      "text": "An approved supplier means a supplier who passed inspection.\nA purchase qualifies as a purchase-ready item when it has funds available and its supplier is an approved supplier.\natlas is a supplier and passed inspection.\norderone appoints atlas as its supplier and has funds available.",
       "label": "Example"
     },
     {
       "type": "p",
-      "text": "Given declared vocabulary and the starter’s interpretation skills, its facts can say:"
-    },
-    {
-      "type": "code",
-      "lang": "text",
-      "text": "orderone is a purchase.\natlas is a supplier and passed inspection.\norderone appoints atlas as its supplier and has funds available.",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "The question is straightforward:"
-    },
-    {
-      "type": "code",
-      "lang": "text",
-      "text": "Is orderone a purchase-ready item?",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "Under these definitions, the supplied facts establish the classification. The answer need not be written into the source for every order. It follows from the relationship to atlas, the inspection requirement and the funds attached to orderone. This is an explanation of the example’s reasoning, rather than a transcript of a runtime response."
-    },
-    {
-      "type": "p",
-      "text": "The same workflow ships with library, trail and venue examples. Each supplies a different vocabulary and set of criteria. These are small synthetic worlds for evaluating the product, not connections to operational systems."
+      "text": "Asked “Is orderone a purchase-ready item?”, the field establishes the classification, though no source line states it. This explains the example’s reasoning; it is not a runtime transcript."
     },
     {
       "type": "h2",
-      "text": "Compile, ask, inspect",
-      "id": "compile-ask-inspect"
+      "text": "Scope",
+      "id": "scope"
     },
     {
       "type": "p",
-      "text": "The separation between authoring and inference matters. A source check lets you inspect interpretations and example-question bindings before building. Compilation uses existing local BGE assets to create the field. Loading a bundle creates a separate writable runtime instance; queries against the compiled field do not initialize that encoder."
-    },
-    {
-      "type": "p",
-      "text": "When a question runs, its interpretation and result remain connected to the build that supplied their meaning. Evidence lets you inspect the definitions and facts behind the classification. A response plan constructs the English or JSON answer from the checked result. The quality of the source facts still matters: checking a derivation cannot establish whether a supplier actually passed an inspection outside the field."
-    },
-    {
-      "type": "p",
-      "text": "Updates are deliberate. Edit the sources, compile a new bundle and load it to activate the change. Editing a text file does not change an already loaded field, and asking a question does not automatically add permanent knowledge. Earlier episodes can be replayed against their retained builds within the same Preview 004 runtime."
-    },
-    {
-      "type": "h2",
-      "text": "The scope of this preview",
-      "id": "the-scope-of-this-preview"
-    },
-    {
-      "type": "p",
-      "text": "Preview 004 is a CLI package for macOS ARM64 and Python 3.11. It supports classification, compositional definitions, and English-authored grammar and interpretation teaching within a documented language contract. Its skills can extend admitted wording and clause composition. They do not let users teach arbitrary reasoning algorithms in English."
-    },
-    {
-      "type": "p",
-      "text": "The proposed Moth Base is a separate product direction: a richer prepared foundation that would supply more tested language and reusable capabilities before a user adds their world. That broader foundation is not part of this release."
-    },
-    {
-      "type": "p",
-      "text": "For now, a useful evaluation starts with an explicit definition and a few cases whose meaning you can inspect. Read the [Moth overview](/moth) for the workflow and consult [releases](/moth#evidence) for the package and its qualification evidence."
+      "text": "Asking never adds knowledge: to change the field, compile and load a new build. Preview 004 is a CLI package for macOS ARM64 and Python 3.11, with four small synthetic example worlds. It does not settle questions in a continuous field or weight facts by priority; that runtime is proposed work. See the [release evidence](/moth#evidence)."
     }
   ],
   "different-wording-different-meaning": [
     {
       "type": "p",
-      "text": "Two sentences can look different and ask the same question. Two almost identical sentences can ask different questions. A useful language interface has to handle both cases: recognizing equivalent wording while preserving changes that affect the answer."
-    },
-    {
-      "type": "p",
-      "text": "In Moth Preview 004, that work starts with explicit interpretation. The field has declared vocabulary, concept definitions and compiled language artifacts. Supported wording binds to those meanings. Similarity between words is not enough to make their roles or requirements interchangeable."
+      "text": "In a field built by pretrained encoders, similar sentences land close together. That is useful, and a risk: text encoders are known to place a sentence and its negation near each other. If answers simply followed nearness, the field would blur differences that matter. So Moth keeps two jobs apart. Encoders help place what you supplied; declared vocabulary and definitions decide what counts."
     },
     {
       "type": "h2",
-      "text": "Keep the subject attached",
-      "id": "keep-the-subject-attached"
-    },
-    {
-      "type": "p",
-      "text": "Consider a sentence from the purchasing starter:"
-    },
-    {
-      "type": "code",
-      "lang": "text",
-      "text": "orderone appoints atlas as its supplier and has funds available.",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "It contains a relationship and a property. The relationship runs from orderone to atlas. The available funds belong to orderone. Assigning the funds to atlas would change the supplied world even if every word survived compilation."
-    },
-    {
-      "type": "p",
-      "text": "The starter’s composition skill makes the shared subject explicit:"
-    },
-    {
-      "type": "code",
-      "lang": "text",
-      "text": "Join clauses with \"and\".\nKeep the first clause's subject for every following clause.",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "These lines are part of a complete skill with declared dependencies. The relationship grammar separately binds the subject, relationship and target. Together, those artifacts allow the compiler to preserve the roles across the admitted clauses and retain their connection to the original source sentence."
-    },
-    {
-      "type": "p",
-      "text": "This is why accepting a sentence is only the beginning of an authoring check. The interpretation needs to represent the intended facts, including which entity each fact concerns."
-    },
-    {
-      "type": "h2",
-      "text": "Change a phrase without changing the relationship",
-      "id": "change-a-phrase-without-changing-the-relationship"
-    },
-    {
-      "type": "p",
-      "text": "The purchasing example uses the verb “appoints.” A source update can teach the supported relationship form using “selects” and revise the facts to use it. If the subject, target and relationship bindings stay the same, the relationship represented in the field stays the same too."
-    },
-    {
-      "type": "p",
-      "text": "That update requires supported teaching instructions. In the starter, one English skill teaches an instruction form that a later grammar skill uses. The grammar skill then defines the domain sentence pattern and its bindings. This is a concrete dependency chain; adding an unexplained synonym to the facts does not establish its meaning."
-    },
-    {
-      "type": "p",
-      "text": "Questions can also use different admitted forms:"
+      "text": "Change a phrase, keep the meaning",
+      "id": "change-a-phrase-keep-the-meaning"
     },
     {
       "type": "code",
@@ -271,71 +126,36 @@ export const BODIES: Record<string, Block[]> = {
     },
     {
       "type": "p",
-      "text": "Both refer to the same entity and named concept. The pinned question language determines which forms are supported. Preview 004 also admits supported expanded descriptions of concepts, but that does not imply that every English paraphrase will be understood."
+      "text": "Both admitted forms refer to the same entity and concept. A source update can also teach a new supported form, such as “selects” for “appoints”; an unexplained synonym does not establish its meaning."
     },
     {
       "type": "h2",
-      "text": "Change a requirement and the meaning changes",
-      "id": "change-a-requirement-and-the-meaning-changes"
+      "text": "Change a requirement, change the answer",
+      "id": "change-a-requirement-change-the-answer"
     },
     {
       "type": "p",
-      "text": "Now consider the definition that gives a supplier its approved status:"
+      "text": "Replace “passed inspection” with “passed audit” in the supplier definition and the criterion changes. The phrases are close in wording, but they are separately declared properties: one does not establish the other. After a rebuild, the classification may change."
     },
     {
-      "type": "code",
-      "lang": "text",
-      "text": "An approved supplier means a supplier who passed inspection.",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "Replacing “passed inspection” with “passed audit” changes the criterion. Inspection and audit are separately declared properties in this example. A fact establishing one does not automatically establish the other. After rebuilding and loading the updated field, a purchase’s classification may change because the relevant requirement changed."
+      "type": "h2",
+      "text": "How to test it",
+      "id": "how-to-test-it"
     },
     {
       "type": "p",
-      "text": "The distinction provides a practical evaluation method. Test supported rewordings that should preserve a classification alongside small edits that should change its interpretation. Change the supplier, the subject or the prerequisite. Review the bindings and evidence, as well as the visible answer. A system that gives the same response to every variation has not demonstrated fidelity."
-    },
-    {
-      "type": "p",
-      "text": "Every such field update requires an explicit compile and load. Retained episodes can be replayed against their original builds within the same runtime, keeping an earlier answer connected to its earlier definitions."
-    },
-    {
-      "type": "p",
-      "text": "A broader prepared Moth Base is proposed to provide more tested wording and composition patterns. Preview 004’s present boundary is its [language contract](/moth#language-contract). The [Moth overview](/moth) explains the product and authoring workflow, and [release qualification](/moth#qualification) describes the current evidence."
+      "text": "Pair rewordings that should keep an answer with small edits that should change it, and review the evidence, not only the answer. See the [language contract](/developers/docs#language-contract)."
     }
   ],
   "when-the-field-cannot-establish-an-answer": [
     {
       "type": "p",
-      "text": "Suppose a purchasing rule requires an approved supplier, and approval requires a passed inspection. The field says that a supplier passed an audit. Is that enough to approve the purchase?"
-    },
-    {
-      "type": "p",
-      "text": "Under those definitions, it is not enough to establish approval. It also does not establish that the supplier failed an inspection. The difference matters to anyone using the answer to decide what to check next."
-    },
-    {
-      "type": "p",
-      "text": "Moth Preview 004 keeps missing support distinct from a negative conclusion. Its field is the compiled environment of supplied facts, definitions and supported interpretation artifacts. That boundary specifies what the runtime may use to establish an answer. It does not turn everything outside the field into a false statement."
+      "text": "In a field-based system, an answer is where a question comes to rest. Sometimes the field gives it nowhere supported to rest. Saying so is part of the answer."
     },
     {
       "type": "h2",
-      "text": "An example with one missing link",
-      "id": "an-example-with-one-missing-link"
-    },
-    {
-      "type": "p",
-      "text": "The purchasing starter defines its requirements this way:"
-    },
-    {
-      "type": "code",
-      "lang": "text",
-      "text": "An approved supplier means a supplier who passed inspection.\nA purchase qualifies as a purchase-ready item when it has funds available and its supplier is an approved supplier.",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "For a second order, the supplied facts include:"
+      "text": "One missing link",
+      "id": "one-missing-link"
     },
     {
       "type": "code",
@@ -345,59 +165,25 @@ export const BODIES: Record<string, Block[]> = {
     },
     {
       "type": "p",
-      "text": "The question is:"
-    },
-    {
-      "type": "code",
-      "lang": "text",
-      "text": "Is ordertwo a purchase-ready item?",
-      "label": "Example"
-    },
-    {
-      "type": "p",
-      "text": "The documented expected outcome is `NO_SUPPORTED_PROOF`: the compiled field does not establish membership in the purchase-ready category. Funding is present, and the supplier relationship is present. What is absent is support for the inspection requirement attached to birch."
-    },
-    {
-      "type": "p",
-      "text": "This describes the example’s expected result, not a captured runtime response. It would be incorrect to paraphrase it as “birch failed inspection” or “ordertwo is definitely unready.” An inspection record may exist elsewhere. The field has not been given that support."
+      "text": "Approval requires a passed inspection. Asked “Is ordertwo a purchase-ready item?”, the documented expected outcome is `NO_SUPPORTED_PROOF`. That does not mean birch failed inspection; the field has not been given that support. This describes the example’s expected result, not a captured runtime response."
     },
     {
       "type": "h2",
-      "text": "Preserve the reason work stopped",
-      "id": "preserve-the-reason-work-stopped"
+      "text": "Keep the reason",
+      "id": "keep-the-reason"
     },
     {
       "type": "p",
-      "text": "Missing support is only one possible outcome. Unsupported vocabulary or syntax can prevent a question from receiving an admitted interpretation. Ambiguity can leave incompatible interpretations. Relevant represented information can conflict. Execution can reach a resource limit or finish without establishing a completed result."
-    },
-    {
-      "type": "p",
-      "text": "Those situations call for different responses. A language diagnostic directs attention to the question or source wording. A conflict directs attention to the represented information. A resource stop says that a limit was reached; it does not prove that no answer exists. Treating all of them as an ordinary “no” would conceal information that an application needs."
-    },
-    {
-      "type": "p",
-      "text": "Preview 004 presents results through controlled English or JSON. The response is constructed from the checked result, while the retained record connects the interpretation and execution to their build and evidence. Applications evaluating this workflow should inspect those outcome distinctions before deciding how to act. A human review step may need the reason for missing support as much as the classification itself."
+      "text": "Unsupported wording, conflicting facts and a resource limit are different outcomes from missing support, and each needs a different next step. Moth reports each one separately instead of collapsing them into “no”."
     },
     {
       "type": "h2",
-      "text": "Improve the field deliberately",
-      "id": "improve-the-field-deliberately"
+      "text": "Improve the field on purpose",
+      "id": "improve-the-field-on-purpose"
     },
     {
       "type": "p",
-      "text": "An author might obtain a valid inspection fact and add it to the source. Alternatively, the organization might decide that its policy should require an audit instead. Those are different updates: one supplies evidence under an existing definition; the other changes the definition."
-    },
-    {
-      "type": "p",
-      "text": "Both require compiling a new bundle and loading it before subsequent questions use the change. The old answer remains associated with its original build. Within the same Preview 004 runtime, replay can verify that retained interpretation and execution chain. It does not prove that the source facts were true in the outside world, or turn an earlier answer into an answer under the new policy."
-    },
-    {
-      "type": "p",
-      "text": "The proposed richer Moth Base would expand tested capabilities, but a larger foundation would still need clear outcome boundaries. Evidence is useful when it shows both what follows and what has not been established."
-    },
-    {
-      "type": "p",
-      "text": "Read the [Moth overview](/moth) for the current model and local workflow, and consult the [language contract](/moth#language-contract) and [qualification evidence](/moth#qualification) for the release’s supported outcomes."
+      "text": "Adding an inspection fact supplies evidence; requiring an audit changes a definition. Both mean a new build. The old answer stays tied to its original build, and replay can verify it within the same runtime. It does not prove the source facts true in the outside world."
     }
   ]
 }

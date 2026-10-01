@@ -1,6 +1,6 @@
-// /solutions, /solutions/[slug], /solutions/use-cases (CONTENT §3.8). Every world here is
-// synthetic and labelled; no customers, results or ROI (CONTENT §4). Entity names follow the
-// source examples: single lowercase words in `code` style.
+// /solutions, /solutions/[slug], /solutions/use-cases (CONTENT §3.8, field framing D-134). Every
+// world here is synthetic and labelled; no customers, results or ROI (CONTENT §4). Entity names
+// follow the source examples: single lowercase words in `code` style.
 import type { UseCaseFilter } from '../lib/security/params.ts'
 import type { Outcome } from './outcomes.ts'
 
@@ -20,9 +20,7 @@ export type Solution = {
   promise: string
   title: string
   lede: string
-  rulebook: readonly string[]
   world: FieldExample
-  next: Partial<Record<Outcome, string>>
   evidence: readonly string[]
   note?: string
 }
@@ -31,30 +29,20 @@ export const SOLUTION_UI = {
   eyebrow: (name: string) => `Solutions · ${name}`,
   explore: 'Explore',
   rulebook: 'The rulebook',
-  rulebookLede: 'What gets defined before a single question is asked.',
+  rulebookLede: 'Everything the field will hold, defined before a single question.',
   world: 'An illustrative world',
   illustrative: 'Illustrative',
-  worldCaption: 'Illustrative example written for this page — not a customer deployment or a live console.',
+  worldCaption: 'Illustrative example — not a customer deployment or a live console.',
   tags: { define: 'Define', facts: 'Facts', ask: 'Ask' },
-  outcomes: {
-    title: 'Outcomes, as they would read here',
-    heads: { outcome: 'Outcome', meaning: 'What it means', next: 'What to do next' },
-  },
-  evidence: 'Why evidence matters here',
+  evidence: 'Why a field fits here',
   limits: {
-    title: 'What Preview 004 does not do',
-    // From releases.md and moth.md (CONTENT §3.2), unchanged in sense.
-    items: [
-      'Preview 004 is a local CLI. There is no public inference API yet.',
-      'Checked execution does not prove outside-world truth.',
-      'It is not a general chat system, arbitrary document reader, production service, or universal reasoning engine.',
-      'The four example worlds are synthetic evaluation cases, not operational integrations.',
-      'Compilation does not anonymize sensitive data.',
-    ],
+    title: 'Preview 004',
+    text: 'A local CLI. A checked answer shows what follows from your field, not outside-world truth.',
+    link: { label: 'All outcomes', href: '/moth#outcomes' },
   },
   cta: {
     title: (name: string) => `Talk to us about ${name.toLowerCase()}.`,
-    text: 'Tell us about the rulebook you work with. We’ll tell you honestly whether Moth fits today.',
+    text: 'Tell us your rulebook. We’ll tell you honestly whether Moth fits today.',
     primary: 'Talk to us',
     sales: 'Contact sales',
     worlds: 'See all example worlds',
@@ -73,12 +61,7 @@ export const SOLUTIONS: readonly Solution[] = [
     icon: 'chart',
     promise: 'Decisions that follow your policies',
     title: 'Decisions that follow your policies.',
-    lede: 'Purchasing, approvals, eligibility: many business decisions already have written criteria. Moth checks each case against the criteria you define and shows why it reached its result.',
-    rulebook: [
-      'The vocabulary: purchases, suppliers, inspections, funds.',
-      'The definitions: what makes a supplier approved, and an item purchase-ready.',
-      'The facts for each case, supplied by you — nothing from outside the field.',
-    ],
+    lede: 'Purchasing, approvals, eligibility. Your policies become the field; Moth answers each case only from it, and shows why.',
     world: {
       title: 'purchasing.field',
       define: [
@@ -106,15 +89,9 @@ export const SOLUTIONS: readonly Solution[] = [
         },
       ],
     },
-    next: {
-      supported: 'Proceed, and keep the evidence with the decision record.',
-      unproven: 'Ask for the missing fact — here, an inspection — before deciding.',
-      conflict: 'Reconcile the records that disagree before anyone approves.',
-    },
     evidence: [
-      'A reviewer can see which facts and which definition produced each result.',
-      'When a policy changes, you rebuild the field deliberately instead of hoping answers drift the right way.',
-      '“No supported proof” names what is missing, so a gap is never mistaken for a no.',
+      'A reviewer sees which facts and which definition produced each result.',
+      'When a policy changes, you rebuild the field on purpose; answers do not drift.',
     ],
   },
   {
@@ -123,12 +100,7 @@ export const SOLUTIONS: readonly Solution[] = [
     icon: 'book',
     promise: 'Answers grounded in your rules',
     title: 'Answers grounded in your rules.',
-    lede: 'Refunds, replacements, entitlements: support teams apply written rules to each request. Moth answers only from the rules and facts you supply, and hands the case to a person when the facts do not support an answer.',
-    rulebook: [
-      'The vocabulary: requests, receipts, return windows.',
-      'The definition of an eligible refund, in controlled English.',
-      'The facts of each request — what the customer has shown, and nothing more.',
-    ],
+    lede: 'Refunds, replacements, entitlements. Your rules become the field; Moth answers only from it, and hands the case to a person when it cannot.',
     world: {
       title: 'refunds.field',
       define: ['An eligible refund is a request that is within the return window and has a receipt.'],
@@ -147,19 +119,13 @@ export const SOLUTIONS: readonly Solution[] = [
           ask: 'Is `requesttwo` an eligible refund?',
           entity: 'requesttwo',
           outcome: 'unproven',
-          reason: 'no receipt supplied — hand off to a person, naming the missing receipt',
+          reason: 'no receipt supplied — hand off to a person',
         },
       ],
     },
-    next: {
-      supported: 'Tell the customer the result and the rule that decided it.',
-      unproven: 'Hand off to a person, naming the missing fact.',
-      refused: 'Route the question to a person; it falls outside the supported language.',
-    },
     evidence: [
-      'Every answer can be traced to the rule and the facts behind it.',
-      'The model does not invent a policy when the rulebook is silent.',
-      'A person receives the case with the missing fact already named.',
+      'Every answer traces to the rule and the facts behind it.',
+      'When the rulebook is silent, no policy is invented; the missing fact is named.',
     ],
   },
   {
@@ -168,12 +134,7 @@ export const SOLUTIONS: readonly Solution[] = [
     icon: 'layers',
     promise: 'Check conditions against defined terms',
     title: 'Check conditions against defined terms.',
-    lede: 'Contracts define their own terms. Moth checks whether a set of clauses meets a condition you have defined, and shows which clauses establish it — or which are missing.',
-    rulebook: [
-      'The defined terms, written as definitions.',
-      'The condition to check, such as what makes a clause set complete.',
-      'The clauses of each set, supplied as facts.',
-    ],
+    lede: 'Contracts define their own terms. Those terms become the field; Moth checks whether a clause set meets your condition, and shows which clauses decide it.',
     world: {
       title: 'clauses.field',
       define: [
@@ -198,15 +159,9 @@ export const SOLUTIONS: readonly Solution[] = [
         },
       ],
     },
-    next: {
-      supported: 'Record which clauses established the condition.',
-      unproven: 'Check whether the missing clause exists outside the supplied set.',
-      conflict: 'Resolve clauses that contradict each other before relying on either.',
-    },
     evidence: [
-      'Each result cites the clauses and the defined term it depends on.',
-      'A missing clause is reported as missing, not silently treated as present or absent.',
-      'Retained builds let you replay a check against the exact definitions used at the time.',
+      'Each result cites its clauses and the defined term.',
+      'A missing clause is reported as missing, never guessed.',
     ],
     note: 'Not legal advice. Illustrative only.',
   },
@@ -216,12 +171,7 @@ export const SOLUTIONS: readonly Solution[] = [
     icon: 'key',
     promise: 'Policy decisions you can audit',
     title: 'Policy decisions you can audit.',
-    lede: 'Access policies are rulebooks. Moth checks whether an account meets your definition of privileged access, keeps the evidence, and replays the decision against the same build when an auditor asks.',
-    rulebook: [
-      'The vocabulary: accounts, roles, status.',
-      'The definition of a privileged account.',
-      'The facts about each account, as your systems report them to you.',
-    ],
+    lede: 'Access policies are rulebooks. Yours becomes the field; Moth checks each account against it and replays the decision when an auditor asks.',
     world: {
       title: 'access.field',
       define: ['A privileged account is an account that holds an administrator role and is active.'],
@@ -244,15 +194,9 @@ export const SOLUTIONS: readonly Solution[] = [
         },
       ],
     },
-    next: {
-      supported: 'Keep the evidence; replay it against the same build for the audit.',
-      unproven: 'Supply the missing status before concluding either way.',
-      incompatible: 'Replay with the build and runtime the decision came from.',
-    },
     evidence: [
       'An auditor can replay a past decision against the build that made it.',
-      'The definition in force at the time is retained with the result.',
-      '“No supported proof” is kept distinct from “not privileged”.',
+      '“No supported proof” stays distinct from “not privileged”.',
     ],
   },
 ]
@@ -261,8 +205,8 @@ export const solutionBySlug = (slug: string) => SOLUTIONS.find((s) => s.slug ===
 
 export const SOLUTIONS_OVERVIEW = {
   eyebrow: 'Solutions',
-  title: 'Decisions that follow *your* rules.',
-  lede: 'Many decisions already have a rulebook. Moth takes that rulebook as the whole world, checks each case against it, and shows the evidence — or says what is missing.',
+  title: 'Your rulebook *is* the field.',
+  lede: 'Many decisions already have a rulebook. Moth takes it as the whole field, answers each case only from it, and says what is missing.',
   useCases: {
     name: 'Use cases',
     promise: 'Example worlds, from purchasing to venues',
@@ -274,9 +218,8 @@ export const SOLUTIONS_OVERVIEW = {
       title: 'Moth fits when…',
       items: [
         'the criteria can be written down',
-        'answers must be explainable',
+        'answers must show their reasons',
         '“not established” is a useful answer',
-        'the rules change and you need to rebuild deliberately',
       ],
     },
     not: {
@@ -286,7 +229,7 @@ export const SOLUTIONS_OVERVIEW = {
   },
   cta: {
     title: 'Have a rulebook in mind?',
-    text: 'Tell us about the decisions you want a model to make from your own rules.',
+    text: 'Tell us the decisions you want answered from your own rules.',
     action: { label: 'Contact sales', href: '/contact/sales' },
   },
 } as const
@@ -302,7 +245,7 @@ export type UseCase = {
 export const USE_CASES = {
   eyebrow: 'Solutions',
   title: 'Example worlds',
-  lede: 'Preview 004 ships with four synthetic example worlds. The rest are sketches of where the same method could apply.',
+  lede: 'Preview 004 ships four synthetic example worlds. The rest are sketches.',
   filterLabel: 'Filter by area',
   filters: {
     all: 'All',
@@ -318,7 +261,7 @@ export const USE_CASES = {
     badge: 'Synthetic example world',
     // The purchasing world is the source example; the other three are named in the source
     // (releases.md, the Introducing post) without detail, so no question or outcome is shown.
-    noExample: 'Its questions and definitions ship with the local delivery.',
+    noExample: 'Its definitions ship with the local delivery.',
     items: [
       {
         name: 'Purchasing',
@@ -326,21 +269,9 @@ export const USE_CASES = {
         definition: 'A purchase-ready item has funds available and an approved supplier.',
         example: { question: 'Is orderone a purchase-ready item?', outcome: 'supported' },
       },
-      {
-        name: 'Libraries',
-        domain: null,
-        definition: 'A library vocabulary with its own criteria, supplied as facts and definitions.',
-      },
-      {
-        name: 'Trails',
-        domain: null,
-        definition: 'A trail vocabulary with its own criteria, supplied as facts and definitions.',
-      },
-      {
-        name: 'Venues',
-        domain: null,
-        definition: 'A venue vocabulary with its own criteria, supplied as facts and definitions.',
-      },
+      { name: 'Libraries', domain: null, definition: 'A library vocabulary with its own criteria.' },
+      { name: 'Trails', domain: null, definition: 'A trail vocabulary with its own criteria.' },
+      { name: 'Venues', domain: null, definition: 'A venue vocabulary with its own criteria.' },
     ] satisfies UseCase[] as UseCase[],
   },
   sketches: {
@@ -370,18 +301,6 @@ export const USE_CASES = {
         domain: 'security',
         definition: 'A privileged account holds an administrator role and is active.',
         example: { question: 'Is accountone a privileged account?', outcome: 'supported' },
-      },
-      {
-        name: 'Grant eligibility',
-        domain: 'business',
-        definition: 'An eligible applicant is an applicant that is registered and has a signed declaration.',
-        example: { question: 'Is applicantone an eligible applicant?', outcome: 'unproven' },
-      },
-      {
-        name: 'Warranty coverage',
-        domain: 'customer-support',
-        definition: 'A covered repair is a repair of a registered product with an intact seal.',
-        example: { question: 'Is repairone a covered repair?', outcome: 'supported' },
       },
     ] satisfies UseCase[] as UseCase[],
   },

@@ -3,13 +3,11 @@ import { notFound } from 'next/navigation'
 import { FieldWindow } from '@/components/instrument/FieldWindow'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
-import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
 import { Button } from '@/components/ui/Button'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Icon } from '@/components/ui/Icon'
 import { Note } from '@/components/ui/Note'
 import { SmartLink } from '@/components/ui/SmartLink'
-import { CORE_OUTCOMES, type Outcome } from '@/content/outcomes'
 import { SOLUTION_UI, SOLUTIONS, solutionBySlug } from '@/content/solutions'
 import { routeMetadata } from '@/lib/seo'
 
@@ -24,13 +22,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return s ? routeMetadata(`/solutions/${s.slug}`) : {}
 }
 
-// PAGES §9.1 — SolutionTemplate. Surfaces: paper · ink · paper · paper-2 · ice.
+// PAGES §9.1 — SolutionTemplate. Surfaces: paper · ink · paper-2 · ice.
 export default async function SolutionPage({ params }: Props) {
   const s = solutionBySlug((await params).slug)
   if (!s) notFound()
   const ui = SOLUTION_UI
-  // Show the domain's own outcome wording first, then the core outcomes it does not override.
-  const outcomes = [...new Set([...CORE_OUTCOMES, ...Object.keys(s.next)])] as Outcome[]
   return (
     <>
       <Section surface="paper" labelledBy="solution-title" className="pt-12 md:pt-16 lg:pt-24">
@@ -54,29 +50,12 @@ export default async function SolutionPage({ params }: Props) {
               {ui.rulebook}
             </Heading>
             <p className="mt-4 text-body text-surface-muted">{ui.rulebookLede}</p>
-            <ol className="mt-8 border-t border-surface-rule">
-              {s.rulebook.map((r, i) => (
-                <li key={r} className="flex gap-4 border-b border-surface-rule py-4 text-body">
-                  <span className="font-mono text-label text-surface-subtle tabular-nums">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  {r}
-                </li>
-              ))}
-            </ol>
           </div>
           <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <FieldWindow field={s.world} tag={ui.illustrative} tags={ui.tags} />
             <p className="mt-4 font-mono text-label text-surface-muted">{ui.worldCaption}</p>
           </div>
         </Grid>
-      </Section>
-
-      <Section surface="paper" id="outcomes" labelledBy="outcomes-title">
-        <Heading level={2} size="display-m" id="outcomes-title">
-          {ui.outcomes.title}
-        </Heading>
-        <OutcomeLedger outcomes={outcomes} heads={ui.outcomes.heads} next={s.next} className="mt-10" />
       </Section>
 
       <Section surface="paper-2" id="evidence" labelledBy="evidence-title">
@@ -101,14 +80,10 @@ export default async function SolutionPage({ params }: Props) {
             <h2 id="limits-title" className="font-mono text-label text-surface-subtle">
               {ui.limits.title}
             </h2>
-            <ul className="mt-5 flex flex-col gap-3 text-small text-surface-muted">
-              {ui.limits.items.map((l) => (
-                <li key={l} className="flex gap-3">
-                  <Icon name="minus" className="mt-0.5 size-4 shrink-0" />
-                  {l}
-                </li>
-              ))}
-            </ul>
+            <p className="mt-5 text-small text-surface-muted">{ui.limits.text}</p>
+            <SmartLink href={ui.limits.link.href} className="link-prose mt-4 inline-block text-small">
+              {ui.limits.link.label}
+            </SmartLink>
           </aside>
           {s.slug === 'security' && (
             <aside

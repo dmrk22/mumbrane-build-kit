@@ -16,7 +16,7 @@ import { site } from './site.ts'
 export const LLMS = {
   title: 'Mumbrane',
   summary:
-    'Mumbrane is an independent lab building closed-world intelligence. Its first model, Moth, is constraint-based: it classifies from the facts and definitions you supply, shows its evidence, and says plainly when the world you defined cannot support an answer.',
+    'Mumbrane is an independent lab building field-based intelligence: knowledge stored as the shape of a field made from your data, and reasoning as a question settling in it. Its first model, Moth, answers only from the facts and definitions you supply, shows its evidence, and says plainly when the field cannot support an answer. Preview 004 compiles a fixed field and uses native constraint reasoning; continuous settling is proposed work.',
   intro:
     'Use the Markdown documents below for clean agent context. Canonical HTML URLs are included in each document’s frontmatter.',
   core: 'Core pages',
@@ -105,12 +105,6 @@ const moth = page('/moth', 'moth', [
   h3(m.preview.supportsTitle),
   ul(m.preview.supports),
   p(m.preview.note),
-  h2(m.contract.title),
-  p(m.contract.rules),
-  { type: 'code', lang: 'text', text: m.contract.examples, label: m.contract.examplesLabel },
-  p(m.contract.skills),
-  ul(m.contract.limits.map((l) => `${l.value} ${l.label}`)),
-  p(m.contract.limitsNote),
   h2(m.qualification.title),
   {
     type: 'table',
@@ -120,21 +114,6 @@ const moth = page('/moth', 'moth', [
     source: m.qualification.source,
   },
   ...m.qualification.caveats.map(p),
-  h2(m.measured.title),
-  p(m.measured.environment),
-  {
-    type: 'table',
-    caption: m.measured.title,
-    columns: [...m.measured.columns],
-    rows: m.measured.rows.map((r) => [...r]),
-    source: m.measured.source,
-  },
-  p(m.measured.caveat),
-  h2(m.inspect.title),
-  p(m.inspect.text),
-  h3(m.inspect.harnessTitle),
-  p(m.inspect.harness),
-  p(m.inspect.closing),
   h2(m.direction.title),
   p(`**${m.direction.tag}.** ${m.direction.text}`),
   h2(m.getPreview.title),

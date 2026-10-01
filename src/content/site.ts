@@ -1,9 +1,9 @@
 export const site = {
   name: 'Mumbrane',
-  title: 'Mumbrane — Intelligence for closed worlds',
+  title: 'Mumbrane — Field-based intelligence',
   titleTemplate: '%s — Mumbrane',
   description:
-    'Mumbrane builds constraint-based models that reason from the facts and definitions you supply, and show the evidence behind every result.',
+    'Mumbrane builds field-based intelligence: your data becomes the field, and a question settles where your facts and definitions support it.',
   skipLink: 'Skip to content',
   // PAGES §0.8. Error pages never echo the requested path or the error.
   notFound: {

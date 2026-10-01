@@ -1,6 +1,6 @@
-// /developers and /developers/docs (CONTENT §3.9). Everything here is either the sources' own wording
-// (releases.md, moth.md — reused from moth.ts where it already lives) or labelled Illustrative.
-// No endpoints, SDKs, CLI commands or schemas are presented as real (CONTENT §4).
+// /developers and /developers/docs (CONTENT §3.9, field framing D-134). Release facts come from the
+// sources (releases.md, moth.md — reused from moth.ts where they already live) or are labelled
+// Illustrative. No endpoints, SDKs, CLI commands or schemas are presented as real (CONTENT §4).
 import { claim } from './claims.ts'
 import { MOTH } from './moth.ts'
 
@@ -8,19 +8,25 @@ import { MOTH } from './moth.ts'
 export const CONCEPTS = [
   {
     term: 'Field',
-    text: 'Supported English facts, definitions, and interpretation skills, compiled into a versioned, reusable structure.',
+    text: 'Your facts and definitions, compiled into one fixed, versioned structure. The only source of truth for an answer.',
   },
-  { term: 'Build', text: 'One compiled version of a field. Updates require a new build and activation.' },
   {
-    term: 'Activation',
-    text: 'The version that questions are asked against. Earlier activations can still be queried.',
+    term: 'Fact',
+    text: 'A supported English statement about an entity, placed in the field at compile time.',
   },
-  { term: 'Question', text: 'A supported classification question: does an entity meet a definition?' },
+  {
+    term: 'Definition',
+    text: 'What counts: the conditions an entity must meet. Definitions decide; similar wording does not.',
+  },
+  {
+    term: 'Build',
+    text: 'One compiled version of the field. Questions never change it; a change means a new build.',
+  },
+  { term: 'Question', text: 'Does an entity meet a definition? Asked against one activated build.' },
   {
     term: 'Result',
-    text: 'Checked English or JSON, constructed by a pinned response plan, with a distinct outcome.',
+    text: 'Checked English or JSON with a distinct outcome and the evidence that established it.',
   },
-  { term: 'Evidence', text: 'What established the result, retained with it.' },
   {
     term: 'Replay',
     text: 'Running a retained episode again against its original build, within the same runtime.',
@@ -30,31 +36,26 @@ export const CONCEPTS = [
 export const DEVELOPERS = {
   hero: {
     eyebrow: 'Developers',
-    title: 'Build on *checked answers.*',
-    lede: 'Moth compiles supported English facts, definitions, and interpretation skills into a versioned field, then answers classification questions with checked English or JSON results and retained evidence.',
+    title: 'Build on a *fixed field.*',
+    lede: 'Compile facts and definitions into a versioned field, then ask classification questions and get checked English or JSON with the evidence.',
     status: 'Preview 004 is a local CLI. There is no public inference API yet.',
   },
   lifecycle: {
     eyebrow: 'The lifecycle',
-    title: 'Define, compile, activate, ask, inspect, replay.',
+    title: 'Define, compile, ask, inspect, replay.',
     figure: 'Fig. 01 — The lifecycle of a field',
     stages: [
-      { name: 'Define', text: 'Supply the vocabulary, facts, relationships, and definitions for a task.' },
-      { name: 'Compile', text: 'Check the interpretation and build a retained, versioned field.' },
-      { name: 'Activate', text: 'Edit source material, rebuild, and activate a new version.' },
-      { name: 'Ask', text: 'Interpret a supported question against the selected field version.' },
-      { name: 'Inspect', text: 'Read the checked English or JSON result and the evidence behind it.' },
-      {
-        name: 'Replay',
-        text: 'Replay an earlier episode against its original build within the same runtime.',
-      },
+      { name: 'Define', text: 'Write the facts and definitions. Nothing else enters the field.' },
+      { name: 'Compile', text: 'Build and activate a fixed, versioned field.' },
+      { name: 'Ask', text: 'Ask whether an entity meets a definition.' },
+      { name: 'Inspect', text: 'Read the checked result and the evidence behind it.' },
+      { name: 'Replay', text: 'Run an earlier episode against its original build.' },
     ],
   },
-  concepts: { eyebrow: 'Concepts', title: 'Seven words to know.' },
   results: {
     eyebrow: 'Results',
     title: 'Checked English, or JSON.',
-    text: 'A pinned response plan constructs the result as checked English or JSON. The JSON below shows the idea; the delivery documents the real interface.',
+    text: 'Each result carries its outcome and evidence. The JSON below shows the idea; the delivery documents the real interface.',
     jsonLabel: 'JSON',
     jsonTag: 'Illustrative — not the Preview 004 schema',
     json: [
@@ -80,10 +81,12 @@ export const DEVELOPERS = {
   outcomes: {
     eyebrow: 'Outcomes and limits',
     title: 'Distinct outcomes, bounded work.',
+    text: 'Missing support, conflict, refusal, and a resource stop each mean something different. The language and its limits are in the documentation.',
+    link: { label: 'All outcomes', href: '/moth#outcomes' },
   },
   future: {
     title: 'When the hosted API arrives',
-    text: 'We intend to keep what makes the preview inspectable: versioned fields, explicit outcomes, retained evidence, and replay. We will document the interface here when it exists, not before.',
+    text: 'It will keep what makes the preview inspectable: fixed fields, explicit outcomes, retained evidence, and replay. We will document it here when it exists.',
   },
   next: [
     { label: 'Documentation', href: '/developers/docs' },
@@ -114,53 +117,46 @@ export const DOCS = {
       id: 'fields',
       title: 'Fields',
       paragraphs: [
-        MOTH.hero.lede,
-        `Current profile: ${claim('profile')}, with ${claim('worlds')} — purchasing, libraries, trails, and venues — and a separate native-demo control.`,
+        CONCEPTS[0].text,
+        `Current profile: ${claim('profile')}, with ${claim('worlds')} — purchasing, libraries, trails, and venues.`,
       ],
     },
     {
       id: 'facts-and-definitions',
       title: 'Facts and definitions',
       paragraphs: [
-        'Sources use admitted complete sentences, supported positive definitions, relational conditions, and shared-subject composition. Explicit negative facts are supported; negated questions and negative definition conditions are not.',
+        'Facts describe entities; definitions say what counts. Sources use admitted complete sentences, supported positive definitions, and relational conditions.',
       ],
       code: { label: 'Definitions', text: MOTH.purchasing.definitions.inspection.join('\n') },
-    },
-    {
-      id: 'interpretation-skills',
-      title: 'Interpretation skills',
-      paragraphs: [
-        'Supported English skills configure interpretation and composition.',
-        MOTH.contract.skills,
-      ],
     },
     {
       id: 'compilation-and-activation',
       title: 'Compilation and activation',
       paragraphs: [
-        'Check the interpretation and build a retained field. Existing local BGE assets participate in compilation; updates require a new build and activation.',
-        'Edit source material, rebuild, and activate a new version. The qualified inference and replay path does not initialize the encoder.',
+        'Compilation checks the interpretation and builds a fixed field. Local BGE assets take part in compilation; the qualified inference path does not run the encoder.',
+        'A change means a new build and activation. Earlier activations can still be queried.',
       ],
     },
     {
       id: 'questions',
       title: 'Questions',
-      paragraphs: [
-        'Interpret a supported question against the selected field version: ask whether an entity meets a definition.',
-      ],
-      code: { label: MOTH.contract.examplesLabel, text: MOTH.contract.examples },
+      paragraphs: ['Ask whether an entity meets a definition, against one activated build.'],
     },
     {
       id: 'outcomes',
       title: 'Outcomes',
-      paragraphs: [MOTH.outcomes.boundaries[0]],
+      paragraphs: [
+        'Supported, no supported proof, conflict, refused, resource limit, incomplete, and incompatible are distinct outcomes; each has its own next step. [See the outcomes table](/moth#outcomes).',
+        MOTH.outcomes.boundaries[0],
+      ],
     },
     {
       id: 'evidence-and-replay',
       title: 'Evidence and replay',
       paragraphs: [
-        'Construct checked English or JSON results with retained evidence. Query earlier activations and replay retained episodes within the same runtime.',
-        'Compiled bundles retain source-derived evidence and may include original spans; compilation does not anonymize sensitive data.',
+        CONCEPTS[5].text,
+        CONCEPTS[6].text,
+        'Compiled bundles may include original source spans; compilation does not anonymize sensitive data.',
       ],
     },
     // Rendered with the shared LanguageContract module (rules, examples, skills, limits).

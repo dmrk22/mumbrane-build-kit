@@ -327,6 +327,8 @@ Next: console app polish, per-page heroes (/moth, /research) in the new language
 - Guard/budgets/shots scripts export pure functions tested in `tests/unit/scripts.test.ts`. `ROUTES` in `tests/e2e/utils.ts` must grow with the route registry in P2.
 
 ## Open questions for the owner
+- [ ] CONTENT.md §1 voice ("closed-world", "constraint-based") predates the field framing of D-134; update the plan file? (copy rewrite 2026-10-01)
+- [ ] Copy is at 6,027 words vs the 5,000 target; the rest needs structural cuts (merge the four solution pages, drop /status copy, shorten /developers/docs) — owner to choose (D-134)
 - [x] Canonical domain: mumbrane.com or mumbrane.ai? (D-013) — **mumbrane.com**, owner 2026-10-01 (D-106)
 - [ ] Legal entity name and address for terms/privacy (D-024) — placeholders shown
 - [ ] "Enterprise teams" in the footer brief = "Enterprise terms"? (D-010)

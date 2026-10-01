@@ -12,11 +12,7 @@ export const PRICING = {
       price: 'Free',
       pigment: 'ice',
       text: 'Explore the console design with synthetic example worlds in your browser.',
-      facts: [
-        'A simulation that runs in your browser.',
-        'Synthetic example worlds only.',
-        'Nothing you type leaves the page.',
-      ],
+      facts: ['A simulation that runs in your browser.', 'Nothing you type leaves the page.'],
       action: { label: 'Try the console', href: '/console' },
     },
     {
@@ -27,7 +23,6 @@ export const PRICING = {
       facts: [
         'Local CLI delivery; no public download.',
         'Documentation and qualification evidence included.',
-        'Four synthetic example worlds to start from.',
       ],
       action: { label: 'Contact sales', href: '/contact/sales' },
     },
@@ -48,10 +43,6 @@ export const PRICING = {
         a: 'The console preview is free. It is a simulation that runs in your browser with synthetic example worlds, not the model itself.',
       },
       { q: 'Is there an API?', a: 'Not yet. Preview 004 is a local CLI; there is no public inference API.' },
-      {
-        q: 'What does evaluation involve?',
-        a: 'A local delivery of Moth Preview 004, with its documentation and qualification evidence.',
-      },
       { q: 'How will pricing work later?', a: 'We’ll publish it here when the hosted service launches.' },
     ],
   },

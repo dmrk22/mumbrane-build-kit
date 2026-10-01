@@ -9,7 +9,7 @@ test.describe('@smoke solutions', () => {
 
   test('use-cases filter: URL state, current chip, counted result', async ({ page }) => {
     await page.goto('/solutions/use-cases')
-    await expect(cards(page)).toHaveCount(10)
+    await expect(cards(page)).toHaveCount(8)
     await filters(page).getByRole('link', { name: 'Legal', exact: true }).click()
     await expect(page).toHaveURL(/\?domain=legal$/)
     await expect(cards(page)).toHaveText(['Clause conditions'])
@@ -22,7 +22,7 @@ test.describe('@smoke solutions', () => {
 
   test('an unknown ?domain falls back to all, never reflected', async ({ page }) => {
     await page.goto('/solutions/use-cases?domain=%3Cb%3Ex')
-    await expect(cards(page)).toHaveCount(10)
+    await expect(cards(page)).toHaveCount(8)
     await expect(filters(page).getByRole('link', { name: 'All', exact: true })).toHaveAttribute(
       'aria-current',
       'true',

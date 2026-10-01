@@ -1,13 +1,11 @@
 import { Container } from '@/components/layout/Container'
 import { LanguageContract, LimitsGrid } from '@/components/sections/LanguageContract'
-import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
 import { CodeBlock } from '@/components/ui/CodeBlock'
 import { DocsToc } from '@/components/ui/DocsToc'
 import { AnchorHeading, Eyebrow } from '@/components/ui/Heading'
 import { Icon } from '@/components/ui/Icon'
 import { Inline } from '@/components/ui/Inline'
 import { CONCEPTS, DOCS } from '@/content/developers'
-import { MOTH } from '@/content/moth'
 import { proseDate } from '@/lib/format'
 import { routeMetadata } from '@/lib/seo'
 
@@ -74,9 +72,6 @@ export default function DocsPage() {
                     </p>
                   ))}
                   {s.code && <CodeBlock code={s.code.text} label={s.code.label} />}
-                  {s.id === 'outcomes' && (
-                    <OutcomeLedger outcomes={MOTH.outcomes.ledger} heads={MOTH.outcomes.heads} />
-                  )}
                   {s.id === 'language-contract' && <LanguageContract limits={false} />}
                   {s.id === 'limits' && <LimitsGrid />}
                 </div>

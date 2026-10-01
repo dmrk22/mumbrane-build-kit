@@ -1,71 +1,49 @@
 ---
 title: "Towards Field based Intelligence"
-description: "Our research hypothesis: persistent knowledge, interacting fields, and energy-guided inference could offer a path toward more general reasoning."
+description: "Field-based intelligence: knowledge stored as the shape of a field, and reasoning as a question settling in it. Our hypothesis, and its limits."
 canonical: "https://mumbrane.ai/research/toward-field-based-intelligence"
 markdown: "https://mumbrane.ai/research/toward-field-based-intelligence.md"
 section: "research"
 category: "Research perspective"
 published: "2026-09-16"
-updated: "2026-09-22"
+updated: "2026-10-01"
 authors:
   - "Mumbrane Labs"
 tags:
   - "Field-based intelligence"
-  - "Energy-guided inference"
-  - "Physical limits"
+  - "Equilibrium"
+  - "Energy-based models"
 ---
 
 # Towards Field based Intelligence
-Our research hypothesis: persistent knowledge, interacting fields, and energy-guided inference could offer a path toward more general reasoning.
+Field-based intelligence: knowledge stored as the shape of a field, and reasoning as a question settling in it. Our hypothesis, and its limits.
 
-What limits the intelligence a system can attain within our universe?
+What if knowledge were not stored as rules or answers, but as the shape of a field?
 
-Mumbrane begins with the hypothesis that intelligence is constrained by the physical conditions under which it operates: the information available to it, the resources it can use, and the causal relationships through which information becomes accessible. We aim to investigate whether these constraints define meaningful frontiers of attainable intelligence.
+That is the direction Mumbrane is pursuing. The field is produced by the data itself. Reasoning is what happens when a new input is dropped into the field and allowed to settle. The point where it comes to rest is the answer.
 
-Our proposed approach represents knowledge as a persistent, layered field. As knowledge accumulates, its relationships change the structure within which a problem is considered. A goal and its constraints shape an energy objective, and inference seeks a configuration that satisfies those conditions. Candidate results must then be checked against the original problem.
+## The data is the field
 
-We call this direction **field-based intelligence**. Its central research question is whether compounding knowledge and energy-guided dynamics can support increasingly general reasoning—and how physical principles, including relativity, might help us characterize its limits.
+Pretrained encoders turn each piece of information into a point in a shared space. Each point shapes the field around it, the way a charge shapes the potential around it. There is no separate model on top: the stored data is the model. Whatever you put in becomes the truth.
 
-## Knowledge that changes the field
+The charge picture is a metaphor. Fixed electric charges cannot hold a free charge in a stable resting place, so we build on smoother energy functions with real minima.
 
-Information gains meaning through relationships. An observation can support an explanation, challenge a previous belief, or introduce a constraint that changes an entire problem.
+## Fix the field, then ask
 
-We want accumulated knowledge to remain available as a structure that subsequent reasoning can use. In the layered field we envision, new information changes the relationships among possible states. Earlier knowledge supplies context; new evidence can refine it or expose contradictions within it.
-
-The ambition is compounding usefulness. Solving one problem should help establish structure that can inform another. More layers alone would not demonstrate progress: the question is whether their interactions improve reasoning while preserving provenance, uncertainty, and the ability to revise an assumption.
-
-## A goal reshapes the landscape
-
-Imagine a field that changes shape as evidence arrives. Some configurations become less compatible with what is known; others become more plausible. A goal then gives this landscape a direction.
-
-In our proposed runtime, a problem's requirements shape an energy objective. Here, energy refers to a mathematical measure of how well a candidate configuration fits the objective and its constraints. Calling it energy does not, by itself, establish an equivalence with physical energy.
-
-Inference is envisioned as a process of adjusting the configuration toward a better fit. The layers contribute relevant knowledge, while the goal determines what the system is trying to resolve. This is the intuition behind the morphing fields in our visual language: information changes the space in which reasoning happens.
-
-The animation is an illustration of that idea, rather than evidence that the underlying research questions have been solved.
+Building the field is the learning step. Once it is fixed, new inputs are shaped by the field but do not change it. A question enters as a new point, and its neighbors push and pull it until the forces balance. That resting point is what the system believes. Priority inputs carry more weight, so questions near them are pulled toward them harder.
 
 ## Equilibrium is a candidate, not a guarantee
 
-A system can settle into a stable state without answering the intended question correctly. An objective may be incomplete, constraints may conflict, or the dynamics may settle somewhere that is only locally favorable.
+A question can come to rest between similar memories rather than on any one of them. And nearness is not meaning: text encoders are known to place a sentence and its negation close together. So a resting point must be checked against the definitions that say what counts.
 
-Verification is therefore central to the direction we are pursuing. A candidate result needs to be evaluated against the original requirements, with unresolved constraints and uncertainty kept visible. Where independent checks are possible, they should contribute evidence for accepting or rejecting the result.
+## Close to known ideas
 
-Our aim is a reasoning process whose outputs can be examined: what conditions were satisfied, what evidence supported the result, and what remains unresolved.
+There is mathematics to borrow. **Modern Hopfield networks** store patterns as minima of an energy landscape and retrieve one by letting a query settle; transformer attention is one step of this update. **Mean shift** moves a point to the weighted average of its neighbors until it stops. **Energy-based models** choose the answer with the lowest energy. Per-item weights correspond to priority inputs.
 
-## Investigating the limits
+In short: memory as a landscape, inference as rolling downhill.
 
-Mumbrane's long-term hypothesis is that physical constraints may help define an attainable frontier for intelligence. Making that hypothesis precise requires specifying what intelligence means for a task, what resources are available, and how performance is measured.
+## Moth as the first step
 
-Relativity is part of this research agenda through questions about causality, access to information, and the relationship between local knowledge and a broader system. Its exact mathematical role in our approach remains an open question. We are not presenting a derived universal upper bound or a demonstrated relativistic theory of intelligence.
+In Moth Preview 004, supported English facts and definitions compile into a fixed, versioned field, and native constraint reasoning establishes each answer with its evidence. It does not establish continuous energy optimization; the [release evidence](https://mumbrane.ai/releases) describes what exists today.
 
-Nor does the hypothesis establish that every problem can be solved. Applications in biology, protein science, or other domains would require their own representations, experiments, and validation. Claims about cryptographic inversion or foundational complexity questions would require separate mathematical evidence. They are not capabilities established by this proposal.
-
-## Moth as an experimental foundation
-
-Moth is the reasoning model we are developing to explore parts of this direction. In Preview 004, supported English facts, definitions, and interpretation skills compile into a reusable field. Native constraint reasoning establishes classifications, and checked English or JSON responses retain evidence for replay.
-
-This gives us a way to test whether meanings survive compilation, whether definitions compose, and how results respond to changed criteria or missing facts. It does not establish continuous energy optimization or the proposed connection to relativity. The [Preview 004 release and evidence summary](https://mumbrane.ai/releases) describes the current implementation separately from this research hypothesis.
-
-The next questions are concrete. Does accumulated structure improve results on new tasks? Can the system revise its conclusions when evidence changes? Does it identify conflicting constraints? How do accuracy, verification, and computational cost compare with appropriate baselines?
-
-These are the tests that must turn a compelling picture into a useful system. Mumbrane's ambition is to understand how far field-based reasoning can go—and to establish that progress through results that others can inspect.
+The open questions are concrete. Does a settled answer survive checking? How do accuracy and cost compare with appropriate baselines? And how far can field-based reasoning go in a physical universe, where causality limits which information can reach a decision?

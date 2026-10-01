@@ -25,11 +25,11 @@ export const ARTICLES = [
     // Normalised from the source's "Towards Field based Intelligence" (D-011).
     title: 'Towards field-based intelligence',
     description:
-      'Our research hypothesis: persistent knowledge, interacting fields, and energy-guided inference could offer a path toward more general reasoning.',
+      'Field-based intelligence: knowledge stored as the shape of a field, and reasoning as a question settling in it. Our hypothesis, and its limits.',
     published: '2026-09-16',
-    updated: '2026-09-22',
+    updated: '2026-10-01',
     authors: ['Mumbrane Labs'],
-    tags: ['Field-based intelligence', 'Energy-guided inference', 'Physical limits'],
+    tags: ['Field-based intelligence', 'Equilibrium', 'Energy-based models'],
     plate: 'plate-field',
     plateNumber: 1,
   },
@@ -39,7 +39,7 @@ export const ARTICLES = [
     category: 'Field notes',
     title: 'Introducing Moth Preview 004',
     description:
-      'A local preview for defining a world, compiling its meaning, and asking classification questions with inspectable evidence.',
+      'A local preview that compiles your facts and definitions into a fixed field and answers classification questions with inspectable evidence.',
     published: '2026-09-22',
     authors: ['Mumbrane Labs'],
     tags: [],
@@ -52,7 +52,7 @@ export const ARTICLES = [
     category: 'Engineering notes',
     title: 'Different wording. Different meaning.',
     description:
-      'How Moth preserves subjects, relationships and requirements when supported English is rephrased — and when a change should alter the answer.',
+      'Nearness in an encoder’s space is not meaning. How Moth keeps rewording and changed requirements apart: definitions decide.',
     published: '2026-09-22',
     authors: ['Mumbrane Labs'],
     tags: [],
@@ -65,7 +65,7 @@ export const ARTICLES = [
     category: 'Research practice',
     title: 'When the field cannot establish an answer',
     description:
-      'Missing support, conflicting information and incomplete execution mean different things. A useful answer keeps those distinctions visible.',
+      'Not every question finds a resting place. Missing support, conflict and incomplete execution mean different things, and the answer keeps them apart.',
     published: '2026-09-22',
     authors: ['Mumbrane Labs'],
     tags: [],

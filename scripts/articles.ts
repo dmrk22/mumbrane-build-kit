@@ -12,7 +12,7 @@ const OUT = 'src/content/articleBodies.ts'
 // Old-site URLs → this site's routes (CONTENT §3.2: /releases is now /moth#evidence).
 const LINK_MAP: Record<string, string> = {
   releases: '/moth#evidence',
-  'releases#language-contract': '/moth#language-contract',
+  'releases#language-contract': '/developers/docs#language-contract',
   'releases#qualification': '/moth#qualification',
 }
 

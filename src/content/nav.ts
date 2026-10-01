@@ -58,7 +58,7 @@ export const HEADER = {
 } as const
 
 export const FOOTER = {
-  tagline: 'Intelligence for closed worlds.',
+  tagline: 'Knowledge as a field.',
   columns: [
     {
       title: 'Solutions',

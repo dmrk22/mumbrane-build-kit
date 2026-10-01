@@ -631,3 +631,25 @@ card included, at 10 px.
 use rx 10 in drawing units; the 10-unit outcome glyph boxes use 4.5 (10 × 10/22, the chip's shape
 at their scale). Supersedes D-132's values; its method and the e2e measurement stand.
 **Status**: Decided (owner instruction in session).
+
+### D-134 — Copy rewritten around field-based intelligence (2026-10-01)
+**Context**: The owner asked for every page to describe what Mumbrane builds — knowledge as the
+shape of a field made by the data, reasoning as a question settling to equilibrium, priority
+inputs as heavier charges — and to cut page copy roughly in half, keeping only what is relevant.
+**Decision**: Owner-confirmed framing "method + direction" and "encoders place, definitions
+decide": present tense for the method; Moth is "built to" settle questions; Preview 004 is the
+first step (fixed compiled field, local BGE assets at compile time, native constraint reasoning).
+Duplicated blocks removed (per-page outcome ledgers, limits grids, qualification and measured
+tables outside /moth, the concept grid on /developers, the home news list, two use-case sketches,
+the rulebook lists). Articles rewritten in their sources and regenerated. Marketing `<main>` text
+went from 10,298 to 6,027 words (localhost, scratch counter).
+Research basis, checked before writing: modern Hopfield networks retrieve by one-step settling
+and attention is that update (Ramsauer et al. 2020, arXiv 2008.02217); mean shift converges to a
+stationary point of the density, also with positive per-point weights (Comaniciu & Meer 2002);
+EBM inference is argmin_Y E(X, Y) (LeCun et al. 2006). Not written as fact: literal electrostatics
+(Earnshaw's theorem: fixed charges give no stable equilibrium, so "charge" stays a metaphor);
+that Preview 004 settles or weights facts; how settling and definitions combine. Encoders are
+known to be negation-blind (arXiv 2504.00584), hence "nearness is not meaning".
+**Alternatives**: present tense for Moth (contradicts releases.md); pure similarity settling
+(contradicts the audit ≠ inspection example).
+**Status**: Decided (owner instruction in session). CONTENT.md §1 voice predates this framing.

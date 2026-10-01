@@ -54,7 +54,7 @@ test('every route shares a card that exists: its family by prefix, articles thei
 
 test('home uses the absolute site title; noindex routes say so', () => {
   const home = routeMetadata('/')
-  assert.deepEqual(home.title, { absolute: 'Mumbrane — Intelligence for closed worlds' })
+  assert.deepEqual(home.title, { absolute: 'Mumbrane — Field-based intelligence' })
   assert.deepEqual(routeMetadata('/console').robots, { index: false, follow: false })
   assert.equal(routeMetadata('/moth', '/og/moth.png').twitter && 'ok', 'ok')
 })
@@ -104,10 +104,10 @@ test('article metadata: OG article with dates, markdown alternate, JSON-LD', asy
   const og = m.openGraph as { type: string; publishedTime: string; modifiedTime: string }
   assert.equal(og.type, 'article')
   assert.equal(og.publishedTime, '2026-09-16')
-  assert.equal(og.modifiedTime, '2026-09-22')
+  assert.equal(og.modifiedTime, '2026-10-01')
   const ld = articleJsonLd(a)
   assert.equal(ld.headline, a.title)
-  assert.equal(ld.dateModified, '2026-09-22')
+  assert.equal(ld.dateModified, '2026-10-01')
   assert.equal(ld.image, 'https://mumbrane.com/paintings/plate-field-1600.webp')
   assert.deepEqual(ld.author, { '@type': 'Organization', name: 'Mumbrane Labs' })
 })

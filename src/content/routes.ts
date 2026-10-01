@@ -24,7 +24,7 @@ export const ROUTES = [
     path: '/',
     title: 'Home',
     description:
-      'Mumbrane builds constraint-based models that reason from the facts and definitions you supply, and show the evidence behind every result.',
+      'Mumbrane builds field-based intelligence: your data becomes the field, and a question settles where your facts and definitions support it.',
     sitemap: true,
     surfaceTop: 'ink',
   },
@@ -32,8 +32,8 @@ export const ROUTES = [
     path: '/moth',
     title: 'Moth',
     description:
-      'Configurable classification over a compiled field of facts, definitions, and supported English interpretation skills.',
-    nav: { description: 'Configurable classification with checked answers' },
+      'Moth turns your facts and definitions into a fixed field and answers each question with checked evidence. Preview 004 is the first step.',
+    nav: { description: 'A fixed field with checked answers' },
     sitemap: true,
     surfaceTop: 'paper',
   },
@@ -43,7 +43,7 @@ export const ROUTES = [
     path: '/solutions',
     title: 'Solutions',
     description:
-      'Many decisions already have a rulebook. Moth takes that rulebook as the whole world, checks each case against it, and shows the evidence.',
+      'Many decisions already have a rulebook. Moth takes it as the whole field, answers each case only from it, and says what is missing.',
     group: 'solutions',
     nav: { label: 'Where closed-world reasoning fits' },
     sitemap: true,
@@ -92,8 +92,7 @@ export const ROUTES = [
   {
     path: '/solutions/use-cases',
     title: 'Use cases',
-    description:
-      'Preview 004 ships with four synthetic example worlds. The rest are sketches of where the same method could apply.',
+    description: 'Preview 004 ships four synthetic example worlds. The rest are sketches.',
     group: 'solutions',
     nav: { description: 'Example worlds, from purchasing to venues' },
     sitemap: true,
@@ -105,7 +104,7 @@ export const ROUTES = [
     path: '/developers',
     title: 'API overview',
     description:
-      'The lifecycle, concepts and outcomes behind checked answers. Preview 004 is a local CLI; there is no public inference API yet.',
+      'The lifecycle and concepts of a fixed, versioned field. Preview 004 is a local CLI; there is no public inference API yet.',
     group: 'developer',
     sitemap: true,
     surfaceTop: 'paper',
@@ -114,7 +113,7 @@ export const ROUTES = [
     path: '/developers/docs',
     title: 'Documentation',
     description:
-      'Concepts and contracts for Moth Preview 004: fields, definitions, questions, outcomes, evidence, and limits.',
+      'Concepts and contracts for Moth Preview 004: fields, facts, definitions, questions, outcomes, evidence, and limits.',
     group: 'developer',
     sitemap: true,
     surfaceTop: 'paper',
@@ -123,7 +122,7 @@ export const ROUTES = [
     path: '/developers/models',
     title: 'Models',
     description:
-      'The model card for Moth Inference Preview 004: capabilities, language contract, outcomes, qualification, and limits.',
+      'The model card for Moth Inference Preview 004: what it supports, what it does not, and where the evidence lives.',
     group: 'developer',
     sitemap: true,
     surfaceTop: 'paper',
@@ -159,7 +158,7 @@ export const ROUTES = [
     path: '/company',
     title: 'Company',
     description:
-      'Mumbrane is an independent research lab investigating field-based intelligence: retained knowledge, reusable skills, and explicit constraints.',
+      'Mumbrane is an independent research lab building field-based intelligence: knowledge as the shape of a field, reasoning as settling in it.',
     group: 'company',
     nav: { label: 'About' },
     sitemap: true,
@@ -169,7 +168,7 @@ export const ROUTES = [
     path: '/research',
     title: 'Research',
     description:
-      'Mumbrane’s research into field-based intelligence, energy-guided reasoning, and the causal limits of inference.',
+      'Field-based intelligence: knowledge as the shape of a field, reasoning as a question settling in it, and the causal limits of inference.',
     group: 'company',
     sitemap: true,
     surfaceTop: 'paper',
@@ -177,7 +176,7 @@ export const ROUTES = [
   {
     path: '/news',
     title: 'News',
-    description: 'Product developments, engineering decisions, and practical examples from Mumbrane Labs.',
+    description: 'Releases, engineering notes, and worked examples from Mumbrane Labs.',
     group: 'company',
     sitemap: true,
     surfaceTop: 'paper',

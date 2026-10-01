@@ -22,7 +22,7 @@ export const COMPANY = {
   hero: {
     eyebrow: 'Company',
     title: 'The lab, block by block.',
-    lede: 'Mumbrane is an independent research lab investigating field-based intelligence. We study how retained knowledge, reusable skills, and explicit constraints can support more general reasoning.',
+    lede: 'Mumbrane is an independent research lab building field-based intelligence: knowledge as the shape of a field, reasoning as a question settling in it.',
   },
   blocks: {
     unlocked: 'unlocked',
@@ -32,7 +32,7 @@ export const COMPANY = {
       {
         kind: 'open',
         label: 'Mission',
-        text: 'Intelligence that answers from the world you define.',
+        text: 'Intelligence shaped only by the data you give it.',
         fill: 'paper',
         step: 1,
         wide: true,
@@ -75,7 +75,7 @@ export const COMPANY = {
       {
         kind: 'open',
         label: 'Research',
-        text: 'Representation · Dynamics · Causality',
+        text: 'Fields · Equilibrium · Causality',
         fill: 'lilac',
         step: 5,
         wide: true,
@@ -108,8 +108,8 @@ export const COMPANY = {
     ] satisfies CompanyBlock[] as CompanyBlock[],
   },
   about: {
-    title: 'Why closed worlds',
-    text: 'Most consequential decisions already have a rulebook — a policy, a contract, a definition of done. We build models that take that rulebook as the whole world, reason inside it, and show their work. When the rulebook is silent, the model says so. That is the discipline we want from intelligence before we ask it to be general.',
+    title: 'Why a field',
+    text: 'In a field, the data is the model: whatever you put in becomes the truth, and a question settles where that truth supports it. When nothing supports an answer, the model says so. That is the discipline we want from intelligence before we ask it to be general.',
     painting: 'company-plate',
   },
   name: {
@@ -138,7 +138,7 @@ export const CAREERS = {
     title: 'How we work',
     items: [
       'Evidence before eloquence',
-      'Small, inspectable systems first',
+      'A fixed field, checked answers',
       'Publish the limits with the results',
       'Design is part of the science',
     ],
@@ -148,20 +148,20 @@ export const CAREERS = {
     // Glosses authored for layout (PAGES §6); owner to confirm (BUILD_STATE open questions).
     items: [
       {
-        name: 'Formal semantics and controlled language',
-        gloss: 'How English definitions become precise, checkable meaning.',
+        name: 'Encoders and representation',
+        gloss: 'Placing facts so that nearness helps, without mistaking it for meaning.',
       },
       {
-        name: 'Constraint reasoning and program analysis',
-        gloss: 'Deciding what follows from a rulebook, and proving it.',
+        name: 'Energy-based models and associative memory',
+        gloss: 'Landscapes where a question settles: Hopfield networks and their kin.',
       },
       {
-        name: 'Physics-inspired models and energy-based methods',
-        gloss: 'Fields, energy and dynamics as a way to guide inference.',
+        name: 'Dynamics and convergence',
+        gloss: 'When settling stops, where it stops, and how weights move it.',
       },
-      { name: 'Systems and runtime engineering', gloss: 'Retained, versioned builds that replay exactly.' },
+      { name: 'Formal semantics', gloss: 'Definitions precise enough to check a resting point against.' },
+      { name: 'Systems and runtime engineering', gloss: 'Fixed, versioned builds that replay exactly.' },
       { name: 'Evaluation design', gloss: 'Tests that separate a supported answer from a lucky one.' },
-      { name: 'Interface design for evidence', gloss: 'Making the reasons behind a result easy to inspect.' },
     ],
   },
   cta: {

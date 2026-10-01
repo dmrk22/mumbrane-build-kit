@@ -1,8 +1,5 @@
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
-import { LanguageContract } from '@/components/sections/LanguageContract'
-import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
-import { Qualification } from '@/components/sections/Qualification'
 import { SpecTable } from '@/components/sections/SpecTable'
 import { Button } from '@/components/ui/Button'
 import { Tag } from '@/components/ui/Chip'
@@ -66,37 +63,14 @@ export default function ModelsPage() {
         </article>
       </Section>
 
-      <Section surface="paper-2" id="language-contract" labelledBy="contract-title">
-        <Eyebrow>{MOTH.contract.eyebrow}</Eyebrow>
-        <Heading level={2} size="display-m" id="contract-title" className="mt-4">
-          {MOTH.contract.title}
+      <Section surface="paper-2" id="evidence" labelledBy="evidence-title">
+        <Heading level={2} size="display-m" id="evidence-title">
+          {MODELS.evidence.title}
         </Heading>
-        <div className="mt-12">
-          <LanguageContract />
-        </div>
-      </Section>
-
-      <Section surface="paper" id="outcomes" labelledBy="outcomes-title">
-        <Eyebrow>{MOTH.outcomes.eyebrow}</Eyebrow>
-        <Heading level={2} size="display-m" id="outcomes-title" className="mt-4">
-          {MOTH.outcomes.title}
-        </Heading>
-        <OutcomeLedger outcomes={MOTH.outcomes.ledger} heads={MOTH.outcomes.heads} className="mt-12" />
-      </Section>
-
-      <Section
-        surface="paper"
-        id="qualification"
-        labelledBy="qualification-title"
-        className="pt-0 md:pt-0 lg:pt-0"
-      >
-        <Eyebrow>{MOTH.qualification.eyebrow}</Eyebrow>
-        <Heading level={2} size="display-m" id="qualification-title" className="mt-4">
-          {MOTH.qualification.title}
-        </Heading>
-        <div className="mt-12">
-          <Qualification />
-        </div>
+        <p className="mt-6 max-w-[60ch] text-lede text-surface-muted">{MODELS.evidence.text}</p>
+        <Button href={MODELS.evidence.link.href} variant="text" arrow className="mt-6">
+          {MODELS.evidence.link.label}
+        </Button>
         <aside
           aria-labelledby="upcoming-title"
           className="mt-16 flex flex-col gap-4 border border-dashed border-surface-rule p-8"

@@ -1,23 +1,19 @@
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
-import { LimitsGrid } from '@/components/sections/LanguageContract'
-import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
 import { Pipeline } from '@/components/sections/Pipeline'
 import { Button } from '@/components/ui/Button'
 import { CodeBlock } from '@/components/ui/CodeBlock'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Inline } from '@/components/ui/Inline'
 import { Note } from '@/components/ui/Note'
-import { CONCEPTS, DEVELOPERS } from '@/content/developers'
-import { MOTH } from '@/content/moth'
-import { CORE_OUTCOMES } from '@/content/outcomes'
+import { DEVELOPERS } from '@/content/developers'
 import { routeMetadata } from '@/lib/seo'
 
 export const metadata = routeMetadata('/developers')
 
 // PAGES §10 — surfaces: paper · ink · paper · paper-2 · paper.
 export default function DevelopersPage() {
-  const { hero, lifecycle, concepts, results, outcomes, future, next } = DEVELOPERS
+  const { hero, lifecycle, results, outcomes, future, next } = DEVELOPERS
   return (
     <>
       <Section surface="paper" labelledBy="developers-title" className="pt-12 md:pt-16 lg:pt-24">
@@ -35,29 +31,6 @@ export default function DevelopersPage() {
           {lifecycle.title}
         </Heading>
         <Pipeline steps={lifecycle.stages} figure={lifecycle.figure} className="mt-14" />
-      </Section>
-
-      <Section surface="paper" id="concepts" labelledBy="concepts-title">
-        <Eyebrow>{concepts.eyebrow}</Eyebrow>
-        <Heading level={2} size="display-m" id="concepts-title" className="mt-4">
-          {concepts.title}
-        </Heading>
-        <dl className="mt-12 grid gap-px border border-surface-rule bg-surface-rule md:grid-cols-2 lg:grid-cols-3">
-          {CONCEPTS.map((c, i) => (
-            <div
-              key={c.term}
-              className="flex flex-col gap-3 bg-surface p-6 md:last:col-span-2 lg:last:col-span-3"
-            >
-              <dt className="flex items-baseline gap-3">
-                <span className="font-mono text-label text-surface-subtle tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="font-display text-display-s">{c.term}</span>
-              </dt>
-              <dd className="text-body text-surface-muted">{c.text}</dd>
-            </div>
-          ))}
-        </dl>
       </Section>
 
       <Section surface="paper-2" id="results" labelledBy="results-title">
@@ -92,10 +65,10 @@ export default function DevelopersPage() {
         <Heading level={2} size="display-m" id="dev-outcomes-title" className="mt-4">
           {outcomes.title}
         </Heading>
-        <OutcomeLedger outcomes={CORE_OUTCOMES} heads={MOTH.outcomes.heads} className="mt-10" />
-        <div className="mt-14">
-          <LimitsGrid />
-        </div>
+        <p className="mt-6 max-w-[60ch] text-lede text-surface-muted">{outcomes.text}</p>
+        <Button href={outcomes.link.href} variant="text" arrow className="mt-6">
+          {outcomes.link.label}
+        </Button>
         <Grid className="mt-16 gap-y-8">
           <div className="col-span-12 lg:col-span-7">
             <h3 className="font-display text-display-s">{future.title}</h3>

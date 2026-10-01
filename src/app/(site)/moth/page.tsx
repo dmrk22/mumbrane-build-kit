@@ -2,14 +2,12 @@ import { MothCurve } from '@/components/art/MothCurve'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
 import { SplitReveal } from '@/components/motion/SplitReveal'
-import { LanguageContract } from '@/components/sections/LanguageContract'
 import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
 import { Pipeline } from '@/components/sections/Pipeline'
 import { PurchasingExplainer } from '@/components/sections/PurchasingExplainer'
 import { Qualification } from '@/components/sections/Qualification'
 import { Button } from '@/components/ui/Button'
 import { Tag } from '@/components/ui/Chip'
-import { DataTable } from '@/components/ui/DataTable'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Icon } from '@/components/ui/Icon'
 import { Inline } from '@/components/ui/Inline'
@@ -35,8 +33,7 @@ function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; i
 
 // PAGES §2 — surfaces: paper · ink · paper · paper-2 · paper · paper-2 · paper · paper · ink · paper-2 · ice.
 export default function MothPage() {
-  const { hero, how, purchasing, outcomes, preview, contract, qualification, measured, inspect, direction } =
-    MOTH
+  const { hero, how, purchasing, outcomes, preview, qualification, direction } = MOTH
   return (
     <>
       <Section surface="paper" labelledBy="moth-title" className="pt-10 lg:pt-16">
@@ -113,57 +110,16 @@ export default function MothPage() {
         </Grid>
       </Section>
 
-      <Section surface="paper-2" id="language-contract" labelledBy="contract-title">
-        <SectionHead eyebrow={contract.eyebrow} title={contract.title} id="contract-title" />
-        <div className="mt-12">
-          <LanguageContract />
-        </div>
-      </Section>
-
-      <Section surface="paper" id="qualification" labelledBy="qualification-title">
+      <Section
+        surface="paper"
+        id="qualification"
+        labelledBy="qualification-title"
+        className="pt-0 md:pt-0 lg:pt-0"
+      >
         <SectionHead eyebrow={qualification.eyebrow} title={qualification.title} id="qualification-title" />
         <div className="mt-12">
           <Qualification />
         </div>
-      </Section>
-
-      <Section surface="paper" id="measured" labelledBy="measured-title" className="pt-0 md:pt-0 lg:pt-0">
-        <SectionHead eyebrow={measured.eyebrow} title={measured.title} id="measured-title" />
-        <p className="mt-8 max-w-[64ch] text-body text-surface-muted">{measured.environment}</p>
-        <DataTable
-          caption={measured.eyebrow}
-          source={measured.source}
-          columns={measured.columns}
-          rows={measured.rows}
-          className="mt-8 max-w-3xl"
-        />
-        <p className="mt-6 max-w-[64ch] text-small text-surface-muted">{measured.caveat}</p>
-      </Section>
-
-      <Section surface="ink" id="inspect" labelledBy="inspect-title">
-        <SectionHead eyebrow={inspect.eyebrow} title={inspect.title} id="inspect-title" />
-        <Grid className="mt-12 gap-y-10">
-          <div className="col-span-12 flex flex-col gap-6 lg:col-span-6">
-            <p className="text-body">
-              <Inline text={inspect.text} />
-            </p>
-            <ul className="flex flex-wrap gap-2">
-              {inspect.files.map((f) => (
-                <li key={f}>
-                  <code className="border border-surface-rule bg-surface-raise px-2 py-1 font-mono text-code">
-                    {f}
-                  </code>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="col-span-12 flex flex-col gap-6 lg:col-span-5 lg:col-start-8">
-            <Note tone="caveat" title={inspect.harnessTitle}>
-              <p>{inspect.harness}</p>
-            </Note>
-            <p className="text-small text-surface-muted">{inspect.closing}</p>
-          </div>
-        </Grid>
       </Section>
 
       <Section surface="paper-2" id="prepared-base" labelledBy="direction-title">

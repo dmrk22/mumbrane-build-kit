@@ -60,13 +60,13 @@ export const FORM_UI = {
 export const CONTACT = {
   eyebrow: 'Contact',
   title: 'Talk to Mumbrane.',
-  lede: 'Tell us what you are trying to understand, where the difficulty is, and what a useful conversation might unlock.',
+  lede: 'Tell us what you are trying to understand, and where the difficulty is.',
   emails: [
     { label: 'Research and technical', address: 'research@mumbrane.com' },
     { label: 'General and press', address: 'hello@mumbrane.com' },
   ],
   copy: 'Copy the address',
-  note: 'A focused note is enough. Links to papers, repositories, or prior work are welcome when they add useful context.',
+  note: 'A focused note is enough. Links to papers or prior work are welcome.',
   form: {
     title: 'Send a message',
     submit: 'Send message',
@@ -104,7 +104,7 @@ export const CONTACT = {
 export const SALES = {
   eyebrow: 'Contact sales',
   title: 'Contact sales',
-  lede: 'Tell us about the decisions you want a model to make from your own rules. We’ll tell you honestly whether Moth fits today.',
+  lede: 'Tell us the decisions you want answered from your own rules. We’ll tell you honestly whether Moth fits today.',
   expect: {
     title: 'What to expect',
     items: [

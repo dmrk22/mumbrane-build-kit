@@ -8,11 +8,10 @@ import { ScrubText } from '@/components/motion/ScrubText'
 import { SplitReveal } from '@/components/motion/SplitReveal'
 import { HomeHero } from '@/components/sections/HomeHero'
 import { HowItWorks } from '@/components/sections/HowItWorks'
-import { NewsList } from '@/components/sections/NewsList'
 import { OutcomeGlyph } from '@/components/sections/OutcomeGlyph'
 import { Button } from '@/components/ui/Button'
 import { Heading } from '@/components/ui/Heading'
-import { articleBySlug, articlePath, articlesIn } from '@/content/articles'
+import { articleBySlug, articlePath } from '@/content/articles'
 import { HOME } from '@/content/home'
 import { OUTCOMES } from '@/content/outcomes'
 import { JsonLd } from '@/lib/security/json-ld'
@@ -68,9 +67,9 @@ function PrincipleFigure() {
   )
 }
 
-// Surfaces: ink · paper · ink · paper · paper-2 · paper · ink · paper · paper-2.
+// Surfaces: ink · paper · ink · paper · paper-2 · paper · ink · paper-2.
 export default function Home() {
-  const { principle, how, evidence, compounding, research, release, news, getStarted } = HOME
+  const { principle, how, evidence, compounding, research, release, getStarted } = HOME
   const plates = research.plates.flatMap((slug) => articleBySlug(slug) ?? [])
   return (
     <>
@@ -114,14 +113,13 @@ export default function Home() {
         </Grid>
         <Reveal
           stagger={0.07}
-          className="mt-16 grid gap-px border-y border-surface-rule bg-surface-rule sm:grid-cols-2 lg:grid-cols-5"
+          className="mt-16 grid gap-px border-y border-surface-rule bg-surface-rule md:grid-cols-3"
         >
           {evidence.ledger.map((o) => (
-            <article key={o} className="flex flex-col gap-4 bg-surface py-8 sm:px-6 lg:py-10 lg:first:pl-0">
+            <article key={o} className="flex flex-col gap-4 bg-surface py-8 md:px-6 md:first:pl-0 lg:py-10">
               <OutcomeGlyph outcome={o} className="h-12 w-44" />
               <h3 className="mt-4 text-title">{OUTCOMES[o].label}</h3>
               <p className="text-small text-surface-muted">{OUTCOMES[o].meaning}</p>
-              <p className="mt-auto pt-2 font-mono text-label text-surface-subtle">{OUTCOMES[o].next}</p>
             </article>
           ))}
         </Reveal>
@@ -211,20 +209,6 @@ export default function Home() {
             <p className="mt-6 font-mono text-label text-surface-subtle">{release.caveat}</p>
           </div>
         </Grid>
-      </Section>
-
-      <Section surface="paper" id="news" labelledBy="news-title">
-        <div className="flex items-baseline-last justify-between gap-6">
-          <Heading level={2} size="display-m" id="news-title">
-            {news.title}
-          </Heading>
-          <Button href={news.link.href} variant="text" arrow>
-            {news.link.label}
-          </Button>
-        </div>
-        <Reveal stagger={0.05}>
-          <NewsList articles={articlesIn('news')} className="mt-10" />
-        </Reveal>
       </Section>
 
       <Section surface="paper-2" id="get-started" labelledBy="start-title">

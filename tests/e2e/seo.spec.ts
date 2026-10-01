@@ -56,7 +56,7 @@ test.describe('@seo', () => {
       await page.goto(visit(route))
       const entry = REGISTRY.find((r) => r.path === route)
       await expect(page).toHaveTitle(
-        route === '/' ? 'Mumbrane — Intelligence for closed worlds' : `${entry?.title} — Mumbrane`,
+        route === '/' ? 'Mumbrane — Field-based intelligence' : `${entry?.title} — Mumbrane`,
       )
       await expect(page.locator('meta[name="description"]')).toHaveAttribute(
         'content',
@@ -133,7 +133,7 @@ test.describe('@seo articles and markdown alternates', () => {
   test('sitemap gives articles their last change', async ({ request }) => {
     const xml = await (await request.get('/sitemap.xml')).text()
     expect(xml).toMatch(
-      /<loc>https:\/\/mumbrane\.com\/research\/toward-field-based-intelligence<\/loc>\s*<lastmod>2026-09-22/,
+      /<loc>https:\/\/mumbrane\.com\/research\/toward-field-based-intelligence<\/loc>\s*<lastmod>2026-10-01/,
     )
   })
 })
