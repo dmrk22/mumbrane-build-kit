@@ -136,10 +136,10 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
 
-### P12 — IN PROGRESS (paused 2026-10-01 at the owner's request, to resume with a design-focused model setting)
-- Done and unit-tested: `src/lib/console/{types,sim,engine}.ts` (simulator per CONSOLE §6; 8 golden/hostile tests in `tests/unit/console-sim.test.ts`), `src/content/console/{worlds,ui}.ts`, `src/app/console/console.css` (themes, not yet imported), `public/console-theme.js`, `src/components/console/ConsoleSession.tsx` (in-memory session provider, not yet mounted).
-- NEXT, in order: (1) `src/app/console/layout.tsx` — `<script src="/console-theme.js" nonce={x-nonce} suppressHydrationWarning />` before the shell, import `./console.css`, wrap in `ConsoleSession`, `data-surface="paper" data-console-surface` root; (2) `ConsoleChrome` (rail ≥ 768 / bottom tabs, top bar with "Simulation" tag + `ThemeControl`); (3) `/console` entry; (4) `/console/playground` (server parses `?world` with `parseWorld`, redirect if invalid; client Playground: world panel, ask bar + chips, ResultCard stream, Evidence panel, rebuild/replay, keyboard §11, aria-live §12); (5) keys, usage, settings; (6) `tests/e2e/console.spec.ts` per CONSOLE §14; (7) shots light + dark, axe both themes, console JS ≤ 230 KB.
-- Component budget: 61/80 used; plan ~10 console components (ConsoleChrome, ThemeControl, Playground, WorldPanel, ResultCard, Evidence, KeysDemo, UsageView, SettingsView, ShortcutsDialog).
+### P12 — IN PROGRESS (resumed 2026-10-01; all routes built, closing with `pnpm verify`)
+- [x] (1) layout + theme bootstrap (`ThemeBootstrap` renders the script only into server HTML; root `<html suppressHydrationWarning>` for the pre-paint attribute) (2) `ConsoleChrome` + `ThemeControl` + `ShortcutsDialog` (3) `/console` entry (simulated outcome dots per world) (4) `/console/playground` (`Playground`, `AskBar`, `WorldPanel`, `ResultCard`, `Evidence`; drawer < 1280, inline evidence < 1024) (5) keys / usage / settings (6) `tests/e2e/console.spec.ts` — 10 tests, chromium + mobile 19/19, webkit @smoke 2/2 (dev) (7) shots reviewed 375/768/1100/1440, light + dark
+- `suggest()` in sim.ts (rephrasing for refusals) + unit test; `ConsoleEngine.build(id)` added to the seam.
+- NEXT: `pnpm verify` (prod e2e + perf ≤ 230 KB), handoff note, mark done, tag `p12-console`.
 
 ### P11 — 2026-10-01
 - `git grep` skips untracked files: audits of new content must use `git grep --untracked` (the P10 audit was re-run; see the claims log).

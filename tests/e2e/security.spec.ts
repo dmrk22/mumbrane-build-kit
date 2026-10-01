@@ -8,6 +8,7 @@ import {
   network,
   prod,
   ROUTES,
+  visit,
 } from './utils.ts'
 
 const NONCE = /'nonce-([A-Za-z0-9+/]{22}==)'/
@@ -27,7 +28,7 @@ function expectStaticHeaders(headers: Record<string, string>, what: string) {
 test.describe('@security', () => {
   for (const route of [...ROUTES, MISSING]) {
     test(`CSP, nonce and markup on ${route}`, async ({ request }) => {
-      const res = await request.get(route)
+      const res = await request.get(visit(route))
       expect(res.status()).toBe(route === MISSING ? 404 : 200)
       const csp = cspOf(res.headers())
       const nonce = NONCE.exec(csp)?.[1]
@@ -58,8 +59,8 @@ test.describe('@security', () => {
     })
 
     test(`two requests to ${route} get different nonces`, async ({ request }) => {
-      const a = NONCE.exec(cspOf((await request.get(route)).headers()))?.[1]
-      const b = NONCE.exec(cspOf((await request.get(route)).headers()))?.[1]
+      const a = NONCE.exec(cspOf((await request.get(visit(route))).headers()))?.[1]
+      const b = NONCE.exec(cspOf((await request.get(visit(route))).headers()))?.[1]
       expect(a).toBeTruthy()
       expect(a).not.toBe(b)
     })
@@ -101,7 +102,7 @@ test.describe('@security', () => {
       const consoleMessages = collectConsole(page)
       const external = externalRequests(page, new URL(baseURL ?? '').origin)
       const net = network(page)
-      await page.goto(route)
+      await page.goto(visit(route))
       await net.quiet()
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
       await net.quiet()

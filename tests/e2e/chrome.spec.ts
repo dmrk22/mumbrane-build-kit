@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { MISSING, ROUTES } from './utils.ts'
+import { MISSING, ROUTES, visit } from './utils.ts'
 
 const header = 'header[data-collapsed]'
 
@@ -9,7 +9,7 @@ test.describe('@smoke layout', () => {
   for (const route of [...ROUTES, MISSING]) {
     test(`no horizontal overflow at 320 px on ${route}`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 800 })
-      await page.goto(route)
+      await page.goto(visit(route))
       const width = await page.evaluate(() => document.documentElement.scrollWidth)
       expect(width).toBeLessThanOrEqual(320)
     })
@@ -23,7 +23,7 @@ test.describe('@smoke layout with motion', () => {
     test(`no horizontal overflow at 1440 px with motion on ${route}`, async ({ page, isMobile }) => {
       test.skip(isMobile, 'desktop layout')
       await page.setViewportSize({ width: 1440, height: 900 })
-      await page.goto(route)
+      await page.goto(visit(route))
       await page.waitForLoadState('load')
       await page.evaluate(async () => {
         const frames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
@@ -251,7 +251,7 @@ test.describe('@smoke current section', () => {
     test(`Solutions trigger current=${current} on ${route}`, async ({ page, isMobile }) => {
       test.skip(isMobile, 'desktop menus')
       await page.setViewportSize({ width: 1440, height: 900 })
-      await page.goto(route)
+      await page.goto(visit(route))
       await expect(page.locator('header button[data-current]', { hasText: 'Solutions' })).toHaveAttribute(
         'data-current',
         current,

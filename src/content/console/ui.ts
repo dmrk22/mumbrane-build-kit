@@ -1,5 +1,6 @@
 // Console preview copy (CONSOLE §2–§12). Every output is labelled a simulation (CONTENT §4).
 import type { Limit, Outcome, Refusal } from '../../lib/console/types.ts'
+import type { Outcome as ChipOutcome } from '../outcomes.ts'
 
 export const CONSOLE_UI = {
   simulation: 'Simulation',
@@ -23,6 +24,11 @@ export const CONSOLE_UI = {
   entry: {
     title: 'Console preview',
     text: 'Ask questions about an example world and inspect the evidence. Everything runs in your browser as a simulation — nothing is sent anywhere.',
+    steps: ['Open a world', 'Click a question', 'Read the evidence'],
+    worlds: 'Example worlds',
+    counts: (entities: number, definitions: number, facts: number) =>
+      `${entities} entities · ${definitions} definitions · ${facts} facts`,
+    examples: (n: number) => `${n} example questions, simulated:`,
     open: 'Open',
     footnote:
       'Simulation — not Moth. The worlds are named after the four synthetic example worlds in Moth Preview 004; their contents here are our own illustrative examples.',
@@ -32,6 +38,9 @@ export const CONSOLE_UI = {
     label: 'World',
     show: 'Show world',
     hide: 'Hide world',
+    close: 'Close',
+    switcher: 'Choose a world',
+    requires: 'Requires',
     build: (id: string, active: boolean) => `build ${id}${active ? ' · active' : ''}`,
     buildHelp: 'A build is a compiled version of this world. Answers remember the build they came from.',
     definitions: 'Definitions',
@@ -81,6 +90,13 @@ export const CONSOLE_UI = {
     jsonTag: 'Illustrative — not the Preview 004 schema',
     download: 'Download JSON',
     jsonLabel: 'JSON · simulation',
+    showJson: 'Show JSON',
+    hideJson: 'Hide JSON',
+    question: 'Question',
+    notEvaluated: 'Not evaluated. The question stopped before any fact was checked.',
+    cite: 'Show in the world panel',
+    filename: (id: string) => `mumbrane-simulation-${id}.json`,
+    jsonNote: 'Simulation — not Moth. Illustrative — not the Preview 004 schema.',
   },
   answer: {
     supported: (entity: string, term: string, article: string) => `\`${entity}\` is ${article} ${term}.`,
@@ -88,6 +104,7 @@ export const CONSOLE_UI = {
     unproven: (entity: string, term: string, article: string) =>
       `The field does not establish that \`${entity}\` is ${article} ${term}.`,
     missing: (items: string) => `Missing: ${items}.`,
+    recorded: (facts: string) => `The field records: ${facts}`,
     notFails: 'This does not mean it fails — the field has not been given that support.',
     conflict: (facts: string) => `The field contains conflicting facts: ${facts}`,
     resolve: 'Resolve the conflict and rebuild.',
@@ -125,6 +142,14 @@ export const CONSOLE_UI = {
     REFUSED: 'refused',
     RESOURCE_LIMIT: 'resource limit',
   } satisfies Record<Outcome, string>,
+  /** The site's outcome chip for each simulated outcome (same colours and labels as /moth). */
+  chip: {
+    SUPPORTED: 'supported',
+    NO_SUPPORTED_PROOF: 'unproven',
+    CONFLICT: 'conflict',
+    REFUSED: 'refused',
+    RESOURCE_LIMIT: 'limit',
+  } satisfies Record<Outcome, ChipOutcome>,
   keys: {
     title: 'API keys',
     note: 'Keys arrive with the hosted console. This page shows how managing them will work.',
@@ -187,7 +212,7 @@ export const CONSOLE_UI = {
       ['J / K', 'Next / previous result'],
       ['E', 'Show the selected result’s evidence'],
       ['R', 'Replay the selected result'],
-      ['Esc', 'Close a drawer or dialog'],
+      ['Esc', 'Close a drawer or dialog, or leave the question box'],
       ['?', 'Show these shortcuts'],
     ],
   },

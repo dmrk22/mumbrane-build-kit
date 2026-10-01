@@ -3,6 +3,25 @@
    choice) and by ThemeControl; without it the system preference decides. Same variables as the
    site's surfaces, so every surface-* utility follows the theme. */
 @layer base {
+  /* Trace status colours as text: the -fg pigments on paper, the -glow ones on ink (DESIGN §2.4). */
+  [data-console-surface] {
+    --console-ok: var(--color-viridian-fg);
+    --console-gap: var(--color-cadmium-fg);
+    --console-bad: var(--color-vermilion-fg);
+  }
+  html[data-console-theme="dark"] [data-console-surface] {
+    --console-ok: var(--color-viridian-glow);
+    --console-gap: var(--color-cadmium-glow);
+    --console-bad: var(--color-vermilion-glow);
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-console-theme="light"]) [data-console-surface] {
+      --console-ok: var(--color-viridian-glow);
+      --console-gap: var(--color-cadmium-glow);
+      --console-bad: var(--color-vermilion-glow);
+    }
+  }
+
   [data-console-panel] {
     --surface-bg: var(--color-paper-2);
     --surface-raise: var(--color-paper);
@@ -22,6 +41,10 @@
     --surface-bg: var(--color-ink-2);
     --surface-raise: var(--color-ink-3);
   }
+  html[data-console-theme="dark"] [data-console-surface] {
+    --surface-invert: var(--color-paper);
+    --surface-on-invert: var(--color-ink);
+  }
 
   @media (prefers-color-scheme: dark) {
     html:not([data-console-theme="light"]) [data-console-surface] {
@@ -32,6 +55,8 @@
       --surface-rule: var(--color-rule-dark);
       --surface-raise: var(--color-ink-2);
       --surface-accent: var(--color-cherenkov);
+      --surface-invert: var(--color-paper);
+      --surface-on-invert: var(--color-ink);
       color-scheme: dark;
     }
     html:not([data-console-theme="light"]) [data-console-panel] {
@@ -59,6 +84,45 @@
     outline-offset: 2px;
     animation: console-flash 2s var(--ease-out);
   }
+
+  /* Panes scroll on their own with thin scrollbars in surface tokens (DESIGN §5). */
+  [data-console-surface] .console-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-rule) transparent;
+  }
+}
+
+@layer components {
+  /* New result cards and a changed build id arrive with the default reveal (reduced motion: the
+     global rule shortens these to nothing). */
+  .console-enter {
+    animation: console-enter var(--duration-reveal) var(--ease-out) both;
+  }
+  .console-fade {
+    animation: console-fade var(--duration-ui) var(--ease-out) both;
+  }
+
+  /* The world drawer below 1280 px: a native modal dialog pinned to the left edge. */
+  .console-drawer {
+    margin: 0 auto 0 0;
+    height: 100dvh;
+    max-height: 100dvh;
+    width: min(360px, 88vw);
+    max-width: none;
+    border: 0;
+    padding: 0;
+  }
+  .console-drawer::backdrop {
+    background-color: color-mix(in oklch, var(--color-ink) 55%, transparent);
+  }
+  .console-drawer[open] {
+    animation: console-drawer var(--duration-ui) var(--ease-out) both;
+  }
+  .console-modal::backdrop {
+    background-color: color-mix(in oklch, var(--color-ink) 55%, transparent);
+  }
 }
 
 @keyframes console-flash {
@@ -67,5 +131,33 @@
   }
   to {
     background-color: transparent;
+  }
+}
+@keyframes console-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes console-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes console-drawer {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+}
+
+/* Prose links are ultramarine-fg on paper; on the dark console they take the ink colour (DESIGN
+   §3.4). Unlayered, so it outranks the link-prose utility without !important. */
+html[data-console-theme="dark"] [data-console-surface] .link-prose {
+  color: var(--color-cherenkov);
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-console-theme="light"]) [data-console-surface] .link-prose {
+    color: var(--color-cherenkov);
   }
 }

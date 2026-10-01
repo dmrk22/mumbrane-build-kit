@@ -451,3 +451,36 @@ deploying, publishing packages, and all existing security rules. Changed: CLAUDE
 protected-file edits; the hooks still refuse Claude's own writes to them.
 **Alternatives**: The owner pushing by hand each time (kept possible); lifting the hook entirely (no).
 **Status**: Decided by the owner.
+
+### D-120 — Console theme script only in server HTML; `<html suppressHydrationWarning>` (2026-10-01)
+**Context**: CONSOLE §10.2 puts `<script src="/console-theme.js" nonce>` before the console shell.
+Rendered on a client-side navigation into the console, React creates an inert copy and logs
+"Encountered a script tag…" in development; and the script's own `data-console-theme` on `<html>`
+made hydration report an attribute mismatch on every console load with a stored theme.
+**Decision**: `ThemeBootstrap` (in `ThemeControl.tsx`) renders the script only during SSR and
+hydration (`useSyncExternalStore` with a server snapshot of `true`); after client navigation
+`ThemeControl`'s layout effect applies the stored theme before paint. The root `<html>` carries
+`suppressHydrationWarning`, which covers that element's own attributes only.
+**Alternatives**: Separate root layouts for site and console (full reload between them; larger
+restructure); an async script (could run after first paint — a flash).
+**Status**: Decided.
+
+### D-121 — Console shell details (2026-10-01)
+**Context**: CONSOLE §2/§4 leave room on a few placements.
+**Decision**: The top-bar title is the page's H1 (the entry screen keeps its own display H1, so its
+bar shows "Console"). Below 640 px the top bar drops the theme control (Settings has it) so the
+title fits. The world drawer button sits in the playground's world summary for every width below
+1280 px (not in the top bar). `Esc` in the question box leaves it, so `E`/`R`/`J`/`K` work from
+the keyboard without the mouse (listed in the shortcuts). The Playground rail item leads to the
+entry screen (where a world is chosen) and is current on both.
+**Alternatives**: A visible H1 in each page body (duplicates the bar); a top-bar World button
+(needs a portal from the page into the layout).
+**Status**: Decided.
+
+### D-122 — Entry cards show each example's simulated outcome (2026-10-01)
+**Context**: The four world cards (CONSOLE §3) were text-only.
+**Decision**: Each card shows "N example questions, simulated:" followed by one small square per
+example in its outcome colour, computed on the server by the same simulator (so it is true by
+construction and labelled as simulated). Decorative (`aria-hidden`); the label carries the meaning.
+**Alternatives**: No preview (plainer); a sample answer (longer cards).
+**Status**: Decided.

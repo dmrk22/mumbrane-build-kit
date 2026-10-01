@@ -19,8 +19,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   // Reading the request headers opts every page into dynamic rendering, which per-request CSP
   // nonces require (SECURITY §3.3). The nonce is handed only to scripts that need it (none yet).
   await headers()
+  // suppressHydrationWarning: the console's pre-paint theme script sets data-console-theme on
+  // <html> before hydration (CONSOLE §10.2). It applies to this element's attributes only.
   return (
-    <html lang="en" data-surface="paper" className={fontVars}>
+    <html lang="en" data-surface="paper" className={fontVars} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   )

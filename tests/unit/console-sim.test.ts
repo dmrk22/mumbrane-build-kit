@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { WORLDS, worldById } from '../../src/content/console/worlds.ts'
-import { ask, makeBuild, normalise, parse } from '../../src/lib/console/sim.ts'
+import { ask, makeBuild, normalise, parse, suggest } from '../../src/lib/console/sim.ts'
 import type { Outcome, WorldId } from '../../src/lib/console/types.ts'
 
 const run = (world: WorldId, q: string, variant: string | null = null) => {
@@ -96,6 +96,30 @@ test('refusals say why', () => {
   })
   assert.deepEqual(run('purchasing', "Isn't orderone a purchase-ready item?").refusal, { code: 'negated' })
   assert.deepEqual(run('purchasing', 'Tell me about orderone').refusal, { code: 'form' })
+})
+
+test('a refusal offers one rephrasing the language accepts', () => {
+  const offer = (world: WorldId, q: string) => {
+    const w = worldById(world)
+    const b = makeBuild(w, null)
+    return suggest(w, b, ask(w, b, q, 's'))
+  }
+  assert.equal(
+    offer('purchasing', 'Is ordertwo not a purchase-ready item?'),
+    'Is ordertwo a purchase-ready item?',
+  )
+  assert.equal(
+    offer('purchasing', "Isn't orderone a purchase-ready item?"),
+    'Is orderone a purchase-ready item?',
+  )
+  assert.equal(offer('libraries', 'Is bookfour a lendable book?'), 'Is bookone a lendable book?')
+  assert.equal(offer('libraries', 'Is bookone a rare book?'), 'Is bookone a lendable book?')
+  assert.equal(offer('venues', 'Tell me about hallone'), 'Is hallone a ready venue?')
+  // Every suggestion for every refusal in the golden table is itself accepted.
+  for (const [world, , q, want] of GOLDEN) {
+    if (want !== 'REFUSED') continue
+    assert.notEqual(run(world, offer(world, q)).outcome, 'REFUSED', q)
+  }
 })
 
 test('the language is forgiving about case, spacing, hyphens and curly quotes', () => {

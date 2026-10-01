@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { REGISTRY } from '../../src/content/routes.ts'
-import { ROUTES } from './utils.ts'
+import { ROUTES, visit } from './utils.ts'
 
 const SITE = 'https://mumbrane.com'
 
@@ -51,7 +51,7 @@ test.describe('@seo', () => {
 
   for (const route of ROUTES) {
     test(`title, description and canonical on ${route}`, async ({ page }) => {
-      await page.goto(route)
+      await page.goto(visit(route))
       const entry = REGISTRY.find((r) => r.path === route)
       await expect(page).toHaveTitle(
         route === '/' ? 'Mumbrane — Intelligence for closed worlds' : `${entry?.title} — Mumbrane`,

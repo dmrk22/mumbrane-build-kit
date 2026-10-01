@@ -1,5 +1,5 @@
 import { expect, type Page, test } from '@playwright/test'
-import { collectViolations, prod, ROUTES } from './utils.ts'
+import { collectViolations, prod, ROUTES, visit } from './utils.ts'
 
 const LAB = '/lab/motion'
 
@@ -35,7 +35,7 @@ test.describe('@motion', () => {
   for (const route of [...ROUTES, ...(prod ? [] : [LAB])]) {
     test(`reduced motion: ${route} ends fully visible, unpinned, unmoved`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion: 'reduce' })
-      await page.goto(route)
+      await page.goto(visit(route))
       await page.waitForLoadState('load')
       await scrollThrough(page)
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))

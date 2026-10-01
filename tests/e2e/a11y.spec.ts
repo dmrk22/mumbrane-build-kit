@@ -1,13 +1,13 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
-import { MISSING, ROUTES, settled } from './utils.ts'
+import { MISSING, ROUTES, settled, visit } from './utils.ts'
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']
 
 test.describe('@a11y', () => {
   for (const route of [...ROUTES, MISSING]) {
     test(`axe finds no violations on ${route}`, async ({ page }) => {
-      await page.goto(route)
+      await page.goto(visit(route))
       await settled(page)
       const { violations } = await new AxeBuilder({ page }).withTags(TAGS).analyze()
       expect(violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual(

@@ -11,6 +11,8 @@ export interface ConsoleEngine {
   rebuild(worldId: WorldId, variantId: string | null): Build
   /** Re-runs a result's question against its original build snapshot. */
   replay(resultId: string): Result | null
+  /** A build snapshot this engine made (results remember theirs). */
+  build(id: string): Build | undefined
 }
 
 export class SimulatorEngine implements ConsoleEngine {

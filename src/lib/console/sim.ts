@@ -78,7 +78,7 @@ const isNegated = (s: string) => s.split(' ').some((t) => t === 'not' || t.endsW
 
 // ---------------------------------------------------------------- evaluation
 
-const article = (term: string) => (/^[aeiou]/.test(term) ? 'an' : 'a')
+export const article = (term: string) => (/^[aeiou]/.test(term) ? 'an' : 'a')
 const code = (id: string) => `\`${id}\``
 
 class Stop extends Error {
@@ -186,6 +186,38 @@ function leaves(t: Trace, want: Status): { missing: string[]; conflicts: string[
 }
 
 // ---------------------------------------------------------------- the pipeline
+
+/**
+ * One rephrasing for a refused question (CONSOLE §7): the positive form of a negated question, a
+ * declared entity or a defined term of the right kind, else the world's first example. Only a
+ * suggestion the language accepts is offered. Fixed patterns only; the input is never a pattern.
+ */
+export function suggest(world: World, build: Build, result: Result): string {
+  const fallback = world.examples[0] ?? ''
+  const q = result.question
+  let candidate = fallback
+  const parsed = parse(normalise(q.replace(/\bnot\s+/i, '')))
+  switch (result.refusal?.code) {
+    case 'negated':
+      candidate = q.replace(/\bnot\s+/i, '').replace(/n['’]t\b/i, '')
+      break
+    case 'undeclared': {
+      const def = parsed && build.definitions.find((d) => termKey(d.term) === parsed.term)
+      const entity = def && world.entities.find((e) => e.kind === def.kind)
+      if (def && entity) candidate = `Is ${entity.id} ${article(def.term)} ${def.term}?`
+      break
+    }
+    case 'undefined': {
+      const kind = parsed && world.entities.find((e) => e.id === parsed.entity)?.kind
+      const def = kind && build.definitions.find((d) => d.kind === kind)
+      if (parsed && def) candidate = `Is ${parsed.entity} ${article(def.term)} ${def.term}?`
+      break
+    }
+  }
+  return candidate !== fallback && ask(world, build, candidate, '').outcome === 'REFUSED'
+    ? fallback
+    : candidate
+}
 
 /** `ask(world, build, raw) → Result` (CONSOLE §6.1). Never throws on any input. */
 export function ask(world: World, build: Build, raw: string, id: string): Result {

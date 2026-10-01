@@ -34,6 +34,10 @@ export const ROUTES = REGISTRY.map((r) => r.path).filter((path) =>
 )
 export const MISSING = '/this-page-does-not-exist'
 
+/** The URL to open for a registry route: the playground needs a world (without one it redirects). */
+export const visit = (route: string): string =>
+  route === '/console/playground' ? `${route}?world=purchasing` : route
+
 export type Violation = { disposition: string; directive: string; blockedURI: string }
 
 /** Records every securitypolicyviolation event from the first script onwards. */

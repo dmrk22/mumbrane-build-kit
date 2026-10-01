@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { prod, ROUTES } from './utils.ts'
+import { prod, ROUTES, visit } from './utils.ts'
 
 // BUILD_PLAN budgets: first-load JS per route (scripts loaded before `load`), compressed.
 const KB = 1024
@@ -31,7 +31,7 @@ test.describe('@perf first-load bytes', () => {
           scripts.push(url ?? '')
         } else if (type === 'Stylesheet') bytes.stylesheet += e.encodedDataLength
       })
-      await page.goto(route, { waitUntil: 'load' })
+      await page.goto(visit(route), { waitUntil: 'load' })
       loaded = true
       test.info().annotations.push(
         {
@@ -116,7 +116,7 @@ test.describe('@perf core web vitals (mobile emulation)', () => {
           for (const e of list.getEntries()) if (loaded) w.__v.long.push(e.duration)
         }).observe({ type: 'longtask', buffered: true })
       })
-      await page.goto(route, { waitUntil: 'load' })
+      await page.goto(visit(route), { waitUntil: 'load' })
       // Observe 3 s of after-load work (idle callback → motion libraries → reveals attach → the
       // membrane running): long tasks there are what INP would feel.
       await page.evaluate(() => new Promise((r) => setTimeout(r, 3000)))
