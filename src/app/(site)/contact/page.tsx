@@ -14,46 +14,48 @@ export const metadata = routeMetadata('/contact')
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
-// PAGES §7.1 — surfaces: paper · paper-2 (the form panel). `?interest=` preselects the topic;
+// Contact — surfaces: ink, with the form on a paper card. `?interest=` preselects the topic;
 // anything that is not a known interest is ignored, never reflected.
 export default async function ContactPage({ searchParams }: Props) {
   const interest = parseInterest((await searchParams).interest)
   return (
     <section
-      data-surface="paper"
+      data-surface="ink"
       aria-labelledby="contact-title"
-      className="pt-12 pb-16 md:pt-16 md:pb-24 lg:pb-32"
+      className="-mt-15 pt-32 pb-20 md:pt-40 md:pb-28 lg:-mt-18 lg:pb-36"
     >
       <Container>
-        <Grid className="gap-y-14">
-          <div className="col-span-12 lg:col-span-5">
+        <Grid className="items-start gap-y-16">
+          <div className="col-span-12 lg:col-span-5 lg:sticky lg:top-28">
             <Eyebrow>{CONTACT.eyebrow}</Eyebrow>
-            <h1 id="contact-title" className="mt-4 font-display text-display-l">
+            <h1 id="contact-title" className="mt-6 font-display text-display-l">
               {CONTACT.title}
             </h1>
-            <p className="mt-6 max-w-[44ch] font-serif text-lede text-surface-muted">{CONTACT.lede}</p>
-            <ul className="mt-10 flex flex-col gap-3">
+            <p className="mt-6 max-w-[42ch] text-lede text-surface-muted">{CONTACT.lede}</p>
+            <ul className="mt-14 flex flex-col gap-9">
               {CONTACT.emails.map((e) => (
-                <li
-                  key={e.address}
-                  className="flex items-center justify-between gap-4 border border-surface-rule px-5 py-4"
-                >
-                  <div className="min-w-0">
-                    <p className="font-serif-italic text-small text-surface-subtle">{e.label}</p>
+                <li key={e.address}>
+                  <p className="font-mono text-label text-surface-subtle">{e.label}</p>
+                  <div className="mt-3 flex items-center gap-3">
+                    <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-surface-fg" />
+                    <span aria-hidden="true" className="h-px w-10 shrink-0 bg-surface-accent sm:w-16" />
                     <SmartLink
                       href={`mailto:${e.address}`}
-                      className="mt-1 block text-body break-all link-prose"
+                      className="min-w-0 truncate text-title decoration-1 underline-offset-[0.22em] hover:underline"
                     >
                       {e.address}
                     </SmartLink>
+                    <CopyButton text={e.address} label={`${CONTACT.copy}: ${e.address}`} />
                   </div>
-                  <CopyButton text={e.address} label={`${CONTACT.copy}: ${e.address}`} />
                 </li>
               ))}
             </ul>
-            <p className="mt-8 max-w-[44ch] text-small text-surface-muted">{CONTACT.note}</p>
+            <p className="mt-14 max-w-[42ch] text-small text-surface-muted">{CONTACT.note}</p>
           </div>
-          <div data-surface="paper-2" className="col-span-12 p-6 md:p-10 lg:col-span-6 lg:col-start-7">
+          <div
+            data-surface="paper"
+            className="col-span-12 rounded-xl p-6 shadow-menu md:p-10 lg:col-span-6 lg:col-start-7"
+          >
             <PreviewForm
               kind="contact"
               action={sendContact}

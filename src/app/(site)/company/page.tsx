@@ -38,7 +38,7 @@ export default function CompanyPage() {
             <Heading level={2} size="display-m" id="about-title">
               {about.title}
             </Heading>
-            <p className="mt-6 max-w-[56ch] font-serif text-lede">{about.text}</p>
+            <p className="mt-6 max-w-[56ch] text-lede">{about.text}</p>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8">
             <CropMarks>
@@ -58,9 +58,7 @@ export default function CompanyPage() {
           </div>
           <figure className="col-span-12 lg:col-span-6 lg:col-start-7">
             <MuonTrack labels={name.labels} className="text-surface-fg" />
-            <figcaption className="mt-4 font-serif-italic text-small text-surface-subtle">
-              {name.figure}
-            </figcaption>
+            <figcaption className="mt-4 font-mono text-label text-surface-subtle">{name.figure}</figcaption>
           </figure>
         </Grid>
       </Section>

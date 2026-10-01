@@ -35,7 +35,7 @@ export default function DocsPage() {
             <h1 id="docs-title" className="mt-4 font-display text-display-l">
               {DOCS.title}
             </h1>
-            <p className="mt-6 max-w-[56ch] font-serif text-lede text-surface-muted">{DOCS.lede}</p>
+            <p className="mt-6 max-w-[56ch] text-lede text-surface-muted">{DOCS.lede}</p>
             <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border border-surface-rule bg-surface-raise p-5 text-small">
               <Icon name="book" className="size-5 shrink-0 text-surface-muted" />
               <span>{DOCS.delivery.text}</span>
@@ -45,12 +45,12 @@ export default function DocsPage() {
                 </code>
               ))}
             </div>
-            <p className="mt-4 font-serif-italic text-small text-surface-subtle">
+            <p className="mt-4 font-mono text-label text-surface-subtle">
               {DOCS.reviewed.label} <time dateTime={DOCS.reviewed.date}>{proseDate(DOCS.reviewed.date)}</time>
             </p>
 
             <details className="mt-10 border-y border-surface-rule py-4 lg:hidden">
-              <summary className="cursor-pointer font-serif-italic text-small">{DOCS.contents}</summary>
+              <summary className="cursor-pointer font-mono text-label">{DOCS.contents}</summary>
               <ol className="mt-4 flex flex-col gap-2 text-small">
                 {toc.map((t) => (
                   <li key={t.id}>

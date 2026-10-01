@@ -9,32 +9,45 @@ import { routeMetadata } from '@/lib/seo'
 export const metadata = routeMetadata('/console')
 
 const { entry } = CONSOLE_UI
-const DOT = {
-  supported: 'bg-supported',
-  unproven: 'bg-unproven',
-  conflict: 'bg-conflict',
-  refused: 'bg-refused',
-  limit: 'bg-limit border border-surface-fg/30',
+// Each example's outcome in the diagram marks: filled = supported, hollow = everything else, in
+// its outcome's colour.
+const MARK = {
+  supported: 'fill-supported stroke-supported',
+  unproven: 'fill-none stroke-unproven',
+  conflict: 'fill-none stroke-conflict',
+  refused: 'fill-none stroke-refused',
+  limit: 'fill-none stroke-surface-subtle',
 } as const
 
 // CONSOLE §3: one sentence of honesty, four worlds, a footnote. No credential fields, no sign-in.
 export default function ConsoleEntry() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 pt-10 pb-16 md:px-10 md:pt-16">
-      <h1 className="font-display text-display-s">{entry.title}</h1>
-      <p className="mt-4 max-w-[58ch] text-body text-surface-muted">{entry.text}</p>
-      <ol className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-serif-italic text-small text-surface-subtle">
-        {entry.steps.map((s, i) => (
-          <li key={s} className="flex items-center gap-3">
-            <span className="tabular-nums text-surface-fg">{String(i + 1).padStart(2, '0')}</span>
-            <span>{s}</span>
-            {i < entry.steps.length - 1 && <Icon name="arrow-right" className="size-3.5" />}
-          </li>
-        ))}
+    <div className="mx-auto w-full max-w-6xl px-5 pt-12 pb-20 md:px-10 md:pt-20">
+      <h1 className="font-display text-display-m">{entry.title}</h1>
+      <p className="mt-5 max-w-[56ch] text-lede text-surface-muted">{entry.text}</p>
+      <ol className="mt-12 flex max-w-3xl flex-col gap-4 font-mono text-label text-surface-muted sm:flex-row sm:items-center sm:gap-0">
+        {entry.steps.map((s, i) => {
+          const last = i === entry.steps.length - 1
+          return (
+            <li key={s} className={cx('flex items-center gap-3', !last && 'sm:flex-1')}>
+              <span
+                aria-hidden="true"
+                className={cx(
+                  'shrink-0 rounded-full',
+                  last ? 'size-3 bg-surface-accent' : 'size-2 bg-surface-fg',
+                )}
+              />
+              <span className={cx('whitespace-nowrap', last && 'text-surface-fg')}>{s}</span>
+              {!last && (
+                <span aria-hidden="true" className="mx-4 hidden h-px flex-1 bg-surface-accent/70 sm:block" />
+              )}
+            </li>
+          )
+        })}
       </ol>
 
       <h2 className="sr-only">{entry.worlds}</h2>
-      <ul className="mt-10 grid gap-4 md:grid-cols-2 md:gap-5">
+      <ul className="mt-14 grid gap-px overflow-hidden rounded-lg border border-surface-rule bg-surface-rule md:grid-cols-2">
         {WORLDS.map((w) => {
           const build = makeBuild(w, null)
           const main = w.definitions.at(-1)
@@ -42,17 +55,16 @@ export default function ConsoleEntry() {
           return (
             <li
               key={w.id}
-              data-console-panel
-              className="group relative flex min-w-0 flex-col rounded-md border border-surface-rule bg-surface transition-[border-color] duration-(--duration-hover) ease-out focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-surface-accent hover:border-surface-fg/40"
+              className="group relative flex min-w-0 flex-col bg-surface transition-colors duration-(--duration-hover) ease-out focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-surface-accent hover:bg-surface-raise"
             >
-              <div className="flex items-center justify-between gap-3 border-b border-surface-rule px-5 py-2.5 font-mono text-label tracking-normal text-surface-subtle">
+              <div className="flex items-center justify-between gap-3 px-6 pt-6 font-mono text-label tracking-normal text-surface-subtle">
                 <span className="shrink-0 text-surface-fg">{w.id}.world</span>
                 <span className="hidden min-w-0 truncate sm:block">
                   {entry.counts(w.entities.length, w.definitions.length, w.facts.length)}
                 </span>
               </div>
-              <div className="flex flex-1 flex-col px-5 pt-5 pb-4">
-                <h3 className="font-sans text-title">
+              <div className="flex flex-1 flex-col px-6 pt-8 pb-6">
+                <h3 className="font-display text-display-s">
                   <SmartLink
                     href={`/console/playground?world=${w.id}`}
                     className="outline-none after:absolute after:inset-0"
@@ -62,17 +74,24 @@ export default function ConsoleEntry() {
                 </h3>
                 <p className="mt-1.5 text-small text-surface-muted">{w.blurb}</p>
                 {main && (
-                  <p className="mt-5 rounded-sm border border-surface-rule bg-surface-raise px-3.5 py-3 font-mono text-code text-surface-muted">
+                  <p className="mt-6 border-l border-surface-accent/70 pl-4 font-mono text-code text-surface-muted">
                     {main.text}
                   </p>
                 )}
                 <div className="mt-auto flex items-center gap-3 pt-5">
                   <p className="text-caption text-surface-subtle">{entry.examples(outcomes.length)}</p>
-                  <span aria-hidden="true" className="flex gap-1">
-                    {outcomes.map(({ q, outcome }) => (
-                      <span key={q} className={cx('size-2.5 rounded-xs', DOT[CONSOLE_UI.chip[outcome]])} />
+                  <svg aria-hidden="true" viewBox={`0 0 ${outcomes.length * 14} 12`} className="h-3 w-auto">
+                    {outcomes.map(({ q, outcome }, i) => (
+                      <circle
+                        key={q}
+                        cx={6 + i * 14}
+                        cy={6}
+                        r={4}
+                        strokeWidth={1.5}
+                        className={MARK[CONSOLE_UI.chip[outcome]]}
+                      />
                     ))}
-                  </span>
+                  </svg>
                   <span
                     aria-hidden="true"
                     className="ml-auto flex items-center gap-1.5 font-sans text-small font-medium text-surface-fg"
@@ -95,7 +114,6 @@ export default function ConsoleEntry() {
         <SmartLink href={entry.moth.href} className="link-prose">
           {entry.moth.label}
         </SmartLink>
-        <span aria-hidden="true"> →</span>
       </p>
     </div>
   )

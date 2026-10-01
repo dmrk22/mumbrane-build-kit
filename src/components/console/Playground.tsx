@@ -179,7 +179,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
   )
 
   return (
-    <div className="grid flex-1 lg:h-[calc(100dvh-3rem)] lg:grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[320px_minmax(0,1fr)_380px]">
+    <div className="grid flex-1 lg:h-[calc(100dvh-3.5rem)] lg:grid-cols-[minmax(0,1fr)_360px] xl:grid-cols-[320px_minmax(0,1fr)_380px]">
       <aside
         aria-labelledby="world-title"
         data-console-panel
@@ -228,7 +228,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
 
           <section aria-labelledby="results-title" className="mt-10">
             <div className="flex items-baseline justify-between border-b border-surface-rule pb-2">
-              <h2 id="results-title" className="font-serif-italic text-small text-surface-subtle">
+              <h2 id="results-title" className="font-mono text-label text-surface-subtle">
                 {copy.label}
               </h2>
               {entries.length > 0 && (

@@ -25,10 +25,7 @@ export function InstrumentWindow({
       data-surface="paper-2"
       className={cx('instrument-window border-[1.5px] border-ink shadow-window', className)}
     >
-      <figcaption
-        data-surface="ink"
-        className="flex h-8 items-center gap-3 px-3 font-mono text-label [font-stretch:87.5%]"
-      >
+      <figcaption data-surface="ink" className="flex h-8 items-center gap-3 px-3 font-mono text-label">
         <span className="truncate">{title}</span>
         {tag && (
           <span data-surface="paper" className="shrink-0 px-1.5 py-px text-label">
@@ -41,7 +38,7 @@ export function InstrumentWindow({
           <span className="size-2 border border-on-dark/70" />
         </span>
       </figcaption>
-      <div className="instrument-body p-5 font-mono text-code [font-stretch:87.5%]">{children}</div>
+      <div className="instrument-body p-5 font-mono text-code">{children}</div>
       {footer && (
         <div
           aria-hidden="true"

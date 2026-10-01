@@ -1,16 +1,16 @@
-import { StringModel } from '@/components/art/StringModel'
 import { Mark } from '@/components/brand/Mark'
 import { Container } from '@/components/layout/Container'
 import { InView } from '@/components/motion/InView'
-import { Qed } from '@/components/ui/Inline'
 import { SmartLink } from '@/components/ui/SmartLink'
 import { HEADER, FOOTER as NAV } from '@/content/nav'
 
-// The footer, after Anthropic's: the mark, the line, dense link columns, a legal row. The page
-// opens on the helicoid; it closes on the same surface at rest, the catenoid (θ = π/2).
+// The footer, after Anthropic's: the mark, the line, dense link columns, a legal row.
 export function Footer() {
   return (
-    <footer data-surface="deep" className="relative overflow-hidden pt-16 md:pt-20 lg:pt-24 print:hidden">
+    <footer
+      data-surface="deep"
+      className="relative overflow-hidden pt-16 pb-6 md:pt-20 lg:pt-24 print:hidden"
+    >
       <Container className="relative">
         <div className="grid grid-cols-12 gap-x-4 gap-y-14 lg:gap-x-6">
           <InView className="col-span-12 lg:col-span-4">
@@ -23,7 +23,7 @@ export function Footer() {
             <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:gap-x-6">
               {NAV.columns.map((col) => (
                 <li key={col.title}>
-                  <h2 className="font-serif-italic text-small text-surface-subtle">{col.title}</h2>
+                  <h2 className="font-mono text-label text-surface-subtle">{col.title}</h2>
                   <ul className="mt-4 flex flex-col gap-2">
                     {col.links.map((l) => (
                       <li key={l.href}>
@@ -50,27 +50,9 @@ export function Footer() {
           >
             {NAV.legal.privacyChoices.label}
           </SmartLink>
-          <p className="flex items-baseline gap-3 font-serif-italic sm:justify-self-end">
-            {NAV.legal.motto}
-            <Qed className="text-surface-fg" />
-          </p>
+          <p className="flex items-baseline gap-3 sm:justify-self-end">{NAV.legal.motto}</p>
         </div>
       </Container>
-
-      {/* The page's last figure: it rises in once it is reached (InView), even at the very end. */}
-      <InView>
-        <div
-          aria-hidden="true"
-          className="footer-film pointer-events-none relative mx-auto h-64 max-w-360 overflow-hidden text-on-dark-3 md:h-80"
-        >
-          <StringModel
-            theta={Math.PI / 2}
-            strings={110}
-            yaw={0.2}
-            className="absolute top-[-4rem] left-1/2 h-[60rem] w-auto -translate-x-1/2 opacity-50 md:top-[-6rem] md:h-[72rem]"
-          />
-        </div>
-      </InView>
     </footer>
   )
 }

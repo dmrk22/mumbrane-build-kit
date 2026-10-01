@@ -574,3 +574,20 @@ instrument windows are printed light windows used twice. Company blocks became a
 after Anthropic's with the catenoid as a bookend. Owner explicitly allowed going beyond the plan.
 **Alternatives**: Keep the ultramarine system and restyle components only (rejected by the owner).
 **Status**: Decided (owner instruction in session).
+
+### D-129 — Owner-directed redesign, round 2: "field" (2026-10-01)
+**Context**: The owner rejected round 1 (D-128) as messy: the logic notation (Γ ⊢ φ and the rest),
+the theorem framing, the proof-sheet demo, the outcome symbols and the green palette all had to
+go; the console and contact pages were to be redesigned; News, Research and About were acceptable.
+Direction: minimal but creative, built from the original mumbrane.com figures.
+**Decision**: Neutral palette (paper and ink, no green) with one accent, ice, for the path to an
+answer, and three quiet status tones (sand, clay, lilac). Mona Sans for everything read and
+clicked, Geist Mono for figure labels and data, the serif kept for article prose only. One diagram
+vocabulary everywhere, after the original site: a filled dot is established, a hollow dot is
+missing, the accent line is the path to an answer, a dashed line has no support, labels are
+lowercase mono. Home hero: the original wireframe field, alive (Canvas 2D, server SVG still). How
+Moth works: a pinned chain diagram of the purchasing example. Outcomes: one glyph each. Moth:
+stacked layers. Console: top bar instead of the rail, entry and evidence redrawn in the
+vocabulary. Contact and sales: dark page, address routes drawn as paths, form on a paper card.
+**Alternatives**: Iterate on round 1 (rejected by the owner).
+**Status**: Decided (owner instruction in session).

@@ -3,7 +3,8 @@
    directly after `@import "tailwindcss";`. Generated from brand/palette/palette.json.
    All colours are sRGB-safe OKLCH (hex in comments). Do not add ad-hoc colours:
    extend this file and DECISIONS.md instead.
-   Palette "blackboard": plaster paper, blackboard ink, chalk on dark, and chalk pigments.
+   Palette "field": paper and ink neutrals, one accent (ice: the path to an answer), three quiet
+   status tones (sand, clay, lilac).
    ========================================================================== */
 
 @theme {
@@ -12,85 +13,67 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --color-paper: oklch(0.968 0.008 118.0); /* #f4f5ef */
-  --color-paper-2: oklch(0.940 0.012 124.0); /* #e9ede4 */
-  --color-paper-3: oklch(0.900 0.016 130.0); /* #dae0d5 */
-  --color-rule: oklch(0.850 0.014 132.0); /* #cad0c6 */
-  --color-ink: oklch(0.200 0.026 166.0); /* #0a1a13 */
-  --color-ink-2: oklch(0.245 0.030 166.0); /* #12251d */
-  --color-ink-3: oklch(0.300 0.032 166.0); /* #1e332a */
-  --color-rule-dark: oklch(0.370 0.030 166.0); /* #31453c */
-  --color-text: oklch(0.200 0.020 166.0); /* #0d1914 */
-  --color-text-2: oklch(0.400 0.020 166.0); /* #3e4b45 */
-  --color-text-3: oklch(0.485 0.016 166.0); /* #57625d */
-  --color-on-dark: oklch(0.958 0.014 110.0); /* #f1f2e8 */
-  --color-on-dark-2: oklch(0.830 0.020 150.0); /* #bfcbc1 */
-  --color-on-dark-3: oklch(0.710 0.022 160.0); /* #96a69d */
-  --color-deep: oklch(0.155 0.026 172.0); /* #02100b */
-  --color-malachite: oklch(0.660 0.130 158.0); /* #3baa73 */
-  --color-malachite-soft: oklch(0.955 0.039 158.0); /* #dbf9e6 */
-  --color-malachite-fg: oklch(0.484 0.113 158.0); /* #017145 — 5.55:1 on paper */
-  --color-malachite-glow: oklch(0.660 0.130 158.0); /* #3baa73 — 6.14:1 on ink */
-  --color-malachite-ink: oklch(0.394 0.092 158.0); /* #005432 — 8.08:1 on malachite-soft */
-  --color-sulfur: oklch(0.885 0.150 98.0); /* #f4da57 */
-  --color-sulfur-soft: oklch(0.955 0.045 98.0); /* #f8f1cf */
-  --color-sulfur-fg: oklch(0.500 0.103 98.0); /* #736301 — 5.45:1 on paper */
-  --color-sulfur-glow: oklch(0.885 0.150 98.0); /* #f4da57 — 12.83:1 on ink */
-  --color-sulfur-ink: oklch(0.402 0.083 98.0); /* #544800 — 8.02:1 on sulfur-soft */
-  --color-cinnabar: oklch(0.655 0.185 34.0); /* #eb5b3b */
-  --color-cinnabar-soft: oklch(0.955 0.022 34.0); /* #ffebe7 */
-  --color-cinnabar-fg: oklch(0.520 0.185 34.0); /* #bb2c03 — 5.51:1 on paper */
-  --color-cinnabar-glow: oklch(0.675 0.185 34.0); /* #f36242 — 5.67:1 on ink */
-  --color-cinnabar-ink: oklch(0.418 0.148 34.0); /* #8b1e02 — 8.01:1 on cinnabar-soft */
-  --color-iris: oklch(0.600 0.150 302.0); /* #9267ca */
-  --color-iris-soft: oklch(0.955 0.025 302.0); /* #f3edff */
-  --color-iris-fg: oklch(0.516 0.150 302.0); /* #794eae — 5.45:1 on paper */
-  --color-iris-glow: oklch(0.668 0.150 302.0); /* #a67ce0 — 5.62:1 on ink */
-  --color-iris-ink: oklch(0.410 0.120 302.0); /* #57377f — 8.13:1 on iris-soft */
-  --color-verdigris: oklch(0.720 0.100 188.0); /* #4cb9b0 */
-  --color-verdigris-soft: oklch(0.955 0.030 188.0); /* #dbf7f4 */
-  --color-verdigris-fg: oklch(0.492 0.085 188.0); /* #02706a — 5.43:1 on paper */
-  --color-verdigris-glow: oklch(0.720 0.100 188.0); /* #4cb9b0 — 7.58:1 on ink */
-  --color-verdigris-ink: oklch(0.394 0.068 188.0); /* #01524d — 8.04:1 on verdigris-soft */
-  --color-madder: oklch(0.740 0.120 8.0); /* #eb8a9c */
-  --color-madder-soft: oklch(0.955 0.022 8.0); /* #feeaed */
-  --color-madder-fg: oklch(0.516 0.120 8.0); /* #9f465a — 5.48:1 on paper */
-  --color-madder-glow: oklch(0.740 0.120 8.0); /* #eb8a9c — 7.39:1 on ink */
-  --color-madder-ink: oklch(0.410 0.096 8.0); /* #743140 — 8.07:1 on madder-soft */
-  --color-ochre: oklch(0.790 0.150 68.0); /* #f9a63e */
-  --color-ochre-soft: oklch(0.955 0.031 68.0); /* #ffeddb */
-  --color-ochre-fg: oklch(0.508 0.111 68.0); /* #8e5701 — 5.45:1 on paper */
-  --color-ochre-glow: oklch(0.790 0.150 68.0); /* #f9a63e — 9.02:1 on ink */
-  --color-ochre-ink: oklch(0.406 0.089 68.0); /* #683e00 — 8.07:1 on ochre-soft */
-  --color-moss: oklch(0.480 0.090 140.0); /* #416a38 */
-  --color-moss-soft: oklch(0.955 0.027 140.0); /* #e7f5e4 */
-  --color-moss-fg: oklch(0.480 0.090 140.0); /* #416a38 — 5.73:1 on paper */
-  --color-moss-glow: oklch(0.644 0.090 140.0); /* #709b66 — 5.61:1 on ink */
-  --color-moss-ink: oklch(0.394 0.072 140.0); /* #304f29 — 8.16:1 on moss-soft */
+  --color-paper: oklch(0.973 0.004 95.0); /* #f7f6f3 */
+  --color-paper-2: oklch(0.948 0.005 95.0); /* #efeeea */
+  --color-paper-3: oklch(0.905 0.006 95.0); /* #e1e0db */
+  --color-rule: oklch(0.860 0.006 95.0); /* #d2d1cd */
+  --color-ink: oklch(0.155 0.003 260.0); /* #0b0c0d */
+  --color-ink-2: oklch(0.200 0.004 260.0); /* #151618 */
+  --color-ink-3: oklch(0.255 0.005 260.0); /* #212325 */
+  --color-rule-dark: oklch(0.320 0.005 260.0); /* #313335 */
+  --color-text: oklch(0.180 0.004 260.0); /* #111213 */
+  --color-text-2: oklch(0.420 0.005 260.0); /* #4b4d50 */
+  --color-text-3: oklch(0.490 0.005 260.0); /* #5f6063 */
+  --color-on-dark: oklch(0.960 0.004 95.0); /* #f2f2ef */
+  --color-on-dark-2: oklch(0.800 0.005 260.0); /* #bcbec1 */
+  --color-on-dark-3: oklch(0.670 0.006 260.0); /* #939599 */
+  --color-deep: oklch(0.120 0.003 260.0); /* #050607 */
+  --color-ice: oklch(0.820 0.085 255.0); /* #9fc7fb */
+  --color-ice-soft: oklch(0.955 0.022 255.0); /* #e7f1ff */
+  --color-ice-fg: oklch(0.508 0.085 255.0); /* #436795 — 5.38:1 on paper */
+  --color-ice-glow: oklch(0.820 0.085 255.0); /* #9fc7fb — 11.22:1 on ink */
+  --color-ice-ink: oklch(0.402 0.068 255.0); /* #2e496c — 8.06:1 on ice-soft */
+  --color-sand: oklch(0.860 0.070 85.0); /* #e6ce9d */
+  --color-sand-soft: oklch(0.955 0.021 85.0); /* #f7efe1 */
+  --color-sand-fg: oklch(0.508 0.070 85.0); /* #786234 — 5.40:1 on paper */
+  --color-sand-glow: oklch(0.860 0.070 85.0); /* #e6ce9d — 12.75:1 on ink */
+  --color-sand-ink: oklch(0.402 0.056 85.0); /* #564623 — 8.01:1 on sand-soft */
+  --color-clay: oklch(0.720 0.120 38.0); /* #e4896c */
+  --color-clay-soft: oklch(0.955 0.023 38.0); /* #ffebe5 */
+  --color-clay-fg: oklch(0.520 0.120 38.0); /* #a14c32 — 5.40:1 on paper */
+  --color-clay-glow: oklch(0.720 0.120 38.0); /* #e4896c — 7.55:1 on ink */
+  --color-clay-ink: oklch(0.406 0.096 38.0); /* #74341f — 8.11:1 on clay-soft */
+  --color-lilac: oklch(0.740 0.085 300.0); /* #b39fd9 */
+  --color-lilac-soft: oklch(0.955 0.025 300.0); /* #f2edff */
+  --color-lilac-fg: oklch(0.516 0.085 300.0); /* #6f5c91 — 5.37:1 on paper */
+  --color-lilac-glow: oklch(0.740 0.085 300.0); /* #b39fd9 — 8.28:1 on ink */
+  --color-lilac-ink: oklch(0.406 0.068 300.0); /* #4f4069 — 8.08:1 on lilac-soft */
 
-  /* Semantic outcome colours (Moth answers). Fill with ink text (≥ 5.2:1), except refused:
-     iris base fails AA with ink (4.29), so refused uses iris-fg with on-dark text (5.29:1). */
-  --color-supported: var(--color-malachite);
-  --color-unproven: var(--color-sulfur);    /* NO_SUPPORTED_PROOF */
-  --color-conflict: var(--color-cinnabar);
-  --color-refused: var(--color-iris-fg);    /* language refusal */
+  /* Semantic outcome colours (Moth answers). Every fill takes ink text (≥ 7.5:1). */
+  --color-supported: var(--color-ice);
+  --color-unproven: var(--color-sand);      /* NO_SUPPORTED_PROOF */
+  --color-conflict: var(--color-clay);
+  --color-refused: var(--color-lilac);      /* language refusal */
   --color-limit: var(--color-paper-3);      /* resource stop / incomplete / incompatible */
 
   /* Type families — variables are provided by next/font in src/app/fonts.ts.
-     Sans carries headlines and UI (its wdth axis is set with font-stretch); serif carries
-     reading text, theorem statements and math variables; Noto Sans Math backs up the logic
-     symbols (⊢ ⊬ ⊥ ∉ ∴) that the text faces lack. */
+     Mona Sans carries everything you read and click (its wdth axis is set with font-stretch);
+     Geist Mono labels figures and data; the serif is kept for long-form article prose only. */
   --font-sans: var(--font-mona), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: var(--font-source-serif), var(--font-math), ui-serif, Georgia, "Times New Roman", serif;
-  --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), var(--font-math), ui-serif, Georgia, serif;
-  --font-mono: var(--font-martian), var(--font-math), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --font-math: var(--font-source-serif-italic), var(--font-math), ui-serif, serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, "Times New Roman", serif;
+  --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   /* Type scale — fluid between 375px and 1440px viewports. Display sizes are set in Mona Sans. */
   --text-display-xl: clamp(3.25rem, 1.2rem + 8.4vw, 9.25rem);
   --text-display-xl--line-height: 0.9;
   --text-display-xl--letter-spacing: -0.045em;
   --text-display-xl--font-weight: 480;
+  /* The home hero's headline: between display-l and display-xl, two lines beside the field. */
+  --text-hero: clamp(3rem, 1.5rem + 4.4vw, 6.25rem);
+  --text-hero--line-height: 0.94;
+  --text-hero--letter-spacing: -0.042em;
+  --text-hero--font-weight: 480;
   --text-display-l: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
   --text-display-l--line-height: 0.98;
   --text-display-l--letter-spacing: -0.038em;
@@ -103,11 +86,6 @@
   --text-display-s--line-height: 1.1;
   --text-display-s--letter-spacing: -0.024em;
   --text-display-s--font-weight: 500;
-  /* Formula: the giant judgement Γ ⊢ φ on the home page and the outcome symbols. */
-  --text-formula: clamp(5.5rem, 2rem + 17vw, 16rem);
-  --text-formula--line-height: 0.9;
-  --text-formula--letter-spacing: -0.02em;
-  --text-formula--font-weight: 300;
   --text-title: clamp(1.1875rem, 1.1rem + 0.38vw, 1.4375rem);
   --text-title--line-height: 1.22;
   --text-title--letter-spacing: -0.012em;
@@ -166,10 +144,9 @@
   --duration-hero: 1100ms;
   --duration-signature: 1400ms;
 
-  /* Elevation — instrument windows cast a hard offset shadow (a printed window, not a glow). */
-  --shadow-window: 6px 6px 0 0 oklch(0.2 0.026 166 / 0.9);
-  --shadow-menu: 0 24px 60px -24px oklch(0.155 0.026 172 / 0.45);
-  --shadow-plate: 0 40px 90px -50px oklch(0.155 0.026 172 / 0.55);
+  /* Elevation — rationed: the instrument window's printed offset, menus. */
+  --shadow-window: 5px 5px 0 0 oklch(0.155 0.003 260 / 0.14);
+  --shadow-menu: 0 24px 60px -24px oklch(0.12 0.003 260 / 0.4);
 
   /* Breakpoints */
   --breakpoint-sm: 40rem;   /* 640 */
@@ -195,31 +172,31 @@
   :root, [data-surface="paper"] {
     --surface-bg: var(--color-paper); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
     --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper-2);
-    --surface-accent: var(--color-cinnabar-fg);
+    --surface-accent: var(--color-ice-fg);
     color-scheme: light;
   }
   [data-surface="paper-2"] {
     --surface-bg: var(--color-paper-2); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
     --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper);
-    --surface-accent: var(--color-cinnabar-fg);
+    --surface-accent: var(--color-ice-fg);
     color-scheme: light;
   }
   [data-surface="ink"] {
     --surface-bg: var(--color-ink); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
     --surface-subtle: var(--color-on-dark-3); --surface-rule: var(--color-rule-dark); --surface-raise: var(--color-ink-2);
-    --surface-accent: var(--color-sulfur);
+    --surface-accent: var(--color-ice);
     color-scheme: dark;
   }
   [data-surface="deep"] {
     --surface-bg: var(--color-deep); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
-    --surface-subtle: var(--color-on-dark-3); --surface-rule: oklch(0.958 0.014 110 / 0.16); --surface-raise: var(--color-ink);
-    --surface-accent: var(--color-sulfur);
+    --surface-subtle: var(--color-on-dark-3); --surface-rule: oklch(0.96 0.004 95 / 0.14); --surface-raise: var(--color-ink);
+    --surface-accent: var(--color-ice);
     color-scheme: dark;
   }
-  [data-surface="sulfur"] {
-    --surface-bg: var(--color-sulfur); --surface-fg: var(--color-ink); --surface-muted: var(--color-sulfur-ink);
-    --surface-subtle: var(--color-sulfur-ink); --surface-rule: oklch(0.2 0.026 166 / 0.28); --surface-raise: var(--color-sulfur-soft);
-    --surface-accent: var(--color-ink);
+  [data-surface="ice"] {
+    --surface-bg: var(--color-ice-soft); --surface-fg: var(--color-text); --surface-muted: var(--color-ice-ink);
+    --surface-subtle: var(--color-ice-ink); --surface-rule: oklch(0.18 0.004 260 / 0.16); --surface-raise: var(--color-paper);
+    --surface-accent: var(--color-ice-fg);
     color-scheme: light;
   }
   @media (prefers-contrast: more) {

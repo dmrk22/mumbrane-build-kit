@@ -5,20 +5,20 @@
 @layer base {
   /* Trace status colours as text: the -fg pigments on paper, the -glow ones on ink (DESIGN §2.4). */
   [data-console-surface] {
-    --console-ok: var(--color-malachite-fg);
-    --console-gap: var(--color-sulfur-fg);
-    --console-bad: var(--color-cinnabar-fg);
+    --console-ok: var(--color-ice-fg);
+    --console-gap: var(--color-ice-fg);
+    --console-bad: var(--color-clay-fg);
   }
   html[data-console-theme="dark"] [data-console-surface] {
-    --console-ok: var(--color-malachite-glow);
-    --console-gap: var(--color-sulfur-glow);
-    --console-bad: var(--color-cinnabar-glow);
+    --console-ok: var(--color-ice-glow);
+    --console-gap: var(--color-ice-glow);
+    --console-bad: var(--color-clay-glow);
   }
   @media (prefers-color-scheme: dark) {
     html:not([data-console-theme="light"]) [data-console-surface] {
-      --console-ok: var(--color-malachite-glow);
-      --console-gap: var(--color-sulfur-glow);
-      --console-bad: var(--color-cinnabar-glow);
+      --console-ok: var(--color-ice-glow);
+      --console-gap: var(--color-ice-glow);
+      --console-bad: var(--color-clay-glow);
     }
   }
 
@@ -34,7 +34,7 @@
     --surface-subtle: var(--color-on-dark-3);
     --surface-rule: var(--color-rule-dark);
     --surface-raise: var(--color-ink-2);
-    --surface-accent: var(--color-verdigris);
+    --surface-accent: var(--color-ice);
     color-scheme: dark;
   }
   html[data-console-theme="dark"] [data-console-panel] {
@@ -54,7 +54,7 @@
       --surface-subtle: var(--color-on-dark-3);
       --surface-rule: var(--color-rule-dark);
       --surface-raise: var(--color-ink-2);
-      --surface-accent: var(--color-verdigris);
+      --surface-accent: var(--color-ice);
       --surface-invert: var(--color-paper);
       --surface-on-invert: var(--color-ink);
       color-scheme: dark;
@@ -80,7 +80,7 @@
 
   /* A fact or definition clicked in the evidence flashes in the world panel (§8). */
   [data-flash="true"] {
-    outline: 2px solid var(--color-sulfur);
+    outline: 2px solid var(--color-ice);
     outline-offset: 2px;
     animation: console-flash 2s var(--ease-out);
   }
@@ -127,7 +127,7 @@
 
 @keyframes console-flash {
   from {
-    background-color: var(--color-sulfur-soft);
+    background-color: var(--color-ice-soft);
   }
   to {
     background-color: transparent;
@@ -154,10 +154,10 @@
 /* Prose links are moss-fg on paper; on the dark console they take the ink colour (DESIGN
    §3.4). Unlayered, so it outranks the link-prose utility without !important. */
 html[data-console-theme="dark"] [data-console-surface] .link-prose {
-  color: var(--color-verdigris);
+  color: var(--color-ice);
 }
 @media (prefers-color-scheme: dark) {
   html:not([data-console-theme="light"]) [data-console-surface] .link-prose {
-    color: var(--color-verdigris);
+    color: var(--color-ice);
   }
 }

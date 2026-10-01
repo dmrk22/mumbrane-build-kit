@@ -26,7 +26,7 @@ export const ROUTES = [
     description:
       'Mumbrane builds constraint-based models that reason from the facts and definitions you supply, and show the evidence behind every result.',
     sitemap: true,
-    surfaceTop: 'deep',
+    surfaceTop: 'ink',
   },
   {
     path: '/moth',
@@ -197,7 +197,7 @@ export const ROUTES = [
       'Tell us what you are trying to understand, where the difficulty is, and what a useful conversation might unlock.',
     group: 'company',
     sitemap: true,
-    surfaceTop: 'paper',
+    surfaceTop: 'ink',
   },
   {
     path: '/contact/sales',
@@ -206,7 +206,7 @@ export const ROUTES = [
       'Tell us about the decisions you want a model to make from your own rules. We’ll tell you honestly whether Moth fits today.',
     group: 'company',
     sitemap: true,
-    surfaceTop: 'paper',
+    surfaceTop: 'ink',
   },
 
   // Console preview (noindex)

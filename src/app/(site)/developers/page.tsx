@@ -25,7 +25,7 @@ export default function DevelopersPage() {
         <h1 id="developers-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
           <Inline text={hero.title} />
         </h1>
-        <p className="mt-8 max-w-[56ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
+        <p className="mt-8 max-w-[56ch] text-lede text-surface-muted">{hero.lede}</p>
         <Note className="mt-10 max-w-2xl">{hero.status}</Note>
       </Section>
 
@@ -74,10 +74,10 @@ export default function DevelopersPage() {
             className="col-span-12 lg:col-span-7"
           />
           <figure className="col-span-12 border border-surface-rule bg-surface lg:col-span-5">
-            <figcaption className="flex h-10 items-center border-b border-surface-rule px-4 font-serif-italic text-small text-surface-subtle">
+            <figcaption className="flex h-10 items-center border-b border-surface-rule px-4 font-mono text-label text-surface-subtle">
               {results.englishLabel}
             </figcaption>
-            <p className="p-5 font-serif text-lede">{results.english}</p>
+            <p className="p-5 text-lede">{results.english}</p>
           </figure>
           <CodeBlock
             code={results.questions}

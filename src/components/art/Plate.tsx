@@ -43,9 +43,9 @@ export function Plate({
         data-surface="paper"
         className="plate group relative flex h-full flex-col rounded-lg border border-surface-rule p-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-surface-accent"
       >
-        <header className="flex items-baseline justify-between font-serif-italic text-small text-surface-subtle">
+        <header className="flex items-baseline justify-between font-mono text-label text-surface-subtle">
           <span>Plate {roman(number)}</span>
-          <time dateTime={date} className="font-serif not-italic tabular-nums">
+          <time dateTime={date} className="tabular-nums">
             {monoDate(date)}
           </time>
         </header>
@@ -66,7 +66,7 @@ export function Plate({
             <TitleText text={title} />
           )}
         </H>
-        <p className="mt-3 px-1 font-serif-italic text-small text-surface-subtle">
+        <p className="mt-3 px-1 font-mono text-label text-surface-subtle">
           {meta}, oil on code, seed {p.seed}
         </p>
         {/* Spacing lives on a wrapper: padding on the 6 px SVG itself would leave it no height. */}

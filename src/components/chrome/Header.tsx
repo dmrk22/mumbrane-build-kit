@@ -294,7 +294,7 @@ function MenuPanel({
               >
                 <span className="font-display text-title">{l.label}</span>
                 {'description' in l && l.description && (
-                  <span className="font-serif text-small text-surface-muted">{l.description}</span>
+                  <span className="text-small text-surface-muted">{l.description}</span>
                 )}
               </SmartLink>
             </li>
@@ -307,12 +307,12 @@ function MenuPanel({
           className="group col-span-4 flex flex-col justify-between gap-8 rounded-lg border border-surface-rule bg-surface-raise p-6 transition-colors duration-(--duration-hover) hover:border-surface-subtle"
         >
           <span className="flex flex-col gap-3">
-            <span className="font-serif-italic text-small text-surface-subtle">{menu.feature.eyebrow}</span>
+            <span className="font-mono text-label text-surface-subtle">{menu.feature.eyebrow}</span>
             <span className="font-display text-display-s">{menu.feature.title}</span>
             <span className="text-small text-surface-muted">{menu.feature.text}</span>
           </span>
           {'meta' in menu.feature && (
-            <span className="font-serif-italic text-small text-surface-subtle">{menu.feature.meta}</span>
+            <span className="font-mono text-label text-surface-subtle">{menu.feature.meta}</span>
           )}
           <Icon
             name="arrow-right"

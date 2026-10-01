@@ -65,7 +65,7 @@ export default async function LegalPage({ params }: Props) {
             <h1 id="legal-title" className="mt-4 font-display text-display-l">
               {routeFor(path).title}
             </h1>
-            <p className="mt-6 font-serif-italic text-small text-surface-subtle">
+            <p className="mt-6 font-mono text-label text-surface-subtle">
               {LEGAL_UI.updated} <time dateTime={doc.updated}>{proseDate(doc.updated)}</time>
             </p>
             {doc.banner && (

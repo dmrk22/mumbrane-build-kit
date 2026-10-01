@@ -42,7 +42,7 @@ export default function StatusPage() {
         <h1 id="status-title" className="mt-4 font-display text-display-xl">
           {STATUS.title}
         </h1>
-        <p className="mt-8 max-w-[52ch] font-serif text-lede text-surface-muted">{STATUS.lede}</p>
+        <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{STATUS.lede}</p>
       </Section>
 
       <Section surface="paper-2" id="components" labelledBy="components-title">
@@ -58,12 +58,12 @@ export default function StatusPage() {
                   <h3 className="text-title">{c.name}</h3>
                   <p className="mt-1 text-small text-surface-muted">{c.text}</p>
                 </div>
-                <span className="inline-flex h-7 items-center bg-paper-3 px-2.5 font-serif-italic text-small text-text-2">
+                <span className="inline-flex h-7 items-center bg-paper-3 px-2.5 font-mono text-label text-text-2">
                   {STATUS.state}
                 </span>
               </div>
               <EmptyBar days={STATUS.days} />
-              <p className="flex justify-between font-serif-italic text-small text-surface-subtle">
+              <p className="flex justify-between font-mono text-label text-surface-subtle">
                 <span className="sr-only">{STATUS.barLabel(STATUS.days)}</span>
                 <span aria-hidden="true">{STATUS.noData}</span>
               </p>

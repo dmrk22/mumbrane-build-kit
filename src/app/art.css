@@ -11,27 +11,6 @@
   background-size: 6px 6px;
 }
 
-@layer components {
-  /* The hero's ground before (and behind) the first WebGL frame: deep, lit from where the film
-     hangs, with a faint chalk-dust grain from two offset dot screens. */
-  .membrane-field {
-    background:
-      radial-gradient(
-        ellipse 60% 70% at 72% 46%,
-        color-mix(in oklab, var(--color-ink-3) 70%, transparent),
-        transparent 70%
-      ),
-      radial-gradient(circle farthest-corner at 72% 46%, var(--color-ink), var(--color-deep));
-  }
-  .membrane-canvas {
-    opacity: 0;
-    transition: opacity var(--duration-hero) var(--ease-out);
-  }
-  .membrane-canvas[data-ready="true"] {
-    opacity: 1;
-  }
-}
-
 /* Instrument window body: always printed plaster with ink text, whatever the ground. Entity and
    result chips are black label chips (`code` and `mark.cli-chip`). */
 @layer components {
@@ -102,9 +81,8 @@
   .plate .plate-frame {
     border: 1px solid CanvasText;
   }
-  /* A WebGL canvas keeps its own colours; hidden, the hero takes the system Canvas colour, so the
-     transparent header's lockup and links stay legible. */
-  .membrane-canvas {
+  /* The field's canvas keeps its own colours; hidden, the still shows in system colours. */
+  .field-canvas {
     display: none;
   }
 }
@@ -154,7 +132,7 @@
 
 /* Company blocks unlock (DESIGN §7.6). Open is the default, so no-JS and reduced motion show every
    block. With scripting and motion, blocks without data-unlocked draw locked from the first paint;
-   opening is an iris wipe from the top-left corner (600 ms mb.inOut), then label and text rise
+   opening is an lilac wipe from the top-left corner (600 ms mb.inOut), then label and text rise
    12 px and fade in (60 ms stagger). If JS never arms the section (no data-live), a failsafe opens
    everything after 4 s; BlocksMosaic sees the finished failsafe and never re-locks. */
 @layer components {
@@ -216,102 +194,7 @@
   }
 }
 
-/* Definition 1 (Turnstile): symbols rise from their baseline, leader lines draw down, notes fade
-   in; each column 140 ms after the last, then the negation. Final state is the CSS default. */
-@media (prefers-reduced-motion: no-preference) {
-  .turnstile .ts-lead {
-    transform-origin: top;
-  }
-  [data-reveal="pending"].turnstile .ts-sym {
-    opacity: 0;
-    transform: translateY(18%);
-  }
-  [data-reveal="pending"].turnstile .ts-lead {
-    transform: scaleY(0);
-  }
-  [data-reveal="pending"].turnstile .ts-note,
-  [data-reveal="pending"].turnstile .ts-neg {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  [data-reveal="done"].turnstile .ts-sym {
-    transition:
-      opacity 900ms var(--ease-out) calc(var(--ts-i, 0) * 140ms),
-      transform 1100ms var(--ease-out) calc(var(--ts-i, 0) * 140ms);
-  }
-  [data-reveal="done"].turnstile .ts-lead {
-    transition: transform 700ms var(--ease-in-out) calc(400ms + var(--ts-i, 0) * 140ms);
-  }
-  [data-reveal="done"].turnstile .ts-note {
-    transition:
-      opacity 600ms var(--ease-out) calc(800ms + var(--ts-i, 0) * 140ms),
-      transform 600ms var(--ease-out) calc(800ms + var(--ts-i, 0) * 140ms);
-  }
-  [data-reveal="done"].turnstile .ts-neg {
-    transition:
-      opacity 700ms var(--ease-out) 1400ms,
-      transform 700ms var(--ease-out) 1400ms;
-  }
-}
-.ts-i-1 {
-  --ts-i: 1;
-}
-.ts-i-2 {
-  --ts-i: 2;
-}
-
-/* Example 2 (ProofSheet): parts fade up as their step arrives; bars of a derivation draw left to
-   right, the inner inference first; a rule whose premise is missing draws a broken bar. */
-@layer components {
-  .ps-part {
-    transition:
-      opacity var(--duration-reveal) var(--ease-out),
-      transform var(--duration-reveal) var(--ease-out);
-  }
-  .ps-part[data-shown="false"] {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  .ps-bar {
-    transform-origin: left;
-    transition: transform 800ms var(--ease-in-out) 520ms;
-  }
-  .ps-rule .ps-rule .ps-bar {
-    transition-delay: 120ms;
-  }
-  .ps-part[data-shown="false"] .ps-bar {
-    transform: scaleX(0);
-  }
-  .ps-bar-open {
-    background-image: linear-gradient(
-      90deg,
-      var(--color-cinnabar-glow) 0 55%,
-      transparent 55% 70%,
-      var(--color-cinnabar-glow) 70% 100%
-    );
-    background-size: 14px 1px;
-    opacity: 0.9;
-  }
-  .ps-step-text {
-    padding-top: 0.25rem;
-  }
-  @media (min-width: 1024px) {
-    .ps-step-closed {
-      display: none;
-    }
-  }
-  /* Entities on the sheet: chalk-outlined names, the way a lecturer boxes a constant. */
-  .sheet-facts code {
-    font-family: var(--font-mono);
-    font-size: 0.86em;
-    font-stretch: 87.5%;
-    border: 1px solid color-mix(in oklab, var(--color-on-dark) 35%, transparent);
-    padding: 0.02em 0.4em;
-    color: var(--color-on-dark);
-  }
-}
-
-/* Hatching for unproven lemmas and conjectures: fine diagonal chalk lines, an engineer's "not yet". */
+/* Hatching for locked blocks: fine diagonal lines, an engineer's "not yet". */
 @utility block-hatch {
   background-image: repeating-linear-gradient(
     135deg,
@@ -320,43 +203,204 @@
   );
 }
 
-/* The footer's catenoid fades in from nothing at its top edge. */
+/* The field (FieldCanvas): the server still, hidden once the canvas has drawn its first frame. */
 @layer components {
-  .footer-film {
-    mask-image: linear-gradient(to bottom, transparent, black 55%);
+  .field-poster polyline,
+  .field-poster circle {
+    vector-effect: non-scaling-stroke;
+  }
+  .field-mesh {
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.17;
+  }
+  .field-mesh .field-edge {
+    stroke-opacity: 0.5;
+  }
+  .field-faint {
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.3;
+  }
+  .field-path {
+    stroke: var(--surface-accent);
+    stroke-width: 1.6;
+  }
+  .field-dot {
+    fill: var(--surface-accent);
+  }
+  .field-label {
+    fill: var(--surface-fg);
+    fill-opacity: 0.78;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .field-canvas {
+    opacity: 0;
+    transition: opacity var(--duration-hero) var(--ease-out);
+  }
+  [data-ready="true"] > .field-canvas {
+    opacity: 1;
+  }
+  [data-ready="true"] > .field-poster {
+    opacity: 0;
+    transition: opacity var(--duration-ui) linear;
   }
 }
 
-/* On dark grounds the window's printed shadow turns to yellow chalk, so the window still lifts. */
+/* Diagram marks, shared by every figure on the site (after the original mumbrane.com figures):
+   a filled dot is established, a hollow dot is missing, the accent line is the path to an answer,
+   a dashed line has no support, labels are lowercase mono. Colours come from the surface. */
+@layer components {
+  .dg-line {
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.35;
+    stroke-width: 1;
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+  .dg-accent {
+    stroke: var(--surface-accent);
+    stroke-width: 1.75;
+    fill: none;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .dg-dash {
+    stroke-dasharray: 3 4;
+  }
+  .dg-dot {
+    fill: var(--surface-accent);
+  }
+  .dg-node {
+    fill: var(--surface-fg);
+  }
+  .dg-hollow {
+    fill: var(--surface-bg);
+    stroke: var(--surface-fg);
+    stroke-opacity: 0.6;
+    stroke-width: 1.25;
+    vector-effect: non-scaling-stroke;
+  }
+  .dg-chip {
+    fill: color-mix(in oklab, var(--surface-fg) 10%, transparent);
+    stroke: color-mix(in oklab, var(--surface-fg) 22%, transparent);
+    vector-effect: non-scaling-stroke;
+  }
+  .dg-label {
+    fill: var(--surface-fg);
+    fill-opacity: 0.72;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .dg-label-strong {
+    fill: var(--surface-fg);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+}
+
+/* On dark grounds a window keeps its paper body and loses the printed shadow for a fine edge. */
 @layer components {
   :is([data-surface="ink"], [data-surface="deep"]) .instrument-window {
-    --tw-shadow-color: var(--color-sulfur);
-    box-shadow: 6px 6px 0 0 var(--color-sulfur);
-    border-color: var(--color-sulfur);
+    box-shadow:
+      0 0 0 1px var(--color-rule-dark),
+      0 40px 80px -40px oklch(0 0 0 / 0.6);
+    border-color: transparent;
   }
 }
 
-/* The footer's catenoid rises into place the first time the end of the page is reached. */
-@media (prefers-reduced-motion: no-preference) {
-  [data-reveal="pending"] .footer-film svg {
+/* How Moth works (HowItWorks): parts fade in as their step arrives; a path draws left to right. */
+@layer components {
+  .hw-part {
+    transition: opacity 520ms var(--ease-out);
+  }
+  .hw-part[data-on="false"] {
     opacity: 0;
-    transform: translateY(14%);
   }
-  [data-reveal="done"] .footer-film svg {
-    transition:
-      opacity 1600ms var(--ease-out),
-      transform 1800ms var(--ease-out);
+  .hw-draw path[pathLength] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1100ms var(--ease-in-out);
+  }
+  .hw-draw[data-on="false"] path[pathLength] {
+    stroke-dashoffset: 1;
+  }
+  .hw-draw .dg-dash {
+    transition: opacity 420ms var(--ease-out) 900ms;
+  }
+  .hw-draw[data-on="false"] .dg-dash {
+    opacity: 0;
+    transition-delay: 0ms;
+  }
+  .hw-ghost {
+    stroke-opacity: 0.5;
+  }
+  .hw-text {
+    padding-top: 0.35rem;
+    padding-bottom: 0.4rem;
+  }
+  @media (min-width: 1024px) {
+    .hw-closed {
+      display: none;
+    }
   }
 }
 
-/* Moth's butterfly curve draws itself once, slowly, the first time it is seen. */
+/* The principle figure: both paths draw from your facts to Moth, then one reaches its answer and
+   the other breaks into "no support". */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal="pending"].moth-curve .moth-curve-path {
+  [data-reveal="pending"].principle-figure .pf-draw {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
   }
-  [data-reveal="done"].moth-curve .moth-curve-path {
-    stroke-dasharray: 1;
-    animation: mark-draw 4200ms var(--ease-in-out) both;
+  [data-reveal="pending"].principle-figure .pf-pop {
+    opacity: 0;
   }
+  [data-reveal="done"].principle-figure .pf-draw {
+    stroke-dasharray: 1;
+    animation: mark-draw 1100ms var(--ease-in-out) both;
+  }
+  [data-reveal="done"].principle-figure .pf-late {
+    animation-delay: 1000ms;
+  }
+  [data-reveal="done"].principle-figure .pf-pop {
+    transition: opacity 600ms var(--ease-out) 1900ms;
+  }
+}
+
+/* LayerStack: planes settle from above, one after another; then the path drops through them. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"].layer-stack .ls-plane {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+  [data-reveal="pending"].layer-stack .ls-path path[pathLength] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  [data-reveal="pending"].layer-stack .ls-path circle,
+  [data-reveal="pending"].layer-stack .ls-path text {
+    opacity: 0;
+  }
+  [data-reveal="done"].layer-stack .ls-plane {
+    transition:
+      opacity 700ms var(--ease-out),
+      transform 900ms var(--ease-out);
+  }
+  [data-reveal="done"].layer-stack .ls-1 {
+    transition-delay: 140ms;
+  }
+  [data-reveal="done"].layer-stack .ls-2 {
+    transition-delay: 280ms;
+  }
+  [data-reveal="done"].layer-stack .ls-path path[pathLength] {
+    stroke-dasharray: 1;
+    animation: mark-draw 1200ms var(--ease-in-out) 900ms both;
+  }
+  [data-reveal="done"].layer-stack .ls-path circle,
+  [data-reveal="done"].layer-stack .ls-path text {
+    transition: opacity 500ms var(--ease-out) 1700ms;
+  }
+}
+.ls-hair {
+  stroke-opacity: 0.18;
 }

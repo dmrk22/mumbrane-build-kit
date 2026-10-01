@@ -11,10 +11,12 @@ import { cx } from '@/lib/cx'
 
 const { evidence } = CONSOLE_UI
 
-const GLYPH: Record<Status, { mark: string; tone: string }> = {
-  supported: { mark: '✓', tone: 'text-(--console-ok)' },
-  missing: { mark: '○', tone: 'text-(--console-gap)' },
-  conflict: { mark: '!', tone: 'text-(--console-bad)' },
+// Status in the site's diagram marks: a filled dot is supported, a hollow dot is missing, a crossed
+// ring is a conflict. Colour is the second channel; the status word always follows.
+const TONE: Record<Status, string> = {
+  supported: 'text-(--console-ok)',
+  missing: 'text-(--console-gap)',
+  conflict: 'text-(--console-bad)',
 }
 
 /** A flash key for the world panel: the definition by term, a fact by its sentence (CONSOLE §8). */
@@ -24,20 +26,23 @@ export const citeKey = {
 }
 
 function StatusMark({ status }: { status: Status }) {
-  const g = GLYPH[status]
   return (
-    <span
-      aria-hidden="true"
-      className={cx('w-4 shrink-0 text-center font-mono text-code font-semibold', g.tone)}
-    >
-      {g.mark}
-    </span>
+    <svg viewBox="0 0 16 16" aria-hidden="true" className={cx('mt-0.5 size-4 shrink-0', TONE[status])}>
+      {status === 'supported' ? (
+        <circle cx={8} cy={8} r={4.5} fill="currentColor" />
+      ) : (
+        <circle cx={8} cy={8} r={4.5} fill="none" stroke="currentColor" strokeWidth={1.5} />
+      )}
+      {status === 'conflict' && (
+        <path d="M5.5 5.5 L10.5 10.5 M10.5 5.5 L5.5 10.5" stroke="currentColor" strokeWidth={1.2} />
+      )}
+    </svg>
   )
 }
 
 function StatusWord({ status }: { status: Status }) {
   return (
-    <span className={cx('font-serif-italic text-small whitespace-nowrap', GLYPH[status].tone)}>
+    <span className={cx('font-mono text-label whitespace-nowrap', TONE[status])}>
       {evidence.status[status]}
     </span>
   )
@@ -61,7 +66,7 @@ function TraceNode({ trace, onCite }: { trace: Trace; onCite: (key: string) => v
           <button
             type="button"
             onClick={() => onCite(citeKey.definition(trace.term))}
-            className={cx(CITE, 'mt-1 font-serif text-small text-surface-muted italic')}
+            className={cx(CITE, 'mt-1 text-small text-surface-muted')}
           >
             {trace.text}
             <span className="sr-only"> — {evidence.cite}</span>
@@ -69,7 +74,7 @@ function TraceNode({ trace, onCite }: { trace: Trace; onCite: (key: string) => v
         </div>
       </div>
       {trace.requirements.length > 0 && (
-        <ol className="mt-3 ml-2 space-y-3 border-l border-surface-rule pl-4">
+        <ol className="mt-3 ml-[7px] space-y-3 border-l border-surface-accent/40 pl-4">
           {trace.requirements.map((r) => (
             <li key={r.text}>
               <div className="flex items-start gap-2">
@@ -184,12 +189,12 @@ export function Evidence({
       {!inline && (
         <div className="space-y-3">
           <StatusChip outcome={CONSOLE_UI.chip[result.outcome]} />
-          <p className="font-serif text-small break-words text-surface-fg">{result.question}</p>
+          <p className="text-small break-words text-surface-fg">{result.question}</p>
         </div>
       )}
 
       <section>
-        <H className="mb-3 font-serif-italic text-small text-surface-subtle">{evidence.trace}</H>
+        <H className="mb-3 font-mono text-label text-surface-subtle">{evidence.trace}</H>
         {result.trace ? (
           <TraceNode trace={result.trace} onCite={onCite} />
         ) : (
@@ -198,7 +203,7 @@ export function Evidence({
       </section>
 
       <section>
-        <H className="mb-3 font-serif-italic text-small text-surface-subtle">{evidence.build}</H>
+        <H className="mb-3 font-mono text-label text-surface-subtle">{evidence.build}</H>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="font-mono text-code text-surface-fg">{result.buildId}</span>
           <span className="text-small text-surface-muted">{evidence.variant(variant?.label ?? null)}</span>

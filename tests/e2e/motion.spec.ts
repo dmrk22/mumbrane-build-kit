@@ -75,7 +75,7 @@ test.describe('@motion', () => {
     const violations = await collectViolations(page)
     await page.goto(LAB)
     await page.waitForLoadState('load')
-    await expect(page.locator('.membrane-canvas').first()).toHaveAttribute('data-ready', 'true')
+    await expect(page.locator('.field').first()).toHaveAttribute('data-ready', 'true')
     await scrollThrough(page)
     // SplitText ran: the heading was split into masked lines (and the text is still readable).
     await expect(page.locator('#lab-reveals')).toHaveText(/Split reveal/)
@@ -83,25 +83,15 @@ test.describe('@motion', () => {
     await expect(page.getByTestId('lab-csp')).toHaveText('0')
   })
 
-  test('reduced motion: the membrane draws one still frame and stops', async ({ page }) => {
+  test('reduced motion: the field shows its still and never animates', async ({ page }) => {
     test.skip(prod, 'the lab is development-only')
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto(LAB)
-    await expect(page.locator('.membrane-canvas').first()).toHaveAttribute('data-ready', 'true')
-    const drawsPerSecond = await page.evaluate(async () => {
-      const canvas = document.querySelector('canvas')
-      const gl = canvas?.getContext('webgl2')
-      if (!gl) return -1
-      let draws = 0
-      const original = gl.drawArrays.bind(gl)
-      gl.drawArrays = (...args: Parameters<typeof gl.drawArrays>) => {
-        draws++
-        original(...args)
-      }
-      await new Promise((r) => setTimeout(r, 1000))
-      return draws
-    })
-    expect(drawsPerSecond).toBe(0)
+    const field = page.locator('.field').first()
+    await expect(field.locator('.field-poster')).toBeVisible()
+    await page.waitForTimeout(1000)
+    // The canvas is never started: no first frame, so the server still stays.
+    await expect(field).not.toHaveAttribute('data-ready', 'true')
   })
 })
 
@@ -126,7 +116,7 @@ test.describe('@perf motion lab', () => {
     })
     await page.goto(LAB)
     await page.waitForLoadState('load')
-    await expect(page.locator('.membrane-canvas').first()).toHaveAttribute('data-ready', 'true')
+    await expect(page.locator('.field').first()).toHaveAttribute('data-ready', 'true')
     await page.evaluate(async () => {
       await document.fonts.ready
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
@@ -150,12 +140,9 @@ test.describe('@perf motion lab', () => {
       for (let i = 0; i < 40; i++) await page.mouse.wheel(0, 120)
       return counting
     }
-    // Headless Chromium rasterises WebGL in software (SwiftShader): with the three membranes on
-    // screen the probe measures the CPU, not the scroll. Recorded, not asserted (see the GPU test).
+    // With the field canvas on screen the probe also measures its drawing. Recorded, not asserted.
     const withCanvases = await probe()
-    test
-      .info()
-      .annotations.push({ type: 'fps with 3 software-GL canvases', description: withCanvases.toFixed(1) })
+    test.info().annotations.push({ type: 'fps with the field canvas', description: withCanvases.toFixed(1) })
     // The motion system itself — Lenis, reveals, split text, scrub, pin — below the canvases.
     await page.evaluate(() => document.getElementById('lab-reveals')?.scrollIntoView())
     const fps = await probe()

@@ -163,15 +163,15 @@ test.describe('@motion brand reveals', () => {
       .toEqual({ strut: [0, 700], band: [450, 700], rim: [950, 450] })
   })
 
-  // Regression: a -15 % bottom root margin meant the footer's last figure (the last thing on the
-  // page) could never enter the zone and stayed in its hidden start state.
-  test('the footer film reveals even though it ends the page', async ({ page }) => {
-    await page.setViewportSize({ width: 1440, height: 900 })
+  // Regression: a -15 % bottom root margin meant a reveal at the very end of the page could never
+  // enter the zone and stayed in its hidden start state.
+  test('the footer mark reveals even though the footer ends the page', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 400 })
     await page.goto(MISSING)
-    const wordmark = page.locator('footer [data-reveal]').last()
-    await expect(wordmark).toHaveAttribute('data-reveal', 'pending')
+    const mark = page.locator('footer [data-reveal]').last()
+    await expect(mark).toHaveAttribute('data-reveal', 'pending')
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    await expect(wordmark).toHaveAttribute('data-reveal', 'done')
+    await expect(mark).toHaveAttribute('data-reveal', 'done')
   })
 
   test('reduced motion: nothing is armed hidden and the mark does not animate', async ({ page }) => {

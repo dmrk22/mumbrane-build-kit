@@ -14,7 +14,7 @@ function Section({ title, help, children }: { title: string; help: string; child
   const id = useId()
   return (
     <section aria-labelledby={id} className="border-t border-surface-rule px-5 py-5">
-      <h3 id={id} className="font-serif-italic text-small text-surface-subtle">
+      <h3 id={id} className="font-mono text-label text-surface-subtle">
         {title}
       </h3>
       <p className="mt-1 text-caption text-surface-muted">{help}</p>
@@ -63,7 +63,7 @@ export function WorldPanel({
     <div ref={root}>
       <div className="px-5 pt-5 pb-5">
         <fieldset>
-          <legend className="font-serif-italic text-small text-surface-subtle">{copy.label}</legend>
+          <legend className="font-mono text-label text-surface-subtle">{copy.label}</legend>
           <div className="mt-3 grid grid-cols-2 gap-1 rounded-sm border border-surface-rule p-1">
             {WORLDS.map((w) => (
               <button
@@ -101,7 +101,7 @@ export function WorldPanel({
               data-flash={flash === citeKey.definition(d.term)}
               className="rounded-sm border border-surface-rule bg-surface-raise p-3.5"
             >
-              <p key={d.text} className="console-fade font-serif text-small text-surface-fg">
+              <p key={d.text} className="console-fade text-small text-surface-fg">
                 {d.text}
               </p>
               <p className="sr-only">{copy.requires}</p>

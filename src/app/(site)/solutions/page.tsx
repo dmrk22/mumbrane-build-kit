@@ -60,7 +60,7 @@ export default function SolutionsPage() {
         <h1 id="solutions-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
           <Inline text={title} />
         </h1>
-        <p className="mt-8 max-w-[52ch] font-serif text-lede text-surface-muted">{lede}</p>
+        <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{lede}</p>
       </Section>
 
       <Section surface="paper-2" id="solutions-list" labelledBy="solutions-list-title">
@@ -85,16 +85,16 @@ export default function SolutionsPage() {
         </Heading>
         <Grid className="mt-12 gap-y-12">
           {[
-            { list: fit.fits, icon: 'check' as const, tone: 'text-malachite-fg' },
+            { list: fit.fits, icon: 'check' as const, tone: 'text-ice-fg' },
             { list: fit.not, icon: 'minus' as const, tone: 'text-surface-subtle' },
           ].map(({ list, icon, tone }) => (
             <div key={list.title} className="col-span-12 md:col-span-6">
-              <h3 className="font-serif-italic text-small text-surface-subtle">{list.title}</h3>
+              <h3 className="font-mono text-label text-surface-subtle">{list.title}</h3>
               <ul className="mt-6 border-t border-surface-rule">
                 {list.items.map((item) => (
                   <li
                     key={item}
-                    className="flex items-start gap-4 border-b border-surface-rule py-4 font-serif text-lede"
+                    className="flex items-start gap-4 border-b border-surface-rule py-4 text-lede"
                   >
                     <Icon name={icon} className={cx('mt-1.5 size-5 shrink-0', tone)} />
                     {item}

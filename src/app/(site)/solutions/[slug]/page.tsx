@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return s ? routeMetadata(`/solutions/${s.slug}`) : {}
 }
 
-// PAGES §9.1 — SolutionTemplate. Surfaces: paper · ink · paper · paper-2 · sulfur.
+// PAGES §9.1 — SolutionTemplate. Surfaces: paper · ink · paper · paper-2 · ice.
 export default async function SolutionPage({ params }: Props) {
   const s = solutionBySlug((await params).slug)
   if (!s) notFound()
@@ -38,7 +38,7 @@ export default async function SolutionPage({ params }: Props) {
         <h1 id="solution-title" className="mt-4 max-w-[18ch] font-display text-display-l">
           {s.title}
         </h1>
-        <p className="mt-8 max-w-[56ch] font-serif text-lede text-surface-muted">{s.lede}</p>
+        <p className="mt-8 max-w-[56ch] text-lede text-surface-muted">{s.lede}</p>
         {s.note && (
           <Note tone="caveat" className="mt-8 max-w-xl">
             {s.note}
@@ -67,7 +67,7 @@ export default async function SolutionPage({ params }: Props) {
           </div>
           <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <FieldWindow field={s.world} tag={ui.illustrative} tags={ui.tags} />
-            <p className="mt-4 font-serif-italic text-small text-surface-muted">{ui.worldCaption}</p>
+            <p className="mt-4 font-mono text-label text-surface-muted">{ui.worldCaption}</p>
           </div>
         </Grid>
       </Section>
@@ -87,8 +87,8 @@ export default async function SolutionPage({ params }: Props) {
             </Heading>
             <ul className="mt-10 flex flex-col gap-6">
               {s.evidence.map((e) => (
-                <li key={e} className="flex items-start gap-4 font-serif text-lede">
-                  <Icon name="check" className="mt-1.5 size-5 shrink-0 text-malachite-fg" />
+                <li key={e} className="flex items-start gap-4 text-lede">
+                  <Icon name="check" className="mt-1.5 size-5 shrink-0 text-ice-fg" />
                   {e}
                 </li>
               ))}
@@ -98,7 +98,7 @@ export default async function SolutionPage({ params }: Props) {
             aria-labelledby="limits-title"
             className="col-span-12 border border-surface-rule bg-surface p-6 md:p-8 lg:col-span-5"
           >
-            <h2 id="limits-title" className="font-serif-italic text-small text-surface-subtle">
+            <h2 id="limits-title" className="font-mono text-label text-surface-subtle">
               {ui.limits.title}
             </h2>
             <ul className="mt-5 flex flex-col gap-3 text-small text-surface-muted">
@@ -130,7 +130,7 @@ export default async function SolutionPage({ params }: Props) {
         </Grid>
       </Section>
 
-      <Section surface="sulfur" id="talk-to-us" labelledBy="solution-cta-title" rhythm="compact">
+      <Section surface="ice" id="talk-to-us" labelledBy="solution-cta-title" rhythm="compact">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
             <Heading level={2} size="display-m" id="solution-cta-title">

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 import { SHADERS } from '../../scripts/shaders.ts'
-import { HEX, MEMBRANE_COLORS, rgb } from '../../src/lib/gl/colors.ts'
+import { HEX, rgb } from '../../src/lib/gl/colors.ts'
 import { cappedDpr, createLoop, deviceTier } from '../../src/lib/gl/loop.ts'
 
 test('src/shaders are exact copies of the tested reference shaders', async () => {
@@ -13,7 +13,7 @@ test('src/shaders are exact copies of the tested reference shaders', async () =>
   }
 })
 
-test('GL colours mirror palette.json', () => {
+test('literal brand colours mirror palette.json', () => {
   const palette = JSON.parse(readFileSync('brand/palette/palette.json', 'utf8')) as {
     neutrals: Record<string, { hex: string }>
     pigments: Record<string, { base: { hex: string } }>
@@ -22,11 +22,8 @@ test('GL colours mirror palette.json', () => {
   assert.equal(HEX.ink, palette.neutrals.ink?.hex)
   assert.equal(HEX.deep, palette.neutrals.deep?.hex)
   assert.equal(HEX.chalk, palette.neutrals['on-dark']?.hex)
-  for (const p of ['sulfur', 'verdigris', 'cinnabar', 'malachite', 'moss'] as const)
-    assert.equal(HEX[p], palette.pigments[p]?.base.hex, p)
+  assert.equal(HEX.ice, palette.pigments.ice?.base.hex)
   assert.deepEqual(rgb('#ff8000'), [1, 128 / 255, 0])
-  assert.deepEqual(MEMBRANE_COLORS.uChalk, rgb(HEX.chalk))
-  assert.deepEqual(MEMBRANE_COLORS.uSpark, rgb(HEX.cinnabar))
 })
 
 function fakeFrames() {

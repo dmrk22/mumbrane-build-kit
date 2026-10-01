@@ -42,7 +42,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
               <TitleText text={article.title} />
             </Heading>
             <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{article.description}</p>
-            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-surface-rule pt-5 font-serif-italic text-small">
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-surface-rule pt-5 font-mono text-label">
               <div className="flex gap-2">
                 <dt className="text-surface-subtle">{ARTICLE_UI.published}</dt>
                 <dd>
@@ -80,7 +80,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
             <CropMarks>
               <Painting id={article.plate} sizes="(min-width: 1024px) 80vw, 100vw" priority />
             </CropMarks>
-            <figcaption className="mt-4 font-serif-italic text-small text-surface-subtle">
+            <figcaption className="mt-4 font-mono text-label text-surface-subtle">
               Plate {roman(article.plateNumber)} — {ARTICLE_UI.oilOnCode} · {ARTICLE_UI.seed} {p.seed}
             </figcaption>
           </figure>
@@ -92,7 +92,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
           {toc.length >= 3 && (
             <nav aria-label={ARTICLE_UI.contents} className="col-span-2 hidden xl:block print:hidden">
               <div className="sticky top-28">
-                <p className="font-serif-italic text-small text-surface-subtle">{ARTICLE_UI.contents}</p>
+                <p className="font-mono text-label text-surface-subtle">{ARTICLE_UI.contents}</p>
                 <ol className="mt-4 flex flex-col gap-3 text-small">
                   {toc.map((t) => (
                     <li key={t.id}>
@@ -115,7 +115,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
         <Grid className="gap-y-10">
           <div className="col-span-12 lg:col-span-8 lg:col-start-3">
             <div className="flex items-center justify-between gap-4">
-              <p id="cite-label" className="font-serif-italic text-small text-surface-subtle">
+              <p id="cite-label" className="font-mono text-label text-surface-subtle">
                 {ARTICLE_UI.citeAs}
               </p>
               <CopyButton text={cite} label={ARTICLE_UI.copyCitation} />
@@ -128,7 +128,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
           </div>
           {related.length > 0 && (
             <div className="col-span-12 lg:col-span-8 lg:col-start-3">
-              <h2 className="font-serif-italic text-small text-surface-subtle">{ARTICLE_UI.related}</h2>
+              <h2 className="font-mono text-label text-surface-subtle">{ARTICLE_UI.related}</h2>
               <NewsList articles={related} className="mt-4" />
             </div>
           )}

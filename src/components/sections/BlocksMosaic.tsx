@@ -4,21 +4,16 @@ import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { Container } from '@/components/layout/Container'
 import { PIN_OK, usePinnedSteps } from '@/components/motion/usePinnedSteps'
 import { Icon } from '@/components/ui/Icon'
-import { Qed } from '@/components/ui/Inline'
 import { SmartLink } from '@/components/ui/SmartLink'
 import type { BlockFill, CompanyBlock } from '@/content/company'
 import { cx } from '@/lib/cx'
 
-// Ground + text pairs (contrast.test.ts). Iris text needs its darker fg ground to pass AA.
+// Ground + text pairs (contrast.test.ts): paper tones, three quiet accents, one dark block.
 const FILL: Record<BlockFill, { bg: string; fg: string }> = {
-  sulfur: { bg: 'bg-sulfur', fg: 'text-ink' },
-  ochre: { bg: 'bg-ochre', fg: 'text-ink' },
-  cinnabar: { bg: 'bg-cinnabar', fg: 'text-ink' },
-  madder: { bg: 'bg-madder', fg: 'text-ink' },
-  iris: { bg: 'bg-iris-fg', fg: 'text-on-dark' },
-  verdigris: { bg: 'bg-verdigris', fg: 'text-ink' },
-  malachite: { bg: 'bg-malachite', fg: 'text-ink' },
-  moss: { bg: 'bg-moss', fg: 'text-on-dark' },
+  ice: { bg: 'bg-ice', fg: 'text-ink' },
+  sand: { bg: 'bg-sand', fg: 'text-ink' },
+  clay: { bg: 'bg-clay', fg: 'text-ink' },
+  lilac: { bg: 'bg-lilac', fg: 'text-ink' },
   paper: { bg: 'bg-paper', fg: 'text-text' },
   'paper-2': { bg: 'bg-paper-2', fg: 'text-text' },
   'paper-3': { bg: 'bg-paper-3', fg: 'text-text' },
@@ -26,13 +21,13 @@ const FILL: Record<BlockFill, { bg: string; fg: string }> = {
 }
 
 /**
- * "The lab, block by block" — a wall of lemmas. Each block starts unproven (hatched) and is proven
- * as you go: its pigment wipes in from the corner, its statement rises, a ∎ lands. Genuinely future
- * work stays a conjecture in every state. Locked blocks are drawn by CSS from the first paint
+ * "The lab, block by block". Each block starts locked (hatched) and unlocks as you go: its ground
+ * wipes in from the corner and its statement rises. Genuinely future work stays locked in every
+ * state, labelled honestly. Locked blocks are drawn by CSS from the first paint
  * (`@media (scripting: enabled)` + motion allowed, art.css), so nothing is re-hidden when this
- * hydrates; without JavaScript or with reduced motion every lemma is proven and the counter reads
- * 12 of 12. Desktop with motion: the section pins and scroll proves the blocks in `step` order.
- * Smaller screens: each block is proven as it enters the viewport. Focusing a linked block proves
+ * hydrates; without JavaScript or with reduced motion every block is open and the counter reads
+ * 12 of 12. Desktop with motion: the section pins and scroll unlocks the blocks in `step` order.
+ * Smaller screens: each block unlocks as it enters the viewport. Focusing a linked block unlocks
  * it at once. Block text is always in the accessibility tree; the hatch is decorative.
  */
 export function BlocksMosaic({
@@ -111,7 +106,7 @@ export function BlocksMosaic({
         <div className="grid gap-x-6 gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">{heading}</div>
           <div className="flex flex-col gap-5 lg:col-span-5 lg:col-start-8">
-            <p className="max-w-[50ch] font-serif text-body text-surface-muted">{lede}</p>
+            <p className="max-w-[50ch] text-body text-surface-muted">{lede}</p>
             <div className="flex items-center gap-4 lg:justify-end">
               <span aria-hidden="true" className="flex gap-1">
                 {blocks
@@ -121,13 +116,13 @@ export function BlocksMosaic({
                       key={b.label}
                       className={cx(
                         'size-2.5 border border-surface-fg/50 transition-colors duration-(--duration-ui)',
-                        isOpen(b.step) && mode !== 'pending' && 'bg-sulfur',
-                        mode === 'pending' && 'bg-sulfur',
+                        isOpen(b.step) && mode !== 'pending' && 'bg-ice',
+                        mode === 'pending' && 'bg-ice',
                       )}
                     />
                   ))}
               </span>
-              <p className="font-serif-italic text-small text-surface-muted tabular-nums">
+              <p className="font-mono text-label text-surface-muted tabular-nums">
                 {String(count).padStart(2, '0')} of {String(total).padStart(2, '0')} {labels.unlocked}
               </p>
             </div>
@@ -141,7 +136,7 @@ export function BlocksMosaic({
                 key={b.label}
                 className="block-hatch relative flex min-h-35 flex-col justify-between rounded-md border border-surface-rule p-4 lg:min-h-0 lg:p-5"
               >
-                <p className="font-serif-italic text-small text-surface-subtle">Conjecture</p>
+                <p className="font-mono text-label text-surface-subtle">{labels.locked}</p>
                 <p className="pr-2 font-sans text-small text-surface-muted">{b.label}</p>
               </li>
             ) : (
@@ -175,16 +170,13 @@ function Block({
         aria-hidden="true"
         className="block-lock block-hatch absolute inset-0 border border-surface-rule text-on-dark-3"
       >
-        <span className="absolute top-4 left-4 font-serif-italic text-small lg:top-5 lg:left-5">
-          Lemma {block.step}
+        <span className="absolute top-4 left-4 font-mono text-label tabular-nums lg:top-5 lg:left-5">
+          {String(block.step).padStart(2, '0')}
         </span>
-        <span className="absolute bottom-4 left-4 font-serif-italic text-small lg:bottom-5 lg:left-5">
-          {locked}
-        </span>
-        <span className="absolute right-4 bottom-3 font-serif text-display-s lg:right-5">?</span>
+        <span className="absolute bottom-4 left-4 font-mono text-label lg:bottom-5 lg:left-5">{locked}</span>
       </span>
       <span className="block-copy relative flex h-full flex-col justify-between gap-4">
-        <span className="flex items-start justify-between gap-4 font-serif-italic text-small">
+        <span className="flex items-start justify-between gap-4 font-mono text-label">
           {block.label}
           {block.href && <Icon name="arrow-up-right" className="size-4 shrink-0" />}
         </span>
@@ -206,7 +198,6 @@ function Block({
               block.text
             )}
           </span>
-          <Qed className="mb-1.5 shrink-0 opacity-70" />
         </span>
       </span>
     </>

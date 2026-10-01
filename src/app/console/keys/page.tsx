@@ -25,7 +25,7 @@ export default function KeysPage() {
               <th
                 key={c}
                 scope="col"
-                className="border-b border-surface-rule px-4 py-2.5 font-serif-italic text-small font-normal text-surface-subtle"
+                className="border-b border-surface-rule px-4 py-2.5 font-mono text-label font-normal text-surface-subtle"
               >
                 {c}
               </th>

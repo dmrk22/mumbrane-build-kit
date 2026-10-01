@@ -72,12 +72,12 @@ export function FilterChip({
   )
 }
 
-// Fill + text pairs from DESIGN §2.4; refused uses iris-fg so its small text passes AA.
+// Fill + text pairs (contrast.test.ts): every outcome ground takes ink text.
 const TONE: Record<Outcome, string> = {
   supported: 'bg-supported text-ink',
   unproven: 'bg-unproven text-ink',
   conflict: 'bg-conflict text-ink',
-  refused: 'bg-refused text-on-dark',
+  refused: 'bg-refused text-ink',
   limit: 'bg-limit text-text-2',
   incomplete: 'bg-limit text-text-2',
   incompatible: 'bg-limit text-text-2',
@@ -107,7 +107,7 @@ export function Tag({ className, children }: { className?: string; children: Rea
   return (
     <span
       className={cx(
-        'inline-flex min-h-6 items-center rounded-xs border border-surface-fg/30 px-2 py-0.5 font-serif-italic text-caption text-surface-muted',
+        'inline-flex min-h-6 items-center rounded-xs border border-surface-fg/30 px-2 py-0.5 font-mono text-label text-surface-muted',
         className,
       )}
     >

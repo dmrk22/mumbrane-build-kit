@@ -97,7 +97,7 @@ export function AskBar({
       )}
 
       <div className="mt-6">
-        <p id="examples-label" className="font-serif-italic text-small text-surface-subtle">
+        <p id="examples-label" className="font-mono text-label text-surface-subtle">
           {copy.examples}
         </p>
         {world.examples.length === 0 ? (

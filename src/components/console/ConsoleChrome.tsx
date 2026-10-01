@@ -46,23 +46,22 @@ function title(p: string): string {
   if (p === '/console/keys') return titles.keys
   if (p === '/console/usage') return titles.usage
   if (p === '/console/settings') return titles.settings
-  return nav.label
+  return titles.entry
 }
 
-function RailLink({ item, pathname }: { item: Item; pathname: string }) {
+function NavLink({ item, pathname }: { item: Item; pathname: string }) {
   const current = item.match(pathname)
   return (
     <SmartLink
       href={item.href}
       aria-current={current ? 'page' : undefined}
       className={cx(
-        'relative flex h-14 w-full flex-col items-center justify-center gap-1 text-surface-muted transition-[color] duration-(--duration-micro) ease-out hover:text-surface-fg',
-        current && 'text-surface-fg',
+        'inline-flex h-8 items-center gap-2 rounded-pill px-3 text-small text-surface-muted transition-colors duration-(--duration-micro) ease-out hover:text-surface-fg',
+        current && 'bg-surface-raise text-surface-fg',
       )}
     >
-      {current && <span aria-hidden="true" className="absolute inset-y-3 left-0 w-0.5 bg-surface-accent" />}
-      <Icon name={item.icon} />
-      <span className="font-sans text-label tracking-normal">{item.label}</span>
+      <Icon name={item.icon} className="size-4" />
+      {item.label}
     </SmartLink>
   )
 }
@@ -86,49 +85,36 @@ function TabLink({ item, pathname }: { item: Item; pathname: string }) {
 }
 
 /**
- * The console shell (CONSOLE §2): a 72 px rail from 768 px (Playground, Keys, Usage; Docs and
- * Settings at the foot), a 48 px top bar with the page title, the Simulation tag and the theme
- * control, and a bottom tab bar on phones.
+ * The console shell: one 56 px top bar — the mark and "Console" with the page title as a
+ * breadcrumb, the sections as pills (Playground, Keys, Usage, Settings, Docs), the Simulation tag,
+ * the theme control and the shortcuts — and a bottom tab bar on phones.
  */
 export function ConsoleChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname()
   const TitleTag = pathname === '/console' ? 'p' : 'h1'
   return (
     <>
-      <nav
-        aria-label={nav.label}
-        data-console-panel
-        className="fixed inset-y-0 left-0 z-30 hidden w-18 flex-col items-center border-r border-surface-rule bg-surface md:flex"
-      >
-        <SmartLink
-          href="/"
-          className="grid h-14 w-full place-items-center text-surface-fg"
-          aria-label={nav.home}
+      <div className="flex min-h-dvh flex-col pb-[calc(3.5rem+env(safe-area-inset-bottom))] lg:pb-0">
+        <header
+          data-console-panel
+          className="sticky top-0 z-20 flex h-14 shrink-0 items-center gap-3 border-b border-surface-rule bg-surface px-4 md:px-6"
         >
-          <Mark width={28} />
-        </SmartLink>
-        <div className="mt-2 flex w-full flex-col">
-          <RailLink item={PLAYGROUND} pathname={pathname} />
-          <RailLink item={KEYS} pathname={pathname} />
-          <RailLink item={USAGE} pathname={pathname} />
-        </div>
-        <div className="mt-auto mb-2 flex w-full flex-col">
-          <RailLink item={DOCS} pathname={pathname} />
-          <RailLink item={SETTINGS} pathname={pathname} />
-        </div>
-      </nav>
-
-      <div className="flex min-h-dvh flex-col pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0 md:pl-18">
-        <header className="sticky top-0 z-20 flex h-12 shrink-0 items-center gap-3 border-b border-surface-rule bg-surface px-4 md:px-6">
-          <SmartLink
-            href="/"
-            className="-ml-1 grid size-9 place-items-center md:hidden"
-            aria-label={nav.home}
-          >
-            <Mark width={24} />
+          <SmartLink href="/" className="-ml-1 grid size-9 shrink-0 place-items-center" aria-label={nav.home}>
+            <Mark width={28} />
           </SmartLink>
+          <p className="hidden font-display text-small font-semibold text-surface-fg sm:block">{nav.label}</p>
+          <span aria-hidden="true" className="hidden text-surface-subtle sm:block">
+            /
+          </span>
           {/* The page's H1, except on the entry screen, which carries its own display heading. */}
-          <TitleTag className="truncate font-sans text-title text-surface-fg">{title(pathname)}</TitleTag>
+          <TitleTag className="truncate text-small text-surface-muted">{title(pathname)}</TitleTag>
+          <nav aria-label={nav.label} className="ml-6 hidden items-center gap-1 lg:flex">
+            <NavLink item={PLAYGROUND} pathname={pathname} />
+            <NavLink item={KEYS} pathname={pathname} />
+            <NavLink item={USAGE} pathname={pathname} />
+            <NavLink item={SETTINGS} pathname={pathname} />
+            <NavLink item={DOCS} pathname={pathname} />
+          </nav>
           <Tag className="ml-auto shrink-0">{CONSOLE_UI.simulation}</Tag>
           {/* Phones set the theme in Settings; the top bar keeps room for the title. */}
           <div className="hidden sm:block">
@@ -144,7 +130,7 @@ export function ConsoleChrome({ children }: { children: ReactNode }) {
       <nav
         aria-label={nav.label}
         data-console-panel
-        className="fixed inset-x-0 bottom-0 z-30 flex border-t border-surface-rule bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 flex border-t border-surface-rule bg-surface pb-[env(safe-area-inset-bottom)] lg:hidden"
       >
         <TabLink item={PLAYGROUND} pathname={pathname} />
         <TabLink item={KEYS} pathname={pathname} />

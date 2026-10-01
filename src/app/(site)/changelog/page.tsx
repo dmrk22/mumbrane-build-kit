@@ -26,7 +26,7 @@ export default function ChangelogPage() {
       <h1 id="changelog-title" className="mt-4 font-display text-display-xl">
         {CHANGELOG.title}
       </h1>
-      <p className="mt-8 max-w-[52ch] font-serif text-lede text-surface-muted">{CHANGELOG.lede}</p>
+      <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{CHANGELOG.lede}</p>
 
       {months.map((month) => (
         <section
@@ -34,7 +34,7 @@ export default function ChangelogPage() {
           aria-label={month}
           className="mt-16 grid gap-6 border-t border-surface-rule pt-6 lg:grid-cols-12"
         >
-          <h2 className="font-serif-italic text-small text-surface-subtle lg:col-span-3">
+          <h2 className="font-mono text-label text-surface-subtle lg:col-span-3">
             <span className="lg:sticky lg:top-28">{month}</span>
           </h2>
           <ol className="flex flex-col lg:col-span-9">

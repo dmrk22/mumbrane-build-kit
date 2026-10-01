@@ -24,15 +24,15 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
     <div className="grid grid-cols-12 gap-x-4 gap-y-10 lg:gap-x-6">
       <div className="col-span-12 flex flex-col gap-8 lg:col-span-6">
         <div>
-          <h3 className="font-serif-italic text-small text-surface-subtle">{p.headings.definitions}</h3>
-          <div className="mt-4 flex flex-col gap-2 font-serif text-lede">
+          <h3 className="font-mono text-label text-surface-subtle">{p.headings.definitions}</h3>
+          <div className="mt-4 flex flex-col gap-2 text-lede">
             {p.definitions[source].map((d) => (
               <p key={d}>{d}</p>
             ))}
           </div>
         </div>
         <div>
-          <h3 className="font-serif-italic text-small text-surface-subtle">{p.headings.facts}</h3>
+          <h3 className="font-mono text-label text-surface-subtle">{p.headings.facts}</h3>
           <ul className="mt-4 flex flex-col gap-2 text-body">
             {p.facts.map((f) => (
               <li key={f}>
@@ -67,8 +67,8 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
           </button>
         </div>
         <div className={cx('flex flex-wrap items-center gap-4', !stale && 'invisible')} aria-hidden={!stale}>
-          <p className="flex items-center gap-2 text-small text-sulfur-fg">
-            <span aria-hidden="true" className="size-2 rounded-full bg-sulfur" />
+          <p className="flex items-center gap-2 text-small text-ice-fg">
+            <span aria-hidden="true" className="size-2 rounded-full bg-ice" />
             {p.changed}
           </p>
           <button
@@ -88,7 +88,7 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
       <div className="col-span-12 lg:col-span-5 lg:col-start-8">
         <div className="border border-surface-rule bg-surface-raise p-6">
           <div className="flex items-center justify-between gap-4">
-            <h3 className="font-serif-italic text-small text-surface-subtle">{p.headings.results}</h3>
+            <h3 className="font-mono text-label text-surface-subtle">{p.headings.results}</h3>
             <Tag>{p.label}</Tag>
           </div>
           <div key={built} className="explainer-swap mt-6">
@@ -103,7 +103,7 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 font-serif-italic text-small text-surface-subtle">
+            <p className="mt-4 font-mono text-label text-surface-subtle">
               {p.headings.build} {p.builds[built]}
             </p>
           </div>

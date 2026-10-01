@@ -10,7 +10,7 @@ export const PRICING = {
     {
       name: 'Console preview',
       price: 'Free',
-      pigment: 'verdigris',
+      pigment: 'ice',
       text: 'Explore the console design with synthetic example worlds in your browser.',
       facts: [
         'A simulation that runs in your browser.',

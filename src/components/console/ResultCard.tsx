@@ -103,10 +103,7 @@ export function ResultCard({
       )}
       <div className="flex flex-wrap items-start gap-x-3 gap-y-2 px-5 pt-4">
         {r ? <StatusChip outcome={CONSOLE_UI.chip[r.outcome]} className="mt-0.5" /> : null}
-        <h3
-          id={head}
-          className="min-w-0 flex-1 basis-44 font-serif text-small break-words text-surface-fg line-clamp-3"
-        >
+        <h3 id={head} className="min-w-0 flex-1 basis-44 text-small break-words text-surface-fg line-clamp-3">
           {entry.question}
         </h3>
         {r && (
@@ -151,7 +148,7 @@ export function ResultCard({
             <button
               type="button"
               onClick={() => onAsk(suggestion)}
-              className="inline-flex min-h-8 items-center rounded-pill border border-surface-fg/25 px-3 py-1 text-left font-serif text-small text-surface-fg hover:bg-surface-raise pointer-coarse:min-h-11"
+              className="inline-flex min-h-8 items-center rounded-pill border border-surface-fg/25 px-3 py-1 text-left text-small text-surface-fg hover:bg-surface-raise pointer-coarse:min-h-11"
             >
               {suggestion}
             </button>

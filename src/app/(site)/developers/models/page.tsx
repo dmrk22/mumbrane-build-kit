@@ -25,7 +25,7 @@ export default function ModelsPage() {
         <h1 id="models-title" className="mt-4 font-display text-display-l">
           {hero.title}
         </h1>
-        <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
+        <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{hero.lede}</p>
 
         <article aria-labelledby="model-card-title" className="mt-14 border border-surface-rule">
           <header className="flex flex-wrap items-center justify-between gap-4 border-b border-surface-rule bg-surface-raise px-6 py-5">
@@ -40,18 +40,18 @@ export default function ModelsPage() {
             </div>
             <div className="col-span-12 grid gap-8 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
               <div>
-                <h3 className="font-serif-italic text-small text-surface-subtle">{card.capabilitiesTitle}</h3>
+                <h3 className="font-mono text-label text-surface-subtle">{card.capabilitiesTitle}</h3>
                 <ul className="mt-4 flex flex-col gap-3">
                   {MOTH.preview.supports.map((s) => (
                     <li key={s} className="flex gap-3 text-small">
-                      <Icon name="check" className="mt-0.5 size-4 text-malachite-fg" />
+                      <Icon name="check" className="mt-0.5 size-4 text-ice-fg" />
                       {s}
                     </li>
                   ))}
                 </ul>
               </div>
               <div>
-                <h3 className="font-serif-italic text-small text-surface-subtle">{card.notIncludedTitle}</h3>
+                <h3 className="font-mono text-label text-surface-subtle">{card.notIncludedTitle}</h3>
                 <ul className="mt-4 flex flex-col gap-3">
                   {card.notIncluded.map((s) => (
                     <li key={s} className="flex gap-3 text-small text-surface-muted">

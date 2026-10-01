@@ -34,10 +34,7 @@ export function Heading({
   )
 }
 
-/**
- * A quiet running head above a heading, set like a book's: serif italic, sentence case. `dot` adds
- * the sulfur chalk mark.
- */
+/** A small label above a heading: mono, sentence case. `dot` adds the accent mark. */
 export function Eyebrow({
   as: Tag = 'p',
   dot = false,
@@ -50,27 +47,10 @@ export function Eyebrow({
   children: ReactNode
 }) {
   return (
-    <Tag
-      className={cx('flex items-center gap-2.5 font-serif-italic text-small text-surface-subtle', className)}
-    >
-      {dot && <span aria-hidden="true" className="size-2 shrink-0 rotate-45 bg-sulfur" />}
+    <Tag className={cx('flex items-center gap-2.5 font-mono text-label text-surface-subtle', className)}>
+      {dot && <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-surface-accent" />}
       <span>{children}</span>
     </Tag>
-  )
-}
-
-/**
- * A theorem-style label (amsthm): "**Theorem 3** (Evidence)." The kind and number are bold
- * upright serif, the optional term sits in parentheses. It says what the section is — a
- * definition defines, a theorem claims, a conjecture asks — so it is content, not decoration.
- */
-export function TheoremLabel({ kind, term, className }: { kind: string; term?: string; className?: string }) {
-  return (
-    <p className={cx('font-serif text-lede text-surface-fg', className)}>
-      <span className="font-semibold">{kind}</span>
-      {term && <span className="text-surface-muted"> ({term})</span>}
-      <span className="font-semibold">.</span>
-    </p>
   )
 }
 
@@ -95,7 +75,7 @@ export function AnchorHeading({
       <a
         href={`#${id}`}
         aria-label={label}
-        className="ml-3 font-serif text-title text-surface-subtle no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+        className="ml-3 text-title text-surface-subtle no-underline opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
       >
         #
       </a>

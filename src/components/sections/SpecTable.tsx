@@ -15,7 +15,7 @@ export function SpecTable({
           key={r.label}
           className="grid gap-1 border-b border-surface-rule py-4 sm:grid-cols-[10rem_1fr] sm:gap-6"
         >
-          <dt className="font-serif-italic text-small text-surface-subtle sm:pt-0.5">{r.label}</dt>
+          <dt className="font-mono text-label text-surface-subtle sm:pt-0.5">{r.label}</dt>
           <dd className="text-small tabular-nums">{r.value}</dd>
         </div>
       ))}

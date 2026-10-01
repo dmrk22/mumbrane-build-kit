@@ -23,7 +23,7 @@ export default function NewsPage() {
         <h1 id="news-title" className="mt-4 font-display text-display-l">
           {NEWS.hero.title}
         </h1>
-        <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{NEWS.hero.lede}</p>
+        <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{NEWS.hero.lede}</p>
 
         {featured && (
           <article aria-labelledby="featured-title" className="group relative mt-14">
@@ -34,7 +34,7 @@ export default function NewsPage() {
                 </CropMarks>
               </div>
               <div className="col-span-12 lg:col-span-4 lg:col-start-9">
-                <p className="font-serif-italic text-small text-surface-subtle">
+                <p className="font-mono text-label text-surface-subtle">
                   {NEWS.featured} · <time dateTime={featured.published}>{proseDate(featured.published)}</time>{' '}
                   · {featured.category}
                 </p>

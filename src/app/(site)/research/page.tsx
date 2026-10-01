@@ -33,7 +33,7 @@ export default function ResearchPage() {
           <Container className="absolute inset-x-0 bottom-6 lg:bottom-10">
             <p
               data-surface="paper"
-              className="glass-card inline-flex border px-4 py-2.5 font-serif-italic text-small"
+              className="glass-card inline-flex border px-4 py-2.5 font-mono text-label"
             >
               {hero.caption}, {ARTICLE_UI.seed.toLowerCase()} {heroSeed}
             </p>
@@ -46,7 +46,7 @@ export default function ResearchPage() {
           </h1>
           <Grid className="mt-10 gap-y-6">
             {hero.abstract.map((p) => (
-              <p key={p} className="col-span-12 font-serif text-lede lg:col-span-6">
+              <p key={p} className="col-span-12 text-lede lg:col-span-6">
                 {p}
               </p>
             ))}
@@ -75,11 +75,11 @@ export default function ResearchPage() {
           ))}
         </Reveal>
         <Grid className="mt-20 items-center gap-y-10">
-          <p className="col-span-12 max-w-[56ch] font-serif text-lede lg:col-span-5">{inquiry.relativity}</p>
+          <p className="col-span-12 max-w-[56ch] text-lede lg:col-span-5">{inquiry.relativity}</p>
           <figure className="col-span-12 lg:col-span-6 lg:col-start-7">
             <LightCone labels={inquiry.cone} className="text-surface-fg" />
             <figcaption className="mt-4 flex flex-col gap-1">
-              <span className="font-serif-italic text-small text-surface-subtle">{inquiry.figure}</span>
+              <span className="font-mono text-label text-surface-subtle">{inquiry.figure}</span>
               <span className="text-caption text-surface-muted">{inquiry.figureCaption}</span>
             </figcaption>
           </figure>
@@ -126,7 +126,7 @@ export default function ResearchPage() {
                   </CropMarks>
                 </div>
                 <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-                  <p className="font-serif-italic text-small text-surface-subtle">
+                  <p className="font-mono text-label text-surface-subtle">
                     <time dateTime={a.published}>{proseDate(a.published)}</time> · {a.category} ·{' '}
                     {a.authors.join(', ')}
                   </p>

@@ -1,4 +1,4 @@
-import { MothCurve } from '@/components/art/MothCurve'
+import { LayerStack } from '@/components/art/LayerStack'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
 import { SplitReveal } from '@/components/motion/SplitReveal'
@@ -33,7 +33,7 @@ function SectionHead({ eyebrow, title, id }: { eyebrow: string; title: string; i
   )
 }
 
-// PAGES §2 — surfaces: paper · ink · paper · paper-2 · paper · paper-2 · paper · paper · ink · paper-2 · sulfur.
+// PAGES §2 — surfaces: paper · ink · paper · paper-2 · paper · paper-2 · paper · paper · ink · paper-2 · ice.
 export default function MothPage() {
   const { hero, how, purchasing, outcomes, preview, contract, qualification, measured, inspect, direction } =
     MOTH
@@ -49,7 +49,7 @@ export default function MothPage() {
             <p className="mt-4 max-w-[18ch] font-display text-display-m text-balance">
               <Inline text={hero.subhead} />
             </p>
-            <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
+            <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{hero.lede}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={hero.primary.href} arrow>
                 {hero.primary.label}
@@ -60,7 +60,7 @@ export default function MothPage() {
             </div>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8">
-            <MothCurve />
+            <LayerStack layers={hero.layers} answer={hero.answer} />
           </div>
         </Grid>
       </Section>
@@ -98,11 +98,11 @@ export default function MothPage() {
             <p className="text-body text-surface-muted">{preview.platform}</p>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8">
-            <h3 className="font-serif-italic text-small text-surface-subtle">{preview.supportsTitle}</h3>
+            <h3 className="font-mono text-label text-surface-subtle">{preview.supportsTitle}</h3>
             <ul className="mt-4 flex flex-col gap-3">
               {preview.supports.map((s) => (
                 <li key={s} className="flex gap-3 text-small">
-                  <Icon name="check" className="mt-0.5 size-4 text-malachite-fg" />
+                  <Icon name="check" className="mt-0.5 size-4 text-ice-fg" />
                   {s}
                 </li>
               ))}
@@ -177,13 +177,13 @@ export default function MothPage() {
             {direction.title}
           </Heading>
         </div>
-        <p className="mt-8 max-w-[60ch] font-serif text-lede">{direction.text}</p>
+        <p className="mt-8 max-w-[60ch] text-lede">{direction.text}</p>
         <Button href={direction.link.href} variant="text" arrow className="mt-8">
           {direction.link.label}
         </Button>
       </Section>
 
-      <Section surface="sulfur" id="get-the-preview" labelledBy="get-title">
+      <Section surface="ice" id="get-the-preview" labelledBy="get-title">
         <Heading level={2} size="display-m" id="get-title">
           {MOTH.getPreview.title}
         </Heading>

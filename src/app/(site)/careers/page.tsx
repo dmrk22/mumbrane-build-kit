@@ -9,7 +9,7 @@ import { routeMetadata } from '@/lib/seo'
 
 export const metadata = routeMetadata('/careers')
 
-// PAGES §6 — surfaces: paper · paper-2 · paper · sulfur. No job listing component exists until
+// PAGES §6 — surfaces: paper · paper-2 · paper · ice. No job listing component exists until
 // the owner supplies roles (CONTENT §4: never invent openings).
 export default function CareersPage() {
   const { hero, principles, areas, cta } = CAREERS
@@ -20,7 +20,7 @@ export default function CareersPage() {
         <h1 id="careers-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
           <Inline text={hero.title} />
         </h1>
-        <p className="mt-8 max-w-[44ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
+        <p className="mt-8 max-w-[44ch] text-lede text-surface-muted">{hero.lede}</p>
       </Section>
 
       <Section surface="paper-2" id="how-we-work" labelledBy="principles-title">
@@ -57,7 +57,7 @@ export default function CareersPage() {
         </ul>
       </Section>
 
-      <Section surface="sulfur" id="write-to-us" labelledBy="careers-cta-title" rhythm="compact">
+      <Section surface="ice" id="write-to-us" labelledBy="careers-cta-title" rhythm="compact">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
             <Heading level={2} size="display-m" id="careers-cta-title">

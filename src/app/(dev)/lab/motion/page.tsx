@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { CropMarks } from '@/components/art/CropMarks'
+import { FieldCanvas } from '@/components/art/FieldCanvas'
 import { Guilloche } from '@/components/art/Guilloche'
-import { MembraneCanvas } from '@/components/art/MembraneCanvas'
+import { LayerStack } from '@/components/art/LayerStack'
 import { Painting } from '@/components/art/Painting'
 import { Plate } from '@/components/art/Plate'
 import { RegistrationMark } from '@/components/art/RegistrationMark'
 import { SpectralStrip } from '@/components/art/SpectralStrip'
-import { StringModel } from '@/components/art/StringModel'
 import { InstrumentStack, InstrumentWindow } from '@/components/instrument/InstrumentWindow'
 import { Section } from '@/components/layout/Section'
 import { Reveal } from '@/components/motion/Reveal'
@@ -65,11 +65,11 @@ const INQUIRY = [
 
 // Real strips come from the paintings manifest (P5); this sample reuses the brand hexes.
 const SAMPLE_PALETTE = [
-  { hex: HEX.sulfur, weight: 0.3 },
-  { hex: HEX.moss, weight: 0.25 },
-  { hex: HEX.verdigris, weight: 0.2 },
+  { hex: HEX.ice, weight: 0.3 },
+  { hex: HEX.paper, weight: 0.25 },
+  { hex: HEX.chalk, weight: 0.2 },
   { hex: HEX.deep, weight: 0.15 },
-  { hex: HEX.cinnabar, weight: 0.1 },
+  { hex: HEX.ink, weight: 0.1 },
 ]
 
 export default function MotionLab() {
@@ -86,19 +86,14 @@ export default function MotionLab() {
 
         <Section surface="deep" rhythm="compact" labelledBy="lab-membrane">
           <Heading level={2} size="display-s" id="lab-membrane">
-            Membrane, live and static
+            Field and layers
           </Heading>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <figure>
-              <div className="relative aspect-video">
-                <MembraneCanvas />
-              </div>
-              <figcaption className="mt-2 font-serif-italic text-small">WebGL string model</figcaption>
-            </figure>
-            <figure>
-              <StringModel className="aspect-video w-full text-on-dark" />
-              <figcaption className="mt-2 font-serif-italic text-small">SVG fallback</figcaption>
-            </figure>
+            <FieldCanvas
+              labels={{ field: 'field', candidate: 'candidate', answer: 'answer' }}
+              className="aspect-[640/520]"
+            />
+            <LayerStack layers={['facts', 'definitions', 'field']} answer="answer" />
           </div>
         </Section>
 
@@ -165,13 +160,13 @@ export default function MotionLab() {
           </div>
           <figure className="mt-10">
             <Painting id="research-hero" sizes="100vw" />
-            <figcaption className="mt-2 font-serif-italic text-small">research-hero · 21:9</figcaption>
+            <figcaption className="mt-2 font-mono text-label">research-hero · 21:9</figcaption>
           </figure>
           <figure className="mt-10">
             <div className="relative aspect-video">
               <Painting id="membrane-poster" decorative fit="cover" sizes="100vw" />
             </div>
-            <figcaption className="mt-2 font-serif-italic text-small">membrane-poster · fallback</figcaption>
+            <figcaption className="mt-2 font-mono text-label">membrane-poster · fallback</figcaption>
           </figure>
         </Section>
 
@@ -184,11 +179,11 @@ export default function MotionLab() {
           </div>
           <div className="mt-10 grid items-start gap-12 md:grid-cols-3">
             <div className="flex flex-col items-start gap-4">
-              <p className="font-serif-italic text-small">Catenoid at rest</p>
-              <StringModel theta={Math.PI / 2} className="w-56" />
+              <p className="font-mono text-label">Layers</p>
+              <LayerStack layers={['a', 'b', 'c']} answer="d" className="w-56" />
             </div>
             <div className="flex flex-col items-start gap-6">
-              <p className="font-serif-italic text-small">Crop marks · registration · spectral strip</p>
+              <p className="font-mono text-label">Crop marks · registration · spectral strip</p>
               <CropMarks className="w-full">
                 <div className="dot-screen aspect-[16/10] w-full border border-surface-rule" />
               </CropMarks>
@@ -196,7 +191,7 @@ export default function MotionLab() {
               <SpectralStrip palette={SAMPLE_PALETTE} />
             </div>
             <div className="flex flex-col items-start gap-4">
-              <p className="font-serif-italic text-small">Rosette · border</p>
+              <p className="font-mono text-label">Rosette · border</p>
               <Guilloche kind="rosette" seed={11} className="w-40 text-surface-subtle" />
               <Guilloche kind="border" seed={2} className="w-full text-surface-subtle" />
             </div>

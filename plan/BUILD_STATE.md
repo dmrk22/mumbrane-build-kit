@@ -174,6 +174,13 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 
+### Redesign R2 — "field" (2026-10-01, D-129)
+Supersedes R1. Logic notation, theorem labels, ProofSheet, Turnstile, StringModel, MothCurve,
+the WebGL string model and the green palette are gone. New: `src/lib/art/field.ts` (tested),
+`FieldCanvas`, `LayerStack`, `OutcomeGlyph`, `HowItWorks`; diagram marks `.dg-*` in art.css;
+palette regenerated (ice/sand/clay/lilac, surfaces paper · paper-2 · ink · deep · ice); console
+shell is a top bar; contact and sales redesigned. e2e updated (field canvas, footer reveal).
+
 ### Redesign R1 — "blackboard" (2026-10-01, D-128)
 Owner overrode the plan's design rules mid-session. Done: palette + tokens regenerated (contrast
 tests updated), fonts swapped (src/app/fonts.ts), surfaces renamed (ultramarine → deep, cadmium →

@@ -59,7 +59,7 @@ export const FORM_UI = {
 
 export const CONTACT = {
   eyebrow: 'Contact',
-  title: 'Talk to Mumbrane',
+  title: 'Talk to Mumbrane.',
   lede: 'Tell us what you are trying to understand, where the difficulty is, and what a useful conversation might unlock.',
   emails: [
     { label: 'Research and technical', address: 'research@mumbrane.com' },

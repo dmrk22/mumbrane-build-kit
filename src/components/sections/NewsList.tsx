@@ -23,7 +23,7 @@ export function NewsList({
             <time dateTime={a.published} className="font-mono text-label text-surface-subtle tabular-nums">
               {monoDate(a.published)}
             </time>
-            <p className="font-serif-italic text-small text-surface-subtle">{a.category}</p>
+            <p className="font-mono text-label text-surface-subtle">{a.category}</p>
             <H className="font-display text-display-s">
               <SmartLink
                 href={articlePath(a)}
