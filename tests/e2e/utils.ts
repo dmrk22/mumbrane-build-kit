@@ -1,9 +1,11 @@
 import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
-import type { Page, Request } from '@playwright/test'
+import { type Page, type Request, test } from '@playwright/test'
 import { REGISTRY } from '../../src/content/routes.ts'
 
 export const prod = !!process.env.E2E_PROD
+/** The Trusted Types trial (SECURITY §3.5): the server adds a report-only TT policy. */
+export const ttTrial = process.env.CSP_TT_TRIAL === '1'
 
 /** App route patterns with a page file, e.g. ['', 'legal/[slug]'] (route groups removed). */
 export function pagePatterns(dir = 'src/app', prefix: string[] = []): string[][] {
@@ -70,6 +72,11 @@ export function collectConsole(page: Page): string[] {
   const messages: string[] = []
   page.on('console', (msg) => {
     if (msg.type() !== 'error' && msg.type() !== 'warning') return
+    // During the Trusted Types trial, report-only findings are recorded, not counted as errors.
+    if (ttTrial && msg.text().startsWith('[Report Only]')) {
+      test.info().annotations.push({ type: 'report-only', description: msg.text() })
+      return
+    }
     // Links already point at the whole site; until a page exists, Next's prefetch of it 404s.
     if (msg.text().startsWith('Failed to load resource') && isUnbuiltPrefetch(msg.location().url)) return
     messages.push(`${msg.type()}: ${msg.text()}`)

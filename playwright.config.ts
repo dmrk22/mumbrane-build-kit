@@ -39,7 +39,8 @@ export default defineConfig({
     {
       name: 'webkit',
       testIgnore: generators,
-      grep: /@smoke/,
+      // @smoke by default; E2E_WEBKIT_ALL=1 runs the whole suite (P14 QA, SECURITY §10).
+      ...(process.env.E2E_WEBKIT_ALL ? {} : { grep: /@smoke/ }),
       use: { ...devices['Desktop Safari'] },
     },
     { name: 'shots', testMatch: /shots\.spec\.ts$/, use: { ...devices['Desktop Chrome'] } },

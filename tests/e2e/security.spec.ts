@@ -106,10 +106,18 @@ test.describe('@security', () => {
       await net.quiet()
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
       await net.quiet()
-      expect((await violations()).filter((v) => v.disposition === 'enforce')).toEqual([])
+      const all = await violations()
+      expect(all.filter((v) => v.disposition === 'enforce')).toEqual([])
+      // Trusted Types trial (SECURITY §3.5): report-only findings are recorded, not failed.
+      const reported = all.filter((v) => v.disposition === 'report')
+      if (reported.length)
+        test.info().annotations.push({ type: 'report-only', description: JSON.stringify(reported) })
       expect(consoleMessages.filter((m) => m.startsWith('error') || m.startsWith('pageerror'))).toEqual([])
       expect(consoleMessages.filter((m) => m.includes('Permissions-Policy'))).toEqual([])
       expect(external).toEqual([])
+      // No cookies (SECURITY §10): none in the jar (so no Set-Cookie) and none set by script.
+      expect(await page.context().cookies()).toEqual([])
+      expect(await page.evaluate(() => document.cookie)).toBe('')
     })
   }
 
