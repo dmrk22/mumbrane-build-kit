@@ -24,7 +24,7 @@ export default function CompanyPage() {
         heading={
           <>
             <Eyebrow>{hero.eyebrow}</Eyebrow>
-            <h1 id="company-title" className="mt-4 font-serif text-display-l">
+            <h1 id="company-title" className="mt-3 font-display text-display-l lg:text-display-m">
               <Inline text={hero.title} />
             </h1>
           </>
@@ -58,7 +58,7 @@ export default function CompanyPage() {
           </div>
           <figure className="col-span-12 lg:col-span-6 lg:col-start-7">
             <MuonTrack labels={name.labels} className="text-surface-fg" />
-            <figcaption className="mt-4 font-mono text-label text-surface-subtle uppercase">
+            <figcaption className="mt-4 font-serif-italic text-small text-surface-subtle">
               {name.figure}
             </figcaption>
           </figure>
@@ -74,7 +74,7 @@ export default function CompanyPage() {
             <li key={l.href} className="border-b border-surface-rule">
               <SmartLink
                 href={l.href}
-                className="group flex items-center justify-between gap-6 py-6 font-serif text-display-m md:py-8"
+                className="group flex items-center justify-between gap-6 py-6 font-display text-display-m md:py-8"
               >
                 <span className="decoration-1 underline-offset-[0.14em] group-hover:underline">
                   {l.label}

@@ -44,7 +44,7 @@ export function DocsToc({
 
   return (
     <nav aria-label={label}>
-      <p className="font-mono text-label text-surface-subtle uppercase">{label}</p>
+      <p className="font-serif-italic text-small text-surface-subtle">{label}</p>
       <ol className="mt-4 flex flex-col gap-1 border-l border-surface-rule">
         {items.map((i) => (
           <li key={i.id}>

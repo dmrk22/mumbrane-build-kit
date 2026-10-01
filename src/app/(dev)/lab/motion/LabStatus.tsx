@@ -17,7 +17,7 @@ export function LabStatus({ children }: { children: ReactNode }) {
     <>
       <div
         data-surface="ink"
-        className="sticky top-0 z-50 flex flex-wrap items-center gap-6 px-5 py-3 font-mono text-label uppercase"
+        className="sticky top-0 z-50 flex flex-wrap items-center gap-6 px-5 py-3 font-serif-italic text-small"
       >
         <span>
           Reduced motion: <strong data-testid="lab-reduced">{reduced ? 'on' : 'off'}</strong>

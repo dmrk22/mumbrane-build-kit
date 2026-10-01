@@ -13,7 +13,7 @@ export function MuonTrack({
   labels: { muon: string; track: string; membrane: string }
   className?: string
 }) {
-  const label = 'absolute font-mono text-label uppercase'
+  const label = 'absolute font-serif-italic text-small'
   return (
     <div data-figure="muon-track" className={cx('relative', className)} aria-hidden="true">
       <svg viewBox="0 0 480 240" className="block h-auto w-full" aria-hidden="true">
@@ -29,12 +29,12 @@ export function MuonTrack({
         <path
           d="M96 12L392 232"
           fill="none"
-          className="stroke-vermilion"
+          className="stroke-cinnabar"
           strokeWidth={3}
           strokeLinecap="round"
           strokeDasharray="0 9"
         />
-        <circle cx="266" cy="139" r="7" fill="none" className="stroke-vermilion" strokeWidth={1} />
+        <circle cx="266" cy="139" r="7" fill="none" className="stroke-cinnabar" strokeWidth={1} />
       </svg>
       <span className={cx(label, 'top-0 left-[28%] text-surface-fg')}>
         <span className="font-serif text-title normal-case">{labels.muon}</span> {labels.track}

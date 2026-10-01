@@ -23,7 +23,7 @@ export function PinDemo() {
               i === active ? 'text-surface-fg' : 'text-surface-subtle',
             )}
           >
-            <span className={cx('font-mono text-label', i === active && 'text-cherenkov')}>0{i + 1}</span>
+            <span className={cx('font-mono text-label', i === active && 'text-verdigris')}>0{i + 1}</span>
             <span className="text-title">{s}</span>
           </li>
         ))}

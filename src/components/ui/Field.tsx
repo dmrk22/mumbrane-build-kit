@@ -4,7 +4,7 @@ import { cx } from '@/lib/cx'
 import { Icon } from './Icon'
 
 // DESIGN §9.5: label above, hint below, error below the hint; inputs 48 px, 4 px radius, text-3
-// border (≥ 3:1 non-text contrast), paper ground, vermilion-fg when invalid.
+// border (≥ 3:1 non-text contrast), paper ground, cinnabar-fg when invalid.
 type Meta = { id: string; label: ReactNode; hint?: ReactNode; error?: ReactNode | undefined }
 
 const CONTROL =
@@ -16,7 +16,7 @@ function describedBy({ id, hint, error }: Meta): string | undefined {
 }
 
 function border(error: ReactNode | undefined) {
-  return error ? 'border-vermilion-fg' : 'border-text-3'
+  return error ? 'border-cinnabar-fg' : 'border-text-3'
 }
 
 function FieldShell({ id, label, hint, error, children }: Meta & { children: ReactNode }) {
@@ -32,7 +32,7 @@ function FieldShell({ id, label, hint, error, children }: Meta & { children: Rea
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="flex items-start gap-1.5 text-caption text-vermilion-fg">
+        <p id={`${id}-error`} className="flex items-start gap-1.5 text-caption text-cinnabar-fg">
           <Icon name="warning" className="mt-px size-4" />
           <span>
             <span className="sr-only">{ui.errorPrefix} </span>
@@ -138,7 +138,7 @@ export function Checkbox({ id, label, hint, error, ...rest }: Meta & CheckRest) 
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="flex items-start gap-1.5 pl-8 text-caption text-vermilion-fg">
+        <p id={`${id}-error`} className="flex items-start gap-1.5 pl-8 text-caption text-cinnabar-fg">
           <Icon name="warning" className="mt-px size-4" />
           <span>
             <span className="sr-only">{ui.errorPrefix} </span>

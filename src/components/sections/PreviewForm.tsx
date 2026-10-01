@@ -86,8 +86,8 @@ export function PreviewForm({
   if (preview) {
     return (
       <div data-surface="paper-2" className="border border-surface-rule p-6 md:p-10">
-        <Icon name="check" className="size-8 text-viridian-fg" />
-        <h2 ref={previewRef} tabIndex={-1} className="mt-6 font-serif text-display-s outline-none">
+        <Icon name="check" className="size-8 text-malachite-fg" />
+        <h2 ref={previewRef} tabIndex={-1} className="mt-6 font-display text-display-s outline-none">
           {FORM_UI.preview.title}
         </h2>
         <p className="mt-4 max-w-[52ch] text-body text-surface-muted">{FORM_UI.preview.text}</p>
@@ -121,11 +121,11 @@ export function PreviewForm({
       aria-labelledby={`${kind}-form-title`}
       className="relative"
     >
-      <h2 id={`${kind}-form-title`} className="font-serif text-display-s">
+      <h2 id={`${kind}-form-title`} className="font-display text-display-s">
         {title}
       </h2>
       {/* Always rendered (never display:none) so screen readers are listening before it fills. */}
-      <p role="status" className="text-small font-medium text-vermilion-fg not-empty:mt-4">
+      <p role="status" className="text-small font-medium text-cinnabar-fg not-empty:mt-4">
         {count > 0 ? FORM_UI.summary(count) : ''}
       </p>
       <div className="mt-8 grid gap-6 md:grid-cols-2">

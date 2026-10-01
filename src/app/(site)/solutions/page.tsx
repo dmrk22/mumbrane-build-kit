@@ -34,7 +34,7 @@ function Card({
     >
       <span className="flex flex-col gap-6">
         <Icon name={icon} className="size-6 text-surface-muted" />
-        <span className="font-serif text-display-s">{name}</span>
+        <span className="font-display text-display-s">{name}</span>
         <span className="max-w-[36ch] text-body text-surface-muted">{promise}</span>
       </span>
       <span className="inline-flex items-center gap-2 text-small font-medium">
@@ -57,7 +57,7 @@ export default function SolutionsPage() {
     <>
       <Section surface="paper" labelledBy="solutions-title" className="pt-12 md:pt-16 lg:pt-24">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 id="solutions-title" className="mt-4 max-w-[16ch] font-serif text-display-xl">
+        <h1 id="solutions-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
           <Inline text={title} />
         </h1>
         <p className="mt-8 max-w-[52ch] font-serif text-lede text-surface-muted">{lede}</p>
@@ -85,11 +85,11 @@ export default function SolutionsPage() {
         </Heading>
         <Grid className="mt-12 gap-y-12">
           {[
-            { list: fit.fits, icon: 'check' as const, tone: 'text-viridian-fg' },
+            { list: fit.fits, icon: 'check' as const, tone: 'text-malachite-fg' },
             { list: fit.not, icon: 'minus' as const, tone: 'text-surface-subtle' },
           ].map(({ list, icon, tone }) => (
             <div key={list.title} className="col-span-12 md:col-span-6">
-              <h3 className="font-mono text-label text-surface-subtle uppercase">{list.title}</h3>
+              <h3 className="font-serif-italic text-small text-surface-subtle">{list.title}</h3>
               <ul className="mt-6 border-t border-surface-rule">
                 {list.items.map((item) => (
                   <li

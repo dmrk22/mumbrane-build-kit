@@ -27,7 +27,7 @@ export function DataTable({
           {source && <span className="text-surface-subtle"> — {source}</span>}
         </caption>
         <thead>
-          <tr data-surface="paper" className="bg-paper-3 font-mono text-label uppercase">
+          <tr data-surface="paper" className="bg-paper-3 font-serif-italic text-small">
             {columns.map((c, i) => (
               <th key={c} scope="col" className={cx('px-3 py-3 font-medium sm:px-4', i > 0 && 'text-right')}>
                 {c}

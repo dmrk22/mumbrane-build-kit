@@ -12,14 +12,16 @@
 }
 
 @layer components {
-  /* The hero's field before (and instead of) the first WebGL frame: the shader's own background
-     (ultramarine at 80 % / 26 % into ultramarine-deep), so the H1 stays the LCP element. */
+  /* The hero's ground before (and behind) the first WebGL frame: deep, lit from where the film
+     hangs, with a faint chalk-dust grain from two offset dot screens. */
   .membrane-field {
-    background: radial-gradient(
-      circle farthest-corner at 80% 26%,
-      var(--color-ultramarine),
-      var(--color-ultramarine-deep)
-    );
+    background:
+      radial-gradient(
+        ellipse 60% 70% at 72% 46%,
+        color-mix(in oklab, var(--color-ink-3) 70%, transparent),
+        transparent 70%
+      ),
+      radial-gradient(circle farthest-corner at 72% 46%, var(--color-ink), var(--color-deep));
   }
   .membrane-canvas {
     opacity: 0;
@@ -30,54 +32,18 @@
   }
 }
 
-/* EvidenceSeal (DESIGN §7.5): rings draw on in sequence while the legend turns 12° → 0°. */
-@media (prefers-reduced-motion: no-preference) {
-  [data-reveal="pending"] .seal-ring {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-  }
-  [data-reveal="done"] .seal-ring {
-    stroke-dasharray: 1;
-    animation: mark-draw var(--duration-signature) var(--ease-in-out) both;
-    animation-delay: calc(var(--ring-i, 0) * 120ms);
-  }
-  .seal-legend {
-    transform-box: view-box;
-    transform-origin: center;
-  }
-  [data-reveal="pending"] .seal-legend {
-    transform: rotate(12deg);
-  }
-  [data-reveal="done"] .seal-legend {
-    transition: transform var(--duration-signature) var(--ease-out);
-  }
-}
-.seal-rings .seal-ring:nth-child(2) {
-  --ring-i: 1;
-}
-.seal-rings .seal-ring:nth-child(3) {
-  --ring-i: 2;
-}
-.seal-rings .seal-ring:nth-child(4) {
-  --ring-i: 3;
-}
-.seal-rings .seal-ring:nth-child(5) {
-  --ring-i: 4;
-}
-.seal-rings .seal-ring:nth-child(6) {
-  --ring-i: 5;
-}
-
-/* Instrument window body: paper on light grounds, ink-2 on dark ones (DESIGN §9.6). */
+/* Instrument window body: always printed plaster with ink text, whatever the ground. Entity and
+   result chips are black label chips (`code` and `mark.cli-chip`). */
 @layer components {
   .instrument-body {
-    background-color: var(--color-paper);
+    background-color: var(--color-paper-2);
     color: var(--color-text);
   }
-  [data-surface="ink"] .instrument-body,
-  [data-surface="ultramarine"] .instrument-body {
-    background-color: var(--color-ink-2);
+  .instrument-body code,
+  .instrument-body .cli-chip {
+    background-color: var(--color-ink);
     color: var(--color-on-dark);
+    padding: 0.05em 0.4em;
   }
 }
 
@@ -153,14 +119,6 @@
     font-size: var(--text-label);
     letter-spacing: var(--text-label--letter-spacing);
     text-transform: uppercase;
-  }
-  .instrument-body code {
-    background-color: var(--color-paper-3);
-    padding: 0.05em 0.35em;
-  }
-  [data-surface="ink"] .instrument-body code,
-  [data-surface="ultramarine"] .instrument-body code {
-    background-color: var(--color-ink-3);
   }
   .demo-part,
   .demo-trace,
@@ -255,5 +213,138 @@
 @keyframes blocks-failsafe-lock {
   to {
     opacity: 0;
+  }
+}
+
+/* Definition 1 (Turnstile): symbols rise from their baseline, leader lines draw down, notes fade
+   in; each column 140 ms after the last, then the negation. Final state is the CSS default. */
+@media (prefers-reduced-motion: no-preference) {
+  .turnstile .ts-lead {
+    transform-origin: top;
+  }
+  [data-reveal="pending"].turnstile .ts-sym {
+    opacity: 0;
+    transform: translateY(18%);
+  }
+  [data-reveal="pending"].turnstile .ts-lead {
+    transform: scaleY(0);
+  }
+  [data-reveal="pending"].turnstile .ts-note,
+  [data-reveal="pending"].turnstile .ts-neg {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  [data-reveal="done"].turnstile .ts-sym {
+    transition:
+      opacity 900ms var(--ease-out) calc(var(--ts-i, 0) * 140ms),
+      transform 1100ms var(--ease-out) calc(var(--ts-i, 0) * 140ms);
+  }
+  [data-reveal="done"].turnstile .ts-lead {
+    transition: transform 700ms var(--ease-in-out) calc(400ms + var(--ts-i, 0) * 140ms);
+  }
+  [data-reveal="done"].turnstile .ts-note {
+    transition:
+      opacity 600ms var(--ease-out) calc(800ms + var(--ts-i, 0) * 140ms),
+      transform 600ms var(--ease-out) calc(800ms + var(--ts-i, 0) * 140ms);
+  }
+  [data-reveal="done"].turnstile .ts-neg {
+    transition:
+      opacity 700ms var(--ease-out) 1400ms,
+      transform 700ms var(--ease-out) 1400ms;
+  }
+}
+.ts-i-1 {
+  --ts-i: 1;
+}
+.ts-i-2 {
+  --ts-i: 2;
+}
+
+/* Example 2 (ProofSheet): parts fade up as their step arrives; bars of a derivation draw left to
+   right, the inner inference first; a rule whose premise is missing draws a broken bar. */
+@layer components {
+  .ps-part {
+    transition:
+      opacity var(--duration-reveal) var(--ease-out),
+      transform var(--duration-reveal) var(--ease-out);
+  }
+  .ps-part[data-shown="false"] {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  .ps-bar {
+    transform-origin: left;
+    transition: transform 800ms var(--ease-in-out) 520ms;
+  }
+  .ps-rule .ps-rule .ps-bar {
+    transition-delay: 120ms;
+  }
+  .ps-part[data-shown="false"] .ps-bar {
+    transform: scaleX(0);
+  }
+  .ps-bar-open {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-cinnabar-glow) 0 55%,
+      transparent 55% 70%,
+      var(--color-cinnabar-glow) 70% 100%
+    );
+    background-size: 14px 1px;
+    opacity: 0.9;
+  }
+  .ps-step-text {
+    padding-top: 0.25rem;
+  }
+  @media (min-width: 1024px) {
+    .ps-step-closed {
+      display: none;
+    }
+  }
+  /* Entities on the sheet: chalk-outlined names, the way a lecturer boxes a constant. */
+  .sheet-facts code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    font-stretch: 87.5%;
+    border: 1px solid color-mix(in oklab, var(--color-on-dark) 35%, transparent);
+    padding: 0.02em 0.4em;
+    color: var(--color-on-dark);
+  }
+}
+
+/* Hatching for unproven lemmas and conjectures: fine diagonal chalk lines, an engineer's "not yet". */
+@utility block-hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--surface-fg) 14%, transparent) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+/* The footer's catenoid fades in from nothing at its top edge. */
+@layer components {
+  .footer-film {
+    mask-image: linear-gradient(to bottom, transparent, black 55%);
+  }
+}
+
+/* On dark grounds the window's printed shadow turns to yellow chalk, so the window still lifts. */
+@layer components {
+  :is([data-surface="ink"], [data-surface="deep"]) .instrument-window {
+    --tw-shadow-color: var(--color-sulfur);
+    box-shadow: 6px 6px 0 0 var(--color-sulfur);
+    border-color: var(--color-sulfur);
+  }
+}
+
+/* The footer's catenoid rises into place the first time the end of the page is reached. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"] .footer-film svg {
+    opacity: 0;
+    transform: translateY(14%);
+  }
+  [data-reveal="done"] .footer-film svg {
+    transition:
+      opacity 1600ms var(--ease-out),
+      transform 1800ms var(--ease-out);
   }
 }

@@ -3,6 +3,7 @@
    directly after `@import "tailwindcss";`. Generated from brand/palette/palette.json.
    All colours are sRGB-safe OKLCH (hex in comments). Do not add ad-hoc colours:
    extend this file and DECISIONS.md instead.
+   Palette "blackboard": plaster paper, blackboard ink, chalk on dark, and chalk pigments.
    ========================================================================== */
 
 @theme {
@@ -11,113 +12,116 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  /* Neutrals — archival paper and blue-black ink */
-  --color-paper: oklch(0.975 0.009 88.0); /* #f9f7f0 */
-  --color-paper-2: oklch(0.948 0.013 86.0); /* #f2ede4 */
-  --color-paper-3: oklch(0.905 0.016 84.0); /* #e5dfd4 */
-  --color-rule: oklch(0.855 0.014 84.0); /* #d4cfc5 */
-  --color-ink: oklch(0.165 0.022 268.0); /* #0a0e18 */
-  --color-ink-2: oklch(0.215 0.026 268.0); /* #141926 */
-  --color-ink-3: oklch(0.265 0.028 268.0); /* #1f2533 */
-  --color-rule-dark: oklch(0.340 0.026 268.0); /* #323846 */
-  --color-text: oklch(0.190 0.020 268.0); /* #10141d */
-  --color-text-2: oklch(0.400 0.022 268.0); /* #424754 */
-  --color-text-3: oklch(0.500 0.018 268.0); /* #5f636e */
-  --color-on-dark: oklch(0.965 0.010 88.0); /* #f6f3ec */
-  --color-on-dark-2: oklch(0.820 0.016 268.0); /* #bfc4cf */
-  --color-on-dark-3: oklch(0.700 0.020 268.0); /* #999eab */
+  --color-paper: oklch(0.968 0.008 118.0); /* #f4f5ef */
+  --color-paper-2: oklch(0.940 0.012 124.0); /* #e9ede4 */
+  --color-paper-3: oklch(0.900 0.016 130.0); /* #dae0d5 */
+  --color-rule: oklch(0.850 0.014 132.0); /* #cad0c6 */
+  --color-ink: oklch(0.200 0.026 166.0); /* #0a1a13 */
+  --color-ink-2: oklch(0.245 0.030 166.0); /* #12251d */
+  --color-ink-3: oklch(0.300 0.032 166.0); /* #1e332a */
+  --color-rule-dark: oklch(0.370 0.030 166.0); /* #31453c */
+  --color-text: oklch(0.200 0.020 166.0); /* #0d1914 */
+  --color-text-2: oklch(0.400 0.020 166.0); /* #3e4b45 */
+  --color-text-3: oklch(0.485 0.016 166.0); /* #57625d */
+  --color-on-dark: oklch(0.958 0.014 110.0); /* #f1f2e8 */
+  --color-on-dark-2: oklch(0.830 0.020 150.0); /* #bfcbc1 */
+  --color-on-dark-3: oklch(0.710 0.022 160.0); /* #96a69d */
+  --color-deep: oklch(0.155 0.026 172.0); /* #02100b */
+  --color-malachite: oklch(0.660 0.130 158.0); /* #3baa73 */
+  --color-malachite-soft: oklch(0.955 0.039 158.0); /* #dbf9e6 */
+  --color-malachite-fg: oklch(0.484 0.113 158.0); /* #017145 — 5.55:1 on paper */
+  --color-malachite-glow: oklch(0.660 0.130 158.0); /* #3baa73 — 6.14:1 on ink */
+  --color-malachite-ink: oklch(0.394 0.092 158.0); /* #005432 — 8.08:1 on malachite-soft */
+  --color-sulfur: oklch(0.885 0.150 98.0); /* #f4da57 */
+  --color-sulfur-soft: oklch(0.955 0.045 98.0); /* #f8f1cf */
+  --color-sulfur-fg: oklch(0.500 0.103 98.0); /* #736301 — 5.45:1 on paper */
+  --color-sulfur-glow: oklch(0.885 0.150 98.0); /* #f4da57 — 12.83:1 on ink */
+  --color-sulfur-ink: oklch(0.402 0.083 98.0); /* #544800 — 8.02:1 on sulfur-soft */
+  --color-cinnabar: oklch(0.655 0.185 34.0); /* #eb5b3b */
+  --color-cinnabar-soft: oklch(0.955 0.022 34.0); /* #ffebe7 */
+  --color-cinnabar-fg: oklch(0.520 0.185 34.0); /* #bb2c03 — 5.51:1 on paper */
+  --color-cinnabar-glow: oklch(0.675 0.185 34.0); /* #f36242 — 5.67:1 on ink */
+  --color-cinnabar-ink: oklch(0.418 0.148 34.0); /* #8b1e02 — 8.01:1 on cinnabar-soft */
+  --color-iris: oklch(0.600 0.150 302.0); /* #9267ca */
+  --color-iris-soft: oklch(0.955 0.025 302.0); /* #f3edff */
+  --color-iris-fg: oklch(0.516 0.150 302.0); /* #794eae — 5.45:1 on paper */
+  --color-iris-glow: oklch(0.668 0.150 302.0); /* #a67ce0 — 5.62:1 on ink */
+  --color-iris-ink: oklch(0.410 0.120 302.0); /* #57377f — 8.13:1 on iris-soft */
+  --color-verdigris: oklch(0.720 0.100 188.0); /* #4cb9b0 */
+  --color-verdigris-soft: oklch(0.955 0.030 188.0); /* #dbf7f4 */
+  --color-verdigris-fg: oklch(0.492 0.085 188.0); /* #02706a — 5.43:1 on paper */
+  --color-verdigris-glow: oklch(0.720 0.100 188.0); /* #4cb9b0 — 7.58:1 on ink */
+  --color-verdigris-ink: oklch(0.394 0.068 188.0); /* #01524d — 8.04:1 on verdigris-soft */
+  --color-madder: oklch(0.740 0.120 8.0); /* #eb8a9c */
+  --color-madder-soft: oklch(0.955 0.022 8.0); /* #feeaed */
+  --color-madder-fg: oklch(0.516 0.120 8.0); /* #9f465a — 5.48:1 on paper */
+  --color-madder-glow: oklch(0.740 0.120 8.0); /* #eb8a9c — 7.39:1 on ink */
+  --color-madder-ink: oklch(0.410 0.096 8.0); /* #743140 — 8.07:1 on madder-soft */
+  --color-ochre: oklch(0.790 0.150 68.0); /* #f9a63e */
+  --color-ochre-soft: oklch(0.955 0.031 68.0); /* #ffeddb */
+  --color-ochre-fg: oklch(0.508 0.111 68.0); /* #8e5701 — 5.45:1 on paper */
+  --color-ochre-glow: oklch(0.790 0.150 68.0); /* #f9a63e — 9.02:1 on ink */
+  --color-ochre-ink: oklch(0.406 0.089 68.0); /* #683e00 — 8.07:1 on ochre-soft */
+  --color-moss: oklch(0.480 0.090 140.0); /* #416a38 */
+  --color-moss-soft: oklch(0.955 0.027 140.0); /* #e7f5e4 */
+  --color-moss-fg: oklch(0.480 0.090 140.0); /* #416a38 — 5.73:1 on paper */
+  --color-moss-glow: oklch(0.644 0.090 140.0); /* #709b66 — 5.61:1 on ink */
+  --color-moss-ink: oklch(0.394 0.072 140.0); /* #304f29 — 8.16:1 on moss-soft */
 
-  /* Pigments — base, soft tint, accessible text on paper (fg), on ink (glow), text on soft (ink) */
-  --color-ultramarine: oklch(0.400 0.205 267.0); /* #1a30b3 */
-  --color-ultramarine-soft: oklch(0.955 0.019 267.0); /* #eaf0fe */
-  --color-ultramarine-fg: oklch(0.400 0.205 267.0); /* #1a30b3 — 9.25:1 on paper */
-  --color-ultramarine-glow: oklch(0.614 0.191 267.0); /* #517af5 — 5.01:1 on ink */
-  --color-ultramarine-ink: oklch(0.412 0.164 267.0); /* #233ea2 — 8.06:1 on ultramarine-soft */
-  --color-cobalt: oklch(0.520 0.190 262.0); /* #245fd4 */
-  --color-cobalt-soft: oklch(0.955 0.020 262.0); /* #e9f1fe */
-  --color-cobalt-fg: oklch(0.520 0.190 262.0); /* #245fd4 — 5.35:1 on paper */
-  --color-cobalt-glow: oklch(0.612 0.190 262.0); /* #3f7df4 — 5.01:1 on ink */
-  --color-cobalt-ink: oklch(0.409 0.152 262.0); /* #16439a — 8.02:1 on cobalt-soft */
-  --color-cherenkov: oklch(0.800 0.101 240.0); /* #7fc7f9 */
-  --color-cherenkov-soft: oklch(0.955 0.022 240.0); /* #e4f3fe */
-  --color-cherenkov-fg: oklch(0.522 0.110 240.0); /* #1970a2 — 5.05:1 on paper */
-  --color-cherenkov-glow: oklch(0.800 0.101 240.0); /* #7fc7f9 — 10.51:1 on ink */
-  --color-cherenkov-ink: oklch(0.403 0.085 240.0); /* #0e4d71 — 8.00:1 on cherenkov-soft */
-  --color-vermilion: oklch(0.665 0.190 36.0); /* #f15d35 */
-  --color-vermilion-soft: oklch(0.955 0.021 36.0); /* #feece7 */
-  --color-vermilion-fg: oklch(0.546 0.172 36.0); /* #bf3e18 — 5.00:1 on paper */
-  --color-vermilion-glow: oklch(0.665 0.190 36.0); /* #f15d35 — 5.84:1 on ink */
-  --color-vermilion-ink: oklch(0.417 0.131 36.0); /* #84280d — 8.02:1 on vermilion-soft */
-  --color-cadmium: oklch(0.865 0.143 88.0); /* #facd56 */
-  --color-cadmium-soft: oklch(0.955 0.045 88.0); /* #fdefcf */
-  --color-cadmium-fg: oklch(0.529 0.100 88.0); /* #836717 — 5.00:1 on paper */
-  --color-cadmium-glow: oklch(0.865 0.143 88.0); /* #facd56 — 12.79:1 on ink */
-  --color-cadmium-ink: oklch(0.403 0.076 88.0); /* #59450c — 8.08:1 on cadmium-soft */
-  --color-viridian: oklch(0.620 0.113 168.0); /* #2a9c79 */
-  --color-viridian-soft: oklch(0.955 0.042 168.0); /* #d6faeb */
-  --color-viridian-fg: oklch(0.514 0.096 168.0); /* #1a785d — 5.04:1 on paper */
-  --color-viridian-glow: oklch(0.620 0.113 168.0); /* #2a9c79 — 5.63:1 on ink */
-  --color-viridian-ink: oklch(0.397 0.074 168.0); /* #0f533f — 8.04:1 on viridian-soft */
-  --color-madder: oklch(0.660 0.150 6.0); /* #dc6684 */
-  --color-madder-soft: oklch(0.955 0.021 6.0); /* #feebee */
-  --color-madder-fg: oklch(0.546 0.150 6.0); /* #b44263 — 5.02:1 on paper */
-  --color-madder-glow: oklch(0.660 0.150 6.0); /* #dc6684 — 5.76:1 on ink */
-  --color-madder-ink: oklch(0.416 0.120 6.0); /* #7e2942 — 8.03:1 on madder-soft */
-  --color-violet: oklch(0.560 0.155 294.0); /* #7b5ec5 */
-  --color-violet-soft: oklch(0.955 0.022 294.0); /* #f0eefe */
-  --color-violet-fg: oklch(0.540 0.155 294.0); /* #7658be — 5.01:1 on paper */
-  --color-violet-glow: oklch(0.619 0.155 294.0); /* #8d70d9 — 5.01:1 on ink */
-  --color-violet-ink: oklch(0.413 0.124 294.0); /* #503987 — 8.07:1 on violet-soft */
-  --color-ultramarine-deep: oklch(0.300 0.169 270.0); /* #151580 — hero field shadow */
-
-  /* Semantic outcome colours (Moth answers). Fill with ink text (≥ 5.6:1), except refused:
-     violet base fails AA with both ink (3.9) and on-dark (4.46), so refused uses violet-fg with
-     on-dark text (4.85:1). Never put small text on the violet base. */
-  --color-supported: var(--color-viridian);
-  --color-unproven: var(--color-cadmium);   /* NO_SUPPORTED_PROOF */
-  --color-conflict: var(--color-vermilion);
-  --color-refused: var(--color-violet-fg);  /* language refusal */
+  /* Semantic outcome colours (Moth answers). Fill with ink text (≥ 5.2:1), except refused:
+     iris base fails AA with ink (4.29), so refused uses iris-fg with on-dark text (5.29:1). */
+  --color-supported: var(--color-malachite);
+  --color-unproven: var(--color-sulfur);    /* NO_SUPPORTED_PROOF */
+  --color-conflict: var(--color-cinnabar);
+  --color-refused: var(--color-iris-fg);    /* language refusal */
   --color-limit: var(--color-paper-3);      /* resource stop / incomplete / incompatible */
 
-  /* Type families — variables are provided by next/font in src/app/fonts.ts */
-  --font-serif: var(--font-newsreader), ui-serif, Georgia, "Times New Roman", serif;
-  /* Italic lives in its own next/font instance (no opsz axis, to stay inside the font budget).
-     Use it for every serif italic; `font-synthesis: none` in the base layer exposes mistakes. */
-  --font-serif-italic: var(--font-newsreader-italic), var(--font-newsreader), ui-serif, Georgia, serif;
-  --font-sans: var(--font-host-grotesk), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Type families — variables are provided by next/font in src/app/fonts.ts.
+     Sans carries headlines and UI (its wdth axis is set with font-stretch); serif carries
+     reading text, theorem statements and math variables; Noto Sans Math backs up the logic
+     symbols (⊢ ⊬ ⊥ ∉ ∴) that the text faces lack. */
+  --font-sans: var(--font-mona), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: var(--font-source-serif), var(--font-math), ui-serif, Georgia, "Times New Roman", serif;
+  --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), var(--font-math), ui-serif, Georgia, serif;
+  --font-mono: var(--font-martian), var(--font-math), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-math: var(--font-source-serif-italic), var(--font-math), ui-serif, serif;
 
-  /* Type scale — fluid between 375px and 1440px viewports */
-  --text-display-xl: clamp(3.25rem, 1.52rem + 7.38vw, 8.25rem);
-  --text-display-xl--line-height: 0.93;
-  --text-display-xl--letter-spacing: -0.028em;
-  --text-display-xl--font-weight: 330;
-  --text-display-l: clamp(2.5rem, 1.8rem + 3vw, 4.5rem);
-  --text-display-l--line-height: 1.02;
-  --text-display-l--letter-spacing: -0.022em;
-  --text-display-l--font-weight: 340;
-  --text-display-m: clamp(1.875rem, 1.2rem + 2.87vw, 3.625rem);
-  --text-display-m--line-height: 1.1;
-  --text-display-m--letter-spacing: -0.018em;
-  --text-display-m--font-weight: 360;
-  --text-display-s: clamp(1.5rem, 1.24rem + 1.1vw, 2.25rem);
-  --text-display-s--line-height: 1.12;
-  --text-display-s--letter-spacing: -0.014em;
-  --text-display-s--font-weight: 370;
-  --text-title: clamp(1.25rem, 1.16rem + 0.38vw, 1.5rem);
-  --text-title--line-height: 1.2;
-  --text-title--letter-spacing: -0.01em;
-  --text-title--font-weight: 600;
-  --text-lede: clamp(1.125rem, 1.06rem + 0.28vw, 1.3125rem);
+  /* Type scale — fluid between 375px and 1440px viewports. Display sizes are set in Mona Sans. */
+  --text-display-xl: clamp(3.25rem, 1.2rem + 8.4vw, 9.25rem);
+  --text-display-xl--line-height: 0.9;
+  --text-display-xl--letter-spacing: -0.045em;
+  --text-display-xl--font-weight: 480;
+  --text-display-l: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
+  --text-display-l--line-height: 0.98;
+  --text-display-l--letter-spacing: -0.038em;
+  --text-display-l--font-weight: 480;
+  --text-display-m: clamp(1.875rem, 1.1rem + 3.1vw, 3.75rem);
+  --text-display-m--line-height: 1.04;
+  --text-display-m--letter-spacing: -0.032em;
+  --text-display-m--font-weight: 500;
+  --text-display-s: clamp(1.5rem, 1.2rem + 1.25vw, 2.375rem);
+  --text-display-s--line-height: 1.1;
+  --text-display-s--letter-spacing: -0.024em;
+  --text-display-s--font-weight: 500;
+  /* Formula: the giant judgement Γ ⊢ φ on the home page and the outcome symbols. */
+  --text-formula: clamp(5.5rem, 2rem + 17vw, 16rem);
+  --text-formula--line-height: 0.9;
+  --text-formula--letter-spacing: -0.02em;
+  --text-formula--font-weight: 300;
+  --text-title: clamp(1.1875rem, 1.1rem + 0.38vw, 1.4375rem);
+  --text-title--line-height: 1.22;
+  --text-title--letter-spacing: -0.012em;
+  --text-title--font-weight: 560;
+  --text-lede: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
   --text-lede--line-height: 1.5;
-  --text-lede--letter-spacing: -0.003em;
+  --text-lede--letter-spacing: -0.004em;
   --text-lede--font-weight: 400;
   --text-body: 1.0625rem;
-  --text-body--line-height: 1.6;
+  --text-body--line-height: 1.62;
   --text-body--letter-spacing: 0em;
   --text-body--font-weight: 400;
   --text-article: clamp(1.1875rem, 1.13rem + 0.24vw, 1.3125rem);
-  --text-article--line-height: 1.6;
+  --text-article--line-height: 1.62;
   --text-article--letter-spacing: -0.003em;
   --text-article--font-weight: 400;
   --text-small: 0.9375rem;
@@ -126,13 +130,13 @@
   --text-small--font-weight: 400;
   --text-caption: 0.8125rem;
   --text-caption--line-height: 1.45;
-  --text-caption--letter-spacing: 0.005em;
+  --text-caption--letter-spacing: 0.004em;
   --text-caption--font-weight: 400;
-  --text-label: 0.71875rem;
-  --text-label--line-height: 1.3;
-  --text-label--letter-spacing: 0.08em;
-  --text-label--font-weight: 500;
-  --text-code: 0.84375rem;
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.35;
+  --text-label--letter-spacing: 0.02em;
+  --text-label--font-weight: 450;
+  --text-code: 0.8125rem;
   --text-code--line-height: 1.7;
   --text-code--letter-spacing: 0em;
   --text-code--font-weight: 400;
@@ -140,12 +144,13 @@
   /* Spacing base (Tailwind multiplies this): 4px grid */
   --spacing: 0.25rem;
 
-  /* Radii — mostly square; pills only for primary buttons and chips */
+  /* Radii — plates and stages are softly rounded; instrument windows stay square. */
   --radius-none: 0;
   --radius-xs: 2px;
   --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 10px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 28px;
   --radius-pill: 999px;
 
   /* Motion. Eases generate `ease-*` utilities. Tailwind has no duration namespace, so the
@@ -153,17 +158,18 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);       /* expo-out: reveals, UI */
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);   /* quint in-out: state changes */
   --ease-in: cubic-bezier(0.7, 0, 0.84, 0);        /* exits */
-  --ease-twist: cubic-bezier(0.83, 0, 0.17, 1);    /* the wordmark half-twist */
+  --ease-twist: cubic-bezier(0.83, 0, 0.17, 1);    /* the wordmark collapse */
   --duration-micro: 120ms;
   --duration-hover: 200ms;
   --duration-ui: 320ms;
-  --duration-reveal: 560ms;
-  --duration-hero: 900ms;
+  --duration-reveal: 640ms;
+  --duration-hero: 1100ms;
   --duration-signature: 1400ms;
 
-  /* Elevation — used sparingly (instrument windows, menus) */
-  --shadow-window: 0 30px 80px -30px oklch(0.1 0.02 268 / 0.55), 0 1px 0 0 oklch(1 0 0 / 0.04) inset;
-  --shadow-menu: 0 24px 60px -24px oklch(0.1 0.02 268 / 0.35);
+  /* Elevation — instrument windows cast a hard offset shadow (a printed window, not a glow). */
+  --shadow-window: 6px 6px 0 0 oklch(0.2 0.026 166 / 0.9);
+  --shadow-menu: 0 24px 60px -24px oklch(0.155 0.026 172 / 0.45);
+  --shadow-plate: 0 40px 90px -50px oklch(0.155 0.026 172 / 0.55);
 
   /* Breakpoints */
   --breakpoint-sm: 40rem;   /* 640 */
@@ -189,35 +195,35 @@
   :root, [data-surface="paper"] {
     --surface-bg: var(--color-paper); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
     --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper-2);
-    --surface-accent: var(--color-cobalt);
+    --surface-accent: var(--color-cinnabar-fg);
     color-scheme: light;
   }
   [data-surface="paper-2"] {
     --surface-bg: var(--color-paper-2); --surface-fg: var(--color-text); --surface-muted: var(--color-text-2);
     --surface-subtle: var(--color-text-3); --surface-rule: var(--color-rule); --surface-raise: var(--color-paper);
-    --surface-accent: var(--color-cobalt);
+    --surface-accent: var(--color-cinnabar-fg);
     color-scheme: light;
   }
   [data-surface="ink"] {
     --surface-bg: var(--color-ink); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
     --surface-subtle: var(--color-on-dark-3); --surface-rule: var(--color-rule-dark); --surface-raise: var(--color-ink-2);
-    --surface-accent: var(--color-cherenkov);
+    --surface-accent: var(--color-sulfur);
     color-scheme: dark;
   }
-  [data-surface="ultramarine"] {
-    --surface-bg: var(--color-ultramarine); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
-    --surface-subtle: var(--color-on-dark-2); --surface-rule: oklch(0.97 0.01 88 / 0.22); --surface-raise: var(--color-ultramarine-deep); /* on-dark-3 fails AA on ultramarine (3.7:1) */
-    --surface-accent: var(--color-cadmium);
+  [data-surface="deep"] {
+    --surface-bg: var(--color-deep); --surface-fg: var(--color-on-dark); --surface-muted: var(--color-on-dark-2);
+    --surface-subtle: var(--color-on-dark-3); --surface-rule: oklch(0.958 0.014 110 / 0.16); --surface-raise: var(--color-ink);
+    --surface-accent: var(--color-sulfur);
     color-scheme: dark;
   }
-  [data-surface="cadmium"] {
-    --surface-bg: var(--color-cadmium); --surface-fg: var(--color-ink); --surface-muted: var(--color-cadmium-ink);
-    --surface-subtle: var(--color-cadmium-ink); --surface-rule: oklch(0.2 0.02 268 / 0.25); --surface-raise: var(--color-cadmium-soft);
+  [data-surface="sulfur"] {
+    --surface-bg: var(--color-sulfur); --surface-fg: var(--color-ink); --surface-muted: var(--color-sulfur-ink);
+    --surface-subtle: var(--color-sulfur-ink); --surface-rule: oklch(0.2 0.026 166 / 0.28); --surface-raise: var(--color-sulfur-soft);
     --surface-accent: var(--color-ink);
     color-scheme: light;
   }
   @media (prefers-contrast: more) {
     :root, [data-surface="paper"], [data-surface="paper-2"] { --surface-muted: var(--color-text); --surface-subtle: var(--color-text-2); }
-    [data-surface="ink"], [data-surface="ultramarine"] { --surface-muted: var(--color-on-dark); --surface-subtle: var(--color-on-dark-2); }
+    [data-surface="ink"], [data-surface="deep"] { --surface-muted: var(--color-on-dark); --surface-subtle: var(--color-on-dark-2); }
   }
 }

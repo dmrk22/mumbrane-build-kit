@@ -5,9 +5,9 @@ import { Icon } from './Icon'
 // Tones (PAGES §0.4 blocks): info · caveat · proposed. Each on its pigment's soft tint with its
 // -ink text (DESIGN §2.4 pairs).
 const TONE = {
-  info: { box: 'bg-cobalt-soft text-cobalt-ink border-cobalt-ink/30', icon: 'info' },
-  caveat: { box: 'bg-cadmium-soft text-cadmium-ink border-cadmium-ink/30', icon: 'warning' },
-  proposed: { box: 'bg-violet-soft text-violet-ink border-violet-ink/30', icon: 'flask' },
+  info: { box: 'bg-verdigris-soft text-verdigris-ink border-verdigris-ink/30', icon: 'info' },
+  caveat: { box: 'bg-sulfur-soft text-sulfur-ink border-sulfur-ink/30', icon: 'warning' },
+  proposed: { box: 'bg-iris-soft text-iris-ink border-iris-ink/30', icon: 'flask' },
 } as const
 
 export function Note({

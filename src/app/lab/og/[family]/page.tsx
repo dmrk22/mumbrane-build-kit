@@ -24,12 +24,12 @@ export default async function OgCardPage({ params }: { params: Promise<{ family:
       <div className="flex flex-col justify-between p-16">
         <Lockup height={40} />
         <div>
-          <p className="font-mono text-label text-surface-subtle uppercase">{card.eyebrow}</p>
-          <h1 className="mt-5 font-serif text-display-l text-balance">
+          <p className="font-serif-italic text-small text-surface-subtle">{card.eyebrow}</p>
+          <h1 className="mt-5 font-display text-display-l text-balance">
             <Inline text={card.title} />
           </h1>
         </div>
-        <p className="font-mono text-label text-surface-muted uppercase">{card.meta}</p>
+        <p className="font-serif-italic text-small text-surface-muted">{card.meta}</p>
       </div>
       <div className="relative border-l border-surface-rule">
         <Painting

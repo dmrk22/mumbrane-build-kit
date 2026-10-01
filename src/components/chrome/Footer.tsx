@@ -1,28 +1,30 @@
-import { Lockup } from '@/components/brand/Lockup'
-import { Wordmark } from '@/components/brand/Wordmark'
+import { StringModel } from '@/components/art/StringModel'
+import { Mark } from '@/components/brand/Mark'
 import { Container } from '@/components/layout/Container'
 import { InView } from '@/components/motion/InView'
+import { Qed } from '@/components/ui/Inline'
 import { SmartLink } from '@/components/ui/SmartLink'
 import { HEADER, FOOTER as NAV } from '@/content/nav'
 
-// DESIGN §9.3 + CONTENT §2.2: ink footer, six link columns, legal row, giant wordmark (§7.8).
+// The footer, after Anthropic's: the mark, the line, dense link columns, a legal row. The page
+// opens on the helicoid; it closes on the same surface at rest, the catenoid (θ = π/2).
 export function Footer() {
   return (
-    <footer data-surface="ink" className="overflow-hidden pt-16 md:pt-20 lg:pt-24 print:hidden">
-      <Container>
+    <footer data-surface="deep" className="relative overflow-hidden pt-16 md:pt-20 lg:pt-24 print:hidden">
+      <Container className="relative">
         <div className="grid grid-cols-12 gap-x-4 gap-y-14 lg:gap-x-6">
           <InView className="col-span-12 lg:col-span-4">
             <SmartLink href="/" aria-label={HEADER.homeLabel} className="-m-2 inline-block p-2">
-              <Lockup height={24} className="draw-on-reveal" />
+              <Mark width={88} className="draw-on-reveal" />
             </SmartLink>
-            <p className="mt-8 max-w-[14ch] font-serif text-display-s">{NAV.tagline}</p>
+            <p className="mt-8 max-w-[13ch] font-display text-display-s">{NAV.tagline}</p>
           </InView>
           <nav aria-label="Footer" className="col-span-12 lg:col-span-8">
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-6">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:gap-x-6">
               {NAV.columns.map((col) => (
                 <li key={col.title}>
-                  <h2 className="font-mono text-label text-surface-subtle uppercase">{col.title}</h2>
-                  <ul className="mt-5 flex flex-col gap-2.5">
+                  <h2 className="font-serif-italic text-small text-surface-subtle">{col.title}</h2>
+                  <ul className="mt-4 flex flex-col gap-2">
                     {col.links.map((l) => (
                       <li key={l.href}>
                         <SmartLink
@@ -40,7 +42,7 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-surface-rule py-6 text-small text-surface-muted sm:grid sm:grid-cols-3 sm:items-center lg:mt-24">
+        <div className="mt-20 flex flex-col gap-3 border-t border-surface-rule py-6 text-small text-surface-muted sm:grid sm:grid-cols-3 sm:items-center lg:mt-28">
           <p>{NAV.legal.copyright}</p>
           <SmartLink
             href={NAV.legal.privacyChoices.href}
@@ -48,16 +50,27 @@ export function Footer() {
           >
             {NAV.legal.privacyChoices.label}
           </SmartLink>
-          <p className="font-serif-italic sm:justify-self-end">{NAV.legal.motto}</p>
+          <p className="flex items-baseline gap-3 font-serif-italic sm:justify-self-end">
+            {NAV.legal.motto}
+            <Qed className="text-surface-fg" />
+          </p>
         </div>
       </Container>
 
-      {/* The giant wordmark, clipped to its top ≈ 62 % (decorative); letters rise in once (§7.8). */}
-      <Container className="mt-8 lg:mt-12">
-        <InView className="aspect-[5340.4/434] overflow-hidden text-ink-3">
-          <Wordmark className="wordmark-rise h-auto w-full" />
-        </InView>
-      </Container>
+      {/* The page's last figure: it rises in once it is reached (InView), even at the very end. */}
+      <InView>
+        <div
+          aria-hidden="true"
+          className="footer-film pointer-events-none relative mx-auto h-64 max-w-360 overflow-hidden text-on-dark-3 md:h-80"
+        >
+          <StringModel
+            theta={Math.PI / 2}
+            strings={110}
+            yaw={0.2}
+            className="absolute top-[-4rem] left-1/2 h-[60rem] w-auto -translate-x-1/2 opacity-50 md:top-[-6rem] md:h-[72rem]"
+          />
+        </div>
+      </InView>
     </footer>
   )
 }

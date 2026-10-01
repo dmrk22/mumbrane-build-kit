@@ -15,7 +15,7 @@ export function LightCone({
   labels: { decision: string; reachable: string; unreachable: string; time: string }
   className?: string
 }) {
-  const label = 'absolute font-mono text-label uppercase'
+  const label = 'absolute font-serif-italic text-small'
   return (
     <div data-figure="light-cone" className={cx('relative', className)} aria-hidden="true">
       <svg viewBox="0 0 480 300" className="block h-auto w-full" aria-hidden="true">
@@ -34,7 +34,7 @@ export function LightCone({
           <circle cx="96" cy="120" r="3.5" opacity={0.5} />
           <circle cx="400" cy="130" r="3.5" opacity={0.5} />
         </g>
-        <circle cx="240" cy="56" r="5" className="fill-vermilion" />
+        <circle cx="240" cy="56" r="5" className="fill-cinnabar" />
       </svg>
       {/* Right of the time axis (x 240 = 50 %) so the dashed line never strikes through a label. */}
       <span className={cx(label, 'top-[2%] left-[52%] text-surface-muted')}>{labels.time} ↑</span>

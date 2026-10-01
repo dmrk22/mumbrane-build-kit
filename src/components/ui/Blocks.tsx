@@ -75,7 +75,7 @@ export function Blocks({ blocks }: { blocks: readonly Block[] }) {
         )
       case 'callout':
         return (
-          <aside key={key} className="not-prose border-l-2 border-ultramarine pl-6 font-sans">
+          <aside key={key} className="not-prose border-l-2 border-moss pl-6 font-sans">
             <p className="text-title">{b.title}</p>
             <p className="mt-2 text-body text-surface-muted">
               <Inline text={b.text} />

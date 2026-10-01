@@ -20,7 +20,7 @@ export default function NewsPage() {
     <>
       <Section surface="paper" labelledBy="news-title" className="pt-10 lg:pt-16">
         <Eyebrow>{NEWS.hero.eyebrow}</Eyebrow>
-        <h1 id="news-title" className="mt-4 font-serif text-display-l">
+        <h1 id="news-title" className="mt-4 font-display text-display-l">
           {NEWS.hero.title}
         </h1>
         <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{NEWS.hero.lede}</p>
@@ -34,7 +34,7 @@ export default function NewsPage() {
                 </CropMarks>
               </div>
               <div className="col-span-12 lg:col-span-4 lg:col-start-9">
-                <p className="font-mono text-label text-surface-subtle uppercase">
+                <p className="font-serif-italic text-small text-surface-subtle">
                   {NEWS.featured} · <time dateTime={featured.published}>{proseDate(featured.published)}</time>{' '}
                   · {featured.category}
                 </p>

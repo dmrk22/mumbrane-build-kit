@@ -1,19 +1,20 @@
 // /company and /careers copy (CONTENT §3.5, §3.6). Inline markup (*italic*) via <Inline>.
 
-/** Pigment pairs from DESIGN §2.4 (checked in contrast.test.ts); the component maps them to classes. */
+/** Block grounds, a walk through chalk pigments; the component maps each to a ground + text pair
+ (checked in contrast.test.ts). */
 export type BlockFill =
-  | 'ultramarine'
-  | 'paper'
-  | 'cadmium'
-  | 'viridian'
-  | 'ink'
-  | 'vermilion'
-  | 'violet'
+  | 'sulfur'
+  | 'ochre'
+  | 'cinnabar'
   | 'madder'
-  | 'cherenkov'
-  | 'paper-3'
-  | 'cobalt'
+  | 'iris'
+  | 'verdigris'
+  | 'malachite'
+  | 'moss'
+  | 'paper'
   | 'paper-2'
+  | 'paper-3'
+  | 'ink'
 
 export type CompanyBlock =
   | {
@@ -32,19 +33,19 @@ export type CompanyBlock =
 export const COMPANY = {
   hero: {
     eyebrow: 'Company',
-    title: 'The lab, block by *block.*',
+    title: 'The lab, block by block.',
     lede: 'Mumbrane is an independent research lab investigating field-based intelligence. We study how retained knowledge, reusable skills, and explicit constraints can support more general reasoning.',
   },
   blocks: {
-    unlocked: 'Unlocked',
-    locked: 'Locked',
+    unlocked: 'proven',
+    locked: 'Unproven',
     // Reading order is the 6-column layout order (board 05-company-blocks): three rows of six cells.
     items: [
       {
         kind: 'open',
         label: 'Mission',
         text: 'Intelligence that answers from the world you define.',
-        fill: 'ultramarine',
+        fill: 'sulfur',
         step: 1,
         wide: true,
       },
@@ -52,16 +53,16 @@ export const COMPANY = {
         kind: 'open',
         label: 'The name',
         text: 'μ + membrane. A particle that passes through; a boundary that holds.',
-        fill: 'paper',
+        fill: 'malachite',
         step: 9,
       },
-      { kind: 'open', label: 'Principle 01', text: 'Evidence before eloquence.', fill: 'cadmium', step: 6 },
-      { kind: 'open', label: 'Independent', text: 'An independent research lab.', fill: 'cobalt', step: 11 },
+      { kind: 'open', label: 'Principle 01', text: 'Evidence before eloquence.', fill: 'madder', step: 6 },
+      { kind: 'open', label: 'Independent', text: 'An independent research lab.', fill: 'paper-3', step: 11 },
       {
         kind: 'open',
         label: 'Principle 02',
         text: 'Say what is supported. Say what is not.',
-        fill: 'viridian',
+        fill: 'ochre',
         step: 2,
       },
       { kind: 'locked', label: 'Hosted console — in preparation' },
@@ -69,7 +70,7 @@ export const COMPANY = {
         kind: 'open',
         label: 'Moth',
         text: 'Preview 004 · local CLI · checked answers',
-        fill: 'ink',
+        fill: 'paper',
         step: 3,
         wide: true,
         href: '/moth',
@@ -78,16 +79,16 @@ export const COMPANY = {
         kind: 'open',
         label: 'Principle 04',
         text: 'Publish the limits with the results.',
-        fill: 'paper-2',
+        fill: 'ink',
         step: 12,
       },
-      { kind: 'open', label: 'Careers', text: 'Join the lab', fill: 'vermilion', step: 4, href: '/careers' },
+      { kind: 'open', label: 'Careers', text: 'Join the lab', fill: 'cinnabar', step: 4, href: '/careers' },
       { kind: 'locked', label: 'Moth Base — proposed' },
       {
         kind: 'open',
         label: 'Research',
         text: 'Representation · Dynamics · Causality',
-        fill: 'violet',
+        fill: 'iris',
         step: 5,
         wide: true,
         href: '/research',
@@ -96,7 +97,7 @@ export const COMPANY = {
         kind: 'open',
         label: 'Contact',
         text: 'hello@mumbrane.com',
-        fill: 'madder',
+        fill: 'verdigris',
         step: 7,
         href: 'mailto:hello@mumbrane.com',
       },
@@ -104,7 +105,7 @@ export const COMPANY = {
         kind: 'open',
         label: 'Principle 03',
         text: 'Replay every answer against the build that made it.',
-        fill: 'cherenkov',
+        fill: 'moss',
         step: 10,
       },
       { kind: 'locked', label: 'Public API — not yet available' },
@@ -112,7 +113,7 @@ export const COMPANY = {
         kind: 'open',
         label: 'News',
         text: 'Introducing Moth Preview 004',
-        fill: 'paper-3',
+        fill: 'paper-2',
         step: 8,
         href: '/news/introducing-moth-preview-004',
       },

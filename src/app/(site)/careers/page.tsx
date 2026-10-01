@@ -9,7 +9,7 @@ import { routeMetadata } from '@/lib/seo'
 
 export const metadata = routeMetadata('/careers')
 
-// PAGES §6 — surfaces: paper · paper-2 · paper · cadmium. No job listing component exists until
+// PAGES §6 — surfaces: paper · paper-2 · paper · sulfur. No job listing component exists until
 // the owner supplies roles (CONTENT §4: never invent openings).
 export default function CareersPage() {
   const { hero, principles, areas, cta } = CAREERS
@@ -17,7 +17,7 @@ export default function CareersPage() {
     <>
       <Section surface="paper" labelledBy="careers-title" className="pt-12 md:pt-16 lg:pt-24">
         <Eyebrow>{hero.eyebrow}</Eyebrow>
-        <h1 id="careers-title" className="mt-4 max-w-[16ch] font-serif text-display-xl">
+        <h1 id="careers-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
           <Inline text={hero.title} />
         </h1>
         <p className="mt-8 max-w-[44ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
@@ -33,7 +33,7 @@ export default function CareersPage() {
               <span className="font-mono text-label text-surface-subtle tabular-nums">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="font-serif text-display-s">{p}</span>
+              <span className="font-display text-display-s">{p}</span>
             </li>
           ))}
         </ol>
@@ -57,7 +57,7 @@ export default function CareersPage() {
         </ul>
       </Section>
 
-      <Section surface="cadmium" id="write-to-us" labelledBy="careers-cta-title" rhythm="compact">
+      <Section surface="sulfur" id="write-to-us" labelledBy="careers-cta-title" rhythm="compact">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
             <Heading level={2} size="display-m" id="careers-cta-title">

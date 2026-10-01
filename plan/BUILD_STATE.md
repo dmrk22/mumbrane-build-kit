@@ -173,6 +173,16 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Screens reviewed 375/768/1440 + reduced; fixed: light-cone labels (SVG text fell to ~7 px at 375 and one crossed the time axis → HTML labels on the type scale)
 
 ## Handoff notes
+
+### Redesign R1 — "blackboard" (2026-10-01, D-128)
+Owner overrode the plan's design rules mid-session. Done: palette + tokens regenerated (contrast
+tests updated), fonts swapped (src/app/fonts.ts), surfaces renamed (ultramarine → deep, cadmium →
+sulfur), all pigment classes renamed; new art `src/lib/art/minimal.ts` (tested, incl. isometry),
+`src/shaders/strings.ts`, `MembraneCanvas` (string model), `StringModel` (SVG); new sections
+`Turnstile`, `ProofSheet` (replaces MothDemo); `OutcomeLedger` shows judgements; `BlocksMosaic` is
+a lemma wall; header/footer restyled; all-caps mono labels replaced by serif-italic running heads.
+Removed: EvidenceSeal, MothDemo. e2e expectations updated (counter wording, footer surface/reveal).
+Next: console app polish, per-page heroes (/moth, /research) in the new language, full `pnpm verify`.
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
 
 ### P14 — 2026-10-01

@@ -76,7 +76,7 @@
     }
     & blockquote {
       margin-block: 40px;
-      border-left: 2px solid var(--color-ultramarine);
+      border-left: 2px solid var(--color-moss);
       padding-left: 24px;
       font-family: var(--font-serif-italic);
       font-style: italic;

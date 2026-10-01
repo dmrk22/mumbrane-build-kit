@@ -42,12 +42,11 @@ const PAIRS: [bg: string[], text: string[], min: number][] = [
   [['paper', 'paper-2'], ['text', 'text-2', 'text-3', ...fg], 4.5],
   [['paper-3'], ['text', 'text-2', 'text-3'], 4.5],
   [['ink', 'ink-2'], ['on-dark', 'on-dark-2', 'on-dark-3', ...glow], 4.5],
-  [['ultramarine'], ['on-dark', 'on-dark-2', 'cadmium', 'cherenkov'], 4.5],
-  [['ultramarine-deep'], ['on-dark', 'on-dark-2'], 4.5],
-  [['cadmium'], ['ink', 'text-2', 'cadmium-ink'], 4.5],
-  [['viridian', 'vermilion', 'madder', 'cherenkov'], ['ink'], 4.5],
-  [['cobalt', 'violet-fg'], ['on-dark'], 4.5],
-  [['violet'], ['on-dark'], 3],
+  [['deep'], ['on-dark', 'on-dark-2', 'on-dark-3', 'sulfur'], 4.5],
+  [['sulfur'], ['ink', 'text-2', 'sulfur-ink'], 4.5],
+  // Company blocks and outcome chips: pigment grounds with ink text, or on-dark on the deep ones.
+  [['malachite', 'cinnabar', 'madder', 'ochre', 'verdigris'], ['ink'], 4.5],
+  [['moss', 'iris-fg'], ['on-dark'], 4.5],
   ...PIGMENTS.map((p): [string[], string[], number] => [[`${p}-soft`], [`${p}-ink`, 'text'], 4.5]),
 ]
 
@@ -63,15 +62,15 @@ test('every allowed text/background pair meets its contrast threshold', () => {
 })
 
 test('the contrast maths matches known WCAG values', () => {
-  // palette.json records these ratios; DESIGN §2.1 quotes 17.2 / 8.7 / 5.6 on paper.
-  assert.equal(contrast('text', 'paper').toFixed(1), '17.2')
-  assert.equal(contrast('text-2', 'paper').toFixed(1), '8.7')
-  assert.equal(contrast('text-3', 'paper').toFixed(1), '5.6')
+  // palette.json records these ratios (text, text-2, text-3 on paper).
+  assert.equal(contrast('text', 'paper').toFixed(1), '16.4')
+  assert.equal(contrast('text-2', 'paper').toFixed(1), '8.3')
+  assert.equal(contrast('text-3', 'paper').toFixed(1), '5.8')
 })
 
 test('pairs the design forbids really do fail (the table is not vacuous)', () => {
-  assert.ok(contrast('on-dark-3', 'ultramarine') < 4.5)
-  assert.ok(contrast('ink', 'violet') < 4.5)
+  assert.ok(contrast('on-dark-3', 'moss') < 4.5)
+  assert.ok(contrast('ink', 'iris') < 4.5)
 })
 
 test('hex comments in tokens.css match palette.json', () => {

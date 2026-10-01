@@ -23,7 +23,7 @@ export default function ChangelogPage() {
   return (
     <Section surface="paper" labelledBy="changelog-title" className="pt-12 md:pt-16 lg:pt-24">
       <Eyebrow>{CHANGELOG.eyebrow}</Eyebrow>
-      <h1 id="changelog-title" className="mt-4 font-serif text-display-xl">
+      <h1 id="changelog-title" className="mt-4 font-display text-display-xl">
         {CHANGELOG.title}
       </h1>
       <p className="mt-8 max-w-[52ch] font-serif text-lede text-surface-muted">{CHANGELOG.lede}</p>
@@ -34,7 +34,7 @@ export default function ChangelogPage() {
           aria-label={month}
           className="mt-16 grid gap-6 border-t border-surface-rule pt-6 lg:grid-cols-12"
         >
-          <h2 className="font-mono text-label text-surface-subtle uppercase lg:col-span-3">
+          <h2 className="font-serif-italic text-small text-surface-subtle lg:col-span-3">
             <span className="lg:sticky lg:top-28">{month}</span>
           </h2>
           <ol className="flex flex-col lg:col-span-9">

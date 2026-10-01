@@ -21,7 +21,7 @@ const DOT = {
 export default function ConsoleEntry() {
   return (
     <div className="mx-auto w-full max-w-5xl px-5 pt-10 pb-16 md:px-10 md:pt-16">
-      <h1 className="font-serif text-display-s">{entry.title}</h1>
+      <h1 className="font-display text-display-s">{entry.title}</h1>
       <p className="mt-4 max-w-[58ch] text-body text-surface-muted">{entry.text}</p>
       <ol className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-label text-surface-subtle uppercase">
         {entry.steps.map((s, i) => (

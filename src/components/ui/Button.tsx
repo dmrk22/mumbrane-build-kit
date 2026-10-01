@@ -4,7 +4,7 @@ import { cx } from '@/lib/cx'
 import { Icon } from './Icon'
 import { SmartLink } from './SmartLink'
 
-// DESIGN §9.4 + §7.7. Primary inverts the surface (ink on paper, paper on ink/ultramarine).
+// DESIGN §9.4 + §7.7. Primary inverts the surface (ink on paper, paper on ink/moss).
 const VARIANT = {
   primary:
     'rounded-pill bg-surface-invert text-surface-on-invert inset-ring inset-ring-transparent hover:inset-ring-surface-on-invert/30',

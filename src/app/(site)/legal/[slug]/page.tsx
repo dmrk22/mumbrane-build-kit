@@ -62,10 +62,10 @@ export default async function LegalPage({ params }: Props) {
 
           <div className="col-span-12 lg:col-span-7 lg:col-start-4">
             <Eyebrow>{LEGAL_UI.eyebrow}</Eyebrow>
-            <h1 id="legal-title" className="mt-4 font-serif text-display-l">
+            <h1 id="legal-title" className="mt-4 font-display text-display-l">
               {routeFor(path).title}
             </h1>
-            <p className="mt-6 font-mono text-label text-surface-subtle uppercase">
+            <p className="mt-6 font-serif-italic text-small text-surface-subtle">
               {LEGAL_UI.updated} <time dateTime={doc.updated}>{proseDate(doc.updated)}</time>
             </p>
             {doc.banner && (

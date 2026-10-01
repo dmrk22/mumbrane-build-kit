@@ -193,7 +193,7 @@ test.describe('@motion company blocks (DESIGN §7.6)', () => {
     test.use({ javaScriptEnabled: false })
     test('every block is open and the counter reads 12 / 12', async ({ page }) => {
       await page.goto('/company')
-      await expect(counter(page)).toHaveText(/^12 \/ 12/)
+      await expect(counter(page)).toHaveText(/^12 of 12/)
       expect(new Set(await opacityOfCopy(page))).toEqual(new Set(['1']))
     })
   })
@@ -202,7 +202,7 @@ test.describe('@motion company blocks (DESIGN §7.6)', () => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/company')
     await expect(page.locator('[data-blocks]')).toHaveAttribute('data-live', '')
-    await expect(counter(page)).toHaveText(/^12 \/ 12/)
+    await expect(counter(page)).toHaveText(/^12 of 12/)
     expect(new Set(await opacityOfCopy(page))).toEqual(new Set(['1']))
   })
 
@@ -213,13 +213,13 @@ test.describe('@motion company blocks (DESIGN §7.6)', () => {
     test.skip(isMobile, 'desktop pin')
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto('/company')
-    await expect(counter(page)).toHaveText(/^00 \/ 12/)
+    await expect(counter(page)).toHaveText(/^00 of 12/)
     // Locked, yet named for assistive tech.
     const moth = page.getByRole('link', { name: /Preview 004 · local CLI/ })
     await expect(moth).not.toHaveAttribute('data-unlocked', '')
     await moth.focus()
     await expect(moth).toHaveAttribute('data-unlocked', '')
-    await expect(counter(page)).toHaveText(/^01 \/ 12/)
+    await expect(counter(page)).toHaveText(/^01 of 12/)
   })
 
   test('desktop: scrolling through the pin unlocks all twelve', async ({ page, isMobile }) => {
@@ -228,7 +228,7 @@ test.describe('@motion company blocks (DESIGN §7.6)', () => {
     await page.goto('/company')
     await page.waitForFunction(() => document.querySelector('.pin-spacer'))
     await scrollThrough(page)
-    await expect(counter(page)).toHaveText(/^12 \/ 12/)
+    await expect(counter(page)).toHaveText(/^12 of 12/)
     // The three future-work blocks stay locked in every state.
     await expect(page.locator('[data-blocks] li:not(:has([data-step]))')).toHaveCount(3)
   })
@@ -240,7 +240,7 @@ test.describe('@motion company blocks (DESIGN §7.6)', () => {
     const before = Number((await counter(page).textContent())?.slice(0, 2))
     expect(before).toBeLessThan(12)
     await scrollThrough(page)
-    await expect(counter(page)).toHaveText(/^12 \/ 12/)
+    await expect(counter(page)).toHaveText(/^12 of 12/)
   })
 })
 

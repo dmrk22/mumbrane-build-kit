@@ -41,11 +41,11 @@ export function Plate({
     <InView className={cx('h-full', className)}>
       <article
         data-surface="paper"
-        className="plate group relative flex h-full flex-col border border-surface-rule p-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-surface-accent"
+        className="plate group relative flex h-full flex-col rounded-lg border border-surface-rule p-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-surface-accent"
       >
-        <header className="flex items-baseline justify-between font-mono text-label text-surface-subtle uppercase">
+        <header className="flex items-baseline justify-between font-serif-italic text-small text-surface-subtle">
           <span>Plate {roman(number)}</span>
-          <time dateTime={date} className="tabular-nums">
+          <time dateTime={date} className="font-serif not-italic tabular-nums">
             {monoDate(date)}
           </time>
         </header>
@@ -54,7 +54,7 @@ export function Plate({
             <Painting id={paintingId} sizes={sizes} className="plate-painting" />
           </div>
         </CropMarks>
-        <H className="mt-7 px-1 font-serif text-display-s">
+        <H className="mt-7 px-1 font-display text-display-s">
           {href ? (
             <SmartLink
               href={href}
@@ -66,8 +66,8 @@ export function Plate({
             <TitleText text={title} />
           )}
         </H>
-        <p className="mt-3 px-1 font-mono text-label text-surface-subtle uppercase">
-          {meta} · Oil on code · Seed {p.seed}
+        <p className="mt-3 px-1 font-serif-italic text-small text-surface-subtle">
+          {meta}, oil on code, seed {p.seed}
         </p>
         {/* Spacing lives on a wrapper: padding on the 6 px SVG itself would leave it no height. */}
         <div className="mt-auto px-1 pt-6">

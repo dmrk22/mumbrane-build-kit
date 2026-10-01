@@ -5,20 +5,20 @@
 @layer base {
   /* Trace status colours as text: the -fg pigments on paper, the -glow ones on ink (DESIGN §2.4). */
   [data-console-surface] {
-    --console-ok: var(--color-viridian-fg);
-    --console-gap: var(--color-cadmium-fg);
-    --console-bad: var(--color-vermilion-fg);
+    --console-ok: var(--color-malachite-fg);
+    --console-gap: var(--color-sulfur-fg);
+    --console-bad: var(--color-cinnabar-fg);
   }
   html[data-console-theme="dark"] [data-console-surface] {
-    --console-ok: var(--color-viridian-glow);
-    --console-gap: var(--color-cadmium-glow);
-    --console-bad: var(--color-vermilion-glow);
+    --console-ok: var(--color-malachite-glow);
+    --console-gap: var(--color-sulfur-glow);
+    --console-bad: var(--color-cinnabar-glow);
   }
   @media (prefers-color-scheme: dark) {
     html:not([data-console-theme="light"]) [data-console-surface] {
-      --console-ok: var(--color-viridian-glow);
-      --console-gap: var(--color-cadmium-glow);
-      --console-bad: var(--color-vermilion-glow);
+      --console-ok: var(--color-malachite-glow);
+      --console-gap: var(--color-sulfur-glow);
+      --console-bad: var(--color-cinnabar-glow);
     }
   }
 
@@ -34,7 +34,7 @@
     --surface-subtle: var(--color-on-dark-3);
     --surface-rule: var(--color-rule-dark);
     --surface-raise: var(--color-ink-2);
-    --surface-accent: var(--color-cherenkov);
+    --surface-accent: var(--color-verdigris);
     color-scheme: dark;
   }
   html[data-console-theme="dark"] [data-console-panel] {
@@ -54,7 +54,7 @@
       --surface-subtle: var(--color-on-dark-3);
       --surface-rule: var(--color-rule-dark);
       --surface-raise: var(--color-ink-2);
-      --surface-accent: var(--color-cherenkov);
+      --surface-accent: var(--color-verdigris);
       --surface-invert: var(--color-paper);
       --surface-on-invert: var(--color-ink);
       color-scheme: dark;
@@ -80,7 +80,7 @@
 
   /* A fact or definition clicked in the evidence flashes in the world panel (§8). */
   [data-flash="true"] {
-    outline: 2px solid var(--color-cadmium);
+    outline: 2px solid var(--color-sulfur);
     outline-offset: 2px;
     animation: console-flash 2s var(--ease-out);
   }
@@ -127,7 +127,7 @@
 
 @keyframes console-flash {
   from {
-    background-color: var(--color-cadmium-soft);
+    background-color: var(--color-sulfur-soft);
   }
   to {
     background-color: transparent;
@@ -151,13 +151,13 @@
   }
 }
 
-/* Prose links are ultramarine-fg on paper; on the dark console they take the ink colour (DESIGN
+/* Prose links are moss-fg on paper; on the dark console they take the ink colour (DESIGN
    §3.4). Unlayered, so it outranks the link-prose utility without !important. */
 html[data-console-theme="dark"] [data-console-surface] .link-prose {
-  color: var(--color-cherenkov);
+  color: var(--color-verdigris);
 }
 @media (prefers-color-scheme: dark) {
   html:not([data-console-theme="light"]) [data-console-surface] .link-prose {
-    color: var(--color-cherenkov);
+    color: var(--color-verdigris);
   }
 }

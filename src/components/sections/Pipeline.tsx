@@ -30,7 +30,7 @@ export function Pipeline({
             )}
             <svg viewBox="0 0 16 16" width={16} height={16} aria-hidden="true" className="relative shrink-0">
               <circle cx="8" cy="8" r="6.5" className="fill-surface" stroke="currentColor" strokeWidth={1} />
-              <circle cx="8" cy="8" r="2.5" className={i === 0 ? 'fill-cherenkov' : 'fill-current'} />
+              <circle cx="8" cy="8" r="2.5" className={i === 0 ? 'fill-verdigris' : 'fill-current'} />
             </svg>
             <div className="flex flex-col gap-2">
               <p className="font-mono text-label text-surface-subtle">{String(i + 1).padStart(2, '0')}</p>
@@ -40,7 +40,7 @@ export function Pipeline({
           </li>
         ))}
       </ol>
-      <figcaption className="mt-10 flex flex-wrap gap-x-4 gap-y-1 font-mono text-label text-surface-subtle uppercase">
+      <figcaption className="mt-10 flex flex-wrap gap-x-4 gap-y-1 font-serif-italic text-small text-surface-subtle">
         <span>{figure}</span>
         {caption && <span className="normal-case">{caption}</span>}
       </figcaption>

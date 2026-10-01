@@ -4,74 +4,79 @@
    ========================================================================== */
 
 @layer components {
-  /* Header lockup collapse: letters fold E → M (30 ms stagger, 310 ms each, mb.twist), each sliding
-   toward the mark ≈ 4 px per index (312 wordmark units at the 20 px lockup) and fading over the
-   last 40 %. Expansion runs M → E in 480 ms with mb.out. The mark itself only gets the uniform
-   1 → 1.04 → 1 bump. */
+  /* Header lockup collapse (after Anthropic's): past 80 px of scroll every letter glides left into
+   the Möbius mark — the far letters travel furthest and leave first — fading over the second half
+   of the move, while the mark redraws its single edge as if it took them in. Shifts are in
+   wordmark units (transform-box: fill-box). Expansion reverses, M first. */
   .lockup-collapsible .mb-letter {
     transform-box: fill-box;
-    transform-origin: center;
     transition:
-      transform 270ms var(--ease-out) var(--in),
-      opacity 108ms linear var(--in);
+      transform 620ms var(--ease-out) var(--in),
+      opacity 360ms linear calc(var(--in) + 140ms);
   }
   [data-collapsed="true"] .lockup-collapsible .mb-letter {
-    transform: translateX(var(--shift)) scaleY(0);
+    transform: translateX(var(--shift));
     opacity: 0;
     transition:
-      transform 310ms var(--ease-twist) var(--out),
-      opacity 124ms linear calc(var(--out) + 186ms);
+      transform 560ms var(--ease-twist) var(--out),
+      opacity 260ms linear calc(var(--out) + 240ms);
   }
   .lockup-collapsible [data-letter="0"] {
-    --shift: 0px;
+    --shift: -560px;
+    --out: 154ms;
     --in: 0ms;
-    --out: 210ms;
   }
   .lockup-collapsible [data-letter="1"] {
-    --shift: -312px;
-    --in: 30ms;
-    --out: 180ms;
+    --shift: -1227px;
+    --out: 132ms;
+    --in: 26ms;
   }
   .lockup-collapsible [data-letter="2"] {
-    --shift: -624px;
-    --in: 60ms;
-    --out: 150ms;
+    --shift: -1894px;
+    --out: 110ms;
+    --in: 52ms;
   }
   .lockup-collapsible [data-letter="3"] {
-    --shift: -936px;
-    --in: 90ms;
-    --out: 120ms;
+    --shift: -2561px;
+    --out: 88ms;
+    --in: 78ms;
   }
   .lockup-collapsible [data-letter="4"] {
-    --shift: -1248px;
-    --in: 120ms;
-    --out: 90ms;
+    --shift: -3228px;
+    --out: 66ms;
+    --in: 104ms;
   }
   .lockup-collapsible [data-letter="5"] {
-    --shift: -1560px;
-    --in: 150ms;
-    --out: 60ms;
+    --shift: -3895px;
+    --out: 44ms;
+    --in: 130ms;
   }
   .lockup-collapsible [data-letter="6"] {
-    --shift: -1872px;
-    --in: 180ms;
-    --out: 30ms;
+    --shift: -4562px;
+    --out: 22ms;
+    --in: 156ms;
   }
   .lockup-collapsible [data-letter="7"] {
-    --shift: -2184px;
-    --in: 210ms;
+    --shift: -5229px;
     --out: 0ms;
+    --in: 182ms;
   }
   .lockup-collapsible .mb-mark-bump {
     transform-box: fill-box;
     transform-origin: center;
   }
   [data-collapsed="true"] .lockup-collapsible .mb-mark-bump {
-    animation: mark-bump 240ms var(--ease-out) 240ms;
+    animation: mark-bump 420ms var(--ease-out) 320ms;
   }
   @keyframes mark-bump {
     50% {
-      transform: scale(1.04);
+      transform: scale(1.06);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    [data-collapsed="true"] .lockup-collapsible .mb-edges path {
+      stroke-dasharray: 1;
+      animation: mark-draw 700ms var(--ease-in-out) 260ms both;
     }
   }
 
@@ -232,17 +237,18 @@ main h1[tabindex="-1"]:focus {
      below 1024 px the text spans the width, so the scrim does too (strongest on the text side). */
   .hero-scrim {
     background: linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--color-ultramarine-deep) 55%, transparent) 0%,
-      color-mix(in oklab, var(--color-ultramarine-deep) 30%, transparent) 100%
+      180deg,
+      color-mix(in oklab, var(--color-deep) 10%, transparent) 0%,
+      color-mix(in oklab, var(--color-deep) 70%, transparent) 70%
     );
   }
   @media (min-width: 1024px) {
     .hero-scrim {
       background: linear-gradient(
         90deg,
-        color-mix(in oklab, var(--color-ultramarine-deep) 45%, transparent) 0%,
-        transparent 38%
+        color-mix(in oklab, var(--color-deep) 82%, transparent) 0%,
+        color-mix(in oklab, var(--color-deep) 40%, transparent) 38%,
+        transparent 58%
       );
     }
   }

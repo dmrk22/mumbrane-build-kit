@@ -4,34 +4,36 @@ import { type ReactNode, useEffect, useRef, useState } from 'react'
 import { Container } from '@/components/layout/Container'
 import { PIN_OK, usePinnedSteps } from '@/components/motion/usePinnedSteps'
 import { Icon } from '@/components/ui/Icon'
+import { Qed } from '@/components/ui/Inline'
 import { SmartLink } from '@/components/ui/SmartLink'
 import type { BlockFill, CompanyBlock } from '@/content/company'
 import { cx } from '@/lib/cx'
 
-// DESIGN §2.4 pairs (contrast.test.ts): the pigment ground and the text that sits on it.
+// Ground + text pairs (contrast.test.ts). Iris text needs its darker fg ground to pass AA.
 const FILL: Record<BlockFill, { bg: string; fg: string }> = {
-  ultramarine: { bg: 'bg-ultramarine', fg: 'text-on-dark' },
-  paper: { bg: 'bg-paper', fg: 'text-text' },
-  cadmium: { bg: 'bg-cadmium', fg: 'text-ink' },
-  viridian: { bg: 'bg-viridian', fg: 'text-ink' },
-  ink: { bg: 'bg-ink', fg: 'text-on-dark' },
-  vermilion: { bg: 'bg-vermilion', fg: 'text-ink' },
-  // The violet-fg token in variable form: the write hook mistakes the utility name for Tailwind's palette.
-  violet: { bg: 'bg-(--color-violet-fg)', fg: 'text-on-dark' },
+  sulfur: { bg: 'bg-sulfur', fg: 'text-ink' },
+  ochre: { bg: 'bg-ochre', fg: 'text-ink' },
+  cinnabar: { bg: 'bg-cinnabar', fg: 'text-ink' },
   madder: { bg: 'bg-madder', fg: 'text-ink' },
-  cherenkov: { bg: 'bg-cherenkov', fg: 'text-ink' },
-  'paper-3': { bg: 'bg-paper-3', fg: 'text-text' },
-  cobalt: { bg: 'bg-cobalt', fg: 'text-on-dark' },
+  iris: { bg: 'bg-iris-fg', fg: 'text-on-dark' },
+  verdigris: { bg: 'bg-verdigris', fg: 'text-ink' },
+  malachite: { bg: 'bg-malachite', fg: 'text-ink' },
+  moss: { bg: 'bg-moss', fg: 'text-on-dark' },
+  paper: { bg: 'bg-paper', fg: 'text-text' },
   'paper-2': { bg: 'bg-paper-2', fg: 'text-text' },
+  'paper-3': { bg: 'bg-paper-3', fg: 'text-text' },
+  ink: { bg: 'bg-ink-3', fg: 'text-on-dark' },
 }
 
 /**
- * "The lab, block by block" (DESIGN §7.6). Locked blocks are drawn by CSS from the first paint
+ * "The lab, block by block" — a wall of lemmas. Each block starts unproven (hatched) and is proven
+ * as you go: its pigment wipes in from the corner, its statement rises, a ∎ lands. Genuinely future
+ * work stays a conjecture in every state. Locked blocks are drawn by CSS from the first paint
  * (`@media (scripting: enabled)` + motion allowed, art.css), so nothing is re-hidden when this
- * hydrates; without JavaScript or with reduced motion every block is open and the counter reads
- * 12 / 12. Desktop with motion: the section pins and scroll unlocks the blocks in `step` order.
- * Smaller screens: each block unlocks as it enters the viewport. Focusing a linked block unlocks
- * it at once. Block text is always in the accessibility tree; the lock overlay is decorative.
+ * hydrates; without JavaScript or with reduced motion every lemma is proven and the counter reads
+ * 12 of 12. Desktop with motion: the section pins and scroll proves the blocks in `step` order.
+ * Smaller screens: each block is proven as it enters the viewport. Focusing a linked block proves
+ * it at once. Block text is always in the accessibility tree; the hatch is decorative.
  */
 export function BlocksMosaic({
   blocks,
@@ -98,36 +100,49 @@ export function BlocksMosaic({
   return (
     <section
       ref={ref}
-      data-surface="paper"
+      data-surface="deep"
       data-blocks=""
       data-live={mode === 'pending' ? undefined : ''}
       aria-labelledby="company-title"
-      className="pt-12 pb-16 md:pt-16 md:pb-24 lg:min-h-dvh lg:pt-24 lg:pb-6"
+      className="-mt-15 pt-27 pb-16 md:pb-24 lg:-mt-18 lg:min-h-dvh lg:pt-24 lg:pb-6"
     >
       <Container>
         {/* Heading left; lede and counter right, so the pinned section fits a 900 px viewport. */}
         <div className="grid gap-x-6 gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">{heading}</div>
-          <div className="flex flex-col gap-6 lg:col-span-5 lg:col-start-8">
-            <p className="max-w-[52ch] text-body text-surface-muted">{lede}</p>
-            <p className="font-mono text-label text-surface-subtle tabular-nums uppercase lg:text-right">
-              {String(count).padStart(2, '0')} / {String(total).padStart(2, '0')} {labels.unlocked}
-            </p>
+          <div className="flex flex-col gap-5 lg:col-span-5 lg:col-start-8">
+            <p className="max-w-[50ch] font-serif text-body text-surface-muted">{lede}</p>
+            <div className="flex items-center gap-4 lg:justify-end">
+              <span aria-hidden="true" className="flex gap-1">
+                {blocks
+                  .filter((b) => b.kind === 'open')
+                  .map((b) => (
+                    <span
+                      key={b.label}
+                      className={cx(
+                        'size-2.5 border border-surface-fg/50 transition-colors duration-(--duration-ui)',
+                        isOpen(b.step) && mode !== 'pending' && 'bg-sulfur',
+                        mode === 'pending' && 'bg-sulfur',
+                      )}
+                    />
+                  ))}
+              </span>
+              <p className="font-serif-italic text-small text-surface-muted tabular-nums">
+                {String(count).padStart(2, '0')} of {String(total).padStart(2, '0')} {labels.unlocked}
+              </p>
+            </div>
           </div>
         </div>
-        {/* Rows are 200 px (DESIGN §7.6) unless the viewport is too short to pin all three. */}
-        <ul className="mt-10 grid grid-cols-2 gap-2 max-lg:grid-flow-row-dense lg:mt-12 lg:auto-rows-[clamp(140px,calc((100dvh-300px)/3),200px)] lg:grid-cols-6">
+        {/* Rows are 200 px unless the viewport is too short to pin all three. */}
+        <ul className="mt-10 grid grid-cols-2 gap-1.5 max-lg:grid-flow-row-dense lg:mt-12 lg:auto-rows-[clamp(140px,calc((100dvh-300px)/3),200px)] lg:grid-cols-6">
           {blocks.map((b) =>
             b.kind === 'locked' ? (
               <li
                 key={b.label}
-                className="dot-screen relative flex min-h-35 flex-col justify-end border border-surface-rule p-4 lg:min-h-0 lg:p-5"
+                className="block-hatch relative flex min-h-35 flex-col justify-between rounded-md border border-surface-rule p-4 lg:min-h-0 lg:p-5"
               >
-                <Icon
-                  name="lock"
-                  className="absolute top-4 right-4 size-4 text-surface-subtle lg:top-5 lg:right-5"
-                />
-                <p className="pr-6 font-mono text-label text-surface-muted uppercase">{b.label}</p>
+                <p className="font-serif-italic text-small text-surface-subtle">Conjecture</p>
+                <p className="pr-2 font-sans text-small text-surface-muted">{b.label}</p>
               </li>
             ) : (
               <li key={b.label} className={b.wide ? 'col-span-2' : 'col-span-1'}>
@@ -158,46 +173,52 @@ function Block({
       <span aria-hidden="true" className={cx('block-fill absolute inset-0', fill.bg)} />
       <span
         aria-hidden="true"
-        className="block-lock dot-screen absolute inset-0 border border-rule text-text-2"
+        className="block-lock block-hatch absolute inset-0 border border-surface-rule text-on-dark-3"
       >
-        <span className="absolute bottom-4 left-4 font-mono text-label uppercase lg:bottom-5 lg:left-5">
+        <span className="absolute top-4 left-4 font-serif-italic text-small lg:top-5 lg:left-5">
+          Lemma {block.step}
+        </span>
+        <span className="absolute bottom-4 left-4 font-serif-italic text-small lg:bottom-5 lg:left-5">
           {locked}
         </span>
-        <Icon name="lock" className="absolute top-4 right-4 size-4 lg:top-5 lg:right-5" />
+        <span className="absolute right-4 bottom-3 font-serif text-display-s lg:right-5">?</span>
       </span>
       <span className="block-copy relative flex h-full flex-col justify-between gap-4">
-        <span className="flex items-start justify-between gap-4 font-mono text-label uppercase">
+        <span className="flex items-start justify-between gap-4 font-serif-italic text-small">
           {block.label}
           {block.href && <Icon name="arrow-up-right" className="size-4 shrink-0" />}
         </span>
-        <span
-          className={cx(
-            'max-w-[26ch] font-serif leading-tight font-normal text-pretty',
-            block.wide ? 'text-title' : 'text-lede',
-          )}
-        >
-          {/* An address breaks after the @ rather than overflowing a narrow block. */}
-          {block.text.includes('@') ? (
-            <>
-              {block.text.slice(0, block.text.indexOf('@') + 1)}
-              <wbr />
-              {block.text.slice(block.text.indexOf('@') + 1)}
-            </>
-          ) : (
-            block.text
-          )}
+        <span className="flex items-end justify-between gap-3">
+          <span
+            className={cx(
+              'max-w-[24ch] font-display text-title leading-tight font-medium text-pretty',
+              block.wide && 'xl:max-w-[28ch]',
+            )}
+          >
+            {/* An address breaks after the @ rather than overflowing a narrow block. */}
+            {block.text.includes('@') ? (
+              <>
+                {block.text.slice(0, block.text.indexOf('@') + 1)}
+                <wbr />
+                {block.text.slice(block.text.indexOf('@') + 1)}
+              </>
+            ) : (
+              block.text
+            )}
+          </span>
+          <Qed className="mb-1.5 shrink-0 opacity-70" />
         </span>
       </span>
     </>
   )
   const className = cx(
-    'relative flex h-full min-h-35 flex-col overflow-hidden p-4 lg:min-h-0 lg:p-5',
+    'relative flex h-full min-h-35 flex-col overflow-hidden rounded-md p-4 lg:min-h-0 lg:p-5',
     fill.fg,
   )
   const attrs = { 'data-step': block.step, 'data-unlocked': open ? '' : undefined }
   return block.href ? (
-    // The site's focus ring, drawn outside the block in the grid gap: an inset ring was painted
-    // over by the fill and lock layers, so focus was invisible (a11y.spec focus test).
+    // The site's focus ring, drawn outside the block in the grid gap: an inset ring would be
+    // painted over by the fill and hatch layers.
     <SmartLink href={block.href} onFocus={onFocus} className={className} {...attrs}>
       {body}
     </SmartLink>

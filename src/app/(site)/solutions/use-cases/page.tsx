@@ -18,7 +18,7 @@ function Card({ item, badge, noExample }: { item: UseCase; badge: string; noExam
   return (
     <li className="flex flex-col gap-5 border border-surface-rule bg-surface p-6">
       <Tag className="self-start">{badge}</Tag>
-      <h3 className="font-serif text-display-s">{item.name}</h3>
+      <h3 className="font-display text-display-s">{item.name}</h3>
       <p className="font-serif text-lede">{item.definition}</p>
       {item.example ? (
         <div className="mt-auto flex flex-col gap-3 border-t border-dashed border-surface-rule pt-4">
@@ -55,7 +55,7 @@ export default async function UseCasesPage({ searchParams }: Props) {
         rhythm="compact"
       >
         <Eyebrow>{USE_CASES.eyebrow}</Eyebrow>
-        <h1 id="use-cases-title" className="mt-4 font-serif text-display-l">
+        <h1 id="use-cases-title" className="mt-4 font-display text-display-l">
           {USE_CASES.title}
         </h1>
         <p className="mt-6 max-w-[56ch] font-serif text-lede text-surface-muted">{USE_CASES.lede}</p>
@@ -73,7 +73,7 @@ export default async function UseCasesPage({ searchParams }: Props) {
       </Section>
 
       <Section surface="paper-2" id="worlds" labelledBy="worlds-count" rhythm="compact">
-        <p id="worlds-count" role="status" className="font-mono text-label text-surface-subtle uppercase">
+        <p id="worlds-count" role="status" className="font-serif-italic text-small text-surface-subtle">
           {groups.length > 0 ? USE_CASES.showing(delivered.length + sketches.length) : USE_CASES.empty}
         </p>
         {groups.map(({ id, group, items }) => (

@@ -10,7 +10,7 @@ export const PRICING = {
     {
       name: 'Console preview',
       price: 'Free',
-      pigment: 'cherenkov',
+      pigment: 'verdigris',
       text: 'Explore the console design with synthetic example worlds in your browser.',
       facts: [
         'A simulation that runs in your browser.',
@@ -22,7 +22,7 @@ export const PRICING = {
     {
       name: 'Local evaluation',
       price: 'By arrangement',
-      pigment: 'ultramarine',
+      pigment: 'moss',
       text: 'Moth Preview 004 delivered for evaluation on macOS ARM64, with documentation and qualification evidence.',
       facts: [
         'Local CLI delivery; no public download.',

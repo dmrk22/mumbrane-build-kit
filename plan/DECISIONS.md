@@ -553,3 +553,24 @@ the full WebKit run is a QA tool.
 **Alternatives**: Run everything on WebKit by default (keyboard tests would need Option+Tab
 variants; slower runs).
 **Status**: Decided.
+
+### D-128 — Owner-directed redesign: "blackboard" identity (2026-10-01)
+**Context**: The owner reviewed v0.1.0-preview and overrode the design rules in the plan files:
+the ultramarine field, the fonts, the header (too close to the old mumbrane.com), the instrument
+boxes, the console demo and the evidence seal were all rejected as boring. Direction: artistic,
+mathematical, frontier-lab quality; references typesafe.ai, generalintelligencecompany.com,
+cofounder.co, mistral.ai, topiary.supply (Nous Research), anthropic.com.
+**Decision**: New identity, security and brand locks unchanged (CSP, no third parties, locked
+Möbius logo, allowlisted deps). Palette "blackboard": plaster paper, blackboard ink, deep, chalk,
+and chalk pigments (sulfur, malachite, cinnabar, iris, verdigris, madder, ochre, moss), regenerated
+in palette.json/tokens.css with every contrast pair re-tested. Type: Mona Sans (headlines, wdth
+112 %), Source Serif 4 (reading text, theorem statements), Martian Mono (instrument windows), Noto
+Sans Math (logic symbols). Home set like a paper (Definition 1 Γ ⊢ φ, Example 2 proof sheet,
+Theorem 3 outcomes as judgements, Conjecture 4). Hero: a WebGL string model of the
+helicoid–catenoid associate family (minimal surfaces: a membrane at rest), its equations as the
+legend with a live θ; muon crossings kept. The console demo became a Gentzen-style proof sheet;
+instrument windows are printed light windows used twice. Company blocks became a lemma wall
+(conjectures for future work). Header: nav right, Anthropic-style collapse into the mark; footer
+after Anthropic's with the catenoid as a bookend. Owner explicitly allowed going beyond the plan.
+**Alternatives**: Keep the ultramarine system and restyle components only (rejected by the owner).
+**Status**: Decided (owner instruction in session).

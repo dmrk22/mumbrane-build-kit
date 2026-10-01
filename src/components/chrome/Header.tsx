@@ -13,7 +13,7 @@ import { MobileNav } from './MobileNav'
 
 export type HeaderNav = typeof HEADER
 
-const DARK: ReadonlySet<Surface> = new Set(['ink', 'ultramarine'])
+const DARK: ReadonlySet<Surface> = new Set(['ink', 'deep'])
 const INTENT_MS = 120 // hover intent (DESIGN §7.7): never shorter, so menus don't flicker
 
 function isCurrent(pathname: string, href: string) {
@@ -28,7 +28,7 @@ function surfaceElements(header: HTMLElement): HTMLElement[] {
 }
 
 const NAV_LINK =
-  'relative inline-flex h-11 items-center gap-1 text-small font-medium after:absolute after:inset-x-0 after:bottom-2.5 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-(--duration-hover) after:ease-out hover:after:scale-x-100 aria-[current=page]:after:scale-x-100'
+  'relative inline-flex h-10 items-center gap-1 rounded-pill px-3 text-small font-medium transition-colors duration-(--duration-hover) hover:bg-surface-fg/8 aria-[current=page]:bg-surface-fg/8 aria-expanded:bg-surface-fg/8'
 
 /** `surfaceTop`: each route's first surface (registry), so the first paint is already themed. */
 export function Header({
@@ -169,11 +169,11 @@ export function Header({
       >
         <div className="mx-auto flex h-15 w-full max-w-360 items-center px-5 sm:px-6 lg:h-18 lg:px-10">
           <SmartLink href="/" aria-label={nav.homeLabel} className="-m-2 p-2">
-            <Lockup height={20} collapsible className="h-4.5 w-auto lg:h-5" />
+            <Lockup height={22} collapsible className="h-5 w-auto lg:h-5.5" />
           </SmartLink>
 
-          <nav aria-label={nav.label} className="ml-10 hidden lg:block" onPointerLeave={hover(null)}>
-            <ul className="flex items-center gap-6 xl:gap-8">
+          <nav aria-label={nav.label} className="ml-auto hidden lg:block" onPointerLeave={hover(null)}>
+            <ul className="flex items-center gap-0.5 xl:gap-1">
               {nav.menus.map((menu) => {
                 const expanded = open === menu.id
                 const current = menu.links.some((l) => isCurrent(pathname, l.href)) || pathname === menu.index
@@ -231,12 +231,12 @@ export function Header({
             </ul>
           </nav>
 
-          <div className="ml-auto flex items-center gap-3">
-            {/* A wrapper, not a class on Button: `hidden` would lose to the button's own `inline-flex`. */}
+          <div className="ml-auto flex items-center gap-2 lg:ml-5 lg:border-l lg:border-surface-rule lg:pl-5">
+            {/* A wrapper, not a class on the link: `hidden` would lose to its own `inline-flex`. */}
             <div className="hidden lg:block">
-              <Button href={nav.actions.secondary.href} variant="secondary">
+              <SmartLink href={nav.actions.secondary.href} className={NAV_LINK}>
                 {nav.actions.secondary.label}
-              </Button>
+              </SmartLink>
             </div>
             <Button href={nav.actions.primary.href}>{nav.actions.primary.label}</Button>
             <MobileNav nav={nav} />
@@ -273,7 +273,7 @@ function MenuPanel({
       data-open={open}
       onPointerEnter={onPointerEnter}
       className={cx(
-        'absolute inset-x-0 top-full rounded-b-md shadow-menu',
+        'absolute inset-x-0 top-full border-y border-surface-rule shadow-menu',
         'invisible -translate-y-2 opacity-0 transition-[opacity,translate,visibility] duration-[160ms] ease-in',
         'data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100 data-[open=true]:duration-[240ms] data-[open=true]:ease-out',
       )}
@@ -292,9 +292,9 @@ function MenuPanel({
                 prefetch={false}
                 onClick={onNavigate}
               >
-                <span className="font-sans text-title">{l.label}</span>
+                <span className="font-display text-title">{l.label}</span>
                 {'description' in l && l.description && (
-                  <span className="text-small text-surface-muted">{l.description}</span>
+                  <span className="font-serif text-small text-surface-muted">{l.description}</span>
                 )}
               </SmartLink>
             </li>
@@ -304,15 +304,15 @@ function MenuPanel({
           href={menu.feature.href}
           prefetch={false}
           onClick={onNavigate}
-          className="group col-span-4 flex flex-col justify-between gap-8 border border-surface-rule bg-surface-raise p-6 transition-colors duration-(--duration-hover) hover:border-surface-subtle"
+          className="group col-span-4 flex flex-col justify-between gap-8 rounded-lg border border-surface-rule bg-surface-raise p-6 transition-colors duration-(--duration-hover) hover:border-surface-subtle"
         >
           <span className="flex flex-col gap-3">
-            <span className="font-mono text-label text-surface-subtle uppercase">{menu.feature.eyebrow}</span>
-            <span className="font-serif text-display-s">{menu.feature.title}</span>
+            <span className="font-serif-italic text-small text-surface-subtle">{menu.feature.eyebrow}</span>
+            <span className="font-display text-display-s">{menu.feature.title}</span>
             <span className="text-small text-surface-muted">{menu.feature.text}</span>
           </span>
           {'meta' in menu.feature && (
-            <span className="font-mono text-label text-surface-subtle uppercase">{menu.feature.meta}</span>
+            <span className="font-serif-italic text-small text-surface-subtle">{menu.feature.meta}</span>
           )}
           <Icon
             name="arrow-right"

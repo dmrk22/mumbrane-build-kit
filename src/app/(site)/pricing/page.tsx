@@ -11,8 +11,8 @@ export const metadata = routeMetadata('/pricing')
 
 // The plan's pigment as its top rule (PAGES §12).
 const RULE = {
-  cherenkov: 'border-t-cherenkov',
-  ultramarine: 'border-t-ultramarine',
+  verdigris: 'border-t-verdigris',
+  moss: 'border-t-moss',
   ink: 'border-t-ink',
 } as const
 
@@ -28,7 +28,7 @@ export default function PricingPage() {
         rhythm="compact"
       >
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 id="pricing-title" className="mt-4 font-serif text-display-xl">
+        <h1 id="pricing-title" className="mt-4 font-display text-display-xl">
           {title}
         </h1>
         <p className="mt-8 max-w-[52ch] font-serif text-lede text-surface-muted">{lede}</p>
@@ -47,8 +47,8 @@ export default function PricingPage() {
                 RULE[p.pigment],
               )}
             >
-              <h3 className="font-mono text-label text-surface-subtle uppercase">{p.name}</h3>
-              <p className="font-serif text-display-s">{p.price}</p>
+              <h3 className="font-serif-italic text-small text-surface-subtle">{p.name}</h3>
+              <p className="font-display text-display-s">{p.price}</p>
               <p className="text-body">{p.text}</p>
               <ul className="flex flex-col gap-3 border-t border-surface-rule pt-5 text-small text-surface-muted">
                 {p.facts.map((f) => (

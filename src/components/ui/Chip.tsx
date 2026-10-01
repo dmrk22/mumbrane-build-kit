@@ -72,7 +72,7 @@ export function FilterChip({
   )
 }
 
-// Fill + text pairs from DESIGN §2.4; refused uses violet-fg so its small text passes AA.
+// Fill + text pairs from DESIGN §2.4; refused uses iris-fg so its small text passes AA.
 const TONE: Record<Outcome, string> = {
   supported: 'bg-supported text-ink',
   unproven: 'bg-unproven text-ink',
@@ -83,17 +83,17 @@ const TONE: Record<Outcome, string> = {
   incompatible: 'bg-limit text-text-2',
 }
 
-/** Moth outcome: text first, colour second (DESIGN §9.7). */
+/** Moth outcome: text first, colour second. Sentence case; the diamond is the chalk mark. */
 export function StatusChip({ outcome, className }: { outcome: Outcome; className?: string }) {
   return (
     <span
       className={cx(
-        'inline-flex h-6 items-center gap-2 rounded-xs px-2 font-mono text-label whitespace-nowrap uppercase',
+        'inline-flex h-7 items-center gap-2 rounded-xs px-2.5 font-sans text-small font-medium whitespace-nowrap',
         TONE[outcome],
         className,
       )}
     >
-      <span aria-hidden="true" className="size-1.5 shrink-0 bg-current" />
+      <span aria-hidden="true" className="size-1.5 shrink-0 rotate-45 bg-current" />
       {OUTCOMES[outcome].label}
     </span>
   )
@@ -107,7 +107,7 @@ export function Tag({ className, children }: { className?: string; children: Rea
   return (
     <span
       className={cx(
-        'inline-flex min-h-6 items-center rounded-xs border border-surface-fg/30 px-2 py-0.5 font-mono text-label text-surface-muted uppercase',
+        'inline-flex min-h-6 items-center rounded-xs border border-surface-fg/30 px-2 py-0.5 font-serif-italic text-caption text-surface-muted',
         className,
       )}
     >

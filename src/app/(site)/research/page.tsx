@@ -33,7 +33,7 @@ export default function ResearchPage() {
           <Container className="absolute inset-x-0 bottom-6 lg:bottom-10">
             <p
               data-surface="paper"
-              className="glass-card inline-flex border px-4 py-2.5 font-mono text-label uppercase"
+              className="glass-card inline-flex border px-4 py-2.5 font-serif-italic text-small"
             >
               {hero.caption}, {ARTICLE_UI.seed.toLowerCase()} {heroSeed}
             </p>
@@ -41,7 +41,7 @@ export default function ResearchPage() {
         </div>
         <Container className="pt-12 lg:pt-16">
           <Eyebrow>{hero.eyebrow}</Eyebrow>
-          <h1 id="research-title" className="mt-4 max-w-[18ch] font-serif text-display-l">
+          <h1 id="research-title" className="mt-4 max-w-[18ch] font-display text-display-l">
             <Inline text={hero.title} />
           </h1>
           <Grid className="mt-10 gap-y-6">
@@ -79,7 +79,7 @@ export default function ResearchPage() {
           <figure className="col-span-12 lg:col-span-6 lg:col-start-7">
             <LightCone labels={inquiry.cone} className="text-surface-fg" />
             <figcaption className="mt-4 flex flex-col gap-1">
-              <span className="font-mono text-label text-surface-subtle uppercase">{inquiry.figure}</span>
+              <span className="font-serif-italic text-small text-surface-subtle">{inquiry.figure}</span>
               <span className="text-caption text-surface-muted">{inquiry.figureCaption}</span>
             </figcaption>
           </figure>
@@ -126,11 +126,11 @@ export default function ResearchPage() {
                   </CropMarks>
                 </div>
                 <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-                  <p className="font-mono text-label text-surface-subtle uppercase">
+                  <p className="font-serif-italic text-small text-surface-subtle">
                     <time dateTime={a.published}>{proseDate(a.published)}</time> · {a.category} ·{' '}
                     {a.authors.join(', ')}
                   </p>
-                  <h3 className="mt-4 font-serif text-display-s">
+                  <h3 className="mt-4 font-display text-display-s">
                     <SmartLink
                       href={articlePath(a)}
                       className="decoration-1 underline-offset-[0.18em] group-hover:underline after:absolute after:inset-0"

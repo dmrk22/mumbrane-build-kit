@@ -28,7 +28,7 @@ export default async function ContactPage({ searchParams }: Props) {
         <Grid className="gap-y-14">
           <div className="col-span-12 lg:col-span-5">
             <Eyebrow>{CONTACT.eyebrow}</Eyebrow>
-            <h1 id="contact-title" className="mt-4 font-serif text-display-l">
+            <h1 id="contact-title" className="mt-4 font-display text-display-l">
               {CONTACT.title}
             </h1>
             <p className="mt-6 max-w-[44ch] font-serif text-lede text-surface-muted">{CONTACT.lede}</p>
@@ -39,7 +39,7 @@ export default async function ContactPage({ searchParams }: Props) {
                   className="flex items-center justify-between gap-4 border border-surface-rule px-5 py-4"
                 >
                   <div className="min-w-0">
-                    <p className="font-mono text-label text-surface-subtle uppercase">{e.label}</p>
+                    <p className="font-serif-italic text-small text-surface-subtle">{e.label}</p>
                     <SmartLink
                       href={`mailto:${e.address}`}
                       className="mt-1 block text-body break-all link-prose"

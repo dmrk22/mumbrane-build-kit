@@ -19,11 +19,14 @@ test('GL colours mirror palette.json', () => {
     pigments: Record<string, { base: { hex: string } }>
   }
   assert.equal(HEX.paper, palette.neutrals.paper?.hex)
-  assert.equal(HEX.ultramarineDeep, palette.neutrals['ultramarine-deep']?.hex)
-  for (const p of ['ultramarine', 'cherenkov', 'vermilion', 'cadmium'] as const)
+  assert.equal(HEX.ink, palette.neutrals.ink?.hex)
+  assert.equal(HEX.deep, palette.neutrals.deep?.hex)
+  assert.equal(HEX.chalk, palette.neutrals['on-dark']?.hex)
+  for (const p of ['sulfur', 'verdigris', 'cinnabar', 'malachite', 'moss'] as const)
     assert.equal(HEX[p], palette.pigments[p]?.base.hex, p)
   assert.deepEqual(rgb('#ff8000'), [1, 128 / 255, 0])
-  assert.deepEqual(MEMBRANE_COLORS.uBgA, rgb(HEX.ultramarine))
+  assert.deepEqual(MEMBRANE_COLORS.uChalk, rgb(HEX.chalk))
+  assert.deepEqual(MEMBRANE_COLORS.uSpark, rgb(HEX.cinnabar))
 })
 
 function fakeFrames() {

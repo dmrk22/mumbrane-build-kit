@@ -78,7 +78,7 @@ test.describe('header theming', () => {
     const h = page.locator(header)
     await expect(h).toHaveAttribute('data-surface', 'paper')
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    await expect(h).toHaveAttribute('data-surface', 'ink')
+    await expect(h).toHaveAttribute('data-surface', 'deep')
   })
 })
 
@@ -163,9 +163,9 @@ test.describe('@motion brand reveals', () => {
       .toEqual({ strut: [0, 700], band: [450, 700], rim: [950, 450] })
   })
 
-  // Regression: a -15 % bottom root margin meant the giant wordmark (the last thing on the page)
-  // could never enter the zone and stayed in its hidden start state.
-  test('the footer wordmark reveals even though it ends the page', async ({ page }) => {
+  // Regression: a -15 % bottom root margin meant the footer's last figure (the last thing on the
+  // page) could never enter the zone and stayed in its hidden start state.
+  test('the footer film reveals even though it ends the page', async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto(MISSING)
     const wordmark = page.locator('footer [data-reveal]').last()

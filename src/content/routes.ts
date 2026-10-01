@@ -26,7 +26,7 @@ export const ROUTES = [
     description:
       'Mumbrane builds constraint-based models that reason from the facts and definitions you supply, and show the evidence behind every result.',
     sitemap: true,
-    surfaceTop: 'ultramarine',
+    surfaceTop: 'deep',
   },
   {
     path: '/moth',
@@ -163,7 +163,7 @@ export const ROUTES = [
     group: 'company',
     nav: { label: 'About' },
     sitemap: true,
-    surfaceTop: 'paper',
+    surfaceTop: 'deep',
   },
   {
     path: '/research',

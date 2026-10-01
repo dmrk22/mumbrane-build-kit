@@ -22,7 +22,7 @@ export default function DevelopersPage() {
     <>
       <Section surface="paper" labelledBy="developers-title" className="pt-12 md:pt-16 lg:pt-24">
         <Eyebrow>{hero.eyebrow}</Eyebrow>
-        <h1 id="developers-title" className="mt-4 max-w-[16ch] font-serif text-display-xl">
+        <h1 id="developers-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
           <Inline text={hero.title} />
         </h1>
         <p className="mt-8 max-w-[56ch] font-serif text-lede text-surface-muted">{hero.lede}</p>
@@ -52,7 +52,7 @@ export default function DevelopersPage() {
                 <span className="font-mono text-label text-surface-subtle tabular-nums">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="font-serif text-display-s">{c.term}</span>
+                <span className="font-display text-display-s">{c.term}</span>
               </dt>
               <dd className="text-body text-surface-muted">{c.text}</dd>
             </div>
@@ -74,7 +74,7 @@ export default function DevelopersPage() {
             className="col-span-12 lg:col-span-7"
           />
           <figure className="col-span-12 border border-surface-rule bg-surface lg:col-span-5">
-            <figcaption className="flex h-10 items-center border-b border-surface-rule px-4 font-mono text-label text-surface-subtle uppercase">
+            <figcaption className="flex h-10 items-center border-b border-surface-rule px-4 font-serif-italic text-small text-surface-subtle">
               {results.englishLabel}
             </figcaption>
             <p className="p-5 font-serif text-lede">{results.english}</p>
@@ -98,7 +98,7 @@ export default function DevelopersPage() {
         </div>
         <Grid className="mt-16 gap-y-8">
           <div className="col-span-12 lg:col-span-7">
-            <h3 className="font-serif text-display-s">{future.title}</h3>
+            <h3 className="font-display text-display-s">{future.title}</h3>
             <p className="mt-4 max-w-[60ch] text-body text-surface-muted">{future.text}</p>
           </div>
           <div className="col-span-12 flex flex-wrap items-end gap-x-8 gap-y-3 lg:col-span-4 lg:col-start-9 lg:justify-end">

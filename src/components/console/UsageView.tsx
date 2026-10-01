@@ -77,7 +77,7 @@ export function UsageView() {
             className="rounded-md border border-surface-rule bg-surface px-5 py-4"
           >
             <dt className="text-small text-surface-muted">{s.label}</dt>
-            <dd className="mt-1 font-serif text-display-s tabular-nums lining-nums">{s.value}</dd>
+            <dd className="mt-1 font-display text-display-s tabular-nums lining-nums">{s.value}</dd>
           </div>
         ))}
       </dl>
