@@ -87,7 +87,7 @@
   }
 }
 
-/* Moth demo (DESIGN §7.4) and instrument content (§9.6): section tags, entity chips, step reveals. */
+/* Section tags inside instrument windows (solution pages). */
 @layer components {
   .demo-tag {
     display: inline-block;
@@ -96,28 +96,6 @@
     padding: 0.1em 0.45em;
     font-size: var(--text-label);
     letter-spacing: var(--text-label--letter-spacing);
-    text-transform: uppercase;
-  }
-  .demo-part,
-  .demo-trace,
-  .demo-fill {
-    transition:
-      opacity var(--duration-ui) var(--ease-out),
-      transform var(--duration-ui) var(--ease-out);
-  }
-  .demo-part[data-shown="false"] {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  .demo-trace[data-shown="false"] {
-    opacity: 0;
-    transform: translateX(24px);
-  }
-  .demo-fill {
-    transform-origin: left;
-  }
-  .demo-fill[data-shown="false"] {
-    transform: scaleX(0);
   }
 }
 
