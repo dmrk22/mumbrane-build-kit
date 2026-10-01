@@ -128,11 +128,11 @@
   /* Spacing base (Tailwind multiplies this): 4px grid */
   --spacing: 0.25rem;
 
-  /* Radii — one site radius, md (8 px), on every box (D-132); xl only on the footer card. */
+  /* Radii — one site radius, md (10 px), on every box, the footer card included (D-133). */
   --radius-none: 0;
   --radius-xs: 2px;
   --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-md: 10px;
   --radius-lg: 16px;
   --radius-xl: 28px;
   --radius-pill: 999px;

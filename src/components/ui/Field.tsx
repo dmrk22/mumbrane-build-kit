@@ -3,7 +3,7 @@ import { ui } from '@/content/ui'
 import { cx } from '@/lib/cx'
 import { Icon } from './Icon'
 
-// DESIGN §9.5: label above, hint below, error below the hint; inputs 48 px, 8 px radius, text-3
+// DESIGN §9.5: label above, hint below, error below the hint; inputs 48 px, 10 px radius, text-3
 // border (≥ 3:1 non-text contrast), paper ground, clay-fg when invalid.
 type Meta = { id: string; label: ReactNode; hint?: ReactNode; error?: ReactNode | undefined }
 

@@ -22,7 +22,7 @@ function Chip({ x, y, text, strong = false }: { x: number; y: number; text: stri
   const w = chipW(text)
   return (
     <g>
-      <rect x={x} y={y - 11} width={w} height={22} rx={8} className={strong ? 'dg-hollow' : 'dg-chip'} />
+      <rect x={x} y={y - 11} width={w} height={22} rx={10} className={strong ? 'dg-hollow' : 'dg-chip'} />
       <text x={x + w / 2} y={y + 4} textAnchor="middle" className={strong ? 'dg-label-strong' : 'dg-label'}>
         {text}
       </text>

@@ -101,7 +101,7 @@ export function StatusChip({ outcome, className }: { outcome: Outcome; className
 
 /**
  * A content label (CONTENT §4): Preview, Illustrative, Simulation, Proposed, Draft, Synthetic
- * example world, Conceptual illustration, Explanatory example. Mono, 8 px radius, bordered.
+ * example world, Conceptual illustration, Explanatory example. Mono, 10 px radius, bordered.
  */
 export function Tag({ className, children }: { className?: string; children: ReactNode }) {
   return (

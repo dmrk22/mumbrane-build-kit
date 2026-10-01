@@ -4,8 +4,8 @@ import { cx } from '@/lib/cx'
 /**
  * Each outcome drawn in the site's diagram marks: a filled dot is established, a hollow dot is
  * missing, the accent line is the path to an answer, a dashed line has no support. Decorative —
- * the outcome's name always sits beside it. Boxes use rx 3.6: the diagram chip (22 tall, rx 8 —
- * the site radius, D-132) at this glyph's 10-unit scale, so they stay boxes, not pills.
+ * the outcome's name always sits beside it. Boxes use rx 4.5: the diagram chip (22 tall, rx 10 —
+ * the site radius, D-133) at this glyph's 10-unit scale, so they stay boxes, not pills.
  */
 export function OutcomeGlyph({ outcome, className }: { outcome: Outcome; className?: string }) {
   return (
@@ -47,9 +47,9 @@ const GLYPHS: Record<Outcome, React.ReactNode> = {
   ),
   refused: (
     <>
-      <rect x={6} y={11} width={22} height={10} rx={3.6} className="dg-chip" />
-      <rect x={32} y={11} width={16} height={10} rx={3.6} className="dg-chip" />
-      <rect x={52} y={11} width={28} height={10} rx={3.6} className="dg-line dg-dash" />
+      <rect x={6} y={11} width={22} height={10} rx={4.5} className="dg-chip" />
+      <rect x={32} y={11} width={16} height={10} rx={4.5} className="dg-chip" />
+      <rect x={52} y={11} width={28} height={10} rx={4.5} className="dg-line dg-dash" />
       <circle cx={108} cy={16} r={4.5} className="dg-hollow" />
     </>
   ),
@@ -75,7 +75,7 @@ const GLYPHS: Record<Outcome, React.ReactNode> = {
       {node(8)}
       {node(52)}
       <path d="M60 16 C 70 16, 74 6, 84 6 H100" className="dg-line dg-dash" />
-      <rect x={100} y={1} width={10} height={10} rx={3.6} className="dg-hollow" />
+      <rect x={100} y={1} width={10} height={10} rx={4.5} className="dg-hollow" />
     </>
   ),
 }

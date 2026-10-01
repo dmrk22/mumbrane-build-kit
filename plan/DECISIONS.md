@@ -623,3 +623,11 @@ half their size. An e2e test measures every element and pseudo-element on every 
 **Alternatives**: 12 px (arrow chip and 24 px controls stay circles/pills); per-size radii (not
 one value).
 **Status**: Decided (owner instruction in session).
+
+### D-133 — Site radius 10 px, footer card included (2026-10-01)
+**Context**: After D-132 (8 px, footer 28 px) the owner asked for one value everywhere, the footer
+card included, at 10 px.
+**Decision**: `--radius-md` is 10 px and every rounded box uses it, the footer card too. SVG chips
+use rx 10 in drawing units; the 10-unit outcome glyph boxes use 4.5 (10 × 10/22, the chip's shape
+at their scale). Supersedes D-132's values; its method and the e2e measurement stand.
+**Status**: Decided (owner instruction in session).

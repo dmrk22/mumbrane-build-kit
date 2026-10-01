@@ -13,10 +13,7 @@ export function Footer() {
       className="relative overflow-hidden bg-surface pt-6 text-surface-fg md:pt-8 print:hidden"
     >
       <Container>
-        <div
-          data-footer-card
-          className="rounded-xl border border-surface-rule bg-surface-raise px-6 pt-8 pb-5 md:px-10 md:pt-10"
-        >
+        <div className="rounded-md border border-surface-rule bg-surface-raise px-6 pt-8 pb-5 md:px-10 md:pt-10">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
             <div className="lg:col-span-3">
               <SmartLink href="/" aria-label={HEADER.homeLabel} className="-m-2 inline-block p-2">
