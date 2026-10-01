@@ -276,7 +276,6 @@ function MenuPanel({
     <section
       id={`menu-${menu.id}`}
       aria-labelledby={`menu-trigger-${menu.id}`}
-      data-surface={surface}
       data-open={open}
       onPointerEnter={onPointerEnter}
       className={cx(
@@ -285,7 +284,12 @@ function MenuPanel({
         'data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100 data-[open=true]:duration-[240ms] data-[open=true]:ease-out',
       )}
     >
-      <div className="w-56 rounded-lg border border-surface-rule bg-surface px-2 py-3 text-surface-fg shadow-menu">
+      {/* The surface sits on the card, not the wrapper: [data-surface] paints its background, and
+          the wrapper's hover gap must stay transparent. */}
+      <div
+        data-surface={surface}
+        className="w-56 rounded-lg border border-surface-rule px-2 py-3 shadow-menu"
+      >
         <ul className="flex flex-col">
           {menu.links.map((l) => (
             <li

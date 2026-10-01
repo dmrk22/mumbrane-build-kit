@@ -152,6 +152,16 @@ test.describe('@a11y menus', () => {
     expect(widths.size).toBe(1)
   })
 
+  // Regression: the wrapper carried data-surface, so its hover gap painted a paper strip above the card.
+  test('only the dropdown card paints; its wrapper is transparent', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop navigation')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto(MISSING)
+    await page.locator('#menu-trigger-solutions').click()
+    await expect(page.locator('#menu-solutions')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)')
+    await expect(page.locator('#menu-solutions > div')).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)')
+  })
+
   test('the footer lists the six owner columns', async ({ page }) => {
     await page.goto(MISSING)
     await expect(page.locator('footer nav h2')).toHaveText([
