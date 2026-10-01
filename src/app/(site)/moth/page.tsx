@@ -46,11 +46,10 @@ export default function MothPage() {
             <h1 id="moth-title" className="mt-4 font-display text-display-xl">
               {hero.title}
             </h1>
-            <p className="mt-4 max-w-[18ch] font-display text-display-m text-balance">
+            <p className="mt-6 text-lede text-surface-muted text-balance">
               <Inline text={hero.subhead} />
             </p>
-            <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{hero.lede}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-3">
               <Button href={hero.primary.href} arrow>
                 {hero.primary.label}
               </Button>

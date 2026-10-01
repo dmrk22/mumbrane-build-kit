@@ -43,12 +43,12 @@ export function MothCurve({ className }: { className?: string }) {
           />
         </svg>
       </InView>
-      <figcaption className="grid gap-3 border-t border-surface-rule pt-4 font-serif text-caption text-surface-muted sm:grid-cols-[auto_1fr] sm:gap-8">
+      <figcaption className="grid gap-3 border-t border-surface-rule pt-4 font-serif text-caption text-surface-muted xl:grid-cols-[auto_1fr] xl:gap-8">
         <p>
           <span className="font-semibold text-surface-fg">Fig. 1.</span> Fay’s butterfly curve, 0 ≤{' '}
           <i className="font-serif-italic">t</i> ≤ 12π.
         </p>
-        <p className="font-serif-italic sm:text-right">
+        <p className="font-serif-italic xl:text-right">
           x = sin t (e<sup>cos t</sup> − 2 cos 4t − sin<sup>5</sup>(t/12)),
           <br />y = cos t (e<sup>cos t</sup> − 2 cos 4t − sin<sup>5</sup>(t/12))
         </p>
