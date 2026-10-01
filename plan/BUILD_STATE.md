@@ -21,13 +21,13 @@ Update after every task: tick the box, add a one-line note, commit.
 | P11 | Developers, Pricing, Changelog, Status | done | 2026-10-01 | 2026-10-01 | `p11-developers` |
 | P12 | Console preview | done | 2026-10-01 | 2026-10-01 | `p12-console` |
 | P13 | Legal, llms.txt, OG images, completeness | done | 2026-10-01 | 2026-10-01 | `p13-legal` |
-| P14 | QA, hardening, polish, final report | not started | | | |
+| P14 | QA, hardening, polish, final report | done | 2026-10-01 | 2026-10-01 | `v0.1.0-preview` |
 
 Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
-- Phase: P14 (not started)
-- Next task: P14 QA, hardening, polish, final report — task 1 (full production e2e on all three projects)
+- Phase: build complete — `v0.1.0-preview` (final report at the end of this file)
+- Next: owner review of the open questions below; then the deploy plan (D-106) once the owner lifts the deploy rule
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -99,6 +99,30 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - [x] Claims: every figure in `claims.ts` (limits, qualification, measurements); limits grid checked against its claim lines; claims audit 2026-10-01 passed
 - Measured (prod): first-load JS /moth 165.9 KB, /developers/models 163.5 KB (budget 190); /moth mobile LCP 861 ms, CLS 0.0004
 
+### P14 — QA, hardening, polish, final report
+- [x] 1 Production e2e on chromium + mobile + webkit (@smoke): 825 passed, 91 skipped by design (desktop-only checks on mobile, webkit runs @smoke). Full WebKit run (`E2E_WEBKIT_ALL=1`, D-127): @security green; icon-only buttons unnamed in WebKit → fixed; keyboard tests depend on Safari's Tab model (platform, verified with Option+Tab)
+- [x] 2 Accessibility: axe on every route (desktop + mobile, console light/dark); new test — every element reached by Tab shows a visible focus indicator on all 36 routes (found and fixed: Company block links had an invisible inset ring); screen-reader spot check on 7 page types (one H1, no skipped levels, labelled landmarks, no vague links); 320/640/720 px no overflow (200 % zoom); forced colors readable (decorative canvas hidden — fixed: the lockup was dark blue on the WebGL hero)
+- [x] 3 Performance: bytes within budget on every route; mobile LCP 0.90–1.24 s, CLS ≤ 0.0004 (final report). One full run saw a 532 ms task on `/` that did not reproduce (3/3 + full perf re-run green on a quiet machine)
+- [x] 4 Security: SECURITY §10 below; Trusted Types trial → kept off (D-126); `pnpm audit --prod` clean; guard clean; every `'use client'` file reviewed (no env, network, cookies; one localStorage key; public copy only); no-cookie assertion added to security.spec
+- [x] 5 Polish (QUALITY §5.3 over all 35 routes at 375/768/1440 + reduced): fixed — hero entrance replayed when the width crossed 1024 px (window resize / tablet rotation); article H1 broke "field-based" at the hyphen; console pill borders (/20, /30 → /25); Company focus ring; forced-colors lockup. Checked and fine: underline style (one definition), scrollbar gutter, tabular numbers, footer columns, giant wordmark, header themes, mobile wrapping. Fewer than 20 visible defects were found; none were invented
+- [x] 6 Final report (end of file)
+
+#### SECURITY §10 release checklist
+- [x] Hooks self-test passes (162 checks) and both live canaries were refused (P0 log)
+- [x] `pnpm audit --prod --audit-level=moderate` clean (2026-10-01); versions ≥ floors (D-100)
+- [x] Dependencies equal the allowlist, exact pins (budgets: 8/8 runtime, 11/11 dev); lockfile committed
+- [x] `pnpm guard` clean (226 files); Biome clean; one suppression (D-110) + the JSON-LD override
+- [x] Production `@security` green on chromium, mobile and webkit (full WebKit run, D-127)
+- [x] CSP: no `unsafe-*` in production; nonce differs per request; zero enforced violations on every route (menus, forms, console, 404 covered by their specs)
+- [x] No third-party request on any route; no cookies (jar empty, `document.cookie` empty)
+- [x] Every `'use client'` file reviewed for data exposure
+- [x] Forms: hostile inputs, honeypot, nothing reflected or logged (forms.test, forms.spec)
+- [x] Links: links.test green; no `target="_blank"` anywhere
+- [x] `/lab`, `/lab/motion`, `/lab/og/*` 404 in production; console `noindex`; robots and sitemap correct
+- [x] `security.txt` valid (Contact, Expires 2027-09-30, Canonical, Policy → /legal/responsible-disclosure)
+- [x] Trusted Types trial run and logged (D-126)
+- [x] Hosting hand-off notes (final report)
+
 ### P13 — Legal, llms.txt, OG images, completeness
 - [x] `/legal/[slug]` (six pages from `src/content/legal.ts`): terms + privacy generated from the source (`LEGAL_BODIES`), privacy's added sentence as a note under "Updated — pending owner review"; enterprise terms, cookies, privacy choices (GPC island) and responsible disclosure as Drafts; rail with `aria-current`, wrapping above the title below 1024 px (D-125)
 - [x] `/md/*` for the key pages, composed from the content modules (`src/content/mdDocs.ts`, D-123) + `/llms.txt` (Core pages, Publications)
@@ -150,6 +174,14 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P14 — 2026-10-01
+- New QA tools: `E2E_WEBKIT_ALL=1` (whole suite on WebKit); `CSP_TT_TRIAL=1` records report-only findings as annotations (`tests/e2e/utils.ts`); the a11y focus test diffs the viewport focused vs blurred.
+- Hero entrance: one animation-name per element at every width, keyframes vary by media query (motion.css). Never swap animation names across breakpoints — it restarts the animation.
+- A labelled `Icon` is named by `aria-label` (WebKit ignores an SVG `<title>`); `TitleText` (ui/) keeps hyphenated compounds together in display titles.
+- Gotcha: `expect.poll` over `page.evaluate` takes a trace snapshot per poll and can stretch running animations past the timeout; await `animation.finished` in one evaluate instead.
+- Gotcha: perf vitals need a quiet machine (D-113); a busy host produced one 532 ms task on `/`.
+- Gotcha: the bash guard reads the word "source" in a grep pattern as the shell builtin; rephrase.
 
 ### P13 — 2026-10-01
 - Legal: `src/content/legal.ts` (`LEGAL`, `LEGAL_UI`, `legalDoc`). A new legal page needs a registry entry and a `LEGAL` entry (the type requires both). Terms/privacy text: edit the source, then `node scripts/articles.ts`.
@@ -284,14 +316,83 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Known issues
 <!-- id · description · where · plan to fix -->
+- K-1 · Trusted Types not enforced: Turbopack's runtime assigns `script.src` for lazy chunks without a policy · framework · revisit when Next ships a named policy, or the owner approves a narrow default policy (D-126)
+- K-2 · Keyboard e2e tests fail on WebKit by platform design (Safari Tabs to form controls only unless "Press Tab to highlight each item" is on) · tests · none needed; webkit default stays @smoke (D-127)
+- K-3 · Home under 4× CPU + software GL: the membrane's frames show as 90–150 ms tasks (budget 200); one 532 ms task seen once on a busy host, not reproduced · `/` · watch in field data; the canvas already pauses off-screen and caps DPR
 
 ## Logs
 - Claims audits: 2026-10-01 (P7) — claims.test green; every figure on / , /moth, /developers/models traced to releases.md; labels present (Explanatory example, Proposed, Illustrative); no forbidden words
 - Claims audits: 2026-10-01 (P10) — claims.test green; /solutions, the four solution pages and /solutions/use-cases carry no numbers, customers, results or ROI; every world labelled (Illustrative / Illustrative sketch / Synthetic example world); avoid-list and forbidden-list grep over company, contact, solutions content: only the verbatim Company-block "Unlocked" and the source contact lede ("unlock") — both allowed by CONTENT §1. (Correction, P11: that first grep skipped the then-untracked solutions.ts; re-run with `git grep --untracked`, it shows only "customer" as the support role and the negation "not a customer deployment" — no claim.)
 - Claims audits: 2026-10-01 (P11) — claims.test green; `git grep --untracked` over developers and pricing content: only code comments and the verbatim status note "We will not show uptime numbers we do not measure" (allowlisted in claims.test); JSON tagged "Illustrative — not the Preview 004 schema"; no prices, endpoints, SDKs or CLI commands; e2e asserts no uptime figures, no currency, changelog dates = article dates
 - Claims audits: 2026-10-01 (P13) — claims.test green; `git grep --untracked` (avoid list, forbidden list, numeric patterns) over legal.ts, mdDocs.ts, og.ts, the legal page, llms.txt, the OG template and GpcNotice: no hits. Draft and review banners on every legal page except terms; markdown documents reuse traced content only.
-- Trusted Types trial: —
-- Dependency changes / advisories: —
+- Claims audits: 2026-10-01 (P14) — claims.test green; P14 changed no content copy; CTA check: "Try for free" → `/console`, whose entry says everything runs as a simulation and carries the Simulation tag.
+- Trusted Types trial: 2026-10-01 — 680 tests, 94 report-only violations, one sink (Turbopack `HTMLScriptElement.src`), no framework policy → kept off (D-126)
+- Dependency changes / advisories: 2026-10-01 — none changed in P12–P14; `pnpm audit --prod --audit-level=moderate`: no known vulnerabilities
 
 ## Final report
 <!-- Written in P14 using the template in QUALITY §7. -->
+
+## Final report — v0.1.0-preview (2026-10-01)
+Evidence: local production build (`next build` + `next start`), headless Chromium/WebKit via
+Playwright on the owner's Mac. Nothing is deployed.
+
+**Routes built: 35** (+ the 404) — `/` · `/moth` · `/research` + 1 research article · `/news` +
+3 posts · `/company` · `/careers` · `/contact` · `/contact/sales` · `/solutions` + business,
+customer-support, legal, security · `/solutions/use-cases` · `/developers` · `/developers/docs` ·
+`/developers/models` · `/pricing` · `/changelog` · `/status` · `/console` + playground, keys, usage,
+settings · `/legal/` terms, enterprise-terms, privacy, cookies, privacy-choices,
+responsible-disclosure. Also `/md/*` (12 markdown documents), `/llms.txt`, robots, sitemap,
+manifest, `security.txt`, 11 generated social cards + the brand default.
+
+**Tests** (all green on the final tree): 100 unit · 825 e2e passed on chromium + mobile + webkit
+@smoke, 91 skipped by design · 42 perf · 11 OG captures. Full WebKit run: @security green; see K-2.
+
+**Budgets** (limit → actual)
+- Source files 230 → 212 · components 80 → 74 · dependencies 8 / 11 → 8 / 11 (exact pins)
+- First-load JS: marketing 190 KB → max 183.0 KB (`/contact`) · home 220 KB → 171.5 KB ·
+  console 230 KB → max 190.6 KB (`/console/playground`)
+- CSS 60 KB → 19.9 KB total built (max 23.4 KB loaded on a route) · fonts 270 KB → 255.2 KB
+  (4 files, 2 preloaded) · paintings ≤ 180 KB → max 176 KB (inquiry-representation, 1600 w AVIF);
+  hero poster ≤ 120 KB → 25 KB
+
+**Performance** (mobile emulation: 4× CPU, Fast 4G): LCP 1.04 s (`/`), 0.96 s (`/moth`), 1.24 s
+(`/research`), 0.97 s (`/company`), 0.90 s (`/console/playground`) · CLS ≤ 0.0004 · no long task
+> 200 ms after load (home: membrane frames at 90–150 ms, K-3) · motion libraries load after first
+paint · WebGL GPU time not measurable headless (SwiftShader); scroll ≥ 55 fps asserted.
+
+**Accessibility**: axe (WCAG 2.0 A/AA, 2.1 AA, 2.2 AA) 0 violations on 36 routes at desktop and
+mobile, console light + dark, menus and mobile sheet open · visible focus on every element reached
+by Tab (all routes) · skip link, menus, sheet trap, console keyboard paths tested · screen-reader
+spot check (7 page types): one H1, no skipped heading levels, labelled landmarks, no vague links ·
+no overflow at 320, 640, 720 px (200 % zoom) · forced colors readable · reduced motion: final
+states everywhere, no pins.
+
+**Security**: nonce CSP with `'strict-dynamic'`, no `unsafe-*` in production, new nonce per request;
+SECURITY §3.4 headers on HTML, JS, CSS, images, robots and 404; zero enforced violations, zero
+third-party requests and no cookies on every route; `pnpm audit --prod` clean; guard clean; hooks
+self-test 162/162; Trusted Types trial → kept off (D-126, K-1). Checklist: P14 above.
+
+**Open questions for the owner**: the unticked items under "Open questions for the owner" — legal
+entity and address, security contact, HSTS scope, the website launch date, "Try for free" wording,
+job openings, the careers glosses, the solution copy, the legal drafts (incl. "Safe harbor" and the
+privacy sentence), the CLAUDE.md agent-rules block, D-119's push edits, and the deploy step.
+
+**Known limitations**: K-1 to K-3 above · the console is an in-browser simulation, not Moth · forms
+are preview-only (nothing is sent; mailto fallback) · no hosted API · Lighthouse not run (below) ·
+the Neon backend is not wired.
+
+**Next steps — Neon backend** (SECURITY §8.4): implement `ContactRepository` / `SalesRepository`
+against Neon behind the existing seam (one import changes); parameterised tagged-template queries
+only; a least-privilege role per purpose; migrations from CI over the unpooled URL, never at
+request time; Row-Level Security if the Neon Data API is used; secrets only in the host's encrypted
+env; Neon branches for previews; rate limiting and bot protection on the form endpoints; retention
+aligned with the privacy notice; `NEXT_PUBLIC_BACKEND_ENABLED` stays `false` until then (the guard
+enforces it).
+
+**Hosting hand-off** (SECURITY §10): serve only over HTTPS; keep the proxy on the Node runtime; no
+analytics or tag managers without revisiting SECURITY.md; HSTS `preload` / `includeSubDomains` only
+after D-005; if TLS terminates at a proxy that does not forward the protocol,
+`upgrade-insecure-requests` is omitted (HSTS still applies).
+
+**Run it**: `pnpm install --frozen-lockfile && pnpm build && pnpm start` (http://localhost:3000)
+**Optional**: Lighthouse via Chrome DevTools → Lighthouse → Mobile.

@@ -525,3 +525,31 @@ stored or sent. Below 1024 px the legal rail wraps above the title, so reading o
 **Alternatives**: A draft banner on privacy (it is the live text plus one sentence); a notice built
 in the client (ships the Note and Icon code).
 **Status**: Decided; the legal texts await owner review (open question).
+
+### D-126 — Trusted Types trial: kept off (2026-10-01)
+**Context**: SECURITY §3.5. A full production run (chromium + mobile, 680 tests) with
+`CSP_TT_TRIAL=1` recorded 94 report-only `require-trusted-types-for` violations, on every route,
+from a single sink: `HTMLScriptElement.src`, assigned by the Turbopack runtime (`turbopack-*.js`)
+when it loads lazy chunks (the motion libraries among them). Our own code hits no sink. The runtime
+creates no Trusted Types policy (it never references `trustedTypes`), so there is no framework
+policy name to allow.
+**Decision**: Trusted Types stay off; the report-only header remains available behind
+`CSP_TT_TRIAL=1`. The e2e suite records report-only findings as annotations, never as failures.
+Listed under known limitations.
+**Alternatives**: Enforce (blocks lazy chunk loading); a narrow `default` policy that admits only
+same-origin `/_next/static/chunks/*.js` (an owner decision — §3.5 forbids a permissive default
+policy); revisit when Next/Turbopack ships a named policy.
+**Status**: Decided.
+
+### D-127 — WebKit full-suite run: findings and the default (2026-10-01)
+**Context**: The webkit project runs `@smoke` only; SECURITY §10 asks for `@security` on WebKit
+too. P14 added `E2E_WEBKIT_ALL=1` to run every spec there.
+**Decision**: `@security` passes on WebKit. Findings: icon-only buttons had no accessible name in
+WebKit (named by an SVG `<title>`) — fixed in `Icon` (aria-label) with an `@smoke` regression test;
+keyboard tests fail because WebKit, like Safari, Tabs only to form controls unless "Press Tab to
+highlight each item" is on (Option+Tab reaches links — verified), which is platform behaviour, not
+a site defect; the Company pin fps probe is calibrated for Chromium. The default stays `@smoke`;
+the full WebKit run is a QA tool.
+**Alternatives**: Run everything on WebKit by default (keyboard tests would need Option+Tab
+variants; slower runs).
+**Status**: Decided.
