@@ -436,3 +436,18 @@ an empty 90-cell bar; no numbers. The docs contents list measures heading positi
 **Alternatives**: Copying source text into new modules (drift); a "Website launched" entry
 (waits for the owner, D-012).
 **Status**: Decided.
+
+### D-119 — Pushing to the owner's private GitHub repository is allowed (2026-10-01)
+**Context**: The build was local-only ("Never push, publish or deploy"; the bash guard denied
+`git push`, `git remote` and every `gh` command). The owner asked for the project on GitHub and
+for the rules to be rewritten accordingly, keeping every security rule as it is.
+**Decision** (owner): plain pushes to the owner's **private** GitHub repository (`origin`) are
+allowed — `git push` (no force, mirror, prune or ref-deleting pushes), `git remote add/-v/show/
+get-url` with GitHub URLs only, and `gh auth status`, `gh repo view`, `gh repo create … --private`.
+Still blocked: clone/fetch/pull, public or internal repositories, every other `gh` command,
+deploying, publishing packages, and all existing security rules. Changed: CLAUDE.md (non-negotiable
+2 and the loop's step 6), SECURITY.md (the commits line), `.claude/settings.json`,
+`.claude/hooks/guard-bash.mjs` and its self-test (new attack and allow cases). The owner applies the
+protected-file edits; the hooks still refuse Claude's own writes to them.
+**Alternatives**: The owner pushing by hand each time (kept possible); lifting the hook entirely (no).
+**Status**: Decided by the owner.
