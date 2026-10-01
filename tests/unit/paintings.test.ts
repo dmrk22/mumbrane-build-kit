@@ -68,7 +68,7 @@ test('medianCut: finds the colours of a known image, weighted by area', () => {
   assert.equal(toHex([255, 128, 0]), '#ff8000')
 })
 
-test('paint scaling: stroke and slice pixels scale with width / 1440; seed and flags applied', () => {
+test('paint scaling: stroke and slice pixels scale with width / 1440; seed and palette applied', () => {
   const preset = {
     width: 1440,
     height: 900,
@@ -85,8 +85,6 @@ test('paint scaling: stroke and slice pixels scale with width / 1440; seed and f
     scene: 'range',
     seed: 9,
     aspect: [16, 10],
-    slices: true,
-    blocks: false,
     alt: '',
     palette: { uSkyTop: [1, 1, 1] },
   } as const
@@ -95,9 +93,20 @@ test('paint scaling: stroke and slice pixels scale with width / 1440; seed and f
   assert.deepEqual(scene?.uniforms.uSkyTop, [1, 1, 1])
   assert.equal(paint?.uniforms.uStroke, 50)
   assert.deepEqual(paint?.uniforms.uSliceBand, [0.1, 0.2, 7 * (2400 / 1440), 10 * (2400 / 1440)])
-  assert.equal(paint?.uniforms.uSlices, 1)
-  assert.equal(paint?.uniforms.uBlocks, 0)
   assert.deepEqual(preset.passes[1]?.uniforms.uStroke, 30, 'the preset itself is not mutated')
+})
+
+// Regression (owner, D-139): the scan slices and sorted blocks read as rendering faults, so no
+// painting renders them, although the range preset still switches both on.
+test('paintings are plain oil: no scan slices or sorted blocks reach the shader', () => {
+  const presets = JSON.parse(readFileSync('reference/shaders/presets.json', 'utf8')).presets
+  for (const spec of PAINTINGS) {
+    if (spec.scene === 'membrane') continue
+    const paint = passesFor(spec, presets[spec.scene], 2400).find((p) => p.fsFile === 'paint.frag')
+    assert.equal(paint?.uniforms.uSlices, 0, `${spec.id} slices`)
+    assert.equal(paint?.uniforms.uBlocks, 0, `${spec.id} blocks`)
+    assert.doesNotMatch(spec.alt, /scan line|sorted colour/i, `${spec.id} alt`)
+  }
 })
 
 test('formats: mono, prose and short dates; Roman numerals', () => {

@@ -5,35 +5,35 @@
     "height": 1029,
     "palette": [
       {
-        "hex": "#d5c670",
+        "hex": "#d5c771",
         "weight": 0.5
       },
       {
-        "hex": "#2e53b5",
+        "hex": "#2d52b5",
         "weight": 0.125
       },
       {
-        "hex": "#7490c9",
+        "hex": "#748dc8",
         "weight": 0.125
       },
       {
-        "hex": "#1d3c2a",
+        "hex": "#163625",
         "weight": 0.063
       },
       {
-        "hex": "#254950",
+        "hex": "#1a4149",
         "weight": 0.063
       },
       {
-        "hex": "#2e534c",
+        "hex": "#254a3d",
         "weight": 0.031
       },
       {
-        "hex": "#354c27",
+        "hex": "#324a26",
         "weight": 0.031
       },
       {
-        "hex": "#c4ba85",
+        "hex": "#c3b986",
         "weight": 0.031
       },
       {
@@ -41,11 +41,11 @@
         "weight": 0.016
       },
       {
-        "hex": "#4b5d36",
+        "hex": "#485b33",
         "weight": 0.016
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwAwCdASoYAAoAPtFWo0uoJKMhsAgBABoJbACdACHetJZratrC7PkgAP7TSVYVL9xOnXeP9AuWaUl+CJBrHfMq6P/hfzITXPqQia4IcSN++qYYzeR9l063wbmkSTbjvRUQasziUfSy7RV8FHsEJXmlgwAAAA=="
+    "lqip": "data:image/webp;base64,UklGRn4AAABXRUJQVlA4IHIAAADQAwCdASoYAAoAPtFWo0uoJKMhsAgBABoJbACdACHesVzPZeDmsTgA/tNKOq1Uz5AxBu3Bi9+IASBdtg0Xr7cOWTBXkqF/MhNc+pA1Z5EtuGdsO6t9KkTiKb8IBq7ml2/hDVKirM4lH0su0VA4e4CNMAA="
   },
   {
     "id": "plate-field",
@@ -53,15 +53,15 @@
     "height": 1500,
     "palette": [
       {
-        "hex": "#d5c670",
+        "hex": "#d5c771",
         "weight": 0.5
       },
       {
-        "hex": "#2c52b7",
+        "hex": "#2c51b7",
         "weight": 0.125
       },
       {
-        "hex": "#718dc9",
+        "hex": "#718cc9",
         "weight": 0.125
       },
       {
@@ -73,15 +73,15 @@
         "weight": 0.063
       },
       {
-        "hex": "#214561",
+        "hex": "#21455e",
         "weight": 0.031
       },
       {
-        "hex": "#314926",
+        "hex": "#324a26",
         "weight": 0.031
       },
       {
-        "hex": "#c1b683",
+        "hex": "#c4b984",
         "weight": 0.031
       },
       {
@@ -89,11 +89,11 @@
         "weight": 0.016
       },
       {
-        "hex": "#40542a",
+        "hex": "#42562c",
         "weight": 0.016
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAACQBACdASoYAA8APtFUpEuoJKOhsAgBABoJbACdMoGv/gPJCZg8ARywpZ5AydIA/tMZ3ZCj0yZOOuuc/KAxJj+WptgQTc/4iGafFb9fCvmOPspc0xcJRrndFfw5woHyJq4frLN/VuBWx/c0AzrkZAQmr09cfjdFrUQFzG6f0NuJuf/dJQ6vKbH/Xf9pCd3ytuXstAW7k91h7nsAAAA="
+    "lqip": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADQBACdASoYAA8APtFUo0uoJKMhsAgBABoJbACdMoMYJn/AeSEzB4AjlhNf5Wp/cAD+0xndkKPTJk4665z8oDEmP5am2BBNz/iIZp8Vv1JfpoRv0AWaoGLTqHaFaNXVnz6I+ys3LDtyZ5sUL6Yetk1IAucDzU9tffZ/g24m5/90lDq8psf9d/2kJ3fK3XOyYUDN09vxX6AAAA=="
   },
   {
     "id": "plate-wording",
@@ -197,47 +197,47 @@
     "height": 1500,
     "palette": [
       {
-        "hex": "#142768",
+        "hex": "#3056a2",
         "weight": 0.25
       },
       {
-        "hex": "#3056a1",
+        "hex": "#5a709f",
         "weight": 0.25
       },
       {
-        "hex": "#4666a4",
+        "hex": "#132b7b",
         "weight": 0.125
       },
       {
-        "hex": "#717e9d",
+        "hex": "#142150",
         "weight": 0.125
       },
       {
-        "hex": "#1c1813",
+        "hex": "#1a2854",
         "weight": 0.063
       },
       {
-        "hex": "#1d306a",
+        "hex": "#1b1712",
         "weight": 0.063
       },
       {
-        "hex": "#292520",
+        "hex": "#1f1912",
         "weight": 0.031
       },
       {
-        "hex": "#2a3964",
+        "hex": "#20356f",
         "weight": 0.031
       },
       {
-        "hex": "#343e58",
+        "hex": "#2e447e",
         "weight": 0.031
       },
       {
-        "hex": "#505c84",
+        "hex": "#4f5c83",
         "weight": 0.031
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAAAwBACdASoYAA8APtFUo0uoJKMhsAgBABoJagCw/f/gPHh5wMkRtXr4yrIA/s3+O8tnY21XB/Qc0px+GQbrHvCdcey8xeBszoTFiExVKJBEx3gGY2YNglgYpxDr6v8ZD6lftEmSv12QGBPHBbAAAA=="
+    "lqip": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADQBACdASoYAA8APtFUo0uoJKMhsAgBABoJagCdMoR4PoHh/gPHh5zmMq1dBWYVUAD+zf47y2djbVcH9BzSnH4ZBtsx9/niifX88MC7qOMVPLw708Vrv/F955zKl43ZHjw5Bmxy3MjPk4di3L4vQim1qZYAAA=="
   },
   {
     "id": "inquiry-representation",
@@ -297,11 +297,11 @@
         "weight": 0.5
       },
       {
-        "hex": "#202976",
+        "hex": "#1a2371",
         "weight": 0.25
       },
       {
-        "hex": "#3e4ea4",
+        "hex": "#3e4da5",
         "weight": 0.125
       },
       {
@@ -313,11 +313,11 @@
         "weight": 0.031
       },
       {
-        "hex": "#5964ac",
+        "hex": "#5864ae",
         "weight": 0.008
       },
       {
-        "hex": "#888693",
+        "hex": "#888593",
         "weight": 0.008
       },
       {
@@ -325,7 +325,7 @@
         "weight": 0.008
       },
       {
-        "hex": "#c6755e",
+        "hex": "#c4735e",
         "weight": 0.004
       },
       {
@@ -333,7 +333,7 @@
         "weight": 0.004
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABQBQCdASoYAB4APslSoUunpKMht/VYAPAZCWgArDLje1+gAKUvCNSSyaY6sMbGaQPbd1gA1oXg9I8xIUX4lH04e/1pKXt/BLOpR9YQPN9tuICvvT7zYiqtLAd6gFSZHo0iExmiOYCtqx/AU2xniw6kXqya8YFu+JgAAA=="
+    "lqip": "data:image/webp;base64,UklGRoIAAABXRUJQVlA4IHYAAACwBACdASoYAB4APslQoUunpKMht/VYAPAZCWgAnTMcZJAUpeEaklk0x1YYwOS4ANaF4PSPMSFF9CWy4cM/4le49jGw4Y0ioeIJPBe3xCJ0C36hScgP1uqAVJkdkU/ukGhmoRFUeahBQ5PEgLTaau5SrVT2ZMAA"
   },
   {
     "id": "inquiry-causality",
@@ -349,39 +349,39 @@
         "weight": 0.25
       },
       {
-        "hex": "#5473ab",
+        "hex": "#5472aa",
         "weight": 0.25
       },
       {
-        "hex": "#3f5b9a",
+        "hex": "#3e5b9a",
         "weight": 0.063
       },
       {
-        "hex": "#5b6d97",
+        "hex": "#75809a",
         "weight": 0.063
-      },
-      {
-        "hex": "#3b4c82",
-        "weight": 0.031
       },
       {
         "hex": "#3e548e",
         "weight": 0.031
       },
       {
-        "hex": "#6e7a99",
+        "hex": "#596890",
         "weight": 0.031
       },
       {
-        "hex": "#79829a",
+        "hex": "#5c719d",
+        "weight": 0.031
+      },
+      {
+        "hex": "#3a497d",
         "weight": 0.016
       },
       {
-        "hex": "#9c9286",
+        "hex": "#3d5088",
         "weight": 0.016
       }
     ],
-    "lqip": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAACQBQCdASoYAB4APtFepE8oJSMiKAqpABoJZgCdL46A6NfFCZZcwx2LV7Z8Apvzpfo3sNv6iAD+7oCv1YasUB3Gb9FGOoohs7jh+bWTqC1/Fz8bG16QzpH7nLYDhck2CfkzihOP2Wx1S5DqU7MQWTulTqs1aIkqrBhad/1MYPJmZzm8nGWYTP6bjmORPuK9TW41zxZKrqyMZBhyToAAAA=="
+    "lqip": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAADQBQCdASoYAB4APtFSpE2oJCMiMBgIAQAaCWYAnS+Oyw+K9r3fnluTzQ9yx7ckazVNuRBLQ3oAAP7ugCWqh+YgnZ62rmhdxYjsRC0hfUR+f1iU6I3R+cPb+drwS6ZnLrrwbCONV9JgER707RAYSxgp3SG62OFG+yBcrr3pmB+9h+p8jRAH7meC2jnoO9l0rRF2eSCnSWLYoN64uwB9AAAA"
   },
   {
     "id": "company-plate",

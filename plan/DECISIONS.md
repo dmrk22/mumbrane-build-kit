@@ -712,3 +712,20 @@ shows no numbers. Not electrostatics: a ball on a sheet, so D-134's Earnshaw cav
 **Alternatives**: the same sheet inside a closed-world box (prototyped; owner preferred no box);
 field lines in a box (flatter, more textbook); keeping the previous field figure.
 **Status**: Decided (owner instruction in session).
+
+### D-139 — Paintings are plain oil: no scan slices or sorted blocks (2026-10-02)
+**Context**: Reviewing /research, the owner asked what the "weird boxes" and stray lines on the hero
+and Plates II–III were. They were DESIGN §8.2's Replay-style interventions, taken from the owner's
+reference card: three pixel-sorted blocks and a band of scan slices, burnt into 5 of the 10
+paintings. Rendered faithfully to the reference, but at display size the 1.6 px slice rules shrink
+to hairlines and the blocks float free of the landscape, so both read as rendering faults; and
+they appeared on some plates and not others.
+**Decision**: Removed everywhere (owner's choice). `PaintingSpec` drops `slices`/`blocks`;
+`scripts/paint.ts` sets `uSlices`/`uBlocks` to 0 for every painting (the protected range preset
+still switches both on; the shaders are unchanged). Re-rendered research-hero, plate-field,
+plate-preview, inquiry-dynamics and inquiry-causality; the other five came out byte-identical.
+Alt text no longer describes them. Supersedes DESIGN §8.2's "Interventions" column and the
+interventions in §8.1.
+**Alternatives**: keep them on the /research hero only; keep as designed; redraw them bolder like
+the reference card (changes the reference shader maths, which DESIGN §8.2 forbids).
+**Status**: Decided (owner instruction in session).

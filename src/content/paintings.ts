@@ -10,8 +10,6 @@ export type PaintingSpec = {
   seed: number
   /** Output aspect, width : height. */
   aspect: readonly [number, number]
-  slices: boolean
-  blocks: boolean
   /** Describes the painting itself (DESIGN §10); '' only for the decorative poster. */
   alt: string
   /** Scene-colour overrides (sRGB 0..1), for a plate that would otherwise repeat another. */
@@ -35,26 +33,20 @@ export const PAINTINGS = [
     scene: 'range',
     seed: 3,
     aspect: [21, 9],
-    slices: true,
-    blocks: true,
-    alt: 'Oil-on-code study: cobalt mountains under a cadmium sky, a band of scan lines across the tree line.',
+    alt: 'Oil-on-code study: cobalt mountains under a cadmium sky, above a dark green tree line.',
   },
   {
     id: 'plate-field',
     scene: 'range',
     seed: 11,
     aspect: [16, 10],
-    slices: false,
-    blocks: true,
-    alt: 'Oil-on-code study: a blue mountain range under a warm yellow sky, with small blocks of sorted colour.',
+    alt: 'Oil-on-code study: a blue mountain range under a warm yellow sky.',
   },
   {
     id: 'plate-wording',
     scene: 'meadow',
     seed: 17,
     aspect: [16, 10],
-    slices: false,
-    blocks: false,
     alt: 'Oil-on-code study: a green meadow below a dark tree line and a pale sky.',
   },
   {
@@ -62,8 +54,6 @@ export const PAINTINGS = [
     scene: 'sea',
     seed: 24,
     aspect: [16, 10],
-    slices: false,
-    blocks: false,
     alt: 'Oil-on-code study: an ultramarine sea at dusk under an orange sky, light glinting on the water.',
   },
   {
@@ -71,17 +61,13 @@ export const PAINTINGS = [
     scene: 'sky',
     seed: 5,
     aspect: [16, 10],
-    slices: true,
-    blocks: false,
-    alt: 'Oil-on-code study: cumulus clouds over a dark horizon, crossed by a band of scan lines.',
+    alt: 'Oil-on-code study: cumulus clouds over a dark horizon.',
   },
   {
     id: 'inquiry-representation',
     scene: 'range',
     seed: 29,
     aspect: [4, 5],
-    slices: false,
-    blocks: false,
     alt: 'Oil-on-code study, portrait: layered blue ridges under a cadmium sky.',
   },
   {
@@ -89,26 +75,20 @@ export const PAINTINGS = [
     scene: 'sea',
     seed: 31,
     aspect: [4, 5],
-    slices: true,
-    blocks: false,
-    alt: 'Oil-on-code study, portrait: a dusk sea with glints, crossed by displaced scan lines.',
+    alt: 'Oil-on-code study, portrait: a low sun over a dusk sea, its glints running down the water.',
   },
   {
     id: 'inquiry-causality',
     scene: 'sky',
     seed: 44,
     aspect: [4, 5],
-    slices: false,
-    blocks: true,
-    alt: 'Oil-on-code study, portrait: towering clouds over a dark horizon, with small blocks of sorted colour.',
+    alt: 'Oil-on-code study, portrait: towering clouds over a dark horizon.',
   },
   {
     id: 'company-plate',
     scene: 'meadow',
     seed: 47,
     aspect: [16, 10],
-    slices: false,
-    blocks: false,
     alt: 'Oil-on-code study: an evening meadow under an apricot sky, violet haze above the tree line.',
     // Every meadow seed shares one composition, so an evening palette keeps this plate apart
     // from plate-wording. Values stay in the token families (cadmium, madder, violet, viridian).
@@ -129,8 +109,6 @@ export const PAINTINGS = [
     scene: 'membrane',
     seed: 1.37,
     aspect: [16, 9],
-    slices: false,
-    blocks: false,
     alt: '',
   },
 ] as const satisfies readonly PaintingSpec[]

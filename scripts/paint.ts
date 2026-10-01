@@ -26,7 +26,7 @@ export function sizeOf(spec: Pick<PaintingSpec, 'scene' | 'aspect'>): { width: n
   return { width: RENDER_WIDTH, height: Math.round((RENDER_WIDTH * h) / w) }
 }
 
-/** The preset's passes with this painting's seed, interventions and the width scaling applied. */
+/** The preset's passes with this painting's seed and the width scaling applied. */
 export function passesFor(spec: PaintingSpec, preset: Preset, width: number): Pass[] {
   const k = width / BASE_WIDTH
   return preset.passes.map((p) => {
@@ -37,8 +37,9 @@ export function passesFor(spec: PaintingSpec, preset: Preset, width: number): Pa
       const [y0 = 0, y1 = 0, spacing = 0, shift = 0] = u.uSliceBand
       u.uSliceBand = [y0, y1, spacing * k, shift * k]
     }
-    if ('uSlices' in u) u.uSlices = spec.slices ? 1 : 0
-    if ('uBlocks' in u) u.uBlocks = spec.blocks ? 1 : 0
+    // Plain oil only (D-139): the presets' scan slices and sorted blocks read as rendering faults.
+    if ('uSlices' in u) u.uSlices = 0
+    if ('uBlocks' in u) u.uBlocks = 0
     // Palette tuning (DESIGN §8.2 allows palettes and seeds, never maths): scene colours only.
     if (p.target === 'scene' && spec.palette) {
       for (const [name, rgb] of Object.entries(spec.palette)) if (name in u) u[name] = [...rgb]
