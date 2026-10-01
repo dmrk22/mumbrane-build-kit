@@ -602,3 +602,11 @@ sits on the deep surface with six columns: Solutions, Company, Developer, Enterp
 **Alternatives**: Plain uniform opacity (does not match the owner's reference); cropping the
 wordmark at the page edge (not requested).
 **Status**: Decided (owner instruction in session).
+
+### D-131 — Butterfly curve back in the Moth hero (2026-10-01)
+**Context**: D-129 replaced Moth's Fig. 1 (Fay's butterfly curve, ca24aa5) with LayerStack. The
+owner asked for the butterfly figure with its equations back on /moth.
+**Decision**: Restore `MothCurve`, `src/lib/art/curves.ts` and its unit tests unchanged, in the
+hero's figure slot. LayerStack stays for the dev lab; the hero's layer copy is removed.
+**Alternatives**: Show both figures on /moth (not asked; crowds the hero).
+**Status**: Decided (owner instruction in session).

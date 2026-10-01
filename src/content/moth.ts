@@ -10,9 +10,6 @@ export const MOTH = {
     lede: 'Moth compiles supported English facts, definitions, and interpretation skills into a reusable reasoning field. Ask whether an entity meets a definition, then inspect checked English or JSON results.',
     primary: { label: 'Release & evidence', href: '#evidence' },
     secondary: { label: 'Talk to the lab', href: '/contact?interest=research' },
-    // The figure beside the title: your world, your definitions, the compiled field, one answer.
-    layers: ['your facts', 'your definitions', 'field · build f3a9'],
-    answer: 'checked answer',
   },
 
   how: {

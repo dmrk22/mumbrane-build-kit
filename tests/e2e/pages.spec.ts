@@ -151,3 +151,12 @@ test('@smoke an article title keeps a hyphenated compound on one line', async ({
   await expect(compound).toHaveCount(1)
   expect(await compound.evaluate((el) => el.getClientRects().length)).toBe(1)
 })
+
+// Regression: the field redesign replaced Moth's butterfly figure; the owner wants it in the hero.
+test('@smoke the Moth hero shows Fig. 1, the butterfly curve with its equations', async ({ page }) => {
+  await page.goto('/moth')
+  const fig = page.locator('main section').first().locator('figure')
+  await expect(fig.locator('.moth-curve-path')).toHaveCount(1)
+  await expect(fig.locator('figcaption')).toContainText('Fay’s butterfly curve')
+  await expect(fig.locator('figcaption')).toContainText('x = sin t')
+})

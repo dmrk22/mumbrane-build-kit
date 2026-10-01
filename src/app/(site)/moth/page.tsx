@@ -1,4 +1,4 @@
-import { LayerStack } from '@/components/art/LayerStack'
+import { MothCurve } from '@/components/art/MothCurve'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
 import { SplitReveal } from '@/components/motion/SplitReveal'
@@ -60,7 +60,7 @@ export default function MothPage() {
             </div>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8">
-            <LayerStack layers={hero.layers} answer={hero.answer} />
+            <MothCurve />
           </div>
         </Grid>
       </Section>
