@@ -16,6 +16,21 @@ test.describe('@smoke layout', () => {
   }
 })
 
+// Regression: the hero's single grid track grew to its widest child, so the lede and the second
+// button ran past a phone's edge; the section's overflow-hidden kept scrollWidth at 320, so the
+// overflow test above could not see it.
+test('@smoke the home hero text fits a 320 px phone', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 })
+  await page.goto('/')
+  for (const box of [
+    await page.locator('#home-title + p').boundingBox(),
+    await page.getByRole('link', { name: 'Read the research' }).first().boundingBox(),
+  ]) {
+    expect(box).not.toBeNull()
+    expect((box?.x ?? 0) + (box?.width ?? 0)).toBeLessThanOrEqual(320)
+  }
+})
+
 test.describe('@smoke layout with motion', () => {
   // Regression: a hidden-until-its-step window, translated 24 px further right, pushed the pinned
   // Moth demo 8 px past the 1440 px viewport. Checked with motion on, after scrolling through.

@@ -17,8 +17,8 @@ export function HomeHero() {
       aria-labelledby="home-title"
       className="hero relative -mt-15 overflow-hidden lg:-mt-18"
     >
-      <Container className="relative grid min-h-[max(640px,94svh)] items-center gap-y-6 pt-28 pb-16 lg:min-h-[min(100svh,960px)] lg:grid-cols-12 lg:gap-x-6 lg:pt-24 lg:pb-12">
-        <div className="relative z-10 lg:col-span-7">
+      <Container className="relative grid min-h-[max(640px,94svh)] grid-cols-[minmax(0,1fr)] items-center gap-y-6 pt-28 pb-16 lg:min-h-[min(100svh,960px)] lg:grid-cols-12 lg:gap-x-6 lg:pt-24 lg:pb-12">
+        <div className="relative z-10 min-w-0 lg:col-span-7">
           <SmartLink
             href={h.announcement.href}
             className="hero-rise hero-d1 group inline-flex max-w-full items-center gap-2.5 font-mono text-label text-surface-muted transition-colors duration-(--duration-hover) hover:text-surface-fg"
