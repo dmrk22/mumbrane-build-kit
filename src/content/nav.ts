@@ -79,7 +79,8 @@ export const HEADER = {
 } as const
 
 export const FOOTER = {
-  tagline: 'Intelligence for closed worlds.',
+  tagline:
+    'Intelligence for closed worlds. Moth answers only from the facts and definitions you supply, and shows its evidence.',
   columns: [
     {
       title: 'Solutions',
@@ -92,37 +93,38 @@ export const FOOTER = {
       ],
     },
     {
-      title: 'Company',
-      links: [link('/company'), link('/careers'), link('/news'), link('/contact'), link('/research')],
-    },
-    {
       title: 'Developer',
       links: [
         link('/developers'),
-        link('/pricing'),
+        link('/developers/docs'),
         link('/developers/models'),
         link('/console'),
+        link('/pricing'),
         link('/changelog'),
-        link('/developers/docs'),
         link('/status'),
       ],
     },
-    { title: 'Enterprise', links: [link('/contact/sales')] },
     {
-      title: 'Legal',
+      title: 'Company',
       links: [
-        link('/legal/terms'),
-        link('/legal/enterprise-terms'),
-        link('/legal/privacy'),
-        link('/legal/cookies'),
-        link('/legal/privacy-choices'),
+        link('/company'),
+        link('/research'),
+        link('/news'),
+        link('/careers'),
+        link('/contact'),
+        link('/contact/sales'),
       ],
     },
-    { title: 'Social', links: SOCIAL.map((s) => ({ label: s.label, href: s.href })) },
   ] satisfies { title: string; links: NavLink[] }[],
+  social: SOCIAL.map((s) => ({ label: s.label, href: s.href })) satisfies NavLink[],
   legal: {
     copyright: '© 2026 Mumbrane',
-    privacyChoices: link('/legal/privacy-choices'),
-    motto: 'Evidence, retained.',
+    links: [
+      link('/legal/terms'),
+      link('/legal/enterprise-terms'),
+      link('/legal/privacy'),
+      link('/legal/cookies'),
+      link('/legal/privacy-choices'),
+    ] satisfies NavLink[],
   },
 } as const

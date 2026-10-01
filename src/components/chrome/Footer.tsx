@@ -1,58 +1,79 @@
-import { Mark } from '@/components/brand/Mark'
+import { Lockup } from '@/components/brand/Lockup'
+import { Wordmark } from '@/components/brand/Wordmark'
 import { Container } from '@/components/layout/Container'
 import { InView } from '@/components/motion/InView'
 import { SmartLink } from '@/components/ui/SmartLink'
 import { HEADER, FOOTER as NAV } from '@/content/nav'
+import { cx } from '@/lib/cx'
 
-// The footer, after Anthropic's: the mark, the line, dense link columns, a legal row.
+const LINK = 'transition-colors duration-(--duration-hover) hover:text-surface-fg'
+
+// A raised paper card on a paper-2 band, the giant wordmark resting faintly beneath it.
 export function Footer() {
   return (
     <footer
-      data-surface="deep"
-      className="relative overflow-hidden pt-16 pb-6 md:pt-20 lg:pt-24 print:hidden"
+      data-surface="paper-2"
+      className="relative overflow-hidden bg-surface pt-10 text-surface-fg md:pt-14 print:hidden"
     >
       <Container className="relative">
-        <div className="grid grid-cols-12 gap-x-4 gap-y-14 lg:gap-x-6">
-          <InView className="col-span-12 lg:col-span-4">
-            <SmartLink href="/" aria-label={HEADER.homeLabel} className="-m-2 inline-block p-2">
-              <Mark width={88} className="draw-on-reveal" />
-            </SmartLink>
-            <p className="mt-8 max-w-[13ch] font-display text-display-s">{NAV.tagline}</p>
-          </InView>
-          <nav aria-label="Footer" className="col-span-12 lg:col-span-8">
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:gap-x-6">
-              {NAV.columns.map((col) => (
-                <li key={col.title}>
-                  <h2 className="font-mono text-label text-surface-subtle">{col.title}</h2>
-                  <ul className="mt-4 flex flex-col gap-2">
-                    {col.links.map((l) => (
-                      <li key={l.href}>
-                        <SmartLink
-                          href={l.href}
-                          className="text-small text-surface-muted transition-colors duration-(--duration-hover) hover:text-surface-fg"
-                        >
-                          {l.label}
-                        </SmartLink>
-                      </li>
-                    ))}
-                  </ul>
+        <div
+          data-surface="paper"
+          className="relative z-10 rounded-xl border bg-surface border-surface-rule px-6 pt-8 pb-5 shadow-card md:px-10 md:pt-10"
+        >
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
+            <div className="lg:col-span-5">
+              <SmartLink href="/" aria-label={HEADER.homeLabel} className="-m-2 inline-block p-2">
+                <Lockup height={22} className="h-5.5 w-auto" />
+              </SmartLink>
+              <p className="mt-5 max-w-[44ch] text-small text-surface-muted">{NAV.tagline}</p>
+              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-small font-medium">
+                {NAV.social.map((s) => (
+                  <li key={s.href}>
+                    <SmartLink href={s.href} className={LINK}>
+                      {s.label}
+                    </SmartLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <nav aria-label="Footer" className="lg:col-span-7">
+              <ul className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+                {NAV.columns.map((col) => (
+                  <li key={col.title}>
+                    <h2 className="text-small font-medium">{col.title}</h2>
+                    <ul className="mt-3 flex flex-col gap-1.5">
+                      {col.links.map((l) => (
+                        <li key={l.href}>
+                          <SmartLink href={l.href} className={cx('text-small text-surface-muted', LINK)}>
+                            {l.label}
+                          </SmartLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          <div className="mt-10 flex flex-col gap-3 border-t border-surface-rule pt-5 text-caption text-surface-muted md:flex-row md:items-center md:justify-between">
+            <p>{NAV.legal.copyright}</p>
+            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+              {NAV.legal.links.map((l) => (
+                <li key={l.href}>
+                  <SmartLink href={l.href} className={cx('underline underline-offset-[0.22em]', LINK)}>
+                    {l.label}
+                  </SmartLink>
                 </li>
               ))}
             </ul>
-          </nav>
-        </div>
-
-        <div className="mt-20 flex flex-col gap-3 border-t border-surface-rule py-6 text-small text-surface-muted sm:grid sm:grid-cols-3 sm:items-center lg:mt-28">
-          <p>{NAV.legal.copyright}</p>
-          <SmartLink
-            href={NAV.legal.privacyChoices.href}
-            className="transition-colors duration-(--duration-hover) hover:text-surface-fg sm:justify-self-center"
-          >
-            {NAV.legal.privacyChoices.label}
-          </SmartLink>
-          <p className="flex items-baseline gap-3 sm:justify-self-end">{NAV.legal.motto}</p>
+          </div>
         </div>
       </Container>
+
+      <InView className="wordmark-rise -mt-6 px-5 pb-6 text-surface-fg/6 sm:px-6 lg:px-10">
+        <Wordmark className="mx-auto h-auto w-full max-w-340" />
+      </InView>
     </footer>
   )
 }

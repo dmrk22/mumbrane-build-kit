@@ -93,7 +93,7 @@ test.describe('header theming', () => {
     const h = page.locator(header)
     await expect(h).toHaveAttribute('data-surface', 'paper')
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    await expect(h).toHaveAttribute('data-surface', 'deep')
+    await expect(h).toHaveAttribute('data-surface', 'paper-2')
   })
 })
 

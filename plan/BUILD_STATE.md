@@ -180,6 +180,12 @@ Header is 56 px at every width (was 60/72). Menus are compact cards anchored und
 via text-decoration, never boxed. The Company menu is gone from the header (Company, Careers,
 Contact remain in the footer; Research and News stay as top-level links). Button gained `size="sm"`.
 
+### Footer card (2026-10-01, owner request)
+Footer is a raised `paper` card (rounded-xl, `--shadow-card`) on a `paper-2` band, no longer the
+`deep` surface: lockup + tagline + social text links, three link columns (Solutions, Developer,
+Company), legal links underlined in the bottom row. The giant wordmark rises faintly beneath, full
+and uncropped (logo lock). Social stays as text: no third-party brand glyphs. 816 → 637 px at 1440.
+
 ### Redesign R2 — "field" (2026-10-01, D-129)
 Supersedes R1. Logic notation, theorem labels, ProofSheet, Turnstile, StringModel, MothCurve,
 the WebGL string model and the green palette are gone. New: `src/lib/art/field.ts` (tested),
