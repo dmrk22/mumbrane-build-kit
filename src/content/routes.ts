@@ -26,7 +26,7 @@ export const ROUTES = [
     description:
       'Mumbrane builds field-based intelligence: your data becomes the field, and a question settles where your facts and definitions support it.',
     sitemap: true,
-    surfaceTop: 'ink',
+    surfaceTop: 'paper',
   },
   {
     path: '/moth',

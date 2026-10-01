@@ -67,7 +67,7 @@ function PrincipleFigure() {
   )
 }
 
-// Surfaces: ink · paper · ink · paper · paper-2 · paper · ink · paper-2.
+// Surfaces: paper · paper · ink · paper · paper-2 · paper · ink · paper-2.
 export default function Home() {
   const { principle, how, evidence, compounding, research, release, getStarted } = HOME
   const plates = research.plates.flatMap((slug) => articleBySlug(slug) ?? [])

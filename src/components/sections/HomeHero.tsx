@@ -13,7 +13,7 @@ export function HomeHero() {
   const h = HOME.hero
   return (
     <section
-      data-surface="ink"
+      data-surface="paper"
       aria-labelledby="home-title"
       className="hero relative -mt-15 overflow-hidden lg:-mt-18"
     >
