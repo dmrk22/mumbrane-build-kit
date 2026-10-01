@@ -25,7 +25,8 @@ export function Footer() {
               <ul className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
                 {NAV.columns.map((col) => (
                   <li key={col.title}>
-                    <h2 className="text-small font-medium">{col.title}</h2>
+                    {/* Headings bright and bold over muted links, so the columns read at a glance. */}
+                    <h2 className="text-small font-semibold text-surface-fg">{col.title}</h2>
                     <ul className="mt-3 flex flex-col gap-1.5">
                       {col.links.map((l) => (
                         <li key={l.href}>

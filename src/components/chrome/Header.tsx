@@ -171,7 +171,9 @@ export function Header({
       >
         <div className="mx-auto flex h-14 w-full max-w-360 items-center px-5 sm:px-6 lg:px-10">
           <SmartLink href="/" aria-label={nav.homeLabel} className="-m-2 p-2">
-            <Lockup height={22} collapsible className="h-5 w-auto lg:h-5.5" />
+            {/* Uniform scale only (logo lock): 20 / 24 / 28 px tall, so the name reads at header
+                size; 20 px keeps the 320 px header from overflowing. */}
+            <Lockup height={28} collapsible className="h-5 w-auto sm:h-6 lg:h-7" />
           </SmartLink>
 
           <nav aria-label={nav.label} className="ml-auto hidden lg:block" onPointerLeave={hover(null)}>
