@@ -27,8 +27,10 @@ function surfaceElements(header: HTMLElement): HTMLElement[] {
   )
 }
 
+// Current, open and hovered links are underlined, never boxed. text-decoration skips the chevron
+// icon, so only the label carries the line.
 const NAV_LINK =
-  'relative inline-flex h-10 items-center gap-1 rounded-pill px-3 text-small font-medium transition-colors duration-(--duration-hover) hover:bg-surface-fg/8 aria-[current=page]:bg-surface-fg/8 aria-expanded:bg-surface-fg/8'
+  'inline-flex h-9 items-center gap-1 px-2.5 text-small font-medium underline decoration-transparent decoration-1 underline-offset-[0.4em] transition-colors duration-(--duration-hover) hover:decoration-surface-fg/40 aria-[current=page]:decoration-current aria-expanded:decoration-current data-[current=true]:decoration-current'
 
 /** `surfaceTop`: each route's first surface (registry), so the first paint is already themed. */
 export function Header({
@@ -167,18 +169,18 @@ export function Header({
           'data-[scrolled=true]:border-surface-rule data-[scrolled=true]:bg-surface/86 data-[scrolled=true]:backdrop-blur-[14px] data-[scrolled=true]:backdrop-saturate-140',
         )}
       >
-        <div className="mx-auto flex h-15 w-full max-w-360 items-center px-5 sm:px-6 lg:h-18 lg:px-10">
+        <div className="mx-auto flex h-14 w-full max-w-360 items-center px-5 sm:px-6 lg:px-10">
           <SmartLink href="/" aria-label={nav.homeLabel} className="-m-2 p-2">
             <Lockup height={22} collapsible className="h-5 w-auto lg:h-5.5" />
           </SmartLink>
 
           <nav aria-label={nav.label} className="ml-auto hidden lg:block" onPointerLeave={hover(null)}>
-            <ul className="flex items-center gap-0.5 xl:gap-1">
+            <ul className="flex items-center">
               {nav.menus.map((menu) => {
                 const expanded = open === menu.id
                 const current = menu.links.some((l) => isCurrent(pathname, l.href)) || pathname === menu.index
                 return (
-                  <li key={menu.id}>
+                  <li key={menu.id} className="relative">
                     <button
                       type="button"
                       ref={(el) => {
@@ -188,7 +190,7 @@ export function Header({
                       aria-expanded={expanded}
                       aria-controls={`menu-${menu.id}`}
                       data-current={current}
-                      className={cx(NAV_LINK, current && 'after:scale-x-100')}
+                      className={NAV_LINK}
                       onClick={(e) => {
                         // A click settles any pending hover intent. Keyboard (detail 0) toggles; a
                         // pointer click only opens, so it can't undo a menu that hover just opened.
@@ -231,14 +233,16 @@ export function Header({
             </ul>
           </nav>
 
-          <div className="ml-auto flex items-center gap-2 lg:ml-5 lg:border-l lg:border-surface-rule lg:pl-5">
+          <div className="ml-auto flex items-center gap-2 lg:ml-3 lg:border-l lg:border-surface-rule lg:pl-3">
             {/* A wrapper, not a class on the link: `hidden` would lose to its own `inline-flex`. */}
             <div className="hidden lg:block">
               <SmartLink href={nav.actions.secondary.href} className={NAV_LINK}>
                 {nav.actions.secondary.label}
               </SmartLink>
             </div>
-            <Button href={nav.actions.primary.href}>{nav.actions.primary.label}</Button>
+            <Button href={nav.actions.primary.href} size="sm">
+              {nav.actions.primary.label}
+            </Button>
             <MobileNav nav={nav} />
           </div>
         </div>
@@ -249,7 +253,10 @@ export function Header({
 
 type MenuData = HeaderNav['menus'][number]
 
-/** A mega-menu disclosure panel (DESIGN §9.2): a labelled region of links, not an ARIA menu. */
+/**
+ * A dropdown disclosure card anchored under its trigger: a labelled region of links, not an ARIA
+ * menu. The top padding is part of the panel so the pointer can cross the gap without leaving it.
+ */
 function MenuPanel({
   menu,
   open,
@@ -273,13 +280,13 @@ function MenuPanel({
       data-open={open}
       onPointerEnter={onPointerEnter}
       className={cx(
-        'absolute inset-x-0 top-full border-y border-surface-rule shadow-menu',
-        'invisible -translate-y-2 opacity-0 transition-[opacity,translate,visibility] duration-[160ms] ease-in',
+        'absolute top-full left-0 pt-2',
+        'invisible -translate-y-1 opacity-0 transition-[opacity,translate,visibility] duration-[160ms] ease-in',
         'data-[open=true]:visible data-[open=true]:translate-y-0 data-[open=true]:opacity-100 data-[open=true]:duration-[240ms] data-[open=true]:ease-out',
       )}
     >
-      <div className="mx-auto grid w-full max-w-360 grid-cols-12 gap-6 px-10 pt-8 pb-10">
-        <ul className="col-span-8 grid grid-cols-2 gap-x-6 gap-y-1 self-start">
+      <div className="w-92 rounded-lg border border-surface-rule bg-surface p-2 text-surface-fg shadow-menu">
+        <ul className="flex flex-col">
           {menu.links.map((l) => (
             <li
               key={l.href}
@@ -287,15 +294,21 @@ function MenuPanel({
             >
               <SmartLink
                 href={l.href}
-                className="-mx-3 flex flex-col gap-1 rounded-sm px-3 py-3 transition-colors duration-(--duration-hover) hover:bg-surface-raise"
+                className="group flex items-center gap-3 rounded-md px-3 py-2 transition-colors duration-(--duration-hover) hover:bg-surface-raise aria-[current=page]:bg-surface-raise"
                 aria-current={isCurrent(pathname, l.href) ? 'page' : undefined}
                 prefetch={false}
                 onClick={onNavigate}
               >
-                <span className="font-display text-title">{l.label}</span>
-                {'description' in l && l.description && (
-                  <span className="text-small text-surface-muted">{l.description}</span>
-                )}
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="text-small font-medium">{l.label}</span>
+                  {'description' in l && l.description && (
+                    <span className="text-caption text-surface-muted">{l.description}</span>
+                  )}
+                </span>
+                <Icon
+                  name="arrow-right"
+                  className="size-4 shrink-0 -translate-x-1 opacity-0 transition-[opacity,translate] duration-(--duration-hover) ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
+                />
               </SmartLink>
             </li>
           ))}
@@ -304,19 +317,15 @@ function MenuPanel({
           href={menu.feature.href}
           prefetch={false}
           onClick={onNavigate}
-          className="group col-span-4 flex flex-col justify-between gap-8 rounded-lg border border-surface-rule bg-surface-raise p-6 transition-colors duration-(--duration-hover) hover:border-surface-subtle"
+          className="group mt-2 flex items-end gap-3 rounded-md border-t border-surface-rule bg-surface-raise px-3 pt-3 pb-3 transition-colors duration-(--duration-hover) hover:bg-surface-fg/8"
         >
-          <span className="flex flex-col gap-3">
+          <span className="flex min-w-0 flex-1 flex-col gap-1">
             <span className="font-mono text-label text-surface-subtle">{menu.feature.eyebrow}</span>
-            <span className="font-display text-display-s">{menu.feature.title}</span>
-            <span className="text-small text-surface-muted">{menu.feature.text}</span>
+            <span className="text-small font-medium">{menu.feature.title}</span>
           </span>
-          {'meta' in menu.feature && (
-            <span className="font-mono text-label text-surface-subtle">{menu.feature.meta}</span>
-          )}
           <Icon
             name="arrow-right"
-            className="transition-transform duration-(--duration-hover) ease-out group-hover:translate-x-0.5"
+            className="size-4 shrink-0 transition-transform duration-(--duration-hover) ease-out group-hover:translate-x-0.5"
           />
         </SmartLink>
       </div>

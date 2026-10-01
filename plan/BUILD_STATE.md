@@ -174,6 +174,12 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 
+### Header condense (2026-10-01, owner request)
+Header is 56 px at every width (was 60/72). Menus are compact cards anchored under their trigger
+(links + one feature row), not full-width mega panels. Current/open/hover nav items are underlined
+via text-decoration, never boxed. The Company menu is gone from the header (Company, Careers,
+Contact remain in the footer; Research and News stay as top-level links). Button gained `size="sm"`.
+
 ### Redesign R2 — "field" (2026-10-01, D-129)
 Supersedes R1. Logic notation, theorem labels, ProofSheet, Turnstile, StringModel, MothCurve,
 the WebGL string model and the green palette are gone. New: `src/lib/art/field.ts` (tested),

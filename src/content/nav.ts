@@ -1,6 +1,5 @@
 // Header and footer navigation (CONTENT §2). Paths are registry paths (checked by the type and by
 // links.test.ts); labels default to the registry title.
-import { ARTICLES, articlePath } from './articles.ts'
 import { type RoutePath, routeFor } from './routes.ts'
 import { SOCIAL } from './social.ts'
 
@@ -26,10 +25,6 @@ function link(path: RoutePath, description?: string): NavLink {
   const r = routeFor(path)
   return { label: r.nav?.label ?? r.title, href: path, ...(description ? { description } : {}) }
 }
-
-const latestNews = [...ARTICLES]
-  .filter((a) => a.section === 'news')
-  .sort((a, b) => b.published.localeCompare(a.published))[0]
 
 export const HEADER = {
   label: 'Primary',
@@ -71,23 +66,6 @@ export const HEADER = {
         text: 'Define the world, compile it, ask, and inspect the evidence.',
         href: '/moth',
         secondary: { label: 'Release & evidence', href: '/moth#evidence' },
-      },
-    },
-    {
-      id: 'company',
-      label: 'Company',
-      links: [
-        link('/company', 'The lab, block by block'),
-        link('/research', 'Field-based intelligence'),
-        link('/news', 'Field notes and releases'),
-        link('/careers', 'How we work'),
-        link('/contact', 'Research, press and general'),
-      ],
-      feature: {
-        eyebrow: `Latest · ${latestNews?.category ?? 'News'}`,
-        title: latestNews?.title ?? 'News',
-        text: latestNews?.description ?? '',
-        href: latestNews ? articlePath(latestNews) : '/news',
       },
     },
   ] satisfies Menu[],

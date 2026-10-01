@@ -14,6 +14,7 @@ const VARIANT = {
 } as const
 
 const SIZE = {
+  sm: { pill: 'h-9 px-4 text-small', arrow: 'pr-2', text: 'text-small' },
   md: { pill: 'h-11 px-5 text-small', arrow: 'pr-2.5', text: 'text-small' },
   lg: { pill: 'h-13 px-6 text-body', arrow: 'pr-3', text: 'text-title' },
 } as const

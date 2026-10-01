@@ -127,10 +127,21 @@ test.describe('@a11y menus', () => {
   test('focus leaving the header closes the open menu', async ({ page, isMobile }) => {
     test.skip(isMobile, 'desktop navigation')
     await page.goto(MISSING)
-    await page.getByRole('button', { name: 'Company' }).click()
-    await expect(page.locator('#menu-company')).toBeVisible()
+    await page.getByRole('button', { name: 'Developer' }).click()
+    await expect(page.locator('#menu-developer')).toBeVisible()
     await page.getByRole('link', { name: 'Research', exact: true }).last().focus() // outside: in main
-    await expect(page.locator('#menu-company')).toBeHidden()
+    await expect(page.locator('#menu-developer')).toBeHidden()
+  })
+
+  test('no Company menu; current page underlined, not boxed', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'desktop navigation')
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto(visit('/research'))
+    const header = page.locator('header')
+    await expect(header.getByRole('button', { name: 'Company' })).toHaveCount(0)
+    const current = header.locator('nav a[aria-current="page"]', { hasText: 'Research' }).first() // the desktop nav; the mobile sheet holds a copy
+    await expect(current).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)')
+    await expect(current).toHaveCSS('text-decoration-line', 'underline')
   })
 
   test('the mobile sheet traps focus, closes on Escape and returns focus', async ({ page }) => {
