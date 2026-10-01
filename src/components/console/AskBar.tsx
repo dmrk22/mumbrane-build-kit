@@ -109,7 +109,7 @@ export function AskBar({
                 <button
                   type="button"
                   onClick={() => onAsk(q)}
-                  className="inline-flex min-h-9 items-center rounded-pill border border-surface-fg/20 px-3.5 py-1.5 text-left text-small text-surface-fg transition-[background-color,border-color] duration-(--duration-micro) ease-out hover:border-surface-fg/45 hover:bg-surface-raise pointer-coarse:min-h-11"
+                  className="inline-flex min-h-9 items-center rounded-pill border border-surface-fg/25 px-3.5 py-1.5 text-left text-small text-surface-fg transition-[background-color,border-color] duration-(--duration-micro) ease-out hover:border-surface-fg/45 hover:bg-surface-raise pointer-coarse:min-h-11"
                 >
                   {q.length > MAX_QUESTION ? copy.long : q}
                 </button>

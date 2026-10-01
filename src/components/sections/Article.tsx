@@ -9,6 +9,7 @@ import { CopyButton } from '@/components/ui/CopyButton'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Prose } from '@/components/ui/Prose'
 import { SmartLink } from '@/components/ui/SmartLink'
+import { TitleText } from '@/components/ui/TitleText'
 import { articleBody, readingMinutes } from '@/content/articleDocs'
 import { type Article as ArticleMeta, articlePath } from '@/content/articles'
 import { painting } from '@/content/paintingsData'
@@ -38,7 +39,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
               {sectionName} · {article.category}
             </Eyebrow>
             <Heading level={1} size="display-l" id="article-title" className="mt-4">
-              {article.title}
+              <TitleText text={article.title} />
             </Heading>
             <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{article.description}</p>
             <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-surface-rule pt-5 font-mono text-label uppercase">

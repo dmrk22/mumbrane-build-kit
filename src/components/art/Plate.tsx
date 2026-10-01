@@ -3,6 +3,7 @@ import { Painting } from '@/components/art/Painting'
 import { SpectralStrip } from '@/components/art/SpectralStrip'
 import { InView } from '@/components/motion/InView'
 import { SmartLink } from '@/components/ui/SmartLink'
+import { TitleText } from '@/components/ui/TitleText'
 import type { PaintingId } from '@/content/paintings'
 import { painting } from '@/content/paintingsData'
 import { cx } from '@/lib/cx'
@@ -13,20 +14,6 @@ import { monoDate, roman } from '@/lib/format'
  * marks, a serif title (the card's link, stretched over the whole card), the mono meta line with
  * the painting's real seed, and the spectral strip of its palette. Reveal and hover per §7.5.
  */
-/** Keeps hyphenated compounds ("field-based") on one line in short display titles. */
-function TitleText({ text }: { text: string }) {
-  const parts = text.split(/(\S+-\S+)/).map((part, i) => ({ part, id: `${i}:${part}` }))
-  return parts.map(({ part, id }) =>
-    /\S-\S/.test(part) ? (
-      <span key={id} className="whitespace-nowrap">
-        {part}
-      </span>
-    ) : (
-      part
-    ),
-  )
-}
-
 export function Plate({
   paintingId,
   number,

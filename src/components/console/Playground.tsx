@@ -209,7 +209,7 @@ export function Playground({ initialWorld }: { initialWorld: WorldId }) {
               type="button"
               aria-haspopup="dialog"
               onClick={() => drawer.current?.showModal()}
-              className="inline-flex h-9 items-center gap-2 rounded-pill border border-surface-fg/30 px-3.5 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
+              className="inline-flex h-9 items-center gap-2 rounded-pill border border-surface-fg/25 px-3.5 text-small text-surface-fg hover:bg-surface-raise pointer-coarse:h-11"
             >
               <Icon name="layers" className="size-4" />
               {worldCopy.show}

@@ -144,3 +144,10 @@ test.describe('@smoke legal (CONTENT §3.13)', () => {
     expect((await request.get('/legal/not-a-page')).status()).toBe(404)
   })
 })
+
+test('@smoke an article title keeps a hyphenated compound on one line', async ({ page }) => {
+  await page.goto('/research/toward-field-based-intelligence')
+  const compound = page.locator('h1 span', { hasText: 'field-based' })
+  await expect(compound).toHaveCount(1)
+  expect(await compound.evaluate((el) => el.getClientRects().length)).toBe(1)
+})
