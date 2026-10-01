@@ -1,0 +1,71 @@
+/* Console themes (CONSOLE §2, §10.2). Light = paper page / paper-2 panels; dark = ink page / ink-2
+   panels. `html[data-console-theme]` is set before first paint by /console-theme.js (stored
+   choice) and by ThemeControl; without it the system preference decides. Same variables as the
+   site's surfaces, so every surface-* utility follows the theme. */
+@layer base {
+  [data-console-panel] {
+    --surface-bg: var(--color-paper-2);
+    --surface-raise: var(--color-paper);
+  }
+
+  html[data-console-theme="dark"] [data-console-surface] {
+    --surface-bg: var(--color-ink);
+    --surface-fg: var(--color-on-dark);
+    --surface-muted: var(--color-on-dark-2);
+    --surface-subtle: var(--color-on-dark-3);
+    --surface-rule: var(--color-rule-dark);
+    --surface-raise: var(--color-ink-2);
+    --surface-accent: var(--color-cherenkov);
+    color-scheme: dark;
+  }
+  html[data-console-theme="dark"] [data-console-panel] {
+    --surface-bg: var(--color-ink-2);
+    --surface-raise: var(--color-ink-3);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-console-theme="light"]) [data-console-surface] {
+      --surface-bg: var(--color-ink);
+      --surface-fg: var(--color-on-dark);
+      --surface-muted: var(--color-on-dark-2);
+      --surface-subtle: var(--color-on-dark-3);
+      --surface-rule: var(--color-rule-dark);
+      --surface-raise: var(--color-ink-2);
+      --surface-accent: var(--color-cherenkov);
+      color-scheme: dark;
+    }
+    html:not([data-console-theme="light"]) [data-console-panel] {
+      --surface-bg: var(--color-ink-2);
+      --surface-raise: var(--color-ink-3);
+    }
+  }
+
+  /* The page behind the shell, so overscroll and short pages match the theme. */
+  html:has([data-console-surface]) {
+    background-color: var(--color-paper);
+  }
+  html[data-console-theme="dark"]:has([data-console-surface]) {
+    background-color: var(--color-ink);
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-console-theme="light"]):has([data-console-surface]) {
+      background-color: var(--color-ink);
+    }
+  }
+
+  /* A fact or definition clicked in the evidence flashes in the world panel (§8). */
+  [data-flash="true"] {
+    outline: 2px solid var(--color-cadmium);
+    outline-offset: 2px;
+    animation: console-flash 2s var(--ease-out);
+  }
+}
+
+@keyframes console-flash {
+  from {
+    background-color: var(--color-cadmium-soft);
+  }
+  to {
+    background-color: transparent;
+  }
+}

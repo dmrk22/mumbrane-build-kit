@@ -19,7 +19,7 @@ Update after every task: tick the box, add a one-line note, commit.
 | P9 | Company, Careers, Contact | done | 2026-10-01 | 2026-10-01 | `p09-company` |
 | P10 | Solutions | done | 2026-10-01 | 2026-10-01 | `p10-solutions` |
 | P11 | Developers, Pricing, Changelog, Status | done | 2026-10-01 | 2026-10-01 | `p11-developers` |
-| P12 | Console preview | not started | | | |
+| P12 | Console preview | in progress | 2026-10-01 | | |
 | P13 | Legal, llms.txt, OG images, completeness | not started | | | |
 | P14 | QA, hardening, polish, final report | not started | | | |
 
@@ -27,7 +27,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
 - Phase: P12 (not started)
-- Next task: P12 Console preview
+- Next task: P12 Console preview — resume at "NEXT (1)" in the P12 handoff note (console layout)
 
 ## P0 — Setup checklist
 - [x] 1 Preflight: node ≥ 24, pnpm ≥ 11, git repo, hooks self-test passes, both live canaries refused
@@ -135,6 +135,11 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 <!-- ≤ 10 lines per phase: what exists, where, gotchas, follow-ups. Newest first. -->
+
+### P12 — IN PROGRESS (paused 2026-10-01 at the owner's request, to resume with a design-focused model setting)
+- Done and unit-tested: `src/lib/console/{types,sim,engine}.ts` (simulator per CONSOLE §6; 8 golden/hostile tests in `tests/unit/console-sim.test.ts`), `src/content/console/{worlds,ui}.ts`, `src/app/console/console.css` (themes, not yet imported), `public/console-theme.js`, `src/components/console/ConsoleSession.tsx` (in-memory session provider, not yet mounted).
+- NEXT, in order: (1) `src/app/console/layout.tsx` — `<script src="/console-theme.js" nonce={x-nonce} suppressHydrationWarning />` before the shell, import `./console.css`, wrap in `ConsoleSession`, `data-surface="paper" data-console-surface` root; (2) `ConsoleChrome` (rail ≥ 768 / bottom tabs, top bar with "Simulation" tag + `ThemeControl`); (3) `/console` entry; (4) `/console/playground` (server parses `?world` with `parseWorld`, redirect if invalid; client Playground: world panel, ask bar + chips, ResultCard stream, Evidence panel, rebuild/replay, keyboard §11, aria-live §12); (5) keys, usage, settings; (6) `tests/e2e/console.spec.ts` per CONSOLE §14; (7) shots light + dark, axe both themes, console JS ≤ 230 KB.
+- Component budget: 61/80 used; plan ~10 console components (ConsoleChrome, ThemeControl, Playground, WorldPanel, ResultCard, Evidence, KeysDemo, UsageView, SettingsView, ShortcutsDialog).
 
 ### P11 — 2026-10-01
 - `git grep` skips untracked files: audits of new content must use `git grep --untracked` (the P10 audit was re-run; see the claims log).
