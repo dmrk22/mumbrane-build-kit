@@ -348,3 +348,15 @@
       transform 1800ms var(--ease-out);
   }
 }
+
+/* Moth's butterfly curve draws itself once, slowly, the first time it is seen. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal="pending"].moth-curve .moth-curve-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  [data-reveal="done"].moth-curve .moth-curve-path {
+    stroke-dasharray: 1;
+    animation: mark-draw 4200ms var(--ease-in-out) both;
+  }
+}

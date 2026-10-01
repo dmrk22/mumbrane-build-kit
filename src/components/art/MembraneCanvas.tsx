@@ -107,7 +107,7 @@ export function MembraneCanvas({
       const wide = canvas.clientWidth / Math.max(1, canvas.clientHeight) > 1.15
       return wide
         ? { center: [0.5, -0.04] as const, scale: 0.235, gain: 1 }
-        : { center: [0.0, 0.18] as const, scale: 0.16, gain: 0.62 }
+        : { center: [0.12, 0.2] as const, scale: 0.17, gain: 0.85 }
     }
 
     const draw = (t: number) => {

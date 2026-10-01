@@ -1,5 +1,4 @@
-import { Mark } from '@/components/brand/Mark'
-import { InstrumentWindow } from '@/components/instrument/InstrumentWindow'
+import { MothCurve } from '@/components/art/MothCurve'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
 import { SplitReveal } from '@/components/motion/SplitReveal'
@@ -61,24 +60,7 @@ export default function MothPage() {
             </div>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8">
-            <InstrumentWindow title={hero.window.title} footer>
-              <div className="flex items-center gap-4 border-b border-surface-rule pb-4">
-                <Mark width={56} className="text-surface-fg" />
-                <span className="text-label uppercase">{MOTH.preview.eyebrow}</span>
-              </div>
-              <ol className="mt-2 divide-y divide-surface-rule">
-                {how.steps.map((s, i) => (
-                  <li key={s.name} className="flex items-center gap-4 py-3">
-                    <span className="text-surface-subtle tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-                    <span>{s.name}</span>
-                    <span className="ml-auto flex items-center gap-2 text-label text-malachite-fg uppercase">
-                      <span aria-hidden="true" className="size-1.5 bg-malachite" />
-                      {hero.window.status}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </InstrumentWindow>
+            <MothCurve />
           </div>
         </Grid>
       </Section>
