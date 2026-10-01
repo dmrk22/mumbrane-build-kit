@@ -136,6 +136,11 @@
   .plate .plate-frame {
     border: 1px solid CanvasText;
   }
+  /* A WebGL canvas keeps its own colours; hidden, the hero takes the system Canvas colour, so the
+     transparent header's lockup and links stay legible. */
+  .membrane-canvas {
+    display: none;
+  }
 }
 
 /* Moth demo (DESIGN §7.4) and instrument content (§9.6): section tags, entity chips, step reveals. */

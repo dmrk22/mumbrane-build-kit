@@ -196,12 +196,9 @@ function Block({
   )
   const attrs = { 'data-step': block.step, 'data-unlocked': open ? '' : undefined }
   return block.href ? (
-    <SmartLink
-      href={block.href}
-      onFocus={onFocus}
-      className={cx(className, 'focus-visible:-outline-offset-4 focus-visible:outline-current')}
-      {...attrs}
-    >
+    // The site's focus ring, drawn outside the block in the grid gap: an inset ring was painted
+    // over by the fill and lock layers, so focus was invisible (a11y.spec focus test).
+    <SmartLink href={block.href} onFocus={onFocus} className={className} {...attrs}>
       {body}
     </SmartLink>
   ) : (

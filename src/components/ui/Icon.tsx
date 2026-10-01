@@ -44,9 +44,10 @@ const STROKE = {
 export function Icon({ name, label, className }: { name: IconName; label?: string; className?: string }) {
   const classes = cx('size-5 shrink-0', className)
   if (label) {
+    // aria-label, not <title>: WebKit does not name an icon-only button from an SVG title
+    // (axe button-name in WebKit; VoiceOver is unreliable with it too).
     return (
-      <svg role="img" className={classes} {...STROKE}>
-        <title>{label}</title>
+      <svg role="img" aria-label={label} className={classes} {...STROKE}>
         <path d={PATHS[name]} />
       </svg>
     )
