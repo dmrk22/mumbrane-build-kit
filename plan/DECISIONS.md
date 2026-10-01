@@ -675,3 +675,15 @@ Supersedes the family rows of DESIGN §3.1/§3.3 and D-129's "Mona Sans / Geist 
 by owner instruction); keeping Geist Mono (owner chose Commit Mono); renaming ~95 class uses to
 carry the family per usage (the role rule does it in one place).
 **Status**: Decided (owner instruction in session).
+
+### D-136 — Headlines in heavy Fustat (2026-10-02)
+**Context**: The owner judged the light serif headlines of D-135 weak and pointed at
+anthropic.com (a heavy sans headline over serif reading text) as the target.
+**Decision**: Every headline is Fustat: display sizes (`hero`, `display-xl`, `display-l`) at 700,
+`display-m`, `display-s`, `title` and article h2/h3 at 600; `font-display` now means Fustat.
+Ledes and body stay Source Serif 4 (with the −25 dark-ground shift); interface text stays Fustat
+400/500. Fustat is now the only preloaded face (it carries the hero, the LCP element); the serif
+roman is no longer preloaded. Italic accents apply to serif text only. Sizes, line heights and
+tracking unchanged. Supersedes D-135's headline rows and the spec's "never bold a headline".
+**Alternatives**: a heavier serif headline (not the reference's look).
+**Status**: Decided (owner instruction in session).

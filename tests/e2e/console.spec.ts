@@ -213,7 +213,7 @@ test('@console outlined chip controls share one border colour (the chip border)'
 test('@console dark theme: the serif lightens, Fustat keeps its weight', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' })
   await page.goto('/console')
-  await expect(page.locator('h1')).toHaveCSS('font-weight', '375')
+  await expect(page.locator('main p.text-lede').first()).toHaveCSS('font-weight', '375')
   await page.goto('/console/keys')
   await expect(page.locator('p.font-sans.text-body').first()).toHaveCSS('font-weight', '400')
 })

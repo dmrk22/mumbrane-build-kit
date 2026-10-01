@@ -63,15 +63,15 @@
   --color-limit: var(--color-paper-3);      /* resource stop / incomplete / incompatible */
 
   /* Type families — variables are provided by next/font in src/app/fonts.ts (D-135).
-     Prose (headlines, ledes, body) reads in Source Serif 4; interface in Fustat; data in
-     Commit Mono. */
+     Headlines in heavy Fustat (D-136); ledes and body read in Source Serif 4; interface in
+     Fustat; data in Commit Mono. */
   --font-sans: var(--font-fustat), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-source-serif), ui-serif, Georgia, "Times New Roman", serif;
   --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), ui-serif, Georgia, serif;
   --font-mono: var(--font-commit-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Type scale — fluid between 375px and 1440px viewports. Display sizes down to `article` are
-     serif; their weight comes from the role rule in the base layer (it drops on dark grounds). */
+  /* Type scale — fluid between 375px and 1440px viewports. Display sizes and `title` are
+     heavy Fustat, `lede` to `article` serif; weights come from the base-layer role rule. */
   --text-display-xl: clamp(3.25rem, 1.2rem + 8.4vw, 9.25rem);
   --text-display-xl--line-height: 1.02;
   --text-display-xl--letter-spacing: -0.03em;
@@ -232,30 +232,30 @@
     min-height: 100dvh;
   }
 
-  /* Roles (D-135): prose sizes read in the serif; interface text stays Fustat (the body default)
-     and opts out at a prose size with `font-sans`, which wins from the utilities layer. Light text
-     on dark grounds reads heavier, so dark surfaces set --serif-shift: -25. */
-  .text-hero, .text-display-xl, .text-display-l, .text-display-m, .text-display-s,
-  .text-title, .text-lede, .text-body, .text-article {
+  /* Roles (D-135, D-136): headlines are heavy Fustat; ledes and body read in the serif; interface
+     text stays Fustat 400/500 (the body default) and opts out of a prose size's weight with
+     `font-sans`, which wins from the utilities layer. Light serif on dark grounds reads heavier,
+     so dark surfaces set --serif-shift: -25. */
+  .text-lede, .text-body, .text-article {
     font-family: var(--font-serif);
   }
-  /* The weights are the serif's: text that opted out keeps Fustat's 400/500, unshifted. */
-  :is(.text-display-m, .text-display-s, .text-title, .text-lede, .text-body, .text-article):not(.font-sans, .font-mono) {
+  :is(.text-lede, .text-body, .text-article):not(.font-sans, .font-mono) {
     font-weight: calc(400 + var(--serif-shift, 0));
   }
+  :is(.text-display-m, .text-display-s, .text-title):not(.font-sans, .font-mono) {
+    font-weight: 600;
+  }
   :is(.text-hero, .text-display-xl, .text-display-l):not(.font-sans, .font-mono) {
-    font-weight: calc(350 + var(--serif-shift, 0));
-    margin-inline-start: -0.04em; /* optical alignment: the serif's side bearing at display size */
+    font-weight: 700;
+    margin-inline-start: -0.04em; /* optical alignment: the first letter's side bearing */
   }
   .font-serif, .font-serif-italic { font-feature-settings: "kern", "liga", "onum"; }
 
   h1, h2, h3 { text-wrap: balance; }
   p, li, dd, figcaption, blockquote { text-wrap: pretty; }
 
-  /* Serif italic is the only emphasis, from its own font instance (tokens: --font-serif-italic).
-     A headline may carry one italic accent word. */
-  :is(.font-serif, .font-display, .text-hero, .text-display-xl, .text-display-l, .text-display-m,
-    .text-display-s, .text-title, .text-lede, .text-body, .text-article) :is(em, i),
+  /* Serif italic is the only emphasis, from its own font instance (tokens: --font-serif-italic). */
+  :is(.font-serif, .text-lede, .text-body, .text-article) :is(em, i),
   .font-serif-italic { font-family: var(--font-serif-italic); font-style: italic; }
 
   code, kbd, samp, pre { font-family: var(--font-mono); font-variant-ligatures: none; }
@@ -294,9 +294,9 @@
   }
 }
 
-/* Headlines: the serif (D-135). */
+/* Headlines: heavy Fustat (D-136). */
 @utility font-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 /* Links inside running text (DESIGN §3.4): 1 px underline, thickens on hover, no colour jump. */

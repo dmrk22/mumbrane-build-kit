@@ -57,15 +57,15 @@
   --color-limit: var(--color-paper-3);      /* resource stop / incomplete / incompatible */
 
   /* Type families — variables are provided by next/font in src/app/fonts.ts (D-135).
-     Prose (headlines, ledes, body) reads in Source Serif 4; interface in Fustat; data in
-     Commit Mono. */
+     Headlines in heavy Fustat (D-136); ledes and body read in Source Serif 4; interface in
+     Fustat; data in Commit Mono. */
   --font-sans: var(--font-fustat), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: var(--font-source-serif), ui-serif, Georgia, "Times New Roman", serif;
   --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), ui-serif, Georgia, serif;
   --font-mono: var(--font-commit-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Type scale — fluid between 375px and 1440px viewports. Display sizes down to `article` are
-     serif; their weight comes from the role rule in the base layer (it drops on dark grounds). */
+  /* Type scale — fluid between 375px and 1440px viewports. Display sizes and `title` are
+     heavy Fustat, `lede` to `article` serif; weights come from the base-layer role rule. */
   --text-display-xl: clamp(3.25rem, 1.2rem + 8.4vw, 9.25rem);
   --text-display-xl--line-height: 1.02;
   --text-display-xl--letter-spacing: -0.03em;

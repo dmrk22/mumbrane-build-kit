@@ -31,8 +31,8 @@ test('@smoke the home hero text fits a 320 px phone', async ({ page }) => {
   }
 })
 
-// D-135: prose in the serif, interface in Fustat, data in Commit Mono; all from our origin, and
-// only the hero's serif preloaded.
+// D-135/D-136: headlines and interface in Fustat (the hero bold), ledes in the serif, data in
+// Commit Mono; all from our origin, and only the hero's face preloaded.
 test('@smoke fonts follow their roles and load from our origin', async ({ page }) => {
   await page.goto('/')
   const result = await page.evaluate(async () => {
@@ -58,6 +58,7 @@ test('@smoke fonts follow their roles and load from our origin', async ({ page }
       .map((r) => new URL(r.name).origin)
     return {
       headline: family('#home-title'),
+      headlineWeight: getComputedStyle(document.querySelector('#home-title') ?? document.body).fontWeight,
       lede: family('#home-title + p'),
       nav: family('header a[href]:not([href="/"])'),
       label: family('main .font-mono'),
@@ -66,11 +67,12 @@ test('@smoke fonts follow their roles and load from our origin', async ({ page }
     }
   })
   expect(result).toEqual({
-    headline: 'Source Serif 4',
+    headline: 'Fustat',
+    headlineWeight: '700',
     lede: 'Source Serif 4',
     nav: 'Fustat',
     label: 'commitMono',
-    preloaded: ['Source Serif 4 normal'],
+    preloaded: ['Fustat normal'],
     foreign: [],
   })
 })

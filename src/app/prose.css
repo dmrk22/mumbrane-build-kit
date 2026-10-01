@@ -12,6 +12,12 @@
     & > * + * {
       margin-top: 1.1em;
     }
+    /* Headings are heavy Fustat like every headline (D-136); the text stays serif. */
+    & h2,
+    & h3 {
+      font-family: var(--font-sans);
+      font-weight: 600;
+    }
     & h2 {
       margin-top: 64px;
       font-size: var(--text-display-s);
