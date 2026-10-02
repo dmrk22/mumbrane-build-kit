@@ -67,6 +67,7 @@ export default function ConsoleEntry() {
                 <h3 className="font-display text-display-s">
                   <SmartLink
                     href={`/console/playground?world=${w.id}`}
+                    newTab={false}
                     className="outline-none after:absolute after:inset-0"
                   >
                     {w.name}

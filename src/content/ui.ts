@@ -1,6 +1,7 @@
 // Small interface strings shared by primitives (kept out of components per CLAUDE.md conventions).
 export const ui = {
   externalSuffix: '(opens external site)',
+  newTabSuffix: '(opens in a new tab)',
   errorPrefix: 'Error:',
   copied: 'Copied',
   loading: 'Loading',

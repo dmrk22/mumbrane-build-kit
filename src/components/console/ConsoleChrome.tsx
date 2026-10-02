@@ -54,6 +54,7 @@ function NavLink({ item, pathname }: { item: Item; pathname: string }) {
   return (
     <SmartLink
       href={item.href}
+      newTab={false}
       aria-current={current ? 'page' : undefined}
       className={cx(
         'inline-flex h-8 items-center gap-2 rounded-md px-3 text-small text-surface-muted transition-colors duration-(--duration-micro) ease-out hover:text-surface-fg',
@@ -71,6 +72,7 @@ function TabLink({ item, pathname }: { item: Item; pathname: string }) {
   return (
     <SmartLink
       href={item.href}
+      newTab={false}
       aria-current={current ? 'page' : undefined}
       className={cx(
         'relative flex h-14 flex-1 flex-col items-center justify-center gap-1 text-surface-muted',

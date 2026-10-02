@@ -10,19 +10,32 @@ type AnchorRest = Omit<
   'href' | 'children' | 'className' | 'rel' | 'target' | 'onClick' | 'onMouseEnter' | 'onTouchStart'
 > & { onClick?: MouseEventHandler<HTMLAnchorElement> }
 
+function isConsole(href: string): boolean {
+  return href === '/console' || href.startsWith('/console/') || href.startsWith('/console?')
+}
+
 /**
  * Every link goes through the link policy (SECURITY §2.5, §4.4): internal and fragment links use
  * next/link; external links are allowlisted, `noopener noreferrer` and marked ↗; anything the
  * policy rejects renders as plain text. `prefetch={false}` is for links that sit in hidden panels
  * (menus, the mobile sheet): every page here is dynamic, so a prefetch is a server render.
+ * The console is its own app, so links into it open a new tab unless `newTab={false}` (links
+ * already inside the console).
  */
 export function SmartLink({
   href,
   className,
   children,
   prefetch,
+  newTab,
   ...rest
-}: { href: string; className?: string; children: ReactNode; prefetch?: false } & AnchorRest) {
+}: {
+  href: string
+  className?: string
+  children: ReactNode
+  prefetch?: false
+  newTab?: boolean
+} & AnchorRest) {
   const safe = toSafeHref(href)
   if (!safe) {
     if (process.env.NODE_ENV !== 'production') console.error(`SmartLink rejected href: ${href}`)
@@ -30,18 +43,22 @@ export function SmartLink({
   }
   switch (safe.kind) {
     case 'internal':
-    case 'fragment':
+    case 'fragment': {
+      const blank = newTab ?? isConsole(safe.href)
       return (
         // Internal paths are checked against the route registry by links.test.ts, not by the type.
         <Link
           href={safe.href as Route}
           className={className}
           {...(prefetch === false ? { prefetch } : {})}
+          {...(blank ? { target: '_blank' } : {})}
           {...rest}
         >
           {children}
+          {blank && <span className="sr-only"> {ui.newTabSuffix}</span>}
         </Link>
       )
+    }
     case 'external':
       return (
         <a href={safe.href} rel="noopener noreferrer" className={className} {...rest}>

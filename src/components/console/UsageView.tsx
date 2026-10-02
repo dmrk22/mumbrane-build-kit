@@ -49,7 +49,7 @@ export function UsageView() {
     return (
       <div className="rounded-md border border-dashed border-surface-rule px-6 py-14 text-center">
         <p className="font-sans text-body text-surface-muted">{usage.empty}</p>
-        <Button href="/console" arrow className="mt-6">
+        <Button href="/console" newTab={false} arrow className="mt-6">
           {usage.open}
         </Button>
         <p className="mt-8 text-caption text-surface-subtle">{usage.note}</p>

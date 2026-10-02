@@ -28,7 +28,7 @@ type Common = {
   children: ReactNode
 }
 
-type AsLink = Common & { href: string; onClick?: MouseEventHandler<HTMLAnchorElement> }
+type AsLink = Common & { href: string; newTab?: boolean; onClick?: MouseEventHandler<HTMLAnchorElement> }
 type AsButton = Common & { href?: undefined; loading?: boolean } & Omit<
     ComponentProps<'button'>,
     'className' | 'children'
@@ -68,7 +68,12 @@ export function Button(props: AsLink | AsButton) {
 
   if (props.href !== undefined) {
     return (
-      <SmartLink href={props.href} className={classes} {...(props.onClick ? { onClick: props.onClick } : {})}>
+      <SmartLink
+        href={props.href}
+        className={classes}
+        {...(props.newTab !== undefined ? { newTab: props.newTab } : {})}
+        {...(props.onClick ? { onClick: props.onClick } : {})}
+      >
         {inner}
       </SmartLink>
     )

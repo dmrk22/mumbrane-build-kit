@@ -41,6 +41,21 @@ test.describe('@console', () => {
     expect(messages).toEqual([])
   })
 
+  test('the site opens the console in a new tab; inside it, links stay in the tab', async ({ page }) => {
+    await page.goto('/')
+    const site = page.locator('a[href="/console"]')
+    expect(await site.count()).toBeGreaterThan(0)
+    for (const a of await site.all()) await expect(a).toHaveAttribute('target', '_blank')
+    const [tab] = await Promise.all([
+      page.context().waitForEvent('page'),
+      site.filter({ visible: true }).first().click(),
+    ])
+    await tab.waitForLoadState()
+    expect(new URL(tab.url()).pathname).toBe('/console')
+    await expect(tab.locator('a[href^="/console"][target]')).toHaveCount(0)
+    await tab.close()
+  })
+
   test('a negated question is refused with a rephrasing that works', async ({ page }) => {
     await page.goto('/console/playground?world=purchasing')
     await askBox(page).fill('Is ordertwo not a purchase-ready item?')
