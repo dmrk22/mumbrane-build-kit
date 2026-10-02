@@ -92,21 +92,26 @@ export function FieldCanvas({
     const scene = createScene()
     const out = new Float64Array(3)
     const copy = beside ? wrap.closest('section')?.querySelector<HTMLElement>(beside) : null
+    const caption = wrap.closest('figure')?.querySelector('figcaption') ?? null
     let w = 1
     let h = 1
     let scroll = 0
     let pending = 0
     let target: { x: number; y: number } | null = null
+    // The status line's left-middle anchor, in canvas px: one line above the figure caption.
+    let status: { x: number; y: number } | null = null
 
     // Where the figure's core goes, in canvas px: the middle of the grid columns right of the copy
     // (from its edge plus the column gap to the grid's content edge), level with the copy's middle.
     const measure = () => {
+      const c = canvas.getBoundingClientRect()
+      const cap = layer.matches ? caption?.getBoundingClientRect() : null
+      status = cap ? { x: cap.left - c.left, y: cap.top - c.top - 12 } : null
       const grid = copy?.parentElement
       if (!copy || !grid || !layer.matches) {
         target = null
         return
       }
-      const c = canvas.getBoundingClientRect()
       const r = copy.getBoundingClientRect()
       const g = grid.getBoundingClientRect()
       const gs = getComputedStyle(grid)
@@ -276,20 +281,16 @@ export function FieldCanvas({
         label(labels.question, out[0] ?? 0, out[1] ?? 0, 48, -26, Math.max(0, 1 - q.age / 3) * fa)
       }
 
-      const status = q
+      const line = q
         ? `${labels.question} ${pad(q.n)} — ${q.rest ? labels.rest : labels.settling}`
         : t < START
           ? labels.forming
           : ''
       ctx.globalAlpha = 0.55 * fade
       ctx.fillStyle = fg
-      // As the desktop layer, right-aligned above the caption, clear of the fade toward the text;
-      // in flow, bottom-left, in line with the caption below the figure.
-      if (layer.matches) {
-        ctx.textAlign = 'right'
-        ctx.fillText(status, w - 40, h - 94)
-        ctx.textAlign = 'left'
-      } else ctx.fillText(status, 20, h - 12)
+      // As the desktop layer, flush left on the caption's own edge, one line above it, so the two
+      // read as one block; in flow, bottom-left, in line with the caption below the figure.
+      ctx.fillText(line, status?.x ?? 20, status?.y ?? h - 12)
       ctx.globalAlpha = 1
       if (wrap.dataset.ready !== 'true') wrap.dataset.ready = 'true'
     }
@@ -334,6 +335,7 @@ export function FieldCanvas({
     const ro = new ResizeObserver(resize)
     ro.observe(canvas)
     if (copy) ro.observe(copy)
+    if (caption) ro.observe(caption)
     resize()
     const io = new IntersectionObserver(([e]) => loop.setOnScreen(!!e?.isIntersecting))
     io.observe(canvas)

@@ -59,7 +59,7 @@ export function HomeHero() {
           >
             <FieldStill labels={h.field} />
           </FieldCanvas>
-          <figcaption className="mt-3 max-w-[52ch] px-edge font-mono text-label text-surface-subtle lg:absolute lg:right-edge lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0 lg:text-right">
+          <figcaption className="mt-3 max-w-[52ch] px-edge font-mono text-label text-surface-subtle lg:absolute lg:right-edge lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0">
             {h.field.caption}
           </figcaption>
         </figure>
