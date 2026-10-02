@@ -27,7 +27,7 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Current focus
 - Phase: build complete — `v0.1.0-preview` (final report at the end of this file)
-- Next: owner review of the open questions below; then the deploy plan (D-106) once the owner lifts the deploy rule
+- Next: owner review of the open questions below; confirm Vercel deploys `main` on push (D-151), then attach mumbrane.com after approval (D-106)
 - 2026-10-01 font change (D-135): Source Serif 4 / Fustat / Commit Mono by role, sizes unchanged.
   The serif size classes carry the serif via the base-layer role rule in globals.css; interface
   text at a prose size needs `font-sans`. Commit Mono lives in `brand/fonts/` (OFL licence beside
@@ -388,7 +388,7 @@ Next: console app polish, per-page heroes (/moth, /research) in the new language
 - [ ] Remove the `nextjs-agent-rules` block that `next dev` appended to CLAUDE.md (Claude cannot edit it; `agentRules: false` stops it recurring) (D-105)
 - [x] Accept the hostile-query test scope: Next escapes the query into its router payload; markup never reflects it (D-103) — accepted, owner 2026-10-01 (D-106)
 - [x] The current site's markdown declares canonical https://mumbrane.ai/… — superseded: mumbrane.com is canonical (D-106)
-- [ ] Pushing (D-119): the guard still refuses `git remote`/`git push` and CLAUDE.md still says "Never push" — apply D-119's protected-file edits if Claude should push; until then commits stay local
+- [x] Pushing (D-151): owner applied the edits in `ba11f71` (labelled D-150 there); Claude pushes `main` after each commit and Vercel deploys from the push. D-151's DECISIONS entry sits after the other session's uncommitted D-150 and is committed with it
 - [ ] **Before any deploy (after P14):** owner lifts the "never deploy" rule in CLAUDE.md and removes `Bash(vercel *)` from the deny list in `.claude/settings.json`. Plan (D-106): Claude deploys to a Vercel test URL first (not mumbrane.com); mumbrane.com is connected only after the owner has tested and approved.
 
 ## Known issues
