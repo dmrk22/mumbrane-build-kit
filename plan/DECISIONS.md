@@ -748,3 +748,18 @@ creation, so a section below the fold starts at its first step instead of jumpin
 pins (the Company blocks gain the same).
 **Alternatives**: a metro-map version of the chain; today's chain with only the atmosphere added.
 **Status**: Decided (owner instruction in session).
+
+### D-140 — Hero figure: 15 % smaller, aligned to the grid, still under the pointer (2026-10-02)
+**Context**: The owner asked for the membrane (D-137) 15 % smaller, aligned on the screen, and not
+moved by the cursor: it sat right and low, bled off the right edge, and leaned with the pointer.
+**Decision**: On the desktop layer the figure draws at 0.85 × its former scale, and its core (the
+box around the five wells, funnel included) centres on the grid columns beside the copy — from
+the copy's edge plus the column gap to the grid's content edge — and on the copy's vertical
+middle, measured from the page on every resize (`aim` in field.ts; FieldCanvas `beside`). The
+pointer lean and the slow camera drift are gone: only the scroll-away tilt moves it. The sheet now
+fades softly at the screen's right edge and the hero's foot too. The server still (reduced motion,
+no JS) uses the same shrink with an average aim, since it cannot measure the page. Phones unchanged.
+**Alternatives**: a fixed share of the layer for the aim (off by up to 60 px across widths, since
+the copy and the container do not scale with the layer); placing the canvas in the grid cell
+(loses the full-bleed fade the owner chose in D-137).
+**Status**: Decided (owner instruction in session).

@@ -199,17 +199,45 @@ export function sheetAlpha(x: number, y: number): number {
   return e * e * (3 - 2 * e)
 }
 
-/** The camera for a stage of w × h px: on a wide stage (the desktop layer) the field sits right. */
-export function framing(w: number, h: number): Camera {
+/**
+ * The camera for a stage of w × h px, drawn at `shrink` × the full size: on a wide stage (the
+ * desktop layer) the field sits right unless `aim` places it.
+ */
+export function framing(w: number, h: number, shrink = 1): Camera {
   const wide = w > h * 1.05
   return {
     yaw: -0.5,
     pitch: 0.55,
     dist: 3.4,
-    scale: 430 * Math.min(w / 900, h / 800),
+    scale: 430 * shrink * Math.min(w / 900, h / 800),
     cx: w * (wide ? 0.6 : 0.5),
     cy: h * (wide ? 0.42 : 0.44),
   }
+}
+
+/**
+ * Moves the camera so the figure's core — the box around the five wells, funnel included —
+ * centres on (x, y) on screen. Projection is a pure translation in (cx, cy), so one pass is exact.
+ */
+export function aim(cam: Camera, x: number, y: number): Camera {
+  const to = projector(cam)
+  const out = new Float64Array(3)
+  let left = Number.POSITIVE_INFINITY
+  let right = Number.NEGATIVE_INFINITY
+  let top = Number.POSITIVE_INFINITY
+  let bottom = Number.NEGATIVE_INFINITY
+  for (const [wx, wy] of WELLS) {
+    to(wx, wy, height(wx, wy) * RELIEF, out)
+    const sx = out[0] ?? 0
+    const sy = out[1] ?? 0
+    left = Math.min(left, sx)
+    right = Math.max(right, sx)
+    top = Math.min(top, sy)
+    bottom = Math.max(bottom, sy)
+  }
+  cam.cx += x - (left + right) / 2
+  cam.cy += y - (top + bottom) / 2
+  return cam
 }
 
 /**

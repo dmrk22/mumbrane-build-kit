@@ -38,6 +38,9 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
   legend, plainer copy. Draw rules select by class (Chromium leaves `path[pathLength]` stale on
   ancestor changes); drawn `.dg-accent` paths measure in drawing units; pins report their step on
   creation.
+- 2026-10-02 hero figure 15 % smaller and aligned (D-140): its core centres on the grid columns
+  beside the copy (`[data-hero-copy]`, measured on resize) and on the copy's middle; no pointer
+  lean or drift.
 - 2026-10-02 paintings are plain oil (D-139): no scan slices or sorted blocks anywhere; the five
   affected paintings re-rendered (the other five came out byte-identical). The /research inquiry
   plates sit on subgrid rows, so a short gloss no longer stretches its plate. `/paintings/*` keeps

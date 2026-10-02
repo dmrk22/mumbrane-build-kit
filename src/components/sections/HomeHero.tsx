@@ -9,7 +9,8 @@ import { HOME } from '@/content/home'
  * The home hero: the headline on the left, the membrane behind the right of the hero (D-137) —
  * facts dent a sheet, a question rolls to rest. The text entrance is CSS-only (motion.css), so the
  * H1 stays the LCP element. From 1024 px the figure is a full-bleed layer under the text column,
- * fading toward it; below, it follows the actions. Slides under the transparent header.
+ * fading toward it, its core centred on the grid columns beside the copy (D-140); below, it
+ * follows the actions. Slides under the transparent header.
  */
 export function HomeHero() {
   const h = HOME.hero
@@ -20,7 +21,7 @@ export function HomeHero() {
       className="hero relative -mt-15 overflow-hidden lg:-mt-18"
     >
       <Container className="grid min-h-[max(640px,94svh)] grid-cols-[minmax(0,1fr)] items-center gap-y-6 pt-28 pb-16 lg:min-h-[min(100svh,960px)] lg:grid-cols-12 lg:gap-x-6 lg:pt-24 lg:pb-12">
-        <div className="relative z-10 min-w-0 lg:col-span-7">
+        <div data-hero-copy className="relative z-10 min-w-0 lg:col-span-7">
           <SmartLink
             href={h.announcement.href}
             className="hero-rise hero-d1 group inline-flex max-w-full items-center gap-2.5 font-mono text-label text-surface-muted transition-colors duration-(--duration-hover) hover:text-surface-fg"
@@ -53,6 +54,7 @@ export function HomeHero() {
         <figure className="-mx-5 sm:-mx-6 lg:absolute lg:top-18 lg:right-0 lg:bottom-0 lg:left-[40%] lg:mx-0 xl:left-[30%]">
           <FieldCanvas
             labels={h.field}
+            beside="[data-hero-copy]"
             className="aspect-square sm:aspect-[4/3] lg:absolute lg:inset-0 lg:aspect-auto"
           >
             <FieldStill labels={h.field} />

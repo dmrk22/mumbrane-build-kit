@@ -68,13 +68,14 @@
       cursor: crosshair;
     }
   }
-  /* In the desktop hero the sheet fades toward the text and the horizon. On the drawings only,
-     not the wrapper, so the keyboard chip stays crisp. */
+  /* In the desktop hero the sheet fades toward the text and the horizon, and softly at the
+     screen's right edge and the hero's foot, so it never shows a cut. On the drawings only, not
+     the wrapper, so the keyboard chip stays crisp. */
   @media (min-width: 1024px) {
     .hero .field > :is(.field-poster, .field-canvas) {
       mask-image:
-        linear-gradient(to right, transparent, var(--color-ink) 30%),
-        linear-gradient(to bottom, transparent, var(--color-ink) 15%);
+        linear-gradient(to right, transparent, var(--color-ink) 30%, var(--color-ink) 96%, transparent),
+        linear-gradient(to bottom, transparent, var(--color-ink) 15%, var(--color-ink) 94%, transparent);
       mask-composite: intersect;
     }
   }

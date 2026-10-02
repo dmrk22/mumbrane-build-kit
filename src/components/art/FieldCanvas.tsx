@@ -1,7 +1,9 @@
 'use client'
 
 import { type ReactNode, useEffect, useRef, useState } from 'react'
+import type { HOME } from '@/content/home'
 import {
+  aim,
   bead,
   FACTS,
   FALL,
@@ -20,21 +22,9 @@ import { createScene, createSheet, drop, LIFT, quiet, START, tick, trailOpacity 
 import { cx } from '@/lib/cx'
 import { createLoop, deviceTier } from '@/lib/gl/loop'
 
-type Labels = Record<
-  | 'facts'
-  | 'priority'
-  | 'candidate'
-  | 'question'
-  | 'answer'
-  | 'forming'
-  | 'settling'
-  | 'rest'
-  | 'drop'
-  | 'restedPriority'
-  | 'restedFact',
-  string
->
+type Labels = (typeof HOME)['hero']['field']
 
+const SHRINK = 0.85 // the desktop layer's figure, 15 % under its full size (owner, D-140)
 const BUCKETS = 10 // opacity steps for the sheet's segments: a handful of strokes per frame
 const TRAIL = 8
 const CORNERS = [
@@ -55,16 +45,20 @@ const pad = (n: number) => String(n).padStart(2, '0')
  * roll across it and come to rest in a well (timeline in `scene.ts`). Three opening questions play
  * once, then the canvas stops drawing until a visitor drops another — a click or tap on the
  * sheet, or the keyboard button, which announces where it came to rest. Canvas 2D, paused
- * off-screen and in hidden tabs; it tilts away as the hero scrolls out. `children` is the server
- * still (FieldStill): shown until the first frame, without JavaScript, under reduced motion and
- * in forced colours.
+ * off-screen and in hidden tabs; it tilts away as the hero scrolls out, and nothing else moves
+ * it (no pointer lean, no drift). `beside` names the copy the figure sits next to (a selector
+ * within the section): as the desktop layer, the figure's core centres on the grid space to that
+ * copy's right and on its vertical centre. `children` is the server still (FieldStill): shown
+ * until the first frame, without JavaScript, under reduced motion and in forced colours.
  */
 export function FieldCanvas({
   labels,
+  beside,
   className,
   children,
 }: {
   labels: Labels
+  beside?: string
   className?: string
   children: ReactNode
 }) {
@@ -97,11 +91,29 @@ export function FieldCanvas({
     const sheet = createSheet(tier === 'low' ? 64 : 96)
     const scene = createScene()
     const out = new Float64Array(3)
-    const pointer = { x: 0, y: 0, tx: 0, ty: 0 }
+    const copy = beside ? wrap.closest('section')?.querySelector<HTMLElement>(beside) : null
     let w = 1
     let h = 1
     let scroll = 0
     let pending = 0
+    let target: { x: number; y: number } | null = null
+
+    // Where the figure's core goes, in canvas px: the middle of the grid columns right of the copy
+    // (from its edge plus the column gap to the grid's content edge), level with the copy's middle.
+    const measure = () => {
+      const grid = copy?.parentElement
+      if (!copy || !grid || !layer.matches) {
+        target = null
+        return
+      }
+      const c = canvas.getBoundingClientRect()
+      const r = copy.getBoundingClientRect()
+      const g = grid.getBoundingClientRect()
+      const gs = getComputedStyle(grid)
+      const start = r.right + (Number.parseFloat(gs.columnGap) || 0)
+      const end = g.right - (Number.parseFloat(gs.paddingRight) || 0)
+      target = { x: (start + end) / 2 - c.left, y: (r.top + r.bottom) / 2 - c.top }
+    }
 
     const label = (text: string, x: number, y: number, dx: number, dy: number, alpha: number) => {
       if (alpha <= 0.01) return
@@ -131,9 +143,9 @@ export function FieldCanvas({
 
     const draw = () => {
       const { t, splashes, candidate } = scene
-      const cam = framing(w, h)
-      cam.yaw += 0.04 * Math.sin(t * 0.1) + pointer.x * 0.06
-      cam.pitch += pointer.y * 0.04 + scroll * 0.28
+      const cam = framing(w, h, layer.matches ? SHRINK : 1)
+      if (target) aim(cam, target.x, target.y)
+      cam.pitch += scroll * 0.28
       const to = projector(cam)
       const fade = 1 - scroll * 0.7
       const wt = weights(t)
@@ -283,8 +295,6 @@ export function FieldCanvas({
     }
 
     const loop = createLoop(tier === 'low' ? 30 : 60, (time, dt) => {
-      pointer.x += (pointer.tx - pointer.x) * 0.05
-      pointer.y += (pointer.ty - pointer.y) * 0.05
       const rested = tick(scene, time, dt)
       if (rested) {
         const text = rested.end === PRIORITY ? labels.restedPriority : labels.restedFact
@@ -317,10 +327,13 @@ export function FieldCanvas({
       h = Math.max(1, canvas.clientHeight)
       canvas.width = Math.round(w * dpr)
       canvas.height = Math.round(h * dpr)
+      measure()
       redraw()
     }
+    // The copy reflows on its own too (fonts arriving, text wrapping), so it is watched as well.
     const ro = new ResizeObserver(resize)
     ro.observe(canvas)
+    if (copy) ro.observe(copy)
     resize()
     const io = new IntersectionObserver(([e]) => loop.setOnScreen(!!e?.isIntersecting))
     io.observe(canvas)
@@ -329,10 +342,6 @@ export function FieldCanvas({
       const r = wrap.getBoundingClientRect()
       scroll = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height)))
       redraw()
-    }
-    const onMove = (e: PointerEvent) => {
-      pointer.tx = (e.clientX / window.innerWidth) * 2 - 1
-      pointer.ty = (e.clientY / window.innerHeight) * 2 - 1
     }
     // A click or tap drops a question onto the nearest visible point of the sheet.
     const onClick = (e: MouseEvent) => {
@@ -351,8 +360,6 @@ export function FieldCanvas({
     }
     document.addEventListener('visibilitychange', onVisibility)
     window.addEventListener('scroll', onScroll, { passive: true })
-    if (window.matchMedia('(pointer: fine)').matches)
-      window.addEventListener('pointermove', onMove, { passive: true })
     canvas.addEventListener('click', onClick)
     onScroll()
     wrap.dataset.state = scene.phase
@@ -364,10 +371,9 @@ export function FieldCanvas({
       askRef.current = undefined
       document.removeEventListener('visibilitychange', onVisibility)
       window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('pointermove', onMove)
       canvas.removeEventListener('click', onClick)
     }
-  }, [labels])
+  }, [labels, beside])
 
   return (
     <div ref={wrapRef} className={cx('field relative', className)}>

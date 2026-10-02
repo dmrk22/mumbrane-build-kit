@@ -1,4 +1,5 @@
 import {
+  aim,
   bead,
   FACTS,
   framing,
@@ -27,7 +28,9 @@ const RETICLE = 14
  * Decorative.
  */
 export function FieldStill({ labels }: { labels: Labels }) {
-  const cam = framing(W, H)
+  // As the canvas draws it on the desktop layer (D-140): 15 % under full size, the core where the
+  // grid columns beside the copy fall on a typical layer (the still cannot measure the page).
+  const cam = aim(framing(W, H, 0.85), W * 0.65, H * 0.48)
   const at = (x: number, y: number, lift = 0) => project([x, y, height(x, y) * RELIEF + lift], cam)
   const run = settle(QUESTIONS[0])
   const path = run.path

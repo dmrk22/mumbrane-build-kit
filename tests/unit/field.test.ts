@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import {
+  aim,
   atRest,
   FACTS,
   FORMED,
@@ -12,6 +13,7 @@ import {
   project,
   projector,
   QUESTIONS,
+  RELIEF,
   ripple,
   settle,
   WELLS,
@@ -213,4 +215,22 @@ test('the sheet freezes its heights once formed and only picks visible points', 
   assert.equal(sheet.pick(sheet.sx[centre] ?? 0, sheet.sy[centre] ?? 0), centre)
   assert.equal(sheet.pick(5000, 5000), -1, 'nothing within reach')
   assert.equal(sheet.sa[0], 0, 'the pinned corner is faded out')
+})
+
+test('the figure shrinks by a factor, and aim centres its core on a point', () => {
+  assert.ok(Math.abs(framing(1200, 860, 0.85).scale - 0.85 * framing(1200, 860).scale) < 1e-9)
+  const cam = aim(framing(1200, 860, 0.85), 700, 410)
+  const to = projector(cam)
+  const out = new Float64Array(3)
+  const xs: number[] = []
+  const ys: number[] = []
+  for (const [x, y] of WELLS) {
+    to(x, y, height(x, y) * RELIEF, out)
+    xs.push(out[0] ?? 0)
+    ys.push(out[1] ?? 0)
+  }
+  assert.ok(Math.abs((Math.min(...xs) + Math.max(...xs)) / 2 - 700) < 1e-6, 'centred across')
+  assert.ok(Math.abs((Math.min(...ys) + Math.max(...ys)) / 2 - 410) < 1e-6, 'centred down')
+  const again = aim({ ...cam }, 700, 410)
+  assert.ok(Math.abs(again.cx - cam.cx) < 1e-9 && Math.abs(again.cy - cam.cy) < 1e-9, 'idempotent')
 })
