@@ -35,7 +35,7 @@ export function Pipeline({
             <div className="flex flex-col gap-2">
               <p className="font-mono text-label text-surface-subtle">{String(i + 1).padStart(2, '0')}</p>
               <p className="text-title">{s.name}</p>
-              <p className="max-w-[40ch] text-small text-surface-muted">{s.text}</p>
+              <p className="max-w-text text-small text-surface-muted">{s.text}</p>
             </div>
           </li>
         ))}

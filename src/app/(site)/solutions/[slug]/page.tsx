@@ -35,7 +35,7 @@ export default async function SolutionPage({ params }: Props) {
         <h1 id="solution-title" className="mt-4 max-w-[18ch] font-display text-display-l">
           {s.title}
         </h1>
-        <p className="mt-8 max-w-[56ch] text-lede text-surface-muted">{s.lede}</p>
+        <p className="mt-8 max-w-text text-lede text-surface-muted">{s.lede}</p>
         {s.note && (
           <Note tone="caveat" className="mt-8 max-w-xl">
             {s.note}
@@ -96,7 +96,7 @@ export default async function SolutionPage({ params }: Props) {
                 <h2 id="own-security-title" className="font-display text-display-s">
                   {ui.security.title}
                 </h2>
-                <p className="mt-3 max-w-[60ch] text-body text-surface-muted">{ui.security.text}</p>
+                <p className="mt-3 max-w-text text-body text-surface-muted">{ui.security.text}</p>
               </div>
               <SmartLink href={ui.security.link.href} className="link-prose text-small">
                 {ui.security.link.label}

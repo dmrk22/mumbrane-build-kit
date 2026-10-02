@@ -24,7 +24,7 @@ export default function SalesPage() {
             <h1 id="sales-title" className="mt-6 font-display text-display-l">
               {SALES.title}
             </h1>
-            <p className="mt-6 max-w-[42ch] text-lede text-surface-muted">{SALES.lede}</p>
+            <p className="mt-6 max-w-text text-lede text-surface-muted">{SALES.lede}</p>
             <section aria-labelledby="expect-title" className="mt-14">
               <h2 id="expect-title" className="font-mono text-label text-surface-subtle">
                 {SALES.expect.title}

@@ -26,13 +26,13 @@ export default function ChangelogPage() {
       <h1 id="changelog-title" className="mt-4 font-display text-display-l">
         {CHANGELOG.title}
       </h1>
-      <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{CHANGELOG.lede}</p>
+      <p className="mt-8 max-w-text text-lede text-surface-muted">{CHANGELOG.lede}</p>
 
       {months.map((month) => (
         <section
           key={month}
           aria-label={month}
-          className="mt-16 grid gap-6 border-t border-surface-rule pt-6 lg:grid-cols-12"
+          className="mt-16 grid gap-6 border-t border-surface-rule pt-6 lg:grid-cols-12 lg:gap-x-gutter"
         >
           <h2 className="font-mono text-label text-surface-subtle lg:col-span-3">
             <span className="lg:sticky lg:top-28">{month}</span>
@@ -57,7 +57,7 @@ export default function ChangelogPage() {
                         </li>
                       ))}
                     </ul>
-                    <p className="max-w-[60ch] text-body text-surface-muted">{e.text}</p>
+                    <p className="max-w-text text-body text-surface-muted">{e.text}</p>
                     <SmartLink
                       href={e.href}
                       className="inline-flex items-center gap-2 self-start text-small font-medium"

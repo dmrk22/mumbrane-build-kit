@@ -90,7 +90,7 @@ export function PreviewForm({
         <h2 ref={previewRef} tabIndex={-1} className="mt-6 font-display text-display-s outline-none">
           {FORM_UI.preview.title}
         </h2>
-        <p className="mt-4 max-w-[52ch] text-body text-surface-muted">{FORM_UI.preview.text}</p>
+        <p className="mt-4 max-w-text text-body text-surface-muted">{FORM_UI.preview.text}</p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <Button href={preview.mailto} arrow>
             {FORM_UI.preview.email}
@@ -182,7 +182,7 @@ export function PreviewForm({
         <Button type="submit" loading={pending} arrow>
           {submit}
         </Button>
-        <p className="max-w-[40ch] text-caption text-surface-muted">{privacy}</p>
+        <p className="max-w-text text-caption text-surface-muted">{privacy}</p>
       </div>
     </form>
   )

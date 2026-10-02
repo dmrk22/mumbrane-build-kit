@@ -21,7 +21,7 @@ export function PurchasingExplainer({ p }: { p: Purchasing }) {
   const stale = source !== built
 
   return (
-    <div className="grid grid-cols-12 gap-x-4 gap-y-10 lg:gap-x-6">
+    <div className="grid grid-cols-12 gap-x-4 gap-y-10 md:gap-x-gutter">
       <div className="col-span-12 flex flex-col gap-8 lg:col-span-6">
         <div>
           <h3 className="font-mono text-label text-surface-subtle">{p.headings.definitions}</h3>

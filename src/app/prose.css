@@ -1,4 +1,5 @@
-/* Article prose (DESIGN §9.11): serif body with oldstyle figures, 64–70 ch measure. */
+/* Article prose (DESIGN §9.11): serif body with oldstyle figures. Measure: anthropic.com's reading
+   column, 640 px from 992 px and the full column below (D-145). */
 @layer components {
   .prose-article {
     font-family: var(--font-serif);
@@ -6,8 +7,10 @@
     line-height: var(--text-article--line-height);
     letter-spacing: var(--text-article--letter-spacing);
     font-variant-numeric: oldstyle-nums proportional-nums;
-    max-width: 68ch;
     color: var(--surface-fg);
+    @media (width >= 62rem) {
+      max-width: var(--container-text);
+    }
 
     & > * + * {
       margin-top: 1.1em;

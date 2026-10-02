@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { cx } from '@/lib/cx'
 
-/** 12 columns; gutter 16 px, 24 px from 1024 (DESIGN §4.1). Children place themselves with col-span-*. */
+/** 12 columns; gutter 16 px on phones, anthropic.com's 28–32 px from 768 (D-145). Children use col-span-*. */
 export function Grid({
   as: Tag = 'div',
   className,
@@ -11,5 +11,5 @@ export function Grid({
   className?: string
   children: ReactNode
 }) {
-  return <Tag className={cx('grid grid-cols-12 gap-x-4 lg:gap-x-6', className)}>{children}</Tag>
+  return <Tag className={cx('grid grid-cols-12 gap-x-4 md:gap-x-gutter', className)}>{children}</Tag>
 }

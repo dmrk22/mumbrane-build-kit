@@ -77,7 +77,7 @@ export default function ResearchPage() {
           ))}
         </Reveal>
         <Grid className="mt-20 items-center gap-y-10">
-          <p className="col-span-12 max-w-[56ch] text-lede lg:col-span-5">{inquiry.relativity}</p>
+          <p className="col-span-12 max-w-text text-lede lg:col-span-5">{inquiry.relativity}</p>
           <figure className="col-span-12 lg:col-span-6 lg:col-start-7">
             <LightCone labels={inquiry.cone} className="text-surface-fg" />
             <figcaption className="mt-4 flex flex-col gap-1">
@@ -98,7 +98,7 @@ export default function ResearchPage() {
               {experiment.title}
             </Heading>
             {experiment.paragraphs.map((p) => (
-              <p key={p} className="mt-6 max-w-[64ch] text-body text-surface-muted">
+              <p key={p} className="mt-6 max-w-text text-body text-surface-muted">
                 {p}
               </p>
             ))}
@@ -140,7 +140,7 @@ export default function ResearchPage() {
                       {a.title}
                     </SmartLink>
                   </h3>
-                  <p className="mt-4 max-w-[52ch] text-body text-surface-muted">{a.description}</p>
+                  <p className="mt-4 max-w-text text-body text-surface-muted">{a.description}</p>
                 </div>
               </Grid>
             </li>

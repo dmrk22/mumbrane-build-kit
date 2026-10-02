@@ -71,7 +71,7 @@ export default function MothPage() {
         <div className="mt-12">
           <PurchasingExplainer p={purchasing} />
         </div>
-        <p className="mt-10 max-w-[64ch] text-caption text-surface-muted">{purchasing.disclaimer}</p>
+        <p className="mt-10 max-w-text text-caption text-surface-muted">{purchasing.disclaimer}</p>
       </Section>
 
       <Section surface="paper-2" id="outcomes" labelledBy="outcomes-title">
@@ -132,7 +132,7 @@ export default function MothPage() {
             {direction.title}
           </Heading>
         </div>
-        <p className="mt-8 max-w-[60ch] text-lede">{direction.text}</p>
+        <p className="mt-8 max-w-text text-lede">{direction.text}</p>
         <Button href={direction.link.href} variant="text" arrow className="mt-8">
           {direction.link.label}
         </Button>
@@ -142,7 +142,7 @@ export default function MothPage() {
         <Heading level={2} size="display-m" id="get-title">
           {MOTH.getPreview.title}
         </Heading>
-        <p className="mt-6 max-w-[56ch] text-lede">{MOTH.getPreview.text}</p>
+        <p className="mt-6 max-w-text text-lede">{MOTH.getPreview.text}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button href={MOTH.getPreview.primary.href} arrow>
             {MOTH.getPreview.primary.label}

@@ -103,10 +103,10 @@ export function BlocksMosaic({
     >
       <Container>
         {/* Heading left; lede and counter right, so the pinned section fits a 900 px viewport. */}
-        <div className="grid gap-x-6 gap-y-6 lg:grid-cols-12 lg:items-end">
+        <div className="grid gap-x-gutter gap-y-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">{heading}</div>
           <div className="flex flex-col gap-5 lg:col-span-5 lg:col-start-8">
-            <p className="max-w-[50ch] text-body text-surface-muted">{lede}</p>
+            <p className="max-w-text text-body text-surface-muted">{lede}</p>
             <div className="flex items-center gap-4 lg:justify-end">
               <span aria-hidden="true" className="flex gap-1">
                 {blocks
@@ -122,8 +122,11 @@ export function BlocksMosaic({
                     />
                   ))}
               </span>
-              <p className="font-mono text-label text-surface-muted tabular-nums">
-                {String(count).padStart(2, '0')} of {String(total).padStart(2, '0')} {labels.unlocked}
+              {/* Below lg the word takes its own line, always: at 14 px (D-145) the fallback mono fit
+                  one line and Commit Mono did not, so the font swap shifted the mosaic (CLS). */}
+              <p data-blocks-count className="font-mono text-label text-surface-muted tabular-nums">
+                {String(count).padStart(2, '0')} of {String(total).padStart(2, '0')}{' '}
+                <span className="max-lg:block">{labels.unlocked}</span>
               </p>
             </div>
           </div>
@@ -183,7 +186,7 @@ function Block({
         <span className="flex items-end justify-between gap-3">
           <span
             className={cx(
-              'max-w-[24ch] font-display text-title leading-tight text-pretty',
+              'max-w-[24ch] font-display text-title text-pretty',
               block.wide && 'xl:max-w-[28ch]',
             )}
           >

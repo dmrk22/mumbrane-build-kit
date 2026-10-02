@@ -58,7 +58,7 @@ export default async function UseCasesPage({ searchParams }: Props) {
         <h1 id="use-cases-title" className="mt-4 font-display text-display-l">
           {USE_CASES.title}
         </h1>
-        <p className="mt-6 max-w-[56ch] text-lede text-surface-muted">{USE_CASES.lede}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{USE_CASES.lede}</p>
         <nav aria-label={USE_CASES.filterLabel} className="mt-10">
           <ul className="flex flex-wrap gap-2">
             {USE_CASE_FILTERS.map((f) => (

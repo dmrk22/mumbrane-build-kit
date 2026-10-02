@@ -19,13 +19,13 @@ export default function NotFound() {
       <Header nav={HEADER} surfaceTop={SURFACE_TOP} />
       <main id="main" tabIndex={-1}>
         <Section surface="paper" labelledBy="not-found-title">
-          <div className="grid grid-cols-12 items-center gap-x-4 gap-y-12 lg:gap-x-6">
+          <div className="grid grid-cols-12 items-center gap-x-4 gap-y-12 md:gap-x-gutter">
             <div className="col-span-12 lg:col-span-6">
               <Eyebrow>{eyebrow}</Eyebrow>
               <Heading level={1} size="display-l" id="not-found-title" className="mt-4 max-w-[18ch]">
                 {title}
               </Heading>
-              <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{body}</p>
+              <p className="mt-6 max-w-text text-lede text-surface-muted">{body}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 {links.map((l, i) => (
                   <Button

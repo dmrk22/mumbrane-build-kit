@@ -40,7 +40,7 @@ export default async function LegalPage({ params }: Props) {
       className="pt-12 pb-16 md:pt-16 md:pb-24 lg:pt-24 lg:pb-32"
     >
       <Container>
-        <div className="grid grid-cols-12 gap-x-4 lg:gap-x-6">
+        <div className="grid grid-cols-12 gap-x-4 md:gap-x-gutter">
           <nav aria-label={LEGAL_UI.nav} className="col-span-12 mb-10 lg:col-span-3 lg:mb-0 print:hidden">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 text-small lg:sticky lg:top-28 lg:flex-col lg:gap-3">
               {PAGES.map((r) => (

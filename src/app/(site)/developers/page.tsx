@@ -21,7 +21,7 @@ export default function DevelopersPage() {
         <h1 id="developers-title" className="mt-4 max-w-[16ch] font-display text-display-l">
           <Inline text={hero.title} />
         </h1>
-        <p className="mt-8 max-w-[56ch] text-lede text-surface-muted">{hero.lede}</p>
+        <p className="mt-8 max-w-text text-lede text-surface-muted">{hero.lede}</p>
         <Note className="mt-10 max-w-2xl">{hero.status}</Note>
       </Section>
 
@@ -38,7 +38,7 @@ export default function DevelopersPage() {
         <Heading level={2} size="display-m" id="results-title" className="mt-4">
           {results.title}
         </Heading>
-        <p className="mt-6 max-w-[60ch] text-body text-surface-muted">{results.text}</p>
+        <p className="mt-6 max-w-text text-body text-surface-muted">{results.text}</p>
         <Grid className="mt-10 items-start gap-y-6">
           <CodeBlock
             code={results.json}
@@ -65,14 +65,14 @@ export default function DevelopersPage() {
         <Heading level={2} size="display-m" id="dev-outcomes-title" className="mt-4">
           {outcomes.title}
         </Heading>
-        <p className="mt-6 max-w-[60ch] text-lede text-surface-muted">{outcomes.text}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{outcomes.text}</p>
         <Button href={outcomes.link.href} variant="text" arrow className="mt-6">
           {outcomes.link.label}
         </Button>
         <Grid className="mt-16 gap-y-8">
           <div className="col-span-12 lg:col-span-7">
             <h3 className="font-display text-display-s">{future.title}</h3>
-            <p className="mt-4 max-w-[60ch] text-body text-surface-muted">{future.text}</p>
+            <p className="mt-4 max-w-text text-body text-surface-muted">{future.text}</p>
           </div>
           <div className="col-span-12 flex flex-wrap items-end gap-x-8 gap-y-3 lg:col-span-4 lg:col-start-9 lg:justify-end">
             {next.map((l) => (

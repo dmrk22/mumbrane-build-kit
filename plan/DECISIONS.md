@@ -843,3 +843,36 @@ baseline, height and gap on all four pages in Chromium and WebKit.
 **Alternatives**: centring the actions on the paragraph (labels float between lines); first
 baseline (actions align with the first line and hang below the text).
 **Status**: Decided (owner instruction in session).
+
+### D-145 — Type, text widths and gutter are anthropic.com's (2026-10-02)
+**Context**: The owner asked for every text and font measurement and the necessary widths of
+anthropic.com, applied exactly on every page, with no change to our fonts, colours, radii, art or
+compositions. Measured live 2026-10-02 (built-in browser, Chromium, computed styles and their CSS).
+Anthropic runs two stacks. Content pages (/news, articles, /research, /company, /careers, /legal,
+/claude/opus, launch pages; every page H1 is `headline-1`) step at 992 and 1024 px: headline-1
+32/44/52 lh 1.1, headline-4 23/23/32, headline-5 20/20/25, headline-6 17/17/19 (lh 1.2),
+body-1 19/19/20 and body-2 17 (lh 1.55), body-3 15 and body-4 12 (lh 1.4), caption 14 lh 1.2
++0.15 px, mono 15 lh 1.4 −0.6 px; reading column 640 px from 992. Their home page (Webflow, fluid
+375→1600): H1 `clamp(2.5rem, 2.0408rem + 1.9592vw, 4rem)` lh 1.1, lede 24/1.4 capped at 40ch
+(594.229 px), gutter `clamp(1.75rem, 1.6735rem + 0.3265vw, 2rem)`. Nav 15/1.4 −0.0375 px; buttons
+15 px −0.08 px; phone-menu top links 23/1.2. x-height: their Sans and Serif 0.508 em at 400,
+0.514 at 500, 0.521 at 600, 0.530 at 700; Mono 0.540 (ours: Fustat 0.500→0.5053, Source Serif 4
+0.483 at 17 px, Commit Mono 0.540).
+**Choice** (owner answers: x-height match, labels at caption size, gutter yes, console and weights
+unchanged, home hero from their home page): tokens take the content-page values and steps
+(`type.css`); `hero`/`hero-lede` take the home page's; `display-xl` merges into `display-l`
+(product H1s); mono labels take caption metrics; a 12 px `fine` token carries the footer;
+`tracking-button`/`tracking-nav`. Running text caps at `max-w-text` (640 px; prose from 992 px),
+headings keep their ch measures. Gutter is theirs from 768 px (their 12-column grid starts at
+tablet width; on phones 11 of their gutters would overflow a 256 px frame, so phones keep 16 px).
+`font-size-adjust` renders our letters at their x-height per weight; the serif lands within
+0.004 em (optical size is read at the computed size, drawn at the used one). The console keeps
+the old scale (scoped block). Weights are unchanged, so nav and buttons stay 500, footer heads
+600, phone-menu links 400 (theirs 400/400/700/600). Not taken: their 880 px media cap (our only
+article figure is the header painting, part of the composition); section spacing; button heights.
+`tests/e2e/type.spec.ts` pins every value at the breakpoint edges in Chromium, mobile and WebKit;
+`tests/unit/measure.test.ts` keeps ch measures on headings. Supersedes DESIGN §3.2 sizes and §4.1
+gutters. OG PNGs were not regenerated: `pnpm og` would now render the new scale.
+**Alternatives**: same px without x-height match (serif reads 6.5 % smaller than theirs); their
+home page's smaller system on our whole home page; their 28 px gutter on phones (overflows).
+**Status**: Decided (owner instruction in session).

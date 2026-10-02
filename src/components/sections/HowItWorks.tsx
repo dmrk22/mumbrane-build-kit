@@ -129,13 +129,13 @@ export function HowItWorks({ how }: { how: How }) {
     >
       <Backdrop />
       <Container className="relative">
-        <div className="grid grid-cols-12 items-center gap-x-4 gap-y-14 lg:gap-x-10">
+        <div className="grid grid-cols-12 items-center gap-x-4 gap-y-14 md:gap-x-gutter lg:gap-x-10">
           <div className="col-span-12 lg:col-span-5 xl:col-span-4">
             <Eyebrow dot>{how.eyebrow}</Eyebrow>
             <Heading level={2} size="display-s" id="how-title" className="mt-5 max-w-[16ch]">
               {how.title}
             </Heading>
-            <p className="mt-6 max-w-[44ch] text-body text-surface-muted">{how.lede}</p>
+            <p className="mt-6 max-w-text text-body text-surface-muted">{how.lede}</p>
             <ol className="mt-10 border-l border-surface-rule">
               {how.steps.map((s, i) => {
                 const active = i === step

@@ -24,7 +24,7 @@ export default function CompanyPage() {
         heading={
           <>
             <Eyebrow>{hero.eyebrow}</Eyebrow>
-            <h1 id="company-title" className="mt-3 font-display text-display-l lg:text-display-m">
+            <h1 id="company-title" className="mt-3 font-display text-display-l">
               <Inline text={hero.title} />
             </h1>
           </>
@@ -38,7 +38,7 @@ export default function CompanyPage() {
             <Heading level={2} size="display-m" id="about-title">
               {about.title}
             </Heading>
-            <p className="mt-6 max-w-[56ch] text-lede">{about.text}</p>
+            <p className="mt-6 max-w-text text-lede">{about.text}</p>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8">
             <CropMarks>
@@ -54,7 +54,7 @@ export default function CompanyPage() {
             <Heading level={2} size="display-m" id="name-title">
               {name.title}
             </Heading>
-            <p className="mt-6 max-w-[52ch] text-body text-surface-muted">{name.text}</p>
+            <p className="mt-6 max-w-text text-body text-surface-muted">{name.text}</p>
           </div>
           <figure className="col-span-12 lg:col-span-6 lg:col-start-7">
             <MuonTrack labels={name.labels} className="text-surface-fg" />

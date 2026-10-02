@@ -31,7 +31,7 @@ export default function PricingPage() {
         <h1 id="pricing-title" className="mt-4 font-display text-display-l">
           {title}
         </h1>
-        <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{lede}</p>
+        <p className="mt-8 max-w-text text-lede text-surface-muted">{lede}</p>
       </Section>
 
       <Section surface="paper-2" id="plans" labelledBy="plans-title">
@@ -69,7 +69,7 @@ export default function PricingPage() {
       </Section>
 
       <Section surface="paper" id="faq" labelledBy="faq-title">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-x-gutter lg:gap-y-6">
           <Heading level={2} size="display-m" id="faq-title" className="lg:col-span-4">
             {faq.title}
           </Heading>
@@ -84,7 +84,7 @@ export default function PricingPage() {
                       className="size-5 shrink-0 transition-transform duration-(--duration-ui) group-open:rotate-45"
                     />
                   </summary>
-                  <p className="max-w-[60ch] pb-6 text-body text-surface-muted">{item.a}</p>
+                  <p className="max-w-text pb-6 text-body text-surface-muted">{item.a}</p>
                 </details>
               ))}
             </div>

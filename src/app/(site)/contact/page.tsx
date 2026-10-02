@@ -31,7 +31,7 @@ export default async function ContactPage({ searchParams }: Props) {
             <h1 id="contact-title" className="mt-6 font-display text-display-l">
               {CONTACT.title}
             </h1>
-            <p className="mt-6 max-w-[42ch] text-lede text-surface-muted">{CONTACT.lede}</p>
+            <p className="mt-6 max-w-text text-lede text-surface-muted">{CONTACT.lede}</p>
             <ul className="mt-14 flex flex-col gap-9">
               {CONTACT.emails.map((e) => (
                 <li key={e.address}>
@@ -50,7 +50,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 </li>
               ))}
             </ul>
-            <p className="mt-14 max-w-[42ch] text-small text-surface-muted">{CONTACT.note}</p>
+            <p className="mt-14 max-w-text text-small text-surface-muted">{CONTACT.note}</p>
           </div>
           <div
             data-surface="paper"

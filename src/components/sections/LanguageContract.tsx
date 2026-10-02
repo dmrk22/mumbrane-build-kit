@@ -10,9 +10,9 @@ export function LanguageContract({ limits = true }: { limits?: boolean }) {
   const c = MOTH.contract
   return (
     <div className="flex flex-col gap-10">
-      <p className="max-w-[64ch] text-body">{c.rules}</p>
+      <p className="max-w-text text-body">{c.rules}</p>
       <CodeBlock code={c.examples} label={c.examplesLabel} className="max-w-3xl" />
-      <p className="max-w-[64ch] text-body text-surface-muted">{c.skills}</p>
+      <p className="max-w-text text-body text-surface-muted">{c.skills}</p>
       {limits && <LimitsGrid />}
     </div>
   )
@@ -34,7 +34,7 @@ export function LimitsGrid() {
           ))}
         </dl>
       </div>
-      <p className="mt-4 max-w-[64ch] text-caption text-surface-muted">
+      <p className="mt-4 max-w-text text-caption text-surface-muted">
         <Inline text={c.limitsNote} />
       </p>
     </div>

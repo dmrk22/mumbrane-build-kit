@@ -23,7 +23,7 @@ export default function NewsPage() {
         <h1 id="news-title" className="mt-4 font-display text-display-l">
           {NEWS.hero.title}
         </h1>
-        <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{NEWS.hero.lede}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{NEWS.hero.lede}</p>
 
         {featured && (
           <article aria-labelledby="featured-title" className="group relative mt-14">

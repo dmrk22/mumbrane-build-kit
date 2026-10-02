@@ -43,12 +43,15 @@ export function MothCurve({ className }: { className?: string }) {
           />
         </svg>
       </InView>
-      <figcaption className="grid gap-3 border-t border-surface-rule pt-4 font-serif text-caption text-surface-muted xl:grid-cols-[auto_1fr] xl:gap-8">
+      {/* The equations keep their own width (auto) so neither breaks mid-term; the prose wraps. */}
+      <figcaption className="grid gap-3 border-t border-surface-rule pt-4 font-serif text-caption text-surface-muted xl:grid-cols-[1fr_auto] xl:gap-8">
         <p>
           <span className="text-surface-fg">Fig. 1.</span> Fay’s butterfly curve, 0 ≤{' '}
           <i className="font-serif-italic">t</i> ≤ 12π.
         </p>
-        <p className="font-serif-italic xl:text-right">
+        {/* nowrap: WebKit wraps a max-content column on a fractional pixel. At 231 px the lines
+            fit the narrowest frame (256 px at 320). */}
+        <p className="font-serif-italic whitespace-nowrap xl:text-right">
           x = sin t (e<sup>cos t</sup> − 2 cos 4t − sin<sup>5</sup>(t/12)),
           <br />y = cos t (e<sup>cos t</sup> − 2 cos 4t − sin<sup>5</sup>(t/12))
         </p>

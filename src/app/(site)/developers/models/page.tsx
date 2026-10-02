@@ -22,7 +22,7 @@ export default function ModelsPage() {
         <h1 id="models-title" className="mt-4 font-display text-display-l">
           {hero.title}
         </h1>
-        <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{hero.lede}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{hero.lede}</p>
 
         <article
           aria-labelledby="model-card-title"
@@ -70,7 +70,7 @@ export default function ModelsPage() {
         <Heading level={2} size="display-m" id="evidence-title">
           {MODELS.evidence.title}
         </Heading>
-        <p className="mt-6 max-w-[60ch] text-lede text-surface-muted">{MODELS.evidence.text}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{MODELS.evidence.text}</p>
         <Button href={MODELS.evidence.link.href} variant="text" arrow className="mt-6">
           {MODELS.evidence.link.label}
         </Button>
@@ -84,7 +84,7 @@ export default function ModelsPage() {
             </Heading>
             <Tag>{upcoming.tag}</Tag>
           </div>
-          <p className="max-w-[60ch] text-body text-surface-muted">{upcoming.text}</p>
+          <p className="max-w-text text-body text-surface-muted">{upcoming.text}</p>
           <Button href={upcoming.link.href} variant="text" arrow className="self-start">
             {upcoming.link.label}
           </Button>

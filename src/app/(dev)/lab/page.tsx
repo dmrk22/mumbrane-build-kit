@@ -31,7 +31,7 @@ function Kit({ surface }: { surface: Surface }) {
       <Heading level={2} size="display-m" id={id} className="mt-4">
         Intelligence for <em>closed worlds.</em>
       </Heading>
-      <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">
+      <p className="mt-6 max-w-text text-lede text-surface-muted">
         Moth answers from the world you define — and says when that world cannot support an answer.
       </p>
 

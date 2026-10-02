@@ -15,7 +15,7 @@ export default function ErrorPage({ retry }: { error: Error & { digest?: string 
         <Heading level={1} size="display-l" id="error-title" className="mt-4 max-w-[18ch]">
           {title}
         </Heading>
-        <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{body}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{body}</p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Button onClick={() => retry()}>{retryLabel}</Button>
           <Button href="/" variant="secondary">

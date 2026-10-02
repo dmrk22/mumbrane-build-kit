@@ -104,7 +104,7 @@ export default function MotionLab() {
               Split reveal: lines rise out of their masks, one after another.
             </Heading>
           </SplitReveal>
-          <Reveal className="mt-8 max-w-[60ch]">
+          <Reveal className="mt-8 max-w-text">
             <p className="text-lede">
               Reveal: a single block rises 16 px and fades in, once, at 85 % of the viewport.
             </p>

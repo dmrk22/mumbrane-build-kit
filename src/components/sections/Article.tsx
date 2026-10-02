@@ -41,7 +41,7 @@ export function Article({ article, related }: { article: ArticleMeta; related: r
             <Heading level={1} size="display-l" id="article-title" className="mt-4">
               <TitleText text={article.title} />
             </Heading>
-            <p className="mt-6 max-w-[48ch] font-serif text-lede text-surface-muted">{article.description}</p>
+            <p className="mt-6 max-w-text font-serif text-lede text-surface-muted">{article.description}</p>
             <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-surface-rule pt-5 font-mono text-label">
               <div className="flex gap-2">
                 <dt className="text-surface-subtle">{ARTICLE_UI.published}</dt>

@@ -107,7 +107,7 @@ export default function Home() {
               </Heading>
             </SplitReveal>
           </div>
-          <p className="col-span-12 max-w-[50ch] text-lede text-surface-muted lg:col-span-5 lg:col-start-8 lg:self-end">
+          <p className="col-span-12 max-w-text text-lede text-surface-muted lg:col-span-5 lg:col-start-8 lg:self-end">
             {evidence.text}
           </p>
         </Grid>
@@ -123,7 +123,7 @@ export default function Home() {
             </article>
           ))}
         </Reveal>
-        <p className="mt-8 max-w-[64ch] text-small text-surface-muted">{evidence.sealCaption}</p>
+        <p className="mt-8 max-w-text text-small text-surface-muted">{evidence.sealCaption}</p>
       </Section>
 
       <Section surface="paper-2" id="research-question" labelledBy="compounding-title">
@@ -135,7 +135,7 @@ export default function Home() {
               </Heading>
             </SplitReveal>
           </div>
-          <p className="col-span-12 max-w-[50ch] text-lede text-surface-muted lg:col-span-5 lg:col-start-8 lg:self-end">
+          <p className="col-span-12 max-w-text text-lede text-surface-muted lg:col-span-5 lg:col-start-8 lg:self-end">
             {compounding.text}
           </p>
         </Grid>
@@ -149,7 +149,7 @@ export default function Home() {
             </div>
           ))}
         </Reveal>
-        <p className="mt-16 max-w-[56ch] text-lede">{compounding.closing}</p>
+        <p className="mt-16 max-w-text text-lede">{compounding.closing}</p>
       </Section>
 
       <Section surface="paper" id="research" labelledBy="research-title">
@@ -163,7 +163,7 @@ export default function Home() {
             {research.link.label}
           </Button>
         </div>
-        <p className="mt-6 max-w-[48ch] text-lede text-surface-muted">{research.text}</p>
+        <p className="mt-6 max-w-text text-lede text-surface-muted">{research.text}</p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {plates.map((a) => (
             <Plate
@@ -187,7 +187,7 @@ export default function Home() {
             <Heading level={2} size="display-m" id="release-title" className="mt-5">
               {release.title}
             </Heading>
-            <p className="mt-6 max-w-[42ch] text-lede text-surface-muted">{release.text}</p>
+            <p className="mt-6 max-w-text text-lede text-surface-muted">{release.text}</p>
             <Button href={release.action.href} variant="text" arrow className="mt-8">
               {release.action.label}
             </Button>
@@ -224,7 +224,7 @@ export default function Home() {
               <Heading level={3} size="display-s">
                 {c.title}
               </Heading>
-              <p className="max-w-[42ch] text-body text-surface-muted">{c.text}</p>
+              <p className="max-w-text text-body text-surface-muted">{c.text}</p>
               <Button href={c.action.href} size="lg" arrow className="mt-auto self-start">
                 {c.action.label}
               </Button>

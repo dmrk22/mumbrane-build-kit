@@ -36,7 +36,7 @@ function Card({
       <span className="flex flex-col gap-6">
         <Icon name={icon} className="size-6 text-surface-muted" />
         <span className="font-display text-display-s">{name}</span>
-        <span className="max-w-[36ch] text-body text-surface-muted">{promise}</span>
+        <span className="max-w-text text-body text-surface-muted">{promise}</span>
       </span>
       <span className="inline-flex items-center gap-2 text-small font-medium">
         <span className="underline decoration-1 underline-offset-[0.22em] group-hover:decoration-2">
@@ -61,7 +61,7 @@ export default function SolutionsPage() {
         <h1 id="solutions-title" className="mt-4 max-w-[16ch] font-display text-display-l">
           <Inline text={title} />
         </h1>
-        <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{lede}</p>
+        <p className="mt-8 max-w-text text-lede text-surface-muted">{lede}</p>
       </Section>
 
       <Section surface="paper-2" id="solutions-list" labelledBy="solutions-list-title">

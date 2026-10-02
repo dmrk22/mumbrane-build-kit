@@ -44,6 +44,10 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 - 2026-10-02 How Moth works panel has square corners (D-141); inner SVG cards keep rx 10. It
   carries `data-square`, the only exemption from the rounded-frame test (pages.spec).
 - 2026-10-02 header is Anthropic's height (D-143): 68 px from `lg`, 64 px below; phone menu bar 64.
+- 2026-10-02 type, text widths and gutter are anthropic.com's, measured live (D-145): content-page
+  scale stepping at 992/1024 px (`type.css`), home hero from their home page, running text capped
+  at 640 px (`max-w-text`), 12-column gutter 28→32 px from 768 px, our letters at their x-height
+  (`font-size-adjust` per weight). Console keeps its old scale. `tests/e2e/type.spec.ts` pins it.
 - 2026-10-02 paintings are plain oil (D-139): no scan slices or sorted blocks anywhere; the five
   affected paintings re-rendered (the other five came out byte-identical). The /research inquiry
   plates sit on subgrid rows, so a short gloss no longer stretches its plate. `/paintings/*` keeps
@@ -366,6 +370,7 @@ Next: console app polish, per-page heroes (/moth, /research) in the new language
 - Guard/budgets/shots scripts export pure functions tested in `tests/unit/scripts.test.ts`. `ROUTES` in `tests/e2e/utils.ts` must grow with the route registry in P2.
 
 ## Open questions for the owner
+- [ ] Social cards (public/og/*.png) were not regenerated after D-145; `pnpm og` would render their titles in the new 52 px scale. Regenerate? (D-145)
 - [ ] CONTENT.md §1 voice ("closed-world", "constraint-based") predates the field framing of D-134; update the plan file? (copy rewrite 2026-10-01)
 - [ ] Copy is at 6,027 words vs the 5,000 target; the rest needs structural cuts (merge the four solution pages, drop /status copy, shorten /developers/docs) — owner to choose (D-134)
 - [x] Canonical domain: mumbrane.com or mumbrane.ai? (D-013) — **mumbrane.com**, owner 2026-10-01 (D-106)

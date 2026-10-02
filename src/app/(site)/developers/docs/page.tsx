@@ -21,7 +21,7 @@ export default function DocsPage() {
       className="pt-12 pb-16 md:pt-16 md:pb-24 lg:pt-24 lg:pb-32"
     >
       <Container>
-        <div className="grid grid-cols-12 gap-x-4 lg:gap-x-6">
+        <div className="grid grid-cols-12 gap-x-4 md:gap-x-gutter">
           <aside className="col-span-3 hidden lg:block">
             <div className="sticky top-28">
               <DocsToc label={DOCS.contents} items={toc} />
@@ -33,7 +33,7 @@ export default function DocsPage() {
             <h1 id="docs-title" className="mt-4 font-display text-display-l">
               {DOCS.title}
             </h1>
-            <p className="mt-6 max-w-[56ch] text-lede text-surface-muted">{DOCS.lede}</p>
+            <p className="mt-6 max-w-text text-lede text-surface-muted">{DOCS.lede}</p>
             <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-md border border-surface-rule bg-surface-raise p-5 text-small">
               <Icon name="book" className="size-5 shrink-0 text-surface-muted" />
               <span>{DOCS.delivery.text}</span>
@@ -67,7 +67,7 @@ export default function DocsPage() {
                 </AnchorHeading>
                 <div className="mt-6 flex flex-col gap-6">
                   {s.paragraphs.map((p) => (
-                    <p key={p} className="max-w-[64ch] text-body">
+                    <p key={p} className="max-w-text text-body">
                       <Inline text={p} />
                     </p>
                   ))}

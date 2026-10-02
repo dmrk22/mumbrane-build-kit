@@ -14,7 +14,7 @@ export function Footer() {
     >
       <Container>
         <div className="rounded-md border border-surface-rule bg-surface-raise px-6 pt-8 pb-5 md:px-10 md:pt-10">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-x-gutter lg:gap-y-6">
             <div className="lg:col-span-3">
               <SmartLink href="/" aria-label={HEADER.homeLabel} className="-m-2 inline-block p-2">
                 <Lockup height={22} className="h-5.5 w-auto" />

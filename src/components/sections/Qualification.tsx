@@ -14,7 +14,7 @@ export function Qualification() {
         className="max-w-3xl"
       />
       {q.caveats.map((c) => (
-        <p key={c} className="max-w-[64ch] text-small text-surface-muted">
+        <p key={c} className="max-w-text text-small text-surface-muted">
           {c}
         </p>
       ))}
