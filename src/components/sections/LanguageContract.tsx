@@ -23,14 +23,17 @@ export function LimitsGrid() {
   const c = MOTH.contract
   return (
     <div>
-      <dl className="grid grid-cols-2 border-t border-l border-surface-rule sm:grid-cols-3 lg:grid-cols-5">
-        {c.limits.map((l) => (
-          <div key={l.claim} className="flex flex-col gap-2 border-r border-b border-surface-rule p-5">
-            <dt className="order-2 text-caption text-surface-muted">{l.label}</dt>
-            <dd className="order-1 font-mono text-title tabular-nums">{l.value}</dd>
-          </div>
-        ))}
-      </dl>
+      {/* One rounded frame; the cells' outer right/bottom rules tuck 1 px under its clipped edge. */}
+      <div data-limits className="overflow-hidden rounded-md border border-surface-rule">
+        <dl className="-mr-px -mb-px grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+          {c.limits.map((l) => (
+            <div key={l.claim} className="flex flex-col gap-2 border-r border-b border-surface-rule p-5">
+              <dt className="order-2 text-caption text-surface-muted">{l.label}</dt>
+              <dd className="order-1 font-mono text-title tabular-nums">{l.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
       <p className="mt-4 max-w-[64ch] text-caption text-surface-muted">
         <Inline text={c.limitsNote} />
       </p>

@@ -240,3 +240,11 @@ for (const route of [...ROUTES, MISSING]) {
     expect(off).toEqual([])
   })
 }
+
+// Regression: the limits grid drew its frame from cell borders, so nothing carried the radius.
+test('the docs limits grid sits in one 10 px rounded frame', async ({ page }) => {
+  await page.goto('/developers/docs')
+  const frame = page.locator('[data-limits]')
+  await expect(frame).toHaveCSS('border-top-left-radius', '10px')
+  await expect(frame).toHaveCSS('overflow', 'hidden')
+})
