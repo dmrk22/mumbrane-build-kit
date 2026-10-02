@@ -115,7 +115,7 @@ images) · `pnpm og` · `pnpm shots <route>` (screenshots at 3 widths into `.sho
    and the board crops in `brand/board/sections/`. Fix spacing, type, colour, alignment, motion
    states. Repeat.
 5. Update `plan/BUILD_STATE.md` (checkbox, notes, anything the next session must know).
-6. Commit: `git add -A && git commit -m "<type>(<scope>): <summary>"` (conventional commits).
+6. Commit and push: `git add -A && git commit -m "<type>(<scope>): <summary>" && git push` (conventional commits; Vercel deploys `main` on push, D-150).
 
 A phase is done only when its exit criteria in BUILD_PLAN pass and `pnpm verify` is green.
 

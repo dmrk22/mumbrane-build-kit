@@ -88,7 +88,7 @@ const PROGRAM_DENY = new Map([
   ...['vercel', 'netlify', 'firebase', 'flyctl', 'fly', 'wrangler', 'heroku', 'railway', 'gh', 'hub', 'aws', 'gcloud', 'az', 'doctl', 'docker', 'podman', 'kubectl', 'terraform'].map((p) => [p, 'Deploying, publishing and cloud CLIs are out of scope for this build.']),
   ...['nc', 'ncat', 'netcat', 'telnet', 'ssh', 'scp', 'sftp', 'ftp', 'socat'].map((p) => [p, 'Raw network tools are not allowed.']),
 ])
-const GIT_DENY = new Set(['push', 'remote', 'clone', 'fetch', 'pull', 'submodule', 'filter-branch', 'update-ref', 'daemon', 'send-email', 'request-pull', 'credential'])
+const GIT_DENY = new Set(['remote', 'clone', 'fetch', 'pull', 'submodule', 'filter-branch', 'update-ref', 'daemon', 'send-email', 'request-pull', 'credential'])
 const PNPM_DENY = new Map([
   ...['dlx', 'create', 'x', 'link', 'patch', 'patch-commit', 'self-update', 'env', 'setup'].map((s) => [s, 'That pnpm command runs or links code outside the reviewed lockfile. Use installed tools via `pnpm exec`.']),
   ...['up', 'update', 'upgrade'].map((s) => [s, 'Change versions only with `pnpm add -E <pkg>@<exact>` so every bump is reviewed.']),
@@ -103,7 +103,15 @@ for (const seg of segments) {
   if (['set', 'export', 'declare', 'typeset'].includes(name) && (args.length === 0 || /^-[a-z]*[px]/.test(args[0] ?? ''))) deny('Dumping the environment is not allowed.')
   if (name === 'git') {
     const { sub, rest } = subcommand(args)
-    if (GIT_DENY.has(sub)) deny('No remotes: pushing, cloning and fetching are the owner’s call. Commit locally.')
+    if (GIT_DENY.has(sub)) deny('No remote changes: cloning, fetching and editing remotes are the owner’s call.')
+    // D-150: plain pushes to origin only (Vercel deploys from them); force, mirror, delete and tag pushes stay out.
+    if (sub === 'push') {
+      const flags = rest.filter((r) => r.startsWith('-'))
+      const refs = rest.filter((r) => !r.startsWith('-'))
+      const okFlags = flags.every((f) => ['-u', '--set-upstream', '-q', '--quiet'].includes(f))
+      const okRefs = refs.length === 0 || (refs[0] === 'origin' && refs.length <= 2 && /^[A-Za-z0-9._/-]*$/.test(refs[1] ?? '') && !(refs[1] ?? '').startsWith('refs/tags'))
+      if (!okFlags || !okRefs) deny('Only plain `git push` / `git push origin <branch>` is allowed: no force, mirror, delete, tags or other targets.')
+    }
     if (sub === 'reset' && rest.includes('--hard')) deny('git reset --hard is blocked; use `git restore <path>` for a single file.')
     if (sub === 'clean' && rest.some((r) => /^-[a-z]*f/.test(r))) deny('git clean -f is blocked.')
     if (args.includes('--no-verify') || rest.includes('-n') && sub === 'commit') deny('Do not bypass checks.')

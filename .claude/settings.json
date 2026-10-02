@@ -102,13 +102,13 @@
       "WebFetch(domain:neon.com)",
       "WebFetch(domain:code.claude.com)",
       "WebFetch(domain:mumbrane.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(git push)",
+      "Bash(git push origin main)"
     ],
     "deny": [
       "Agent",
       "Workflow",
-      "Bash(git push *)",
-      "Bash(git push)",
       "Bash(git reset --hard *)",
       "Bash(git clean *)",
       "Bash(git remote *)",

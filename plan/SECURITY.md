@@ -88,7 +88,7 @@ WAF/CDN configuration (owner's hosting decision; see §10 hand-off notes).
 - `.env*` files are never read, printed, copied or committed (`.env.example` is the only
   tracked one and contains no secrets). The guard hooks block attempts.
 - No credentials, tokens or connection strings in code, tests, fixtures or docs.
-- Commits are local. Never push, publish or deploy.
+- Commits are pushed to `origin` with plain pushes only (D-150); Vercel deploys `main` from them. Never force-push or publish packages.
 
 ---
 
