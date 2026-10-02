@@ -234,6 +234,13 @@ test.describe('@motion how moth works (D-138)', () => {
     expect(effects.length).toBeGreaterThan(0)
     expect(new Set(effects)).toEqual(new Set(['none']))
   })
+
+  // Owner request (D-141): the instrument panel is a square frame, its crop marks at true corners.
+  test('the panel has square corners', async ({ page }) => {
+    await page.goto('/')
+    const panel = page.locator('#how-moth-works figure section[tabindex="0"]').locator('..')
+    expect(await panel.evaluate((el) => getComputedStyle(el).borderRadius)).toBe('0px')
+  })
 })
 
 test.describe('@motion company blocks (DESIGN §7.6)', () => {

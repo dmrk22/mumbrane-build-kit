@@ -763,3 +763,11 @@ no JS) uses the same shrink with an average aim, since it cannot measure the pag
 the copy and the container do not scale with the layer); placing the canvas in the grid cell
 (loses the full-bleed fade the owner chose in D-137).
 **Status**: Decided (owner instruction in session).
+
+### D-141 — How Moth works panel: square corners (2026-10-02)
+**Context**: The owner asked for no rounded corners on the How Moth works instrument panel.
+**Choice**: The panel frame drops `rounded-md`; border, ground and crop marks stay. A square box
+passes D-133's measure (0 px is allowed); the definition cards drawn inside the SVG keep rx 10.
+An e2e test pins the panel at 0 px.
+**Alternatives**: squaring the inner cards too (not asked).
+**Status**: Decided (owner instruction in session).
