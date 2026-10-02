@@ -29,6 +29,8 @@ const nextConfig: NextConfig = {
       { source: '/privacy', destination: '/legal/privacy', permanent: true },
       { source: '/terms', destination: '/legal/terms', permanent: true },
       { source: '/login', destination: '/console', permanent: false },
+      // The console app is parked (D-147): every console page lands on the coming-soon page.
+      { source: '/console/:path+', destination: '/console', permanent: false },
       { source: '/:path*.md', destination: '/md/:path*', permanent: true },
     ]
   },

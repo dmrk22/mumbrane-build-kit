@@ -212,7 +212,7 @@ export const ROUTES = [
   {
     path: '/console',
     title: 'Console',
-    description: 'A browser simulation of the Mumbrane console, using synthetic example worlds.',
+    description: 'The Mumbrane console is coming soon. Moth Preview 004 runs locally as a CLI today.',
     group: 'console',
     sitemap: false,
     noindex: true,

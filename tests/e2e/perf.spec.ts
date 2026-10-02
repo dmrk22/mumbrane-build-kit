@@ -63,7 +63,7 @@ test.describe('@perf first-load bytes', () => {
 })
 
 // QUALITY §4: mobile emulation, CPU 4×, Fast 4G. Routes named in QUALITY §3.2 as they are built.
-const VITALS_ROUTES = ['/', '/moth', '/research', '/company', '/console/playground'].filter((r) =>
+const VITALS_ROUTES = ['/', '/moth', '/research', '/company', '/console'].filter((r) =>
   (ROUTES as readonly string[]).includes(r),
 )
 

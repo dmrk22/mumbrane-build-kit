@@ -876,3 +876,17 @@ gutters. OG PNGs were not regenerated: `pnpm og` would now render the new scale.
 **Alternatives**: same px without x-height match (serif reads 6.5 % smaller than theirs); their
 home page's smaller system on our whole home page; their 28 px gutter on phones (overflows).
 **Status**: Decided (owner instruction in session).
+
+### D-147 — Console parked behind a coming-soon page (2026-10-02)
+**Context**: The owner asked for the console page to become a coming-soon page.
+**Choice**: `/console` renders a coming-soon page in the site's chrome (header, footer, paper
+surface, `display-l` H1, two actions: Talk to the lab, Explore Moth); copy in `site.consoleSoon`,
+no dates promised. `/console/:path+` redirects to it (307, next.config). The app code (sub-pages,
+`src/components/console`, `src/lib/console`, `console.css`, its unit tests) stays in the repo,
+unreachable; the old layout, entry page, the console's own type scale (D-145) and the console
+e2e flows are in git history (167541b) and come back together. Route stays noindex. Tests:
+console.spec now covers the page and the redirects; a11y, perf and frame target `/console`.
+Not changed (owner to decide): site links still say "Try for free" / "Try the console" and still
+open `/console` in a new tab (SmartLink).
+**Alternatives**: deleting the console app (not asked; harder to bring back).
+**Status**: Decided (owner instruction in session).

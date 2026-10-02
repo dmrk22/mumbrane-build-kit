@@ -4,7 +4,7 @@ import { MISSING, ROUTES, visit } from './utils.ts'
 // D-142/D-144: every page sits in anthropic.com's frame, centred in the layout width W:
 // min(W, min(1432, 100vw) − 2 × edge), the edge rising linearly from 32 px at 375 to 80 px at
 // 1600. Nothing readable leaves it. Full-bleed art (SVG drawings, the research painting) is not
-// text, so the text check below skips SVG. The console is an app shell with its own layout.
+// text, so the text check below skips SVG. Console sub-pages redirect to /console (D-147).
 const LU = 1 / 64 // Chromium's layout unit
 
 // Real scrollbars, so the classic-scrollbar tests below can show one. Every check reads the layout
@@ -57,7 +57,7 @@ async function frame(page: Page) {
 
 test.describe('frame', () => {
   test.use({ reducedMotion: 'reduce' })
-  for (const route of [...ROUTES.filter((r) => !r.startsWith('/console')), MISSING]) {
+  for (const route of [...ROUTES.filter((r) => !r.startsWith('/console/')), MISSING]) {
     test(`content stays in the frame on ${route}`, async ({ page, isMobile }) => {
       // 320: the narrowest frame (256 px); 1920: wider than the 1432 px cap.
       for (const width of isMobile ? [320, 390] : [1440, 1920]) {

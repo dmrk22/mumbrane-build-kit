@@ -278,7 +278,7 @@
     margin-inline-start: -0.04em; /* optical alignment: the first letter's side bearing */
   }
 
-  /* Size steps, the console's own scale and the x-height match live in type.css (D-145). */
+  /* Size steps and the x-height match live in type.css (D-145). */
   .font-serif, .font-serif-italic { font-feature-settings: "kern", "liga", "onum"; }
 
   h1, h2, h3 { text-wrap: balance; }

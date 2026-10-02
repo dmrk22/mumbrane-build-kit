@@ -370,6 +370,7 @@ Next: console app polish, per-page heroes (/moth, /research) in the new language
 - Guard/budgets/shots scripts export pure functions tested in `tests/unit/scripts.test.ts`. `ROUTES` in `tests/e2e/utils.ts` must grow with the route registry in P2.
 
 ## Open questions for the owner
+- [ ] The console is parked behind a coming-soon page (D-147), but the header CTA still says "Try for free" and home/pricing say "Try the console", opening it in a new tab. Relabel them (e.g. "Console — coming soon") and drop the new tab? (D-147)
 - [ ] Social cards (public/og/*.png) were not regenerated after D-145; `pnpm og` would render their titles in the new 52 px scale. Regenerate? (D-145)
 - [ ] CONTENT.md §1 voice ("closed-world", "constraint-based") predates the field framing of D-134; update the plan file? (copy rewrite 2026-10-01)
 - [ ] Copy is at 6,027 words vs the 5,000 target; the rest needs structural cuts (merge the four solution pages, drop /status copy, shorten /developers/docs) — owner to choose (D-134)

@@ -51,7 +51,8 @@ test.describe('@seo', () => {
     expect(site).toMatchObject({ name: 'Mumbrane', url: `${SITE}/` })
   })
 
-  for (const route of ROUTES) {
+  // Console sub-pages redirect to /console while the app is parked (D-147; console.spec).
+  for (const route of ROUTES.filter((r) => !r.startsWith('/console/'))) {
     test(`title, description and canonical on ${route}`, async ({ page }) => {
       await page.goto(visit(route))
       const entry = REGISTRY.find((r) => r.path === route)

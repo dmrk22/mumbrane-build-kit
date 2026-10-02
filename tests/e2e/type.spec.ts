@@ -224,22 +224,6 @@ for (const [vw, lines] of [
   })
 }
 
-// Owner choice: the console keeps its pre-D-145 type, inside its own surface.
-test('@smoke the console keeps its own type scale', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto('/console')
-  const got = await probe(
-    page,
-    ['text-small', 'text-label', 'text-caption', 'text-code', 'text-display-s'],
-    '[data-console-surface]',
-  )
-  expect(got['text-small']).toEqual([15, 22.5, 0])
-  expect(got['text-label']?.[0]).toBe(11)
-  expect(got['text-caption']?.[0]).toBe(13)
-  expect(got['text-code']).toEqual([13, 22.1, 0])
-  expect(got['text-display-s']?.[0]).toBeCloseTo(37.2, 1) // 1.2rem + 1.25vw
-})
-
 for (const vw of [375, 768, 991, 992, 1023, 1024, 1440, 1600, 1920]) {
   test(`@smoke type matches anthropic.com at ${vw} px`, async ({ page }) => {
     await page.setViewportSize({ width: vw, height: 900 })

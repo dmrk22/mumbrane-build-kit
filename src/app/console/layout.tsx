@@ -1,24 +1,22 @@
-import { headers } from 'next/headers'
 import type { ReactNode } from 'react'
+import { Footer } from '@/components/chrome/Footer'
+import { Header } from '@/components/chrome/Header'
 import { SkipLink } from '@/components/chrome/SkipLink'
-import { ConsoleChrome } from '@/components/console/ConsoleChrome'
-import { ConsoleSession } from '@/components/console/ConsoleSession'
-import { ThemeBootstrap } from '@/components/console/ThemeControl'
-import './console.css'
+import { SURFACE_TOP } from '@/content/chrome'
+import { HEADER } from '@/content/nav'
 
-// CONSOLE §2, §10.2. The theme script comes before the shell markup, so the stored theme is set
-// before the first paint; it is same-origin and carries the request nonce (SECURITY §3).
-export default async function ConsoleLayout({ children }: { children: ReactNode }) {
-  const nonce = (await headers()).get('x-nonce') ?? undefined
+// The console app is parked (D-147): /console is a coming-soon page in the site's chrome, and
+// /console/* redirects to it (next.config). To bring the app back, restore this layout's app shell
+// (ConsoleChrome, ConsoleSession, ThemeBootstrap, console.css) and the entry page from git.
+export default function ConsoleLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <ThemeBootstrap nonce={nonce} />
-      <div data-surface="paper" data-console-surface className="min-h-dvh">
-        <SkipLink />
-        <ConsoleSession>
-          <ConsoleChrome>{children}</ConsoleChrome>
-        </ConsoleSession>
-      </div>
+      <SkipLink />
+      <Header nav={HEADER} surfaceTop={SURFACE_TOP} />
+      <main id="main" tabIndex={-1}>
+        {children}
+      </main>
+      <Footer />
     </>
   )
 }

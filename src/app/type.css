@@ -1,5 +1,6 @@
-/* anthropic.com's type (D-145), beyond the tokens in globals.css: their content pages' size steps,
-   the console's own scale, and their x-height. Measured live 2026-10-02. */
+/* anthropic.com's type (D-145), beyond the tokens in globals.css: their content pages' size steps
+   and their x-height. Measured live 2026-10-02. (The console's own scale left with the parked
+   console app, D-147; restore it from git with the app.) */
 @layer base {
   /* Their content pages step at 992 and 1024 px. */
   @media (width >= 62rem) {
@@ -17,41 +18,11 @@
     }
   }
 
-  /* The console keeps its pre-D-145 type (owner choice): the old scale, verbatim. */
-  [data-console-surface] {
-    --text-display-l: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
-    --text-display-l--line-height: 1.02;
-    --text-display-l--letter-spacing: -0.03em;
-    --text-display-m: clamp(1.875rem, 1.1rem + 3.1vw, 3.75rem);
-    --text-display-m--line-height: 1.1;
-    --text-display-m--letter-spacing: -0.02em;
-    --text-display-s: clamp(1.5rem, 1.2rem + 1.25vw, 2.375rem);
-    --text-display-s--line-height: 1.2;
-    --text-display-s--letter-spacing: -0.01em;
-    --text-title: clamp(1.1875rem, 1.1rem + 0.38vw, 1.4375rem);
-    --text-title--line-height: 1.2;
-    --text-title--letter-spacing: -0.01em;
-    --text-lede: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
-    --text-lede--line-height: 1.45;
-    --text-body--line-height: 1.6;
-    --text-small--line-height: 1.5;
-    --text-caption: 0.8125rem;
-    --text-caption--line-height: 1.45;
-    --text-caption--letter-spacing: 0.004em;
-    --text-label: 0.6875rem;
-    --text-label--line-height: 1.35;
-    --text-label--letter-spacing: 0.02em;
-    --text-code: 0.8125rem;
-    --text-code--line-height: 1.7;
-    --text-code--letter-spacing: 0em;
-    --tracking-button: normal;
-  }
-
   /* x-height (owner choice): at the same px our letters render as tall as theirs. Their Sans and
      Serif measure 0.508 em at 400, 0.514 at 500, 0.521 at 600, 0.530 at 700 (their x grows with
      weight); their Mono 0.540, which Commit Mono already is. The browser scales by these ÷ our
-     instance's own x (weight and optical size included). Zero specificity, so the console's reset
-     wins; the mono rule comes last so mono text never takes a sans value. */
+     instance's own x (weight and optical size included). The mono rule comes last so mono text
+     never takes a sans value. */
   html {
     font-size-adjust: 0.508;
   }
@@ -70,9 +41,5 @@
   }
   :where(.font-mono, code, kbd, samp, pre, .dg-label, .dg-label-strong, .field-label) {
     font-size-adjust: 0.54;
-  }
-  [data-console-surface],
-  [data-console-surface] * {
-    font-size-adjust: none;
   }
 }

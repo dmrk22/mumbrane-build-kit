@@ -18,7 +18,7 @@ test.describe('@a11y', () => {
 
   // @smoke, so WebKit runs it too: an icon-only button is named by the icon's aria-label, which
   // WebKit honours (it ignored the SVG <title> the icons used to carry).
-  for (const route of ['/moth', '/console/settings']) {
+  for (const route of ['/moth', '/console']) {
     test(`@smoke icon-only buttons have a name in every engine on ${route}`, async ({ page }) => {
       await page.goto(route)
       await settled(page)
@@ -55,14 +55,14 @@ test.describe('@a11y', () => {
 
   // QUALITY §3.2: every element reached by Tab shows a visible focus indicator — the viewport
   // differs between focused and blurred. Site chrome is the same everywhere, so it is checked on
-  // the 404 page; console routes check their own chrome too.
+  // the 404 page.
   for (const route of [...ROUTES, MISSING]) {
     test(`every element reached by Tab shows its focus on ${route}`, async ({ page, isMobile }) => {
       test.skip(isMobile, 'keyboard navigation: desktop')
       await page.emulateMedia({ reducedMotion: 'reduce' })
       await page.goto(visit(route))
       await settled(page)
-      const everything = route === MISSING || route.startsWith('/console')
+      const everything = route === MISSING
       const unseen: string[] = []
       for (let i = 0; i < 250; i++) {
         await page.keyboard.press('Tab')
