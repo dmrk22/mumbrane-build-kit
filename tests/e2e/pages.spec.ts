@@ -211,6 +211,23 @@ test('@smoke research: the intro paragraphs stack on the left', async ({ page })
   expect(boxes[1]?.t).toBeGreaterThan(boxes[0]?.b ?? Number.POSITIVE_INFINITY)
 })
 
+test('@smoke research: the experiment eyebrow sits above its heading, flush left', async ({ page }) => {
+  await page.goto('/research')
+  const m = await page.locator('#hypothesis-to-experiment').evaluate((s) => {
+    const r = (sel: string) => (s.querySelector(sel) as Element).getBoundingClientRect()
+    const eyebrow = r('p.font-mono')
+    const head = r('#experiment-title')
+    return {
+      eyebrowLeft: eyebrow.left,
+      eyebrowBottom: eyebrow.bottom,
+      headLeft: head.left,
+      headTop: head.top,
+    }
+  })
+  expect(m.headLeft).toBe(m.eyebrowLeft)
+  expect(m.headTop).toBeGreaterThan(m.eyebrowBottom)
+})
+
 test('@smoke the research inquiry plates and their glosses line up', async ({ page, isMobile }) => {
   test.skip(isMobile, 'one column on phones')
   await page.goto('/research')

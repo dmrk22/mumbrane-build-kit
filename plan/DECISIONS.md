@@ -945,3 +945,12 @@ sit on the left like the home ledes (D-150), not in the right half beside the fi
 24 px apart. An e2e test pins same left edge and second-below-first.
 **Alternatives**: none offered; follows D-150.
 **Status**: Decided (owner instruction in session).
+
+### D-153 — Research "From hypothesis to experiment" stacks: eyebrow over heading (2026-10-02)
+**Context**: The owner asked for the section's eyebrow to sit above "A working foundation, and a
+proposal." instead of in its own left column (cols 1–3, content in cols 4–11).
+**Choice**: Eyebrow, heading (16 px under it), paragraphs and links stack flush left, as the
+"Three connected lines of inquiry" section above does; the paragraphs keep the 40rem text column.
+An e2e test pins same left edge and heading-below-eyebrow.
+**Alternatives**: none offered; follows D-150/D-152.
+**Status**: Decided (owner instruction in session).

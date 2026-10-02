@@ -89,28 +89,22 @@ export default function ResearchPage() {
       </Section>
 
       <Section surface="paper" id="hypothesis-to-experiment" labelledBy="experiment-title">
-        <Grid className="gap-y-6">
-          <div className="col-span-12 lg:col-span-3">
-            <Eyebrow>{experiment.eyebrow}</Eyebrow>
-          </div>
-          <div className="col-span-12 lg:col-span-8 lg:col-start-4">
-            <Heading level={2} size="display-m" id="experiment-title">
-              {experiment.title}
-            </Heading>
-            {experiment.paragraphs.map((p) => (
-              <p key={p} className="mt-6 max-w-text text-body text-surface-muted">
-                {p}
-              </p>
-            ))}
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
-              {experiment.links.map((l) => (
-                <Button key={l.href} href={l.href} variant="text" arrow>
-                  {l.label}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </Grid>
+        <Eyebrow>{experiment.eyebrow}</Eyebrow>
+        <Heading level={2} size="display-m" id="experiment-title" className="mt-4">
+          {experiment.title}
+        </Heading>
+        {experiment.paragraphs.map((p) => (
+          <p key={p} className="mt-6 max-w-text text-body text-surface-muted">
+            {p}
+          </p>
+        ))}
+        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+          {experiment.links.map((l) => (
+            <Button key={l.href} href={l.href} variant="text" arrow>
+              {l.label}
+            </Button>
+          ))}
+        </div>
       </Section>
 
       <Section surface="ink" id="perspectives" labelledBy="perspectives-title">
