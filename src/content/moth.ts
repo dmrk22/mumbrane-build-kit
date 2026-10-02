@@ -138,8 +138,7 @@ export const MOTH = {
   qualification: {
     eyebrow: 'Qualification',
     title: 'What was checked.',
-    caption: 'The release documentation records:',
-    source: 'From the Preview 004 qualification report',
+    caption: 'From the Preview 004 qualification report.',
     columns: ['Check', 'Result'],
     rows: [
       ['Core installed answers', claim('core-answers')],

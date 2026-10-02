@@ -5,9 +5,9 @@ import { SplitReveal } from '@/components/motion/SplitReveal'
 import { OutcomeLedger } from '@/components/sections/OutcomeLedger'
 import { Pipeline } from '@/components/sections/Pipeline'
 import { PurchasingExplainer } from '@/components/sections/PurchasingExplainer'
-import { Qualification } from '@/components/sections/Qualification'
 import { Button } from '@/components/ui/Button'
 import { Tag } from '@/components/ui/Chip'
+import { DataTable } from '@/components/ui/DataTable'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Icon } from '@/components/ui/Icon'
 import { Inline } from '@/components/ui/Inline'
@@ -87,18 +87,18 @@ export default function MothPage() {
       </Section>
 
       <Section surface="paper" id="evidence" labelledBy="preview-title">
-        <SectionHead eyebrow={preview.eyebrow} title={preview.title} id="preview-title" />
-        <Grid className="mt-12 gap-y-10">
-          <div className="col-span-12 flex flex-col gap-6 lg:col-span-6">
-            <p className="text-body">{preview.scope}</p>
-            <p className="text-body text-surface-muted">{preview.platform}</p>
+        <Grid className="gap-y-12">
+          <div className="col-span-12 lg:col-span-5">
+            <SectionHead eyebrow={preview.eyebrow} title={preview.title} id="preview-title" />
+            <p className="mt-8 text-lede">{preview.scope}</p>
+            <p className="mt-6 text-body text-surface-muted">{preview.platform}</p>
           </div>
-          <div className="col-span-12 lg:col-span-5 lg:col-start-8">
+          <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <h3 className="font-mono text-label text-surface-subtle">{preview.supportsTitle}</h3>
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="mt-4 border-b border-surface-rule">
               {preview.supports.map((s) => (
-                <li key={s} className="flex gap-3 text-small">
-                  <Icon name="check" className="mt-0.5 size-4 text-ice-fg" />
+                <li key={s} className="flex gap-4 border-t border-surface-rule py-4 text-body">
+                  <Icon name="check" className="mt-1 size-4 shrink-0 text-ice-fg" />
                   {s}
                 </li>
               ))}
@@ -116,10 +116,26 @@ export default function MothPage() {
         labelledBy="qualification-title"
         className="pt-0 md:pt-0 lg:pt-0"
       >
-        <SectionHead eyebrow={qualification.eyebrow} title={qualification.title} id="qualification-title" />
-        <div className="mt-12">
-          <Qualification />
-        </div>
+        <Grid className="gap-y-12">
+          <div className="col-span-12 lg:col-span-5">
+            <SectionHead
+              eyebrow={qualification.eyebrow}
+              title={qualification.title}
+              id="qualification-title"
+            />
+            {qualification.caveats.map((c) => (
+              <p key={c} className="mt-8 text-body text-surface-muted">
+                {c}
+              </p>
+            ))}
+          </div>
+          <DataTable
+            caption={qualification.caption}
+            columns={qualification.columns}
+            rows={qualification.rows}
+            className="col-span-12 lg:col-span-6 lg:col-start-7"
+          />
+        </Grid>
       </Section>
 
       <Section surface="paper-2" id="prepared-base" labelledBy="direction-title">

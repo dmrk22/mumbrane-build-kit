@@ -228,6 +228,36 @@ test('@smoke research: the experiment eyebrow sits above its heading, flush left
   expect(m.headTop).toBeGreaterThan(m.eyebrowBottom)
 })
 
+test('@smoke moth: preview and qualification put their material beside the heading', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, 'one column on phones')
+  await page.goto('/moth')
+  for (const [section, material] of [
+    ['#evidence', 'h3'],
+    ['#qualification', 'table'],
+  ] as const) {
+    const m = await page.locator(section).evaluate((s, sel) => {
+      const r = (q: string) => (s.querySelector(q) as Element).getBoundingClientRect()
+      const eyebrow = r('p.font-mono')
+      return { eyebrowTop: eyebrow.top, headRight: r('h2').right, side: r(sel) }
+    }, material)
+    expect(m.side.left).toBeGreaterThan(m.headRight)
+    expect(Math.abs(m.side.top - m.eyebrowTop)).toBeLessThanOrEqual(2)
+  }
+})
+
+// Fustat's tnum feature widens spaces and commas too, so "2,115 tests" read as "2 ,115  tests".
+test('@smoke evidence table values use proportional figures', async ({ page }) => {
+  await page.goto('/moth')
+  const variants = await page
+    .locator('#qualification td')
+    .evaluateAll((tds) => tds.map((td) => getComputedStyle(td).fontVariantNumeric))
+  expect(variants.length).toBeGreaterThan(0)
+  expect(new Set(variants)).toEqual(new Set(['normal']))
+})
+
 test('@smoke the research inquiry plates and their glosses line up', async ({ page, isMobile }) => {
   test.skip(isMobile, 'one column on phones')
   await page.goto('/research')

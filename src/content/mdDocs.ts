@@ -111,7 +111,6 @@ const moth = page('/moth', 'moth', [
     caption: m.qualification.caption,
     columns: [...m.qualification.columns],
     rows: m.qualification.rows.map((r) => [...r]),
-    source: m.qualification.source,
   },
   ...m.qualification.caveats.map(p),
   h2(m.direction.title),

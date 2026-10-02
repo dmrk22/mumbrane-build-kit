@@ -954,3 +954,20 @@ proposal." instead of in its own left column (cols 1–3, content in cols 4–11
 An e2e test pins same left edge and heading-below-eyebrow.
 **Alternatives**: none offered; follows D-150/D-152.
 **Status**: Decided (owner instruction in session).
+
+### D-154 — Moth "What Preview 004 is" and "What was checked" share one two-column split (2026-10-02)
+**Context**: The owner found the two sections clumsy, with no weight distribution: the heading sat
+alone above two uneven columns (two short paragraphs left, list and note right), the table filled
+60 % of the row with empty space beside it, the caption read "records: — From the…", and the
+Result column showed "2 ,115" with wide word gaps.
+**Choice**: Both sections put eyebrow, heading and prose in cols 1–5 and the material (supports
+list + note; the table) in cols 7–12, starting level with the eyebrow. The scope line is the lede;
+the supports list is body serif between hairlines (was sans `small`), like the prose beside it. The
+caption is one line, "From the Preview 004 qualification report." (`source` folded in; the
+Markdown export follows). `Qualification.tsx` (one caller) is inlined. `DataTable` cells drop
+`tabular-nums`: Fustat's tnum also sets spaces and commas to figure width (measured: +67 % on a
+word run), and the values sit in one right-aligned column, so proportional figures lose nothing.
+Tests: right column level with the eyebrow and clear of the heading; table cells `normal` figures.
+**Alternatives**: full-width table (sparse two-column rows across 1,285 px); stacking everything
+left (keeps the imbalance).
+**Status**: Decided (owner request in session; owner to confirm the look).

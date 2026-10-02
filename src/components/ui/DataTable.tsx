@@ -3,7 +3,7 @@ import { keepNumberUnits } from '@/lib/format'
 
 /**
  * Evidence tables (DESIGN §9.8): full width, 1 px rules, a mono header row on paper-3, numbers
- * tabular; the caption above names the source. The site's evidence tables have two columns and
+ * in the body face; the caption above names the source. The site's evidence tables have two columns and
  * wrap to fit 320 px, so nothing needs a keyboard-scrollable region (the wrapper only guards).
  */
 export function DataTable({
@@ -46,7 +46,8 @@ export function DataTable({
                     scope={i === 0 ? 'row' : undefined}
                     className={cx(
                       'px-3 py-4 align-top text-small sm:px-4',
-                      i === 0 ? 'font-normal' : 'text-right tabular-nums',
+                      // No tabular-nums: Fustat's tnum also widens spaces and commas ("2 ,115").
+                      i === 0 ? 'font-normal' : 'text-right',
                     )}
                   >
                     {keepNumberUnits(cell)}
