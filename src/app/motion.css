@@ -207,17 +207,7 @@
   }
 }
 
-/* Lenis (lenis/dist/lenis.css, the rules this site needs) and the route-change focus target. */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis:not(.lenis-autoToggle).lenis-stopped {
-  overflow: clip;
-}
-.lenis [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
+/* The route-change focus target (DESIGN §7.9) shows no ring. */
 main h1[tabindex="-1"]:focus {
   outline: none;
 }

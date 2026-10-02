@@ -144,7 +144,7 @@ test.describe('@perf motion lab', () => {
     // With the field canvas on screen the probe also measures its drawing. Recorded, not asserted.
     const withCanvases = await probe()
     test.info().annotations.push({ type: 'fps with the field canvas', description: withCanvases.toFixed(1) })
-    // The motion system itself — Lenis, reveals, split text, scrub, pin — below the canvases.
+    // The motion system itself — reveals, split text, scrub, pin — below the canvases.
     await page.evaluate(() => document.getElementById('lab-reveals')?.scrollIntoView())
     const fps = await probe()
     test.info().annotations.push({ type: 'fps', description: fps.toFixed(1) })

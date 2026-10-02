@@ -890,3 +890,17 @@ Not changed (owner to decide): site links still say "Try for free" / "Try the co
 open `/console` in a new tab (SmartLink).
 **Alternatives**: deleting the console app (not asked; harder to bring back).
 **Status**: Decided (owner instruction in session).
+
+### D-148 — Native scrolling, as anthropic.com has it (2026-10-02)
+**Context**: The owner asked for anthropic.com's scroll feel. Measured live: anthropic.com runs no
+smooth-scroll layer (no Lenis or similar, no wheel interception, `scroll-behavior: auto`, no
+scroll padding); its feel is the browser's own wheel and trackpad scrolling, with GSAP
+ScrollTrigger for reveals. Ours ran Lenis (`lerp: 0.1`) on fine pointers, which eases every wheel
+step through JS and trails the input.
+**Choice**: Supersedes DESIGN §7.0's Lenis line. `SmoothScroll` becomes `PageScroll`: it keeps the
+ScrollTrigger refresh after fonts load and DESIGN §7.9's route change (top, focus on the H1),
+and adds nothing to scrolling. The `lenis` dependency and its CSS are removed. In-page anchors
+still land 96 px down through the headings' existing `scroll-margin-top`, now jumping instantly
+like anthropic.com's instead of gliding.
+**Alternatives**: keeping Lenis with a lighter lerp (still not the native feel).
+**Status**: Decided (owner instruction in session).
