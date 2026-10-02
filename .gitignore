@@ -10,3 +10,4 @@ playwright-report
 .DS_Store
 .claude/settings.local.json
 next-env.d.ts
+.vercel
