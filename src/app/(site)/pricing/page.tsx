@@ -28,7 +28,7 @@ export default function PricingPage() {
         rhythm="compact"
       >
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 id="pricing-title" className="mt-4 font-display text-display-xl">
+        <h1 id="pricing-title" className="mt-4 font-display text-display-l">
           {title}
         </h1>
         <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{lede}</p>

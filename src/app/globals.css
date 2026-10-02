@@ -71,52 +71,61 @@
   --font-serif-italic: var(--font-source-serif-italic), var(--font-source-serif), ui-serif, Georgia, serif;
   --font-mono: var(--font-commit-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  /* Type scale — fluid between 375px and 1440px viewports. Display sizes and `title` are
-     heavy Fustat, `lede` to `article` serif; weights come from the base-layer role rule. */
-  --text-display-xl: clamp(3.25rem, 1.2rem + 8.4vw, 9.25rem);
-  --text-display-xl--line-height: 1.02;
-  --text-display-xl--letter-spacing: -0.03em;
-  /* The home hero's headline: between display-l and display-xl, two lines beside the field. */
-  --text-hero: clamp(3rem, 1.5rem + 4.4vw, 6.25rem);
-  --text-hero--line-height: 1.02;
-  --text-hero--letter-spacing: -0.03em;
-  --text-display-l: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
-  --text-display-l--line-height: 1.02;
-  --text-display-l--letter-spacing: -0.03em;
-  --text-display-m: clamp(1.875rem, 1.1rem + 3.1vw, 3.75rem);
-  --text-display-m--line-height: 1.1;
-  --text-display-m--letter-spacing: -0.02em;
-  --text-display-s: clamp(1.5rem, 1.2rem + 1.25vw, 2.375rem);
+  /* Type scale — anthropic.com's, measured live 2026-10-02 (D-145). These are their content
+     pages' values below 992 px; the 992 and 1024 px steps are in the base layer below. Each line
+     names their class. Weights come from the base-layer role rule. */
+  /* Home H1: their home page's u-display-xl, 40 px at 375 to 64 px at 1600, linear. They write
+     2.0408163265rem + 1.9591836735vw; exact binary fractions here (375 px = 23.4375rem). */
+  --text-hero: clamp(2.5rem, 2.5rem + (100vw - 23.4375rem) * 1.5 / 76.5625, 4rem);
+  --text-hero--line-height: 1.1;
+  --text-hero--letter-spacing: 0em;
+  --text-hero-lede: 1.5rem; /* their home hero lede, u-paragraph-l */
+  --text-hero-lede--line-height: 1.4;
+  --text-hero-lede--letter-spacing: 0em;
+  --text-display-l: 2rem; /* headline-1: 32 / 44 / 52 */
+  --text-display-l--line-height: 1.1;
+  --text-display-l--letter-spacing: 0em;
+  --text-display-m: 1.4375rem; /* headline-4: 23 / 23 / 32 */
+  --text-display-m--line-height: 1.2;
+  --text-display-m--letter-spacing: 0em;
+  --text-display-s: 1.25rem; /* headline-5: 20 / 20 / 25 */
   --text-display-s--line-height: 1.2;
-  --text-display-s--letter-spacing: -0.01em;
-  --text-title: clamp(1.1875rem, 1.1rem + 0.38vw, 1.4375rem);
+  --text-display-s--letter-spacing: 0em;
+  --text-title: 1.0625rem; /* headline-6: 17 / 17 / 19 */
   --text-title--line-height: 1.2;
-  --text-title--letter-spacing: -0.01em;
-  --text-lede: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
-  --text-lede--line-height: 1.45;
+  --text-title--letter-spacing: 0em;
+  --text-lede: 1.1875rem; /* body-1: 19 / 19 / 20 */
+  --text-lede--line-height: 1.55;
   --text-lede--letter-spacing: 0em;
-  --text-body: 1.0625rem;
-  --text-body--line-height: 1.6;
+  --text-body: 1.0625rem; /* body-2 */
+  --text-body--line-height: 1.55;
   --text-body--letter-spacing: 0em;
-  --text-article: clamp(1.1875rem, 1.13rem + 0.24vw, 1.3125rem);
-  --text-article--line-height: 1.6;
+  --text-article: 1.0625rem; /* body-2 .post-text */
+  --text-article--line-height: 1.55;
   --text-article--letter-spacing: 0em;
-  --text-small: 0.9375rem;
-  --text-small--line-height: 1.5;
+  --text-small: 0.9375rem; /* body-3 */
+  --text-small--line-height: 1.4;
   --text-small--letter-spacing: 0em;
   --text-small--font-weight: 400;
-  --text-caption: 0.8125rem;
-  --text-caption--line-height: 1.45;
-  --text-caption--letter-spacing: 0.004em;
+  --text-caption: 0.875rem; /* caption */
+  --text-caption--line-height: 1.2;
+  --text-caption--letter-spacing: 0.15px;
   --text-caption--font-weight: 400;
-  --text-label: 0.6875rem;
-  --text-label--line-height: 1.35;
-  --text-label--letter-spacing: 0.02em;
+  --text-label: 0.875rem; /* caption, set in our mono (owner choice) */
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.15px;
   --text-label--font-weight: 400;
-  --text-code: 0.8125rem;
-  --text-code--line-height: 1.7;
-  --text-code--letter-spacing: 0em;
+  --text-code: 0.9375rem; /* mono */
+  --text-code--line-height: 1.4;
+  --text-code--letter-spacing: -0.6px;
   --text-code--font-weight: 400;
+  --text-fine: 0.75rem; /* body-4: the footer */
+  --text-fine--line-height: 1.4;
+  --text-fine--letter-spacing: 0em;
+  --text-fine--font-weight: 400;
+  /* Their button and nav-link tracking. */
+  --tracking-button: -0.08px;
+  --tracking-nav: -0.0375px;
 
   /* Spacing base (Tailwind multiplies this): 4px grid */
   --spacing: 0.25rem;
@@ -249,18 +258,62 @@
      text stays Fustat 400/500 (the body default) and opts out of a prose size's weight with
      `font-sans`, which wins from the utilities layer. Light serif on dark grounds reads heavier,
      so dark surfaces set --serif-shift: -25. */
-  .text-lede, .text-body, .text-article {
+  .text-hero-lede, .text-lede, .text-body, .text-article {
     font-family: var(--font-serif);
   }
-  :is(.text-lede, .text-body, .text-article):not(.font-sans, .font-mono) {
+  :is(.text-hero-lede, .text-lede, .text-body, .text-article):not(.font-sans, .font-mono) {
     font-weight: calc(400 + var(--serif-shift, 0));
   }
   :is(.text-display-m, .text-display-s, .text-title):not(.font-sans, .font-mono) {
     font-weight: 600;
   }
-  :is(.text-hero, .text-display-xl, .text-display-l):not(.font-sans, .font-mono) {
+  :is(.text-hero, .text-display-l):not(.font-sans, .font-mono) {
     font-weight: 700;
     margin-inline-start: -0.04em; /* optical alignment: the first letter's side bearing */
+  }
+
+  /* anthropic.com's content pages step their type at 992 and 1024 px (D-145). */
+  @media (width >= 62rem) {
+    :root { --text-display-l: 2.75rem; }
+  }
+  @media (width >= 64rem) {
+    :root {
+      --text-display-l: 3.25rem;
+      --text-display-m: 2rem;
+      --text-display-s: 1.5625rem;
+      --text-title: 1.1875rem;
+      --text-lede: 1.25rem;
+    }
+  }
+
+  /* The console keeps its pre-D-145 type (owner choice): the old scale, verbatim. */
+  [data-console-surface] {
+    --text-display-l: clamp(2.5rem, 1.6rem + 3.8vw, 5rem);
+    --text-display-l--line-height: 1.02;
+    --text-display-l--letter-spacing: -0.03em;
+    --text-display-m: clamp(1.875rem, 1.1rem + 3.1vw, 3.75rem);
+    --text-display-m--line-height: 1.1;
+    --text-display-m--letter-spacing: -0.02em;
+    --text-display-s: clamp(1.5rem, 1.2rem + 1.25vw, 2.375rem);
+    --text-display-s--line-height: 1.2;
+    --text-display-s--letter-spacing: -0.01em;
+    --text-title: clamp(1.1875rem, 1.1rem + 0.38vw, 1.4375rem);
+    --text-title--line-height: 1.2;
+    --text-title--letter-spacing: -0.01em;
+    --text-lede: clamp(1.1875rem, 1.1rem + 0.4vw, 1.4375rem);
+    --text-lede--line-height: 1.45;
+    --text-body--line-height: 1.6;
+    --text-small--line-height: 1.5;
+    --text-caption: 0.8125rem;
+    --text-caption--line-height: 1.45;
+    --text-caption--letter-spacing: 0.004em;
+    --text-label: 0.6875rem;
+    --text-label--line-height: 1.35;
+    --text-label--letter-spacing: 0.02em;
+    --text-code: 0.8125rem;
+    --text-code--line-height: 1.7;
+    --text-code--letter-spacing: 0em;
+    --tracking-button: normal;
   }
   .font-serif, .font-serif-italic { font-feature-settings: "kern", "liga", "onum"; }
 
@@ -268,7 +321,7 @@
   p, li, dd, figcaption, blockquote { text-wrap: pretty; }
 
   /* Serif italic is the only emphasis, from its own font instance (tokens: --font-serif-italic). */
-  :is(.font-serif, .text-lede, .text-body, .text-article) :is(em, i),
+  :is(.font-serif, .text-hero-lede, .text-lede, .text-body, .text-article) :is(em, i),
   .font-serif-italic { font-family: var(--font-serif-italic); font-style: italic; }
 
   code, kbd, samp, pre { font-family: var(--font-mono); font-variant-ligatures: none; }

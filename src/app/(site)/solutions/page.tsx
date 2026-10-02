@@ -57,7 +57,7 @@ export default function SolutionsPage() {
     <>
       <Section surface="paper" labelledBy="solutions-title" className="pt-12 md:pt-16 lg:pt-24">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 id="solutions-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
+        <h1 id="solutions-title" className="mt-4 max-w-[16ch] font-display text-display-l">
           <Inline text={title} />
         </h1>
         <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{lede}</p>

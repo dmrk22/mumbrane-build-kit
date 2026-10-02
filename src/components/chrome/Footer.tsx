@@ -19,20 +19,21 @@ export function Footer() {
               <SmartLink href="/" aria-label={HEADER.homeLabel} className="-m-2 inline-block p-2">
                 <Lockup height={22} className="h-5.5 w-auto" />
               </SmartLink>
-              <p className="mt-4 text-small text-surface-muted">{NAV.tagline}</p>
+              {/* Every footer line is anthropic.com's footer size, 12 px (D-145). */}
+              <p className="mt-4 text-fine text-surface-muted">{NAV.tagline}</p>
             </div>
             <nav aria-label="Footer" className="lg:col-span-9">
               <ul className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
                 {NAV.columns.map((col) => (
                   <li key={col.title}>
                     {/* Headings bright and bold over muted links, so the columns read at a glance. */}
-                    <h2 className="text-small font-semibold text-surface-fg">{col.title}</h2>
+                    <h2 className="text-fine font-semibold text-surface-fg">{col.title}</h2>
                     <ul className="mt-3 flex flex-col gap-1.5">
                       {col.links.map((l) => (
                         <li key={l.href}>
                           <SmartLink
                             href={l.href}
-                            className="text-small text-surface-muted transition-colors duration-(--duration-hover) hover:text-surface-fg"
+                            className="text-fine text-surface-muted transition-colors duration-(--duration-hover) hover:text-surface-fg"
                           >
                             {l.label}
                           </SmartLink>
@@ -45,7 +46,7 @@ export function Footer() {
             </nav>
           </div>
 
-          <div className="mt-10 flex flex-col gap-2 border-t border-surface-rule pt-5 text-caption text-surface-muted sm:flex-row sm:justify-between">
+          <div className="mt-10 flex flex-col gap-2 border-t border-surface-rule pt-5 text-fine text-surface-muted sm:flex-row sm:justify-between">
             <p>{NAV.legal.copyright}</p>
             <p>{NAV.legal.motto}</p>
           </div>

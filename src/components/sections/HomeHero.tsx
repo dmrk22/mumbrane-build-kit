@@ -31,7 +31,7 @@ export function HomeHero() {
               {h.announcement.label}
             </span>
           </SmartLink>
-          <h1 id="home-title" className="hero-title mt-7 font-display text-display-l lg:text-hero">
+          <h1 id="home-title" className="hero-title mt-7 font-display text-hero">
             {h.titleLines.map((line, i) => (
               <span key={line}>
                 {i > 0 && ' '}
@@ -41,7 +41,10 @@ export function HomeHero() {
               </span>
             ))}
           </h1>
-          <p className="hero-rise hero-d3 mt-8 max-w-[38ch] text-lede text-surface-muted">{h.lede}</p>
+          {/* anthropic.com's home lede (D-145): 24 px serif, capped at their 40ch, 594.229 px. */}
+          <p className="hero-rise hero-d3 mt-8 max-w-[594.229px] text-hero-lede text-surface-muted">
+            {h.lede}
+          </p>
           <div className="hero-rise hero-d4 mt-10 flex flex-wrap gap-3">
             <Button href={h.primary.href} size="lg" arrow>
               {h.primary.label}

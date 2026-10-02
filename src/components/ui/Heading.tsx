@@ -3,7 +3,6 @@ import { cx } from '@/lib/cx'
 
 // Visual size and semantic level are chosen independently (DESIGN §3.2).
 const SIZE = {
-  'display-xl': 'font-display text-display-xl',
   'display-l': 'font-display text-display-l',
   'display-m': 'font-display text-display-m',
   'display-s': 'font-display text-display-s',

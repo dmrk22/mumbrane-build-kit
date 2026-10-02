@@ -16,7 +16,8 @@ const VARIANT = {
 const SIZE = {
   sm: { pill: 'h-9 px-4 text-small', arrow: 'pr-2', text: 'text-small' },
   md: { pill: 'h-11 px-5 text-small', arrow: 'pr-2.5', text: 'text-small' },
-  lg: { pill: 'h-13 px-6 text-body', arrow: 'pr-3', text: 'text-title' },
+  // anthropic.com sets every button and text link at 15 px (D-145); the heights stay ours.
+  lg: { pill: 'h-13 px-6 text-small', arrow: 'pr-3', text: 'text-small' },
 } as const
 
 type Common = {
@@ -38,7 +39,7 @@ export function Button(props: AsLink | AsButton) {
   const { variant = 'primary', size = 'md', arrow = false, className, children } = props
   const pill = variant !== 'text'
   const classes = cx(
-    'group relative inline-flex items-center justify-center gap-3 font-sans font-medium whitespace-nowrap',
+    'group relative inline-flex items-center justify-center gap-3 font-sans font-medium tracking-button whitespace-nowrap',
     'transition-[background-color,color,box-shadow,text-decoration-thickness,scale] duration-(--duration-hover) ease-out',
     'active:scale-[0.98] active:duration-(--duration-micro) disabled:cursor-not-allowed disabled:opacity-50',
     VARIANT[variant],

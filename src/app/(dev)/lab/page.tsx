@@ -128,7 +128,7 @@ export default function LabPage() {
             Component lab
           </Heading>
           <div className="mt-10 flex flex-col gap-3">
-            <Heading level={2} size="display-xl">
+            <Heading level={2} size="display-l">
               Display XL
             </Heading>
             <Heading level={2} size="display-l">

@@ -23,7 +23,7 @@ export default function ChangelogPage() {
   return (
     <Section surface="paper" labelledBy="changelog-title" className="pt-12 md:pt-16 lg:pt-24">
       <Eyebrow>{CHANGELOG.eyebrow}</Eyebrow>
-      <h1 id="changelog-title" className="mt-4 font-display text-display-xl">
+      <h1 id="changelog-title" className="mt-4 font-display text-display-l">
         {CHANGELOG.title}
       </h1>
       <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{CHANGELOG.lede}</p>

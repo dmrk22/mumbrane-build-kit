@@ -39,7 +39,7 @@ export default function StatusPage() {
     <>
       <Section surface="paper" labelledBy="status-title" className="pt-12 md:pt-16 lg:pt-24" rhythm="compact">
         <Eyebrow>{STATUS.eyebrow}</Eyebrow>
-        <h1 id="status-title" className="mt-4 font-display text-display-xl">
+        <h1 id="status-title" className="mt-4 font-display text-display-l">
           {STATUS.title}
         </h1>
         <p className="mt-8 max-w-[52ch] text-lede text-surface-muted">{STATUS.lede}</p>

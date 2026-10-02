@@ -17,7 +17,7 @@ export default function CareersPage() {
     <>
       <Section surface="paper" labelledBy="careers-title" className="pt-12 md:pt-16 lg:pt-24">
         <Eyebrow>{hero.eyebrow}</Eyebrow>
-        <h1 id="careers-title" className="mt-4 max-w-[16ch] font-display text-display-xl">
+        <h1 id="careers-title" className="mt-4 max-w-[16ch] font-display text-display-l">
           <Inline text={hero.title} />
         </h1>
         <p className="mt-8 max-w-[44ch] text-lede text-surface-muted">{hero.lede}</p>

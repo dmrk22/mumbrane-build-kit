@@ -28,9 +28,9 @@ function surfaceElements(header: HTMLElement): HTMLElement[] {
 }
 
 // Current, open and hovered links are underlined, never boxed. text-decoration skips the chevron
-// icon, so only the label carries the line.
+// icon, so only the label carries the line. Tracking is anthropic.com's nav link's (D-145).
 const NAV_LINK =
-  'inline-flex h-9 items-center gap-1 px-2.5 text-small font-medium underline decoration-transparent decoration-1 underline-offset-[0.4em] transition-colors duration-(--duration-hover) hover:decoration-surface-fg/40 aria-[current=page]:decoration-current aria-expanded:decoration-current data-[current=true]:decoration-current'
+  'inline-flex h-9 items-center gap-1 px-2.5 text-small font-medium tracking-nav underline decoration-transparent decoration-1 underline-offset-[0.4em] transition-colors duration-(--duration-hover) hover:decoration-surface-fg/40 aria-[current=page]:decoration-current aria-expanded:decoration-current data-[current=true]:decoration-current'
 
 /** `surfaceTop`: each route's first surface (registry), so the first paint is already themed. */
 export function Header({

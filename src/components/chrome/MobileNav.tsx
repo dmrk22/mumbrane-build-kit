@@ -58,7 +58,8 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
               {nav.menus.map((menu) => (
                 <li key={menu.id}>
                   <details name="mobile-nav" className="nav-accordion group">
-                    <summary className="flex h-14 cursor-pointer list-none items-center justify-between font-sans text-title [&::-webkit-details-marker]:hidden">
+                    {/* anthropic.com's sheet: top links at headline-4's phone size, 23 px (D-145). */}
+                    <summary className="flex h-14 cursor-pointer list-none items-center justify-between font-sans text-display-m [&::-webkit-details-marker]:hidden">
                       {menu.label}
                       <Icon
                         name="chevron-down"
@@ -93,7 +94,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
                     prefetch={false}
                     onClick={close}
                     aria-current={pathname === l.href ? 'page' : undefined}
-                    className="flex h-14 items-center font-sans text-title aria-[current=page]:underline"
+                    className="flex h-14 items-center font-sans text-display-m aria-[current=page]:underline"
                   >
                     {l.label}
                   </SmartLink>

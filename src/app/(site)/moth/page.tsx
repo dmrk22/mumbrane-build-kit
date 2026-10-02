@@ -40,7 +40,7 @@ export default function MothPage() {
         <Grid className="items-center gap-y-14">
           <div className="col-span-12 lg:col-span-6">
             <Eyebrow>{hero.eyebrow}</Eyebrow>
-            <h1 id="moth-title" className="mt-4 font-display text-display-xl">
+            <h1 id="moth-title" className="mt-4 font-display text-display-l">
               {hero.title}
             </h1>
             <p className="mt-6 text-lede text-surface-muted text-balance">
