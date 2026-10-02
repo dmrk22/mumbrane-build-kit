@@ -199,6 +199,18 @@ test('@smoke home: each section lede sits under its heading, flush left', async 
   }
 })
 
+test('@smoke research: the intro paragraphs stack on the left', async ({ page }) => {
+  await page.goto('/research')
+  const boxes = await page
+    .locator('#research-title ~ .grid > p')
+    .evaluateAll((els) =>
+      els.map((e) => e.getBoundingClientRect()).map((r) => ({ l: r.left, t: r.top, b: r.bottom })),
+    )
+  expect(boxes).toHaveLength(2)
+  expect(boxes[1]?.l).toBe(boxes[0]?.l)
+  expect(boxes[1]?.t).toBeGreaterThan(boxes[0]?.b ?? Number.POSITIVE_INFINITY)
+})
+
 test('@smoke the research inquiry plates and their glosses line up', async ({ page, isMobile }) => {
   test.skip(isMobile, 'one column on phones')
   await page.goto('/research')

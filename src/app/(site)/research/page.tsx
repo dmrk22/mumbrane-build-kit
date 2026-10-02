@@ -47,7 +47,7 @@ export default function ResearchPage() {
           </h1>
           <Grid className="mt-10 gap-y-6">
             {hero.abstract.map((p) => (
-              <p key={p} className="col-span-12 text-lede lg:col-span-6">
+              <p key={p} className="col-span-12 text-lede lg:col-span-6 lg:col-start-1">
                 {p}
               </p>
             ))}

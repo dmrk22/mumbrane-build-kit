@@ -924,3 +924,24 @@ grids; the evidence grid was `gap-y-8`), still capped at the 40rem text column. 
 left edge and below-the-heading on desktop, phone and WebKit.
 **Alternatives**: flush-right text in the right column (offered first; the owner chose left).
 **Status**: Decided (owner instruction in session).
+
+### D-151 — Claude pushes `main`; Vercel deploys from the push (2026-10-02)
+**Context**: D-119 allowed pushing, but its protected-file edits were never applied, so the guard
+and the deny list still refused every `git push` and nothing reached Vercel. (Commit `ba11f71` and
+the protected files call this "D-150"; that number collided with the entry above, so it is logged
+here. Read "D-150" in settings, guard, loop step 6 and SECURITY §2.6 as this entry.)
+**Choice** (owner): plain `git push` / `git push origin <branch>` to `origin` only; force, mirror,
+delete, tag and other-target pushes stay blocked by the guard. Loop step 6 commits and pushes.
+Deploys come from Vercel's Git integration on push to `main`; the `vercel`/`gh` CLIs stay denied.
+Owner applied the edits in `ba11f71`; guard self-test 164/164. D-106 still holds: mumbrane.com is
+attached only after the owner approves the `*.vercel.app` build.
+**Alternatives**: a git post-commit hook (would push the owner's manual commits too); the Vercel CLI.
+**Status**: Decided (owner). Supersedes D-119's push scope.
+
+### D-152 — Research intro paragraphs stack on the left (2026-10-02)
+**Context**: The owner asked for the research hero's second paragraph ("How far that can go…") to
+sit on the left like the home ledes (D-150), not in the right half beside the first.
+**Choice**: Both paragraphs keep their 6-column width and start at column 1, one under the other,
+24 px apart. An e2e test pins same left edge and second-below-first.
+**Alternatives**: none offered; follows D-150.
+**Status**: Decided (owner instruction in session).
