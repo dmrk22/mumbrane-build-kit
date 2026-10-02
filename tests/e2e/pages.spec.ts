@@ -217,8 +217,9 @@ for (const route of [...ROUTES, MISSING]) {
             }
           }
         }
-        // A box framed on all four sides and larger than 32 px must be rounded too, not square.
-        if (el instanceof SVGElement) continue
+        // A box framed on all four sides and larger than 32 px must be rounded too, not square,
+        // unless the owner asked for that one square (`data-square`, D-141).
+        if (el instanceof SVGElement || el.hasAttribute('data-square')) continue
         const cs = getComputedStyle(el)
         const framed = ['top', 'right', 'bottom', 'left'].every(
           (s) =>

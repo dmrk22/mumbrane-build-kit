@@ -16,6 +16,21 @@ test.describe('@smoke layout', () => {
   }
 })
 
+// Owner request (D-143): the header row measures what anthropic.com's does, 16 px above and below
+// a 36 px row on desktop (68 px), 64 px on phones; it sat too high at 56 px.
+for (const [width, height] of [
+  [1440, 68],
+  [375, 64],
+] as const) {
+  test(`@smoke the header is ${height} px tall at ${width} px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 })
+    await page.goto('/')
+    expect((await page.locator(header).boundingBox())?.height).toBe(height)
+    const cta = await page.locator(header).getByRole('link', { name: 'Try for free' }).boundingBox()
+    expect(cta?.y).toBe((height - 36) / 2) // the 36 px button, centred: 16 px from the top on desktop
+  })
+}
+
 // Regression: the hero's single grid track grew to its widest child, so the lede and the second
 // button ran past a phone's edge; the section's overflow-hidden kept scrollWidth at 320, so the
 // overflow test above could not see it.

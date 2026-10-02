@@ -189,7 +189,7 @@ export function HowItWorks({ how }: { how: How }) {
           <figure className="col-span-12 lg:col-span-7 xl:col-span-8">
             <CropMarks>
               {/* The ground lets the backdrop's rings show through faintly: one field, inside and out. */}
-              <div className="overflow-hidden border border-surface-rule bg-surface/80">
+              <div data-square className="overflow-hidden border border-surface-rule bg-surface/80">
                 <div
                   aria-hidden="true"
                   className="flex items-center justify-between gap-4 border-surface-rule border-b px-5 py-3 font-mono text-label text-surface-subtle"

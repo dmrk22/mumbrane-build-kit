@@ -771,3 +771,16 @@ passes D-133's measure (0 px is allowed); the definition cards drawn inside the 
 An e2e test pins the panel at 0 px.
 **Alternatives**: squaring the inner cards too (not asked).
 **Status**: Decided (owner instruction in session).
+
+### D-143 — Header height matches anthropic.com's (2026-10-02)
+**Context**: The owner found the header row sat too high and asked for Anthropic's, measured.
+Measured live on anthropic.com/news (`SiteHeader…__header`): `padding: var(--sp-16) 0`, a 36 px
+row on desktop (68 px in all) and a 32 px row on phones (64 px). Ours was a flat 56 px.
+**Choice**: The header row is `h-16` (64 px) below `lg` and `h-17` (68 px) from `lg`, items
+centred, so the 36 px button sits 16 px from the top on desktop, as Anthropic's does (14 px on
+phones, where our button stays 36 px for its touch target). The phone menu's top bar is 64 px
+too, so its close button lands where the open button was. An e2e test pins both heights.
+Also: D-141's square panel carries `data-square`, the one exemption from D-133's rule that
+framed boxes are rounded (that rule caught the panel; the exemption is the owner's request).
+**Alternatives**: copying Anthropic's 32 px phone button (a smaller touch target).
+**Status**: Decided (owner instruction in session).

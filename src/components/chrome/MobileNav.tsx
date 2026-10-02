@@ -38,7 +38,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
         className="mobile-sheet fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none p-0 text-surface-fg lg:hidden"
       >
         <div className="flex h-full flex-col">
-          <div className="flex h-14 shrink-0 items-center justify-between border-b border-surface-rule px-edge">
+          <div className="flex h-16 shrink-0 items-center justify-between border-b border-surface-rule px-edge">
             <SmartLink
               href="/"
               aria-label={nav.homeLabel}
