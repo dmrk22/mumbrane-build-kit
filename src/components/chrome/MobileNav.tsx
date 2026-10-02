@@ -38,7 +38,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
         className="mobile-sheet fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none p-0 text-surface-fg lg:hidden"
       >
         <div className="flex h-full flex-col">
-          <div className="flex h-14 shrink-0 items-center justify-between border-b border-surface-rule px-5 sm:px-6">
+          <div className="flex h-14 shrink-0 items-center justify-between border-b border-surface-rule px-edge">
             <SmartLink
               href="/"
               aria-label={nav.homeLabel}
@@ -53,7 +53,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
             </button>
           </div>
 
-          <nav aria-label={nav.label} className="flex-1 overflow-y-auto px-5 py-4 sm:px-6">
+          <nav aria-label={nav.label} className="flex-1 overflow-y-auto px-edge py-4">
             <ul className="divide-y divide-surface-rule">
               {nav.menus.map((menu) => (
                 <li key={menu.id}>
@@ -102,7 +102,7 @@ export function MobileNav({ nav }: { nav: HeaderNav }) {
             </ul>
           </nav>
 
-          <div className="grid shrink-0 grid-cols-2 gap-3 border-t border-surface-rule px-5 pt-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6">
+          <div className="grid shrink-0 grid-cols-2 gap-3 border-t border-surface-rule px-edge pt-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             <Button href={nav.actions.secondary.href} variant="secondary" onClick={close}>
               {nav.actions.secondary.label}
             </Button>

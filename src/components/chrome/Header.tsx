@@ -169,7 +169,7 @@ export function Header({
           'data-[scrolled=true]:bg-surface/86 data-[scrolled=true]:backdrop-blur-[14px] data-[scrolled=true]:backdrop-saturate-140',
         )}
       >
-        <div className="mx-auto flex h-14 w-full max-w-360 items-center px-5 sm:px-6 lg:px-10">
+        <div className="mx-auto flex h-14 w-full max-w-site items-center px-edge">
           <SmartLink href="/" aria-label={nav.homeLabel} className="-m-2 p-2">
             {/* Uniform scale only (logo lock): 20 / 24 / 28 px tall, so the name reads at header
                 size; 20 px keeps the 320 px header from overflowing. */}

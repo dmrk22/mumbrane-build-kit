@@ -385,7 +385,7 @@ export function FieldCanvas({
         type="button"
         hidden={!live}
         onClick={() => askRef.current?.()}
-        className="pointer-events-none absolute top-3 right-5 rounded-md border border-surface-rule bg-surface px-3 py-2 font-mono text-label text-surface-fg opacity-0 focus-visible:pointer-events-auto focus-visible:opacity-100 sm:right-6 lg:right-10"
+        className="pointer-events-none absolute top-3 right-edge rounded-md border border-surface-rule bg-surface px-3 py-2 font-mono text-label text-surface-fg opacity-0 focus-visible:pointer-events-auto focus-visible:opacity-100"
       >
         {labels.drop}
       </button>

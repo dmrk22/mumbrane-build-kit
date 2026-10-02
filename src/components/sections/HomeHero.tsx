@@ -51,7 +51,7 @@ export function HomeHero() {
             </Button>
           </div>
         </div>
-        <figure className="-mx-5 sm:-mx-6 lg:absolute lg:top-18 lg:right-0 lg:bottom-0 lg:left-[40%] lg:mx-0 xl:left-[30%]">
+        <figure className="-mx-edge lg:absolute lg:top-18 lg:right-0 lg:bottom-0 lg:left-[40%] lg:mx-0 xl:left-[30%]">
           <FieldCanvas
             labels={h.field}
             beside="[data-hero-copy]"
@@ -59,7 +59,7 @@ export function HomeHero() {
           >
             <FieldStill labels={h.field} />
           </FieldCanvas>
-          <figcaption className="mt-3 max-w-[52ch] px-5 font-mono text-label text-surface-subtle sm:px-6 lg:absolute lg:right-10 lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0 lg:text-right">
+          <figcaption className="mt-3 max-w-[52ch] px-edge font-mono text-label text-surface-subtle lg:absolute lg:right-edge lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0 lg:text-right">
             {h.field.caption}
           </figcaption>
         </figure>
