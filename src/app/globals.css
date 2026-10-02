@@ -154,10 +154,17 @@
   --breakpoint-xl: 80rem;   /* 1280 */
   --breakpoint-2xl: 90rem;  /* 1440 */
 
-  /* Page frame, measured from anthropic.com (D-142): a 1432 px frame whose side margin runs
-     linearly from 32 px at 375 to 80 px at 1600, so content is min(100vw, 1432) − 2 × margin. */
-  --container-site: 89.5rem;
-  --spacing-edge: clamp(2rem, 1.0816rem + 3.9184vw, 5rem);
+  /* Page frame: anthropic.com's `.u-container` (D-142, D-144). The edge runs linearly from 32 px
+     at 375 to 80 px at 1600; the frame is min(1432 px, 100vw) less two edges, centred by
+     `mx-auto`. Being 100vw-based, it matches theirs beside a classic scrollbar too, where the
+     visible margin is the edge less half the scrollbar. They write the line as
+     1.0816326530612246rem + 3.9183673469387754vw; the CSS minifier rounds such decimals to six
+     digits, so it is written here with exact binary fractions (375 px = 23.4375rem). */
+  --spacing-edge: clamp(2rem, 2rem + (100vw - 23.4375rem) * 3 / 76.5625, 5rem);
+  --container-site: calc(min(89.5rem, 100vw) - var(--spacing-edge) * 2);
+  /* A full-width box's distance to the frame, for bleeds and overlays inside an `@container`
+     that spans the page (the home hero, the menu sheet): 100cqw is that box's width. */
+  --spacing-inset: calc((100cqw - min(100cqw, var(--container-site))) / 2);
 }
 
 /* Surface themes: every <Section> sets data-surface; components use surface-* utilities

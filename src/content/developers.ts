@@ -103,7 +103,9 @@ export type DocSection = {
 
 export const DOCS = {
   eyebrow: 'Developers',
-  title: 'Documentation',
+  // A soft hyphen: at display-l the word is wider than the 256–272 px frame below 337 px, and
+  // Chromium never auto-hyphenates a capitalised word (D-144).
+  title: 'Documen\u00ADtation',
   lede: 'Concepts and contracts for Moth Preview 004.',
   delivery: {
     text: 'The complete documentation ships with the local delivery:',

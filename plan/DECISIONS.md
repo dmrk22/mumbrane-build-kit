@@ -772,6 +772,20 @@ An e2e test pins the panel at 0 px.
 **Alternatives**: squaring the inner cards too (not asked).
 **Status**: Decided (owner instruction in session).
 
+### D-142 — Page frame matches anthropic.com's container (2026-10-02)
+**Context**: The owner asked for content squeezed toward the centre by exactly Anthropic's amount,
+on every page. Measured live on anthropic.com (`.u-container`): `--site--width: 89.5rem`,
+`--site--margin: clamp(2rem, 1.0816rem + 3.9184vw, 5rem)`, content = min(100vw, 1432) − 2 × margin
+→ 311 / 673.2 / 909.13 / 1284.53 / 1272 px at 375 / 768 / 1024 / 1440 / 1920.
+**Choice**: Supersedes DESIGN §4.1's 1440 px frame with 20 / 24 / 40 px padding. Two theme tokens,
+`--container-site` (`max-w-site`) and `--spacing-edge` (`px-edge`, `-mx-edge`, `right-edge`), used by
+`Container`, the header, the mobile nav and the hero figure's bleed and caption. Inner 12-column
+grids, gaps and text measures are unchanged. The console app shell keeps its full-width layout.
+The margin token is not named `site`: Tailwind resolves `max-w-*` from `--spacing-*` first, so a
+shared name made `max-w-site` 80 px. `tests/unit/frame.test.ts` pins both facts.
+**Alternatives**: a fixed narrower max-width (does not reproduce the fluid margin).
+**Status**: Decided (owner instruction in session).
+
 ### D-143 — Header height matches anthropic.com's (2026-10-02)
 **Context**: The owner found the header row sat too high and asked for Anthropic's, measured.
 Measured live on anthropic.com/news (`SiteHeader…__header`): `padding: var(--sp-16) 0`, a 36 px
@@ -783,4 +797,31 @@ too, so its close button lands where the open button was. An e2e test pins both 
 Also: D-141's square panel carries `data-square`, the one exemption from D-133's rule that
 framed boxes are rounded (that rule caught the panel; the exemption is the owner's request).
 **Alternatives**: copying Anthropic's 32 px phone button (a smaller touch target).
+**Status**: Decided (owner instruction in session).
+
+### D-144 — Frame re-verified: anthropic.com's exact model on every page (2026-10-02)
+**Context**: The owner asked to re-verify that every page aligns mathematically. A sweep of 36
+routes × 13 widths (320–2560) in Chromium, with anthropic.com measured beside it in the same
+browser, found D-142's frame off: 1/128–1/64 px at most widths (its rounded constants and
+padding-based centring); 7–15 px narrower than theirs beside a classic scrollbar (Windows, Linux,
+a Mac with a mouse) below 1447 px, because their frame is 100vw-based; the home hero's caption and
+drop chip inset from the viewport edge, up to 540 px outside the frame above 1432 px; at 320 px
+the narrower frame pushed the header's menu button 15 px past it and "Documentation" 17 px past it
+(below 337 px); How Moth works centred its frame with flex, 1/128 px off the others at a quarter of
+widths.
+**Choice**: `.u-container`'s model verbatim: `--container-site: calc(min(89.5rem, 100vw) -
+var(--spacing-edge) * 2)`, centred by `mx-auto`, no padding. The edge line is written with exact
+binary fractions, `2rem + (100vw - 23.4375rem) * 3 / 76.5625`, because the CSS minifier rounds
+their 16-digit decimals to six digits. `--spacing-inset` (100cqw inside an `@container`) puts the
+hero's bleed, caption and drop chip and the menu sheet's rows on the frame. Header logo 16 px below
+360 px; a soft hyphen in `DOCS.title` (Chromium never auto-hyphenates a capitalised word); How
+Moth works centres with grid. Result: the same box as theirs at all 9,201 widths tested (300–2600,
+¼ px steps); no frame off, no text outside the frame and no overflow on 31 pages, with and without
+a classic scrollbar. `tests/unit/frame.test.ts` and `tests/e2e/frame.spec.ts` pin it.
+**Alternatives**: the padding model (not their box beside a classic scrollbar); hiding the header's
+CTA below 360 px (loses the primary action).
+**Open**: the display headings' −0.04em optical shift lands the first letter's ink 3 px inside
+(D) to 2 px outside (W) at 1440; exact alignment needs a per-glyph offset table. At exactly 320 px
+the last "e" of /careers' "intelligence" (display-xl at its 52 px floor) inks 0.43 px past the
+frame; a 51.2 px floor or a hyphen would fix it, both owner calls (type scale, copy).
 **Status**: Decided (owner instruction in session).

@@ -117,13 +117,15 @@ export function HowItWorks({ how }: { how: How }) {
   const d = how.diagram
   const now = how.steps[step]
 
+  // Grid, not flex, centres the frame: flex rounds its auto margins differently from block layout,
+  // putting this frame 1/128 px off every other one at a quarter of widths (D-144).
   return (
     <section
       ref={ref}
       id="how-moth-works"
       data-surface="ink"
       aria-labelledby="how-title"
-      className="relative flex items-center overflow-x-clip py-20 md:py-28 lg:min-h-dvh lg:pt-24 lg:pb-12"
+      className="relative grid items-center overflow-x-clip py-20 md:py-28 lg:min-h-dvh lg:pt-24 lg:pb-12"
     >
       <Backdrop />
       <Container className="relative">

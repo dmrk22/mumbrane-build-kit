@@ -194,6 +194,15 @@ Status values: `not started` · `in progress` · `blocked (reason)` · `done`.
 
 ## Handoff notes
 
+### Page frame (2026-10-02, owner request, D-142, D-144)
+Every site frame is `Container` (`mx-auto w-full max-w-site`, no padding): anthropic.com's
+`.u-container` model, 100vw-based, the same box as theirs to the layout unit. Never give a frame
+side padding or bring back fixed `px-*` gutters. A bleed or overlay that must land on the frame
+uses `px-inset` / `-mx-inset` / `right-inset` inside an `@container` spanning the page (the home
+hero, the menu sheet). Centre frames in block or grid flow, not flex (flex rounds the auto margins
+1/128 px off). `tests/e2e/frame.spec.ts` checks every route at 320/390 and 1440/1920 and beside a
+classic scrollbar; the console is an app shell and exempt.
+
 ### Home hero: the membrane (2026-10-02, owner request, D-137)
 `FieldCanvas` (client) + `FieldStill` (server SVG passed as `children`) over `src/lib/art/field.ts`
 (the sheet: wells, slope, settle, projection) and `src/lib/art/scene.ts` (timeline + drawable

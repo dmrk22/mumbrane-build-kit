@@ -169,11 +169,12 @@ export function Header({
           'data-[scrolled=true]:bg-surface/86 data-[scrolled=true]:backdrop-blur-[14px] data-[scrolled=true]:backdrop-saturate-140',
         )}
       >
-        <div className="mx-auto flex h-16 w-full max-w-site items-center px-edge lg:h-17">
+        <div className="mx-auto flex h-16 w-full max-w-site items-center lg:h-17">
           <SmartLink href="/" aria-label={nav.homeLabel} className="-m-2 p-2">
             {/* Uniform scale only (logo lock): 20 / 24 / 28 px tall, so the name reads at header
-                size; 20 px keeps the 320 px header from overflowing. */}
-            <Lockup height={28} collapsible className="h-5 w-auto sm:h-6 lg:h-7" />
+                size; 16 px below 360 px, where the frame is 256–295 px and logo, CTA and menu
+                button need 271 px at 20 px (D-144). */}
+            <Lockup height={28} collapsible className="h-4 w-auto min-[360px]:h-5 sm:h-6 lg:h-7" />
           </SmartLink>
 
           <nav aria-label={nav.label} className="ml-auto hidden lg:block" onPointerLeave={hover(null)}>

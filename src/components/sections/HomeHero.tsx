@@ -18,7 +18,7 @@ export function HomeHero() {
     <section
       data-surface="paper"
       aria-labelledby="home-title"
-      className="hero relative -mt-15 overflow-hidden lg:-mt-18"
+      className="hero @container relative -mt-15 overflow-hidden lg:-mt-18"
     >
       <Container className="grid min-h-[max(640px,94svh)] grid-cols-[minmax(0,1fr)] items-center gap-y-6 pt-28 pb-16 lg:min-h-[min(100svh,960px)] lg:grid-cols-12 lg:gap-x-6 lg:pt-24 lg:pb-12">
         <div data-hero-copy className="relative z-10 min-w-0 lg:col-span-7">
@@ -51,7 +51,7 @@ export function HomeHero() {
             </Button>
           </div>
         </div>
-        <figure className="-mx-edge lg:absolute lg:top-18 lg:right-0 lg:bottom-0 lg:left-[40%] lg:mx-0 xl:left-[30%]">
+        <figure className="-mx-inset lg:absolute lg:top-18 lg:right-0 lg:bottom-0 lg:left-[40%] lg:mx-0 xl:left-[30%]">
           <FieldCanvas
             labels={h.field}
             beside="[data-hero-copy]"
@@ -59,7 +59,7 @@ export function HomeHero() {
           >
             <FieldStill labels={h.field} />
           </FieldCanvas>
-          <figcaption className="mt-3 max-w-[52ch] px-edge font-mono text-label text-surface-subtle lg:absolute lg:right-edge lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0">
+          <figcaption className="mt-3 max-w-[52ch] px-inset font-mono text-label text-surface-subtle lg:absolute lg:right-inset lg:bottom-8 lg:mt-0 lg:max-w-[46ch] lg:px-0">
             {h.field.caption}
           </figcaption>
         </figure>
