@@ -52,6 +52,21 @@ test.describe('@smoke solutions', () => {
     await expect(page.getByText('Not legal advice. Illustrative only.')).toBeVisible()
   })
 
+  test('the closing CTAs share one height, one centre line and an 8 px gap', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'the row wraps on phones')
+    await page.goto('/solutions/customer-support')
+    const boxes = await page.locator('#talk-to-us a').evaluateAll((els) =>
+      els.map((e) => {
+        const r = e.getBoundingClientRect()
+        return { h: r.height, cy: r.top + r.height / 2, left: r.left, right: r.right }
+      }),
+    )
+    expect(boxes).toHaveLength(3)
+    expect(new Set(boxes.map((b) => b.h))).toEqual(new Set([44]))
+    expect(new Set(boxes.map((b) => Math.round(b.cy))).size).toBe(1)
+    expect(boxes.slice(1).map((b, i) => Math.round(b.left - (boxes[i]?.right ?? 0)))).toEqual([8, 8])
+  })
+
   test('an unknown solution is a 404', async ({ request }) => {
     expect((await request.get('/solutions/not-a-solution')).status()).toBe(404)
   })

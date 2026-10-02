@@ -113,14 +113,15 @@ export default async function SolutionPage({ params }: Props) {
             </Heading>
             <p className="mt-4 max-w-[52ch] text-body text-surface-muted">{ui.cta.text}</p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2">
             <Button href={`/contact?interest=${s.slug}`} arrow>
               {ui.cta.primary}
             </Button>
             <Button href="/contact/sales" variant="secondary">
               {ui.cta.sales}
             </Button>
-            <Button href="/solutions/use-cases" variant="text" arrow>
+            {/* Pill height so all three CTAs share one box, centre line and wrap row. */}
+            <Button href="/solutions/use-cases" variant="text" arrow className="h-11">
               {ui.cta.worlds}
             </Button>
           </div>
