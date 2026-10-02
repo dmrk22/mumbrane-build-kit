@@ -99,7 +99,7 @@ export default function Home() {
       <HowItWorks how={how} />
 
       <Section surface="paper" id="evidence" labelledBy="evidence-title">
-        <Grid className="gap-y-8">
+        <Grid className="gap-y-6">
           <div className="col-span-12 lg:col-span-6">
             <SplitReveal>
               <Heading level={2} size="display-m" id="evidence-title">
@@ -107,9 +107,7 @@ export default function Home() {
               </Heading>
             </SplitReveal>
           </div>
-          <p className="col-span-12 max-w-text text-lede text-surface-muted lg:col-span-5 lg:col-start-8 lg:self-end">
-            {evidence.text}
-          </p>
+          <p className="col-span-12 max-w-text text-lede text-surface-muted">{evidence.text}</p>
         </Grid>
         <Reveal
           stagger={0.07}
@@ -135,9 +133,7 @@ export default function Home() {
               </Heading>
             </SplitReveal>
           </div>
-          <p className="col-span-12 max-w-text text-lede text-surface-muted lg:col-span-5 lg:col-start-8 lg:self-end">
-            {compounding.text}
-          </p>
+          <p className="col-span-12 max-w-text text-lede text-surface-muted">{compounding.text}</p>
         </Grid>
         <Reveal stagger={0.08} className="mt-16 grid gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-4">
           {compounding.items.map((item) => (

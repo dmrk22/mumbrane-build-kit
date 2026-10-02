@@ -184,6 +184,21 @@ for (const [route, band] of [
   })
 }
 
+test('@smoke home: each section lede sits under its heading, flush left', async ({ page }) => {
+  await page.goto('/')
+  for (const id of ['evidence-title', 'compounding-title']) {
+    const m = await page.locator(`#${id}`).evaluate((h) => {
+      const head = h.getBoundingClientRect()
+      const lede = (
+        (h.closest('.grid') as Element).querySelector(':scope > p') as Element
+      ).getBoundingClientRect()
+      return { headLeft: head.left, headBottom: head.bottom, ledeLeft: lede.left, ledeTop: lede.top }
+    })
+    expect(m.ledeLeft).toBe(m.headLeft)
+    expect(m.ledeTop).toBeGreaterThan(m.headBottom)
+  }
+})
+
 test('@smoke the research inquiry plates and their glosses line up', async ({ page, isMobile }) => {
   test.skip(isMobile, 'one column on phones')
   await page.goto('/research')

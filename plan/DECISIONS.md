@@ -914,3 +914,13 @@ The WebKit last-baseline workaround is gone with the side-by-side layout. The e2
 left edge, below-the-text, height and gap.
 **Alternatives**: keeping actions right-aligned on wide screens only.
 **Status**: Decided (owner instruction in session). Supersedes D-146's placement; keeps its gap.
+
+### D-150 — Home section ledes sit under their headings (2026-10-02)
+**Context**: The owner asked for the ledes beside the home page's "Not every question finds a
+resting place." and "Close to ideas that already work." headings to move from the right column
+(cols 8–12, bottom-aligned) to the left, under the heading.
+**Choice**: Both ledes span the full row, flush left, 24 px under the heading (`gap-y-6` on both
+grids; the evidence grid was `gap-y-8`), still capped at the 40rem text column. An e2e test pins
+left edge and below-the-heading on desktop, phone and WebKit.
+**Alternatives**: flush-right text in the right column (offered first; the owner chose left).
+**Status**: Decided (owner instruction in session).
