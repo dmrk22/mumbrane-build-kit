@@ -52,21 +52,6 @@ test.describe('@smoke solutions', () => {
     await expect(page.getByText('Not legal advice. Illustrative only.')).toBeVisible()
   })
 
-  test('the closing CTAs share one height, one centre line and an 8 px gap', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'the row wraps on phones')
-    await page.goto('/solutions/customer-support')
-    const boxes = await page.locator('#talk-to-us a').evaluateAll((els) =>
-      els.map((e) => {
-        const r = e.getBoundingClientRect()
-        return { h: r.height, cy: r.top + r.height / 2, left: r.left, right: r.right }
-      }),
-    )
-    expect(boxes).toHaveLength(3)
-    expect(new Set(boxes.map((b) => b.h))).toEqual(new Set([44]))
-    expect(new Set(boxes.map((b) => Math.round(b.cy))).size).toBe(1)
-    expect(boxes.slice(1).map((b, i) => Math.round(b.left - (boxes[i]?.right ?? 0)))).toEqual([8, 8])
-  })
-
   test('an unknown solution is a 404', async ({ request }) => {
     expect((await request.get('/solutions/not-a-solution')).status()).toBe(404)
   })
@@ -170,6 +155,46 @@ test('@smoke an article title keeps a hyphenated compound on one line', async ({
 
 // Regression: a plate absorbed the length of the gloss under it, so Plate III (one-line gloss)
 // stood taller than its neighbours and its strip and gloss sat lower.
+for (const [route, band] of [
+  ['/solutions/business', 'talk-to-us'],
+  ['/solutions', 'solutions-cta'],
+  ['/careers', 'write-to-us'],
+  ['/research', 'talk-to-the-lab'],
+] as const) {
+  test(`@smoke ${route}: the closing actions sit on the line beside them, 6 px apart`, async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, 'the actions wrap below the line on phones')
+    await page.goto(route)
+    const m = await page.locator(`#${band}`).evaluate((s) => {
+      // A zero-size inline box lands on the baseline of whatever line it ends.
+      const baseline = (el: Element) => {
+        const mark = document.createElement('span')
+        mark.style.display = 'inline-block'
+        el.append(mark)
+        const y = mark.getBoundingClientRect().bottom
+        mark.remove()
+        return Math.round(y * 2) / 2
+      }
+      const links = [...s.querySelectorAll('a')]
+      return {
+        line: baseline(s.querySelector('p') as Element),
+        labels: links.map((a) => baseline(a.querySelector('span') ?? a)),
+        boxes: links
+          .map((a) => a.getBoundingClientRect())
+          .map((r) => ({ h: r.height, top: r.top, l: r.left, r: r.right })),
+      }
+    })
+    expect(new Set(m.labels)).toEqual(new Set([m.line]))
+    expect(new Set(m.boxes.map((b) => b.h))).toEqual(new Set([44]))
+    expect(new Set(m.boxes.map((b) => b.top)).size).toBe(1)
+    expect(m.boxes.slice(1).map((b, i) => Math.round(b.l - (m.boxes[i]?.r ?? 0)))).toEqual(
+      m.boxes.slice(1).map(() => 6),
+    )
+  })
+}
+
 test('@smoke the research inquiry plates and their glosses line up', async ({ page, isMobile }) => {
   test.skip(isMobile, 'one column on phones')
   await page.goto('/research')

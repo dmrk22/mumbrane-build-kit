@@ -825,3 +825,21 @@ CTA below 360 px (loses the primary action).
 the last "e" of /careers' "intelligence" (display-xl at its 52 px floor) inks 0.43 px past the
 frame; a 51.2 px floor or a hyphen would fix it, both owner calls (type scale, copy).
 **Status**: Decided (owner instruction in session).
+
+### D-146 — Closing CTA bands: one component, actions on the text's last baseline (2026-10-02)
+**Context**: The owner found the solution pages' closing actions misaligned and asked for them
+closer together and the band slightly smaller, the same everywhere. Measured at 1728 px: the action
+labels sat between the two lines of the paragraph beside them, because the row was bottom-aligned
+by box, not by text. Careers, research, the solutions index and each solution page each had a
+hand-copied version of the band, and the copies had drifted (gap-3 vs gap-6 vs gap-8, 48–52ch).
+**Choice**: `CtaBand` (sections/) renders all four. The band aligns by last baseline, so the
+action labels sit on the paragraph's last line. The actions are an `inline-flex` row inside a block,
+because WebKit takes a last baseline only from a line box: a flex or grid row put the labels
+5.5 px high in Safari (tested both engines, 1100–1728 px). Actions are 6 px apart (was 8–12). The
+solution pages' text link is 44 px tall like the pills, with an 8 px left pad from `sm` so its
+bare label has the room a pill's padding gives. New `band` rhythm on `Section`: 64/56 px on
+desktop (was compact's 80/64), 56/48 px on tablet, so the band is 15 % shorter. An e2e test pins
+baseline, height and gap on all four pages in Chromium and WebKit.
+**Alternatives**: centring the actions on the paragraph (labels float between lines); first
+baseline (actions align with the first line and hang below the text).
+**Status**: Decided (owner instruction in session).

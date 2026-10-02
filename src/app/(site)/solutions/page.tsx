@@ -1,5 +1,6 @@
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
+import { CtaBand } from '@/components/sections/CtaBand'
 import { Button } from '@/components/ui/Button'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Icon } from '@/components/ui/Icon'
@@ -106,19 +107,17 @@ export default function SolutionsPage() {
         </Grid>
       </Section>
 
-      <Section surface="ink" id="solutions-cta" labelledBy="solutions-cta-title" rhythm="compact">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <Heading level={2} size="display-m" id="solutions-cta-title">
-              {cta.title}
-            </Heading>
-            <p className="mt-4 max-w-[48ch] text-body text-surface-muted">{cta.text}</p>
-          </div>
-          <Button href={cta.action.href} arrow>
-            {cta.action.label}
-          </Button>
-        </div>
-      </Section>
+      <CtaBand
+        surface="ink"
+        id="solutions-cta"
+        titleId="solutions-cta-title"
+        title={cta.title}
+        text={cta.text}
+      >
+        <Button href={cta.action.href} arrow>
+          {cta.action.label}
+        </Button>
+      </CtaBand>
     </>
   )
 }

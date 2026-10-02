@@ -6,6 +6,7 @@ import { Container } from '@/components/layout/Container'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
 import { Reveal } from '@/components/motion/Reveal'
+import { CtaBand } from '@/components/sections/CtaBand'
 import { Button } from '@/components/ui/Button'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Inline } from '@/components/ui/Inline'
@@ -147,19 +148,11 @@ export default function ResearchPage() {
         </ul>
       </Section>
 
-      <Section surface="paper" id="talk-to-the-lab" labelledBy="cta-title" rhythm="compact">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <Heading level={2} size="display-m" id="cta-title">
-              {cta.title}
-            </Heading>
-            <p className="mt-4 max-w-[48ch] text-body text-surface-muted">{cta.text}</p>
-          </div>
-          <Button href={cta.action.href} arrow>
-            {cta.action.label}
-          </Button>
-        </div>
-      </Section>
+      <CtaBand surface="paper" id="talk-to-the-lab" titleId="cta-title" title={cta.title} text={cta.text}>
+        <Button href={cta.action.href} arrow>
+          {cta.action.label}
+        </Button>
+      </CtaBand>
     </>
   )
 }

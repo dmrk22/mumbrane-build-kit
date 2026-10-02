@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { FieldWindow } from '@/components/instrument/FieldWindow'
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
+import { CtaBand } from '@/components/sections/CtaBand'
 import { Button } from '@/components/ui/Button'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
 import { Icon } from '@/components/ui/Icon'
@@ -105,28 +106,25 @@ export default async function SolutionPage({ params }: Props) {
         </Grid>
       </Section>
 
-      <Section surface="ice" id="talk-to-us" labelledBy="solution-cta-title" rhythm="compact">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <div>
-            <Heading level={2} size="display-m" id="solution-cta-title">
-              {ui.cta.title(s.name)}
-            </Heading>
-            <p className="mt-4 max-w-[52ch] text-body text-surface-muted">{ui.cta.text}</p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Button href={`/contact?interest=${s.slug}`} arrow>
-              {ui.cta.primary}
-            </Button>
-            <Button href="/contact/sales" variant="secondary">
-              {ui.cta.sales}
-            </Button>
-            {/* Pill height so all three CTAs share one box, centre line and wrap row. */}
-            <Button href="/solutions/use-cases" variant="text" arrow className="h-11">
-              {ui.cta.worlds}
-            </Button>
-          </div>
-        </div>
-      </Section>
+      <CtaBand
+        surface="ice"
+        id="talk-to-us"
+        titleId="solution-cta-title"
+        title={ui.cta.title(s.name)}
+        text={ui.cta.text}
+      >
+        <Button href={`/contact?interest=${s.slug}`} arrow>
+          {ui.cta.primary}
+        </Button>
+        <Button href="/contact/sales" variant="secondary">
+          {ui.cta.sales}
+        </Button>
+        {/* Pill height so all three share one box. The left pad gives the bare label the room a
+            pill's padding gives its label; phones drop it, where the link wraps flush left. */}
+        <Button href="/solutions/use-cases" variant="text" arrow className="h-11 sm:pl-2">
+          {ui.cta.worlds}
+        </Button>
+      </CtaBand>
     </>
   )
 }

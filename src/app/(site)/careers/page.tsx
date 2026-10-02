@@ -1,5 +1,6 @@
 import { Grid } from '@/components/layout/Grid'
 import { Section } from '@/components/layout/Section'
+import { CtaBand } from '@/components/sections/CtaBand'
 import { Button } from '@/components/ui/Button'
 import { Chip } from '@/components/ui/Chip'
 import { Eyebrow, Heading } from '@/components/ui/Heading'
@@ -57,24 +58,14 @@ export default function CareersPage() {
         </ul>
       </Section>
 
-      <Section surface="ice" id="write-to-us" labelledBy="careers-cta-title" rhythm="compact">
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <div>
-            <Heading level={2} size="display-m" id="careers-cta-title">
-              {cta.title}
-            </Heading>
-            <p className="mt-4 text-body text-surface-muted">{cta.note}</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button href={cta.email.href} arrow>
-              {cta.email.label}
-            </Button>
-            <Button href={cta.form.href} variant="secondary">
-              {cta.form.label}
-            </Button>
-          </div>
-        </div>
-      </Section>
+      <CtaBand surface="ice" id="write-to-us" titleId="careers-cta-title" title={cta.title} text={cta.note}>
+        <Button href={cta.email.href} arrow>
+          {cta.email.label}
+        </Button>
+        <Button href={cta.form.href} variant="secondary">
+          {cta.form.label}
+        </Button>
+      </CtaBand>
     </>
   )
 }
