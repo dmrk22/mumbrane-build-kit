@@ -904,3 +904,13 @@ still land 96 px down through the headings' existing `scroll-margin-top`, now ju
 like anthropic.com's instead of gliding.
 **Alternatives**: keeping Lenis with a lighter lerp (still not the native feel).
 **Status**: Decided (owner instruction in session).
+
+### D-149 — Closing CTA actions sit under the text, flush left (2026-10-02)
+**Context**: The owner asked for the closing band's actions ("Talk to us", "Contact sales", the
+text link) under the paragraph on the left, not at the right on its last baseline (D-146).
+**Choice**: `CtaBand` stacks heading, paragraph and actions in one left column; the actions are a
+plain flex row 32 px under the paragraph, still 44 px tall and 6 px apart. All four bands follow.
+The WebKit last-baseline workaround is gone with the side-by-side layout. The e2e test now pins
+left edge, below-the-text, height and gap.
+**Alternatives**: keeping actions right-aligned on wide screens only.
+**Status**: Decided (owner instruction in session). Supersedes D-146's placement; keeps its gap.

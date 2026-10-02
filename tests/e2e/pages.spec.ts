@@ -161,33 +161,22 @@ for (const [route, band] of [
   ['/careers', 'write-to-us'],
   ['/research', 'talk-to-the-lab'],
 ] as const) {
-  test(`@smoke ${route}: the closing actions sit on the line beside them, 6 px apart`, async ({
+  test(`@smoke ${route}: the closing actions sit under the text, flush left, 6 px apart`, async ({
     page,
     isMobile,
   }) => {
-    test.skip(isMobile, 'the actions wrap below the line on phones')
     await page.goto(route)
     const m = await page.locator(`#${band}`).evaluate((s) => {
-      // A zero-size inline box lands on the baseline of whatever line it ends.
-      const baseline = (el: Element) => {
-        const mark = document.createElement('span')
-        mark.style.display = 'inline-block'
-        el.append(mark)
-        const y = mark.getBoundingClientRect().bottom
-        mark.remove()
-        return Math.round(y * 2) / 2
-      }
-      const links = [...s.querySelectorAll('a')]
-      return {
-        line: baseline(s.querySelector('p') as Element),
-        labels: links.map((a) => baseline(a.querySelector('span') ?? a)),
-        boxes: links
-          .map((a) => a.getBoundingClientRect())
-          .map((r) => ({ h: r.height, top: r.top, l: r.left, r: r.right })),
-      }
+      const text = (s.querySelector('p') as Element).getBoundingClientRect()
+      const boxes = [...s.querySelectorAll('a')]
+        .map((a) => a.getBoundingClientRect())
+        .map((r) => ({ h: r.height, top: r.top, l: r.left, r: r.right }))
+      return { textLeft: text.left, textBottom: text.bottom, boxes }
     })
-    expect(new Set(m.labels)).toEqual(new Set([m.line]))
+    expect(m.boxes[0]?.l).toBe(m.textLeft)
+    expect(Math.min(...m.boxes.map((b) => b.top))).toBeGreaterThan(m.textBottom)
     expect(new Set(m.boxes.map((b) => b.h))).toEqual(new Set([44]))
+    if (isMobile) return // the row may wrap on phones
     expect(new Set(m.boxes.map((b) => b.top)).size).toBe(1)
     expect(m.boxes.slice(1).map((b, i) => Math.round(b.l - (m.boxes[i]?.r ?? 0)))).toEqual(
       m.boxes.slice(1).map(() => 6),
