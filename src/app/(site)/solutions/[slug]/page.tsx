@@ -90,7 +90,7 @@ export default async function SolutionPage({ params }: Props) {
             <aside
               data-surface="ink"
               aria-labelledby="own-security-title"
-              className="col-span-12 flex flex-wrap items-end justify-between gap-6 p-6 md:p-8"
+              className="col-span-12 flex flex-wrap items-end justify-between gap-6 rounded-md p-6 md:p-8"
             >
               <div>
                 <h2 id="own-security-title" className="font-display text-display-s">

@@ -352,3 +352,12 @@ test('the docs limits grid sits in one 10 px rounded frame', async ({ page }) =>
   await expect(frame).toHaveCSS('border-top-left-radius', '10px')
   await expect(frame).toHaveCSS('overflow', 'hidden')
 })
+
+// Regression: the ink "Our own security" panel has no border, so the framed-box sweep missed it square.
+test('the own-security panel carries the 10 px site radius', async ({ page }) => {
+  await page.goto('/solutions/security')
+  await expect(page.locator('aside[aria-labelledby="own-security-title"]')).toHaveCSS(
+    'border-top-left-radius',
+    '10px',
+  )
+})
